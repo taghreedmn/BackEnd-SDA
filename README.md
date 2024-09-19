@@ -4,6 +4,8 @@ This repository contains ASP.NET Core application with RESTful API endpoints for
 
 `This is a teamwork assignment where you will work as a team within your group`
 
+**_DEADLINE: 06.10.2024_**
+
 ## How to work
 
 1. One team member (admin) should fork the repo and add other members to that admin repo as collaborators.
@@ -23,7 +25,7 @@ In this level, the application includes the following features:
 2. Define Attributes: For each entity, list and define the attributes or properties associated with it. For example, for a "customer" entity, attributes might include "id," "firstName," "lastName," "email" and so on.
 3. Establish Relationships: Determine the relationships between entities. Relationships can be one-to-one, one-to-many, or many-to-many. For instance, in an E-commerce system, a "customer" may have multiple "orders".
 4. Key: When establishing relationships, remember to create a key in your ERD to explain the notation used for relationships.
-5. According to the ERD above, create the entities, and build the database with Entity Framework Core.
+5. According to the ERD above, create the entities, and build the database with Entity Framework Core. Add ERD in screenshots folders
 6. Create basic CRUD operations for each endpoint.
 7. Use authentication and role-based authorization
 
