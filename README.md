@@ -10,7 +10,7 @@ This repository contains ASP.NET Core application with RESTful API endpoints for
 2. The other team members should fork then clone the forked repo (the admin repo).
 3. Any change/update made should be submitted to admin repo as pull request.
 4. Each change should be done in a separate pull request.
-5. Pull request must be reviewed by all members before merged to admin repo.
+5. Pull request must be reviewed by at least 2 members before merged to admin repo.
 6. Admin should open a PR to the original (Integrify) repo.
 
 Please ask your instructor or supporting instructor if you have any questions or need help.
@@ -39,7 +39,7 @@ In addition to the basic requirements, the application enhances its functionalit
 
 If you have a higher skill level and finish the previous requirements before the deadline, you can tackle the following bonus tasks:
 
-1. Refactor method getting all books or products to also handle query parameters for filtering and sorting products based on specific criteria (e.g., price range, by title, by date, etc). Pagination still need to be integrated.
+1. Refactor method getting all products to also handle query parameters for filtering and sorting products based on specific criteria (e.g., price range, by title, by date, etc). Pagination still need to be integrated.
 2. Use claim-based or resource-based where applicable.
 3. Peer Review:
    - Review 2 assignments from other teams.
