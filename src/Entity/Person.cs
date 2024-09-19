@@ -86,7 +86,7 @@ namespace backend.src.Entity
         {
             BaseId = baseId;
             LimitId = limitId;
-            Counter = baseId + 1;
+            Counter = baseId;
         }
     }
 
