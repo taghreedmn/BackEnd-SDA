@@ -12,7 +12,7 @@ This repository contains screenshots of the Entity Relationship Diagram (ERD) an
 In database design, the ERD and RDS serve complementary roles. The ERD focuses on the relationships and interactions between entities, allowing for a conceptual understanding of the data model. Conversely, the RDS details how this model is implemented in a relational database, specifying the tables, columns, data types, and relationships.
 
 ## Entity Relationship Diagram (ERD)
-![Entity Relationship Diagram](path/to/erd.png)
+![Entity Relationship Diagram](Team5_FusionTech_ERD.svg)
 **Description:** The ERD visualizes the entities involved in the system and their relationships. Each entity represents a distinct object or an actor in the system 
 
 ### Entities and Attributes
@@ -110,7 +110,7 @@ In database design, the ERD and RDS serve complementary roles. The ERD focuses o
 
 
 ## Relational Database Schema (RDS)
-![Relational Database Schema](path/to/rds.png)
+![Relational Database Schema](Team5_FusionTech_RDS.svg)
 **Description:** The RDS provides a detailed breakdown of the database structure, including tables, attributes, and data types. This schema is essential for understanding how to implement the ERD in a relational database.
 
 ### Relationships
