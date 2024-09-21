@@ -31,7 +31,7 @@ In database design, the ERD and RDS serve complementary roles. The ERD focuses o
 - Publisher_Picture_Path : The path of publisher's picture 
 
 #### Video Game
-**Description:** An interactive digital entertainment product that can be played on various platforms, including but limited to video game consoles, PCs, and mobile devices.
+**Description:** An interactive digital entertainment product that can be played on various platforms, including but not limited to video game consoles, PCs, and mobile devices.
 - Game_ID: Unique identifier for the video game
 - Name: Name of the video game
 - Year_of_Release: Date when the game was released
