@@ -4,13 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using sda_3_online_Backend_Teamwork.src.Entity;
+using FusionTech.src.Entity;
 
-namespace sda_3_online_Backend_Teamwork.src.Controllers
+namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
-    public class CategoriesController: ControllerBase
+    public class CategoriesController : ControllerBase
     {
         public List<Category> categories = new List<Category>
         {
@@ -29,19 +29,19 @@ namespace sda_3_online_Backend_Teamwork.src.Controllers
         public ActionResult GetCategoryById(int id)
         {
             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-            if(foundCategory == null)
+            if (foundCategory == null)
             {
                 return NotFound();
             }
             return Ok(foundCategory);
         }
 
-        [HttpPost]
-        public ActionResult CreateCategory(Category newCategory)
-        {
-            categories.Add(newCategory);
-            return CreatedAtAction(nameof(GetCategoryById), new {id = newCategory.Id},newCategory);
-        }
+        // [HttpPost]
+        // public ActionResult CreateCategory(Category newCategory)
+        // {
+        //     categories.Add(newCategory);
+        //     return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
+        // }
 
         [HttpDelete("{Id}")]
         public ActionResult DeleteCategory(int id)

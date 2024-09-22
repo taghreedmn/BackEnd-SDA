@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Backend_Teamwork.src.Entity
+namespace FusionTech.src.Entity
 {
     public class VideoGame
     {

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace FusionTech.src.Entity
 {
-    public class Category
+    public class Persons
     {
         public int Id { get; set; }
-        public string? CategoryName { get; set; }
+        public string? Name { get; set; }
 
     }
 }
