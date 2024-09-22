@@ -36,12 +36,12 @@ namespace FusionTech.src.Controllers
             return Ok(foundCategory);
         }
 
-        // [HttpPost]
-        // public ActionResult CreateCategory(Category newCategory)
-        // {
-        //     categories.Add(newCategory);
-        //     return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
-        // }
+        [HttpPost]
+        public ActionResult CreateCategory(Category newCategory)
+        {
+            categories.Add(newCategory);
+            return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
+        }
 
         [HttpDelete("{Id}")]
         public ActionResult DeleteCategory(int id)
