@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace sda_3_online_Backend_Teamwork.src.Entity
+namespace FusionTech.src.Entity
 {
     public class Category
     {
