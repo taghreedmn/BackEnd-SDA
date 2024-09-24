@@ -11,9 +11,9 @@ namespace FusionTech.src.Controllers
     {
         public static List<Person> people = new List<Person>
         {
-            new Customer("cus", "Ran@mail.com", "+966561111111", 25),
-            new StoreEmployee("emp", "emp@mail.com", "+966561111112", 8),
-            new SystemAdmin("adm", "adm@mail.com", "+966561111113", true, true, true, true),
+            new Customer("cus", "Ran@mail.com", "+966561111111", "Path", 25),
+            new StoreEmployee("emp", "emp@mail.com", "+966561111112", "Path", "role", 15000, 3),
+            new SystemAdmin("adm", "adm@mail.com", "+966561111113", "Path", true, true, true, true),
         };
 
         [HttpGet]
@@ -26,18 +26,24 @@ namespace FusionTech.src.Controllers
         [HttpGet("{id}")]
         public ActionResult GetPerson(int id)
         {
-            return Ok(people.FirstOrDefault(p => p.Person_Id.Equals(id)));
+            return Ok(people.FirstOrDefault(p => p.PersonId.Equals(id)));
             // 200
         }
 
         [HttpPost]
-        public ActionResult RegisterCustomer(string name, string email, string number, int age)
+        public ActionResult RegisterCustomer(
+            string name,
+            string email,
+            string number,
+            string path,
+            int age
+        )
         {
-            var newCustomer = new Customer(name, email, number, age);
+            var newCustomer = new Customer(name, email, number, path, age);
             people.Add(newCustomer);
             return CreatedAtAction(
                 nameof(GetPerson),
-                new { id = newCustomer.Person_Id },
+                new { id = newCustomer.PersonId },
                 newCustomer
             );
         }
@@ -45,7 +51,7 @@ namespace FusionTech.src.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteCustomer(int id)
         {
-            Customer? customer = people.FirstOrDefault(p => p.Person_Id == id) as Customer;
+            Customer? customer = people.FirstOrDefault(p => p.PersonId == id) as Customer;
             if (customer == null)
             {
                 return NotFound();
@@ -56,9 +62,9 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPut("{id}/birthday")]
-        public ActionResult incrementAge(int id)
+        public ActionResult IncrementAge(int id)
         {
-            Customer? customer = people.FirstOrDefault(p => p.Person_Id == id) as Customer;
+            Customer? customer = people.FirstOrDefault(p => p.PersonId == id) as Customer;
             if (customer == null)
             {
                 return NotFound();

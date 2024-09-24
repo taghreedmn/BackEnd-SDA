@@ -11,12 +11,13 @@ namespace FusionTech.src.Entity
             string name,
             string email,
             string phone,
+            string profilePicturePath,
             bool manageStores,
             bool manageEmployess,
             bool manageGames,
             bool manageCustomers
         )
-            : base(PersonType.System_Admin, name, email, phone)
+            : base(PersonType.System_Admin, name, email, phone, profilePicturePath)
         {
             ManageStores = manageStores;
             ManageEmployess = manageEmployess;

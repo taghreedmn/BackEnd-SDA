@@ -30,7 +30,7 @@ namespace FusionTech.src.Entity
         public PersonType Type { get; private set; }
 
         private int _id;
-        public int Person_Id
+        public int PersonId
         {
             get => _id;
             private set
@@ -54,25 +54,34 @@ namespace FusionTech.src.Entity
             MinimumLength = 3,
             ErrorMessage = "Name must be between 3 and 100 characters"
         )]
-        public string Person_Name { get; private set; }
+        public string PersonName { get; private set; }
 
         // Email must be valid and non-empty
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public string Person_Email { get; private set; }
+        public string PersonEmail { get; private set; }
 
         // Phone number must match a specific format
         [Required(ErrorMessage = "Phone number is required")]
         [Phone(ErrorMessage = "Invalid phone number")]
-        public string Person_Phone { get; private set; }
+        public string PersonPhone { get; private set; }
 
-        protected Person(PersonType type, string name, string email, string phone)
+        public string ProfilePicturePath { get; set; }
+
+        protected Person(
+            PersonType type,
+            string name,
+            string email,
+            string phone,
+            string profilePicturePath
+        )
         {
             Type = type;
-            Person_Name = name;
-            Person_Email = email;
-            Person_Phone = phone;
-            Person_Id = -1; // Assign the ID by calling the setter
+            PersonName = name;
+            PersonEmail = email;
+            PersonPhone = phone;
+            ProfilePicturePath = profilePicturePath;
+            PersonId = -1; // Assign the ID by calling the setter
         }
     }
 
