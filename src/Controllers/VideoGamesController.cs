@@ -12,26 +12,51 @@ namespace Backend_Teamwork.src.Controllers
     public class VideoGamesController : ControllerBase
     {
         public List<VideoGame> videoGames = new List<VideoGame>()
-           {
-            new VideoGame{Id = 1,Game_Name ="game1",Price =100,Description="description for game1",Year_of_release=new DateTime(2019, 7, 4),Rating=3,Company_ID=1},
-            new VideoGame{Id = 2,Game_Name ="game2",Price =150,Description="description for game2",Year_of_release=new DateTime(2020, 9, 8),Rating=5,Company_ID=2},
-            new VideoGame{Id = 3,Game_Name ="game3",Price =140,Description="description for game3",Year_of_release=new DateTime(2023, 3, 2),Rating=2,Company_ID=3},
-
-          };
+        {
+            new VideoGame
+            {
+                GameId = 1,
+                GameName = "game1",
+                Price = 100,
+                Description = "description for game1",
+                YearOfRelease = new DateTime(2019, 7, 4),
+                TotalRating = 3,
+                PublisherId = 1,
+            },
+            new VideoGame
+            {
+                GameId = 2,
+                GameName = "game2",
+                Price = 150,
+                Description = "description for game2",
+                YearOfRelease = new DateTime(2020, 9, 8),
+                TotalRating = 5,
+                PublisherId = 2,
+            },
+            new VideoGame
+            {
+                GameId = 3,
+                GameName = "game3",
+                Price = 140,
+                Description = "description for game3",
+                YearOfRelease = new DateTime(2023, 3, 2),
+                TotalRating = 2,
+                PublisherId = 3,
+            },
+        };
 
         //get all videoGames
         [HttpGet]
         public ActionResult GetVideoGames()
         {
             return Ok(videoGames);
-
         }
 
         // get by ID
         [HttpGet("{id}")]
         public ActionResult GetVideoGameById(int id)
         {
-            VideoGame? foundVideoGame = videoGames.FirstOrDefault(p => p.Id == id);
+            VideoGame? foundVideoGame = videoGames.FirstOrDefault(p => p.GameId == id);
             if (foundVideoGame == null)
             {
                 return NotFound();
@@ -45,24 +70,25 @@ namespace Backend_Teamwork.src.Controllers
         public ActionResult CreateVideoGame(VideoGame newVideoGame)
         {
             videoGames.Add(newVideoGame);
-            return CreatedAtAction(nameof(GetVideoGameById), new { id = newVideoGame.Id }, newVideoGame);
-
+            return CreatedAtAction(
+                nameof(GetVideoGameById),
+                new { id = newVideoGame.GameId },
+                newVideoGame
+            );
         }
 
-        // delete videoGame 
+        // delete videoGame
 
         [HttpDelete("{id}")]
         public ActionResult DeleteVideoGame(int id)
         {
-            VideoGame? foundVideoGame = videoGames.FirstOrDefault(p => p.Id == id);
+            VideoGame? foundVideoGame = videoGames.FirstOrDefault(p => p.GameId == id);
             if (foundVideoGame == null)
             {
                 return NotFound();
-
             }
             videoGames.Remove(foundVideoGame);
             return NoContent();
-
         }
 
         // update videoGame
@@ -70,20 +96,19 @@ namespace Backend_Teamwork.src.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateVideoGame(int id, VideoGame updatedVideoGame)
         {
-
-            VideoGame? foundVideoGame = videoGames.FirstOrDefault(p => p.Id == id);
+            VideoGame? foundVideoGame = videoGames.FirstOrDefault(p => p.GameId == id);
 
             if (foundVideoGame == null)
             {
                 return NotFound();
             }
 
-            foundVideoGame.Game_Name = updatedVideoGame.Game_Name;
+            foundVideoGame.GameName = updatedVideoGame.GameName;
             foundVideoGame.Price = updatedVideoGame.Price;
             foundVideoGame.Description = updatedVideoGame.Description;
-            foundVideoGame.Year_of_release = updatedVideoGame.Year_of_release;
-            foundVideoGame.Rating = updatedVideoGame.Rating;
-            foundVideoGame.Company_ID = updatedVideoGame.Company_ID;
+            foundVideoGame.YearOfRelease = updatedVideoGame.YearOfRelease;
+            foundVideoGame.TotalRating = updatedVideoGame.TotalRating;
+            foundVideoGame.PublisherId = updatedVideoGame.PublisherId;
 
             return NoContent();
         }

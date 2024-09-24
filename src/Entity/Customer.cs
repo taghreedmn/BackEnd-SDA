@@ -9,7 +9,7 @@ namespace backend.src.Entity
 
         // public string favorite;
 
-        public Customer(string name, string email, string phone, int age)
-            : base(PersonType.Customer, name, email, phone) => Age = age;
+        public Customer(string name, string email, string phone,  string profilePicturePath, int age)
+            : base(PersonType.Customer, name, email, phone, profilePicturePath) => Age = age;
     }
 }
