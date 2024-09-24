@@ -10,7 +10,7 @@ namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
-    public class CategoriesController: ControllerBase
+    public class CategoriesController : ControllerBase
     {
         public List<Category> categories = new List<Category>
         {
@@ -29,7 +29,7 @@ namespace FusionTech.src.Controllers
         public ActionResult GetCategoryById(int id)
         {
             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-            if(foundCategory == null)
+            if (foundCategory == null)
             {
                 return NotFound();
             }
@@ -40,7 +40,7 @@ namespace FusionTech.src.Controllers
         public ActionResult CreateCategory(Category newCategory)
         {
             categories.Add(newCategory);
-            return CreatedAtAction(nameof(GetCategoryById), new {id = newCategory.Id},newCategory);
+            return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
         }
 
         [HttpDelete("{Id}")]
