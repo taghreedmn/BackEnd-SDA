@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Backend_Teamwork.src.Entity;
+using FusionTech.src.Entity;
 using System.Linq;
 
-namespace Backend_Teamwork.src.Controllers
+namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

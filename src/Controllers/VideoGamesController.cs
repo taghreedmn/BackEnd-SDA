@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backend_Teamwork.src.Entity;
+using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Backend_Teamwork.src.Controllers
+namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

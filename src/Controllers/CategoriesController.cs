@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using sda_3_online_Backend_Teamwork.src.Entity;
+using FusionTech.src.Entity;
 
-namespace sda_3_online_Backend_Teamwork.src.Controllers
+namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]

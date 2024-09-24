@@ -1,4 +1,4 @@
-using Backend_Teamwork.src.Entity;
+using FusionTech.src.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 

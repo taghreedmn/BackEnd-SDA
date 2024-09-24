@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace backend.src.Entity
+namespace FusionTech.src.Entity
 {
     public abstract class Person
     {

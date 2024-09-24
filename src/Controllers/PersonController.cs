@@ -1,9 +1,9 @@
 // This file will be replaced later with a sign in and sign up apis.
 
-using backend.src.Entity;
+using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backend.src.Controllers
+namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

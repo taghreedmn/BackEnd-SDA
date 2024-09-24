@@ -1,4 +1,4 @@
-namespace backend.src.Entity
+namespace FusionTech.src.Entity
 {
     public class StoreEmployee : Person
     {
