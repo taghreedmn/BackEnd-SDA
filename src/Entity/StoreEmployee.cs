@@ -9,13 +9,14 @@ namespace FusionTech.src.Entity
         public StoreEmployee(
             string name,
             string email,
+            string password,
             string phone,
             string profilePicturePath,
             string role,
             float salary,
             int yearsOfService
         )
-            : base(PersonType.Store_Employee, name, email, phone, profilePicturePath)
+            : base(PersonType.Store_Employee, name, email, password, phone, profilePicturePath)
         {
             Role = role;
             Salary = salary;

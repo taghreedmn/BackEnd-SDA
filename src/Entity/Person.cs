@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+using FusionTech.src.utils;
 
 namespace FusionTech.src.Entity
 {
@@ -61,6 +63,19 @@ namespace FusionTech.src.Entity
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string PersonEmail { get; private set; }
 
+        private string _personPassword;
+        public string PersonPassword
+        {
+            get => _personPassword;
+            private set
+            {
+                // var passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&-_]{8,}$";
+                // if (Regex.IsMatch(value, passwordPattern))
+
+                PasswordUtils.HashPassword(value, out _personPassword, out _salt);
+            }
+        }
+
         // Phone number must match a specific format
         [Required(ErrorMessage = "Phone number is required")]
         [Phone(ErrorMessage = "Invalid phone number")]
@@ -68,10 +83,13 @@ namespace FusionTech.src.Entity
 
         public string ProfilePicturePath { get; set; }
 
+        private byte[] _salt;
+
         protected Person(
             PersonType type,
             string name,
             string email,
+            string password,
             string phone,
             string profilePicturePath
         )
@@ -79,10 +97,14 @@ namespace FusionTech.src.Entity
             Type = type;
             PersonName = name;
             PersonEmail = email;
+            PersonPassword = password;
             PersonPhone = phone;
             ProfilePicturePath = profilePicturePath;
             PersonId = -1; // Assign the ID by calling the setter
         }
+
+        public bool trySignIn(string enteredPassword) =>
+            PasswordUtils.isPasswordEqual(enteredPassword, _personPassword, _salt);
     }
 
     internal struct PersonTypeMetadata
