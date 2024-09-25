@@ -12,6 +12,7 @@ namespace FusionTech.src.Repository
         public PersonRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
+            _Person = _databaseContext.Set<Person>();
         }
 
         public async Task<Person> LogIn(string email, string password)

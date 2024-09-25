@@ -13,31 +13,38 @@ namespace FusionTech.src.Database
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
 
-        // This is very complex, I am starting to regret the complexity I made in our Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Person table: PersonId as Primary Key
             modelBuilder.Entity<Person>().ToTable("Persons").HasKey(p => p.PersonId);
 
+            // Customer table
+            modelBuilder.Entity<Customer>().ToTable("Customers").HasKey(c => c.PersonId); // Set primary key
+            // Has relationship with table Person
             modelBuilder
                 .Entity<Customer>()
-                .ToTable("Customers")
                 .HasOne<Person>()
                 .WithOne()
-                .HasForeignKey<Customer>(c => c.PersonId);
+                .HasForeignKey<Customer>(c => c.PersonId); // Set foreign key
 
+            // StoreEmployee table
             modelBuilder
                 .Entity<StoreEmployee>()
                 .ToTable("StoreEmployees")
+                .HasKey(se => se.PersonId); // Set primary key
+            modelBuilder
+                .Entity<StoreEmployee>()
                 .HasOne<Person>()
                 .WithOne()
-                .HasForeignKey<StoreEmployee>(se => se.PersonId);
+                .HasForeignKey<StoreEmployee>(se => se.PersonId); // Set foreign key
 
+            // SystemAdmin entity configuration
+            modelBuilder.Entity<SystemAdmin>().ToTable("SystemAdmins").HasKey(sa => sa.PersonId); // Set primary key
             modelBuilder
                 .Entity<SystemAdmin>()
-                .ToTable("SystemAdmins")
                 .HasOne<Person>()
                 .WithOne()
-                .HasForeignKey<SystemAdmin>(sa => sa.PersonId);
+                .HasForeignKey<SystemAdmin>(sa => sa.PersonId); // Set foreign key
 
             base.OnModelCreating(modelBuilder);
         }

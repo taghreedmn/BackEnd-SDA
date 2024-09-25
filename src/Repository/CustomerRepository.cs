@@ -12,6 +12,7 @@ namespace FusionTech.src.Repository
         public CustomerRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
+            _Customer = _databaseContext.Set<Customer>();
         }
 
         public async Task<Customer> SignUp(
