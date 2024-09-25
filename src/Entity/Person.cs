@@ -103,6 +103,9 @@ namespace FusionTech.src.Entity
             PersonId = -1; // Assign the ID by calling the setter
         }
 
+        // To make Database creation possible.
+        protected Person() { }
+
         public bool trySignIn(string enteredPassword) =>
             PasswordUtils.isPasswordEqual(enteredPassword, _personPassword, _salt);
     }

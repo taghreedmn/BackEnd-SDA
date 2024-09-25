@@ -25,5 +25,7 @@ namespace FusionTech.src.Entity
             ManageGames = manageGames;
             ManageCustomers = manageCustomers;
         }
+
+        public SystemAdmin() { }
     }
 }
