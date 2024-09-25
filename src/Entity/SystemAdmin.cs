@@ -10,6 +10,7 @@ namespace FusionTech.src.Entity
         public SystemAdmin(
             string name,
             string email,
+            string password,
             string phone,
             string profilePicturePath,
             bool manageStores,
@@ -17,7 +18,7 @@ namespace FusionTech.src.Entity
             bool manageGames,
             bool manageCustomers
         )
-            : base(PersonType.System_Admin, name, email, phone, profilePicturePath)
+            : base(PersonType.System_Admin, name, email, password, phone, profilePicturePath)
         {
             ManageStores = manageStores;
             ManageEmployess = manageEmployess;

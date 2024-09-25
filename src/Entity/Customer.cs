@@ -9,7 +9,15 @@ namespace FusionTech.src.Entity
 
         // public string favorite;
 
-        public Customer(string name, string email, string phone,  string profilePicturePath, int age)
-            : base(PersonType.Customer, name, email, phone, profilePicturePath) => Age = age;
+        public Customer(
+            string name,
+            string email,
+            string password,
+            string phone,
+            string profilePicturePath,
+            int age
+        )
+            : base(PersonType.Customer, name, email, password, phone, profilePicturePath) =>
+            Age = age;
     }
 }
