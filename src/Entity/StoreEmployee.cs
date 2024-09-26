@@ -22,5 +22,7 @@ namespace FusionTech.src.Entity
             Salary = salary;
             YearsOfService = yearsOfService;
         }
+
+        public StoreEmployee() { }
     }
 }
