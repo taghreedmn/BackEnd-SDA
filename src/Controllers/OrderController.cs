@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Backend_Teamwork.src.Entity;
-using System.Linq;
+using backend.src.Entity;
 
-namespace Backend_Teamwork.src.Controllers
-{
+namespace backend.src.Controllers
+ {
     [ApiController]
     [Route("api/v1/[controller]")]
     public class OrderController : ControllerBase
