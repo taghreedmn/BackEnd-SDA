@@ -1,4 +1,4 @@
-namespace  Backend_Teamwork.src.Entity
+namespace  FusionTech.src.Entity
  {
     public class Order 
     {
