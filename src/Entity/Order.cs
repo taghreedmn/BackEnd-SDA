@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-namespace backend.src.Entity
+namespace  Backend_Teamwork.src.Entity
  {
     public class Order 
     {
