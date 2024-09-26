@@ -19,5 +19,8 @@ namespace FusionTech.src.Entity
         )
             : base(PersonType.Customer, name, email, password, phone, profilePicturePath) =>
             Age = age;
+
+        public Customer()
+            : base() { }
     }
 }
