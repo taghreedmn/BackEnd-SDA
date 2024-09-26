@@ -9,6 +9,9 @@ namespace FusionTech.src.Database
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
         public DbSet<SystemAdmin> SystemAdmins { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Payment> Payment { get; set; }
 
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
@@ -47,6 +50,30 @@ namespace FusionTech.src.Database
                 .HasForeignKey<SystemAdmin>(sa => sa.PersonId); // Set foreign key
 
             base.OnModelCreating(modelBuilder);
+
+            // Code to seed data
+            modelBuilder
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Cash on deleviry" });
+            modelBuilder
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Visa" });
+            modelBuilder
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Mada" });
+            modelBuilder
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Apple Pay" });
+            // Category data
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 1" });
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" });
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" });
         }
     }
 }

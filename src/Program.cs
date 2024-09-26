@@ -1,15 +1,13 @@
 using FusionTech.src.Database;
-using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//connect the database
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
     builder.Configuration.GetConnectionString("local")
 );
-
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
@@ -21,16 +19,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+//test if the database is conncted
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-
     try
     {
-        // Check if the application can connect to the database
         if (dbContext.Database.CanConnect())
         {
-            Console.WriteLine("Database is connected");
+            Console.WriteLine("Database is connected.");
         }
         else
         {
@@ -39,11 +36,9 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Database connection failed: {ex.Message}");
+        Console.WriteLine($"Databse connection failed:{ex.Message}");
     }
 }
-
-app.MapControllers();
 
 // Enable Swagger for API documentation
 if (app.Environment.IsDevelopment())
