@@ -31,7 +31,7 @@ namespace FusionTech.src.Repository
         public async Task<int> GetNextIdCustomerAsync()
         {
             var counter = await _databaseContext.PersonIdCounters.SingleOrDefaultAsync(c =>
-                c.PersonIdCounterId == PersonType.Customer
+                c.PersonIdCounterId == Customer.PersonType
             );
 
             // Increment the counter
