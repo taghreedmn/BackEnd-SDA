@@ -1,5 +1,4 @@
 using FusionTech.Service.PersonService;
-using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.PersonDTO;
 
@@ -16,8 +15,8 @@ namespace FusionTech.src.Controllers
             _personService = personService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PersonReadDto>> GetPerson(int id)
+        [HttpGet]
+        public async Task<ActionResult<PersonReadDto>> GetPerson([FromQuery] int id)
         {
             var person = await _personService.GetByIdAsync(id);
             return Ok(person); // 200
