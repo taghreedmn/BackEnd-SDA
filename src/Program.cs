@@ -1,4 +1,9 @@
+using FusionTech.Service.CustomerService;
+using FusionTech.Service.PersonService;
+using FusionTech.src.Config;
 using FusionTech.src.Database;
+using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
@@ -12,6 +17,17 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
+
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+// add DI services
+builder
+    .Services.AddScoped<IPersonService, PersonService>()
+    .AddScoped<PersonRepository, PersonRepository>();
+
+builder
+    .Services.AddScoped<ICustomerService, CustomerService>()
+    .AddScoped<CustomerRepository, CustomerRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

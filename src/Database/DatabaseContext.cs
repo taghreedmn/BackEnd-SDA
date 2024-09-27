@@ -13,45 +13,52 @@ namespace FusionTech.src.Database
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
 
+        // Config
+        public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
+
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Person table: PersonId as Primary Key
+            /*** Person and its children ***/
+            // I need to define Person as a base table
             modelBuilder.Entity<Person>().ToTable("Persons").HasKey(p => p.PersonId);
 
-            // Customer table
-            modelBuilder.Entity<Customer>().ToTable("Customers").HasKey(c => c.PersonId); // Set primary key
-            // Has relationship with table Person
+            // No auto-generation
+            modelBuilder.Entity<Person>().Property(p => p.PersonId).ValueGeneratedNever();
+
             modelBuilder
                 .Entity<Customer>()
+                .ToTable("Customers")
                 .HasOne<Person>()
                 .WithOne()
-                .HasForeignKey<Customer>(c => c.PersonId); // Set foreign key
+                .HasForeignKey<Customer>(c => c.PersonId);
 
-            // StoreEmployee table
             modelBuilder
                 .Entity<StoreEmployee>()
                 .ToTable("StoreEmployees")
-                .HasKey(se => se.PersonId); // Set primary key
-            modelBuilder
-                .Entity<StoreEmployee>()
                 .HasOne<Person>()
                 .WithOne()
-                .HasForeignKey<StoreEmployee>(se => se.PersonId); // Set foreign key
+                .HasForeignKey<StoreEmployee>(se => se.PersonId);
 
-            // SystemAdmin entity configuration
-            modelBuilder.Entity<SystemAdmin>().ToTable("SystemAdmins").HasKey(sa => sa.PersonId); // Set primary key
             modelBuilder
                 .Entity<SystemAdmin>()
+                .ToTable("SystemAdmins")
                 .HasOne<Person>()
                 .WithOne()
-                .HasForeignKey<SystemAdmin>(sa => sa.PersonId); // Set foreign key
+                .HasForeignKey<SystemAdmin>(sa => sa.PersonId);
+
+            // Store enums as string
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .Property(p => p.PersonIdCounterId)
+                .HasConversion<string>();
 
             base.OnModelCreating(modelBuilder);
 
             // Code to seed data
+            // Payment Data
             modelBuilder
                 .Entity<Payment>()
                 .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Cash on deleviry" });
@@ -74,6 +81,30 @@ namespace FusionTech.src.Database
             modelBuilder
                 .Entity<Category>()
                 .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" });
+            // Id Generation counter Data
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .HasData(
+                    new PersonIdCounter
+                    {
+                        PersonIdCounterId = PersonType.SystemAdmin,
+                        CurrentId = 0,
+                    }
+                );
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .HasData(
+                    new PersonIdCounter
+                    {
+                        PersonIdCounterId = PersonType.StoreEmployee,
+                        CurrentId = 0,
+                    }
+                );
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .HasData(
+                    new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
+                );
         }
     }
 }
