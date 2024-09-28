@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
+using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Repository
@@ -21,12 +22,17 @@ namespace FusionTech.src.Repository
 
         public async Task<Category> CreateOneAsync(Category newCategory)
         {
-             await _category.AddAsync(newCategory);
-             await _databaseContext.SaveChangesAsync();
+            await _category.AddAsync(newCategory);
+            await _databaseContext.SaveChangesAsync();
             return newCategory;
         }
-
-        public async Task<Category> GetIdAsync(Guid id)
+        public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
+        {
+           var result = _category.Where(c => c.CategoryName.ToLower().Contains(paginationOptions.Search.ToLower()));
+            return await result.Skip(paginationOptions.Offset).Take(paginationOptions.Limit).ToListAsync();
+            
+        }
+        public async Task<Category> GetByIdAsync(Guid id)
         {
             return await _category.FindAsync(id);
         }

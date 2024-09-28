@@ -1,73 +1,76 @@
-// using System;
-// using System.Collections.Generic;
-// using System.ComponentModel;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Mvc;
-// using FusionTech.src.Entity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using FusionTech.src.Entity;
+using FusionTech.src.Services;
+using static FusionTech.src.DTO.CategoryDTO;
+using FusionTech.src.DTO;
+using System.Data;
+using FusionTech.src.Utils;
+using FusionTech.src.Services.category;
 
-// namespace FusionTech.src.Controllers
-// {
-//     [ApiController]
-//     [Route("/api/v1/[controller]")]
-//     public class CategoriesController : ControllerBase
-//     {
-//         public List<Category> categories = new List<Category>
-//         {
-//             new Category {  Id = Guid.NewGuid() , CategoryName = "Category1"},
-//             new Category {  Id = Guid.NewGuid() , CategoryName ="Category2"},
-//             new Category {  Id = Guid.NewGuid() , CategoryName ="Category3"}
-//         };
+namespace FusionTech.src.Controllers
+{
+    [ApiController]
+    [Route("/api/v1/[controller]")]
+    public class CategoriesController : ControllerBase
+    {
+        protected readonly ICategoryService _categoryService;
+        public CategoriesController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
 
-//         [HttpGet]
-//         public ActionResult GetCategory()
-//         {
-//             return Ok(categories);
-//         }
+        [HttpPost]
+        public async Task<ActionResult<CategoryReadDto>> CreateOne([FromBody] CategoryCreateDto createDto)
+        {
+            var categoryCreated = await _categoryService.CreateOneAsync(createDto);
+            return Created($"api/v1/categories/{categoryCreated.Id}", categoryCreated);
+            // return Ok(categoryCreated);
+        }
+        [HttpGet]
+        public async Task<ActionResult<CategoryReadDto>> GetCategory([FromQuery] PaginationOptions paginationOptions)
+        {
+            var categoryList = await _categoryService.GetAllAsync(paginationOptions);
+            return Ok(categoryList);
+        }
 
-//         [HttpGet("{Id}")]
-//         public ActionResult GetCategoryById(Guid id)
-//         {
-//             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-//             if (foundCategory == null)
-//             {
-//                 return NotFound();
-//             }
-//             return Ok(foundCategory);
-//         }
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            return Ok(category);
+        }
 
-//         [HttpPost]
-//         public ActionResult CreateCategory(Category newCategory)
-//         {
-//             categories.Add(newCategory);
-//             return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
-//         }
 
-//         [HttpDelete("{Id}")]
-//         public ActionResult DeleteCategory(Guid id)
-//         {
-//             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-//             if (foundCategory == null)
-//             {
-//                 return NotFound();
-//             }
-//             categories.Remove(foundCategory);
-//             return NoContent();
-//         }
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            await _categoryService.DeleteOneAsync(category.Id);
+            return Ok(category);
+        }
 
-//         [HttpPut("{Id}")]
-//         public ActionResult PutCategory(Guid id, Category updateCategory)
-//         {
-//             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-//             if (foundCategory == null)
-//             {
-//                 return NotFound();
-//             }
+        //         [HttpPut("{Id}")]
+        //         public ActionResult PutCategory(Guid id, Category updateCategory)
+        //         {
+        //             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
+        //             if (foundCategory == null)
+        //             {
+        //                 return NotFound();
+        //             }
 
-//             foundCategory.Id = updateCategory.Id;
-//             foundCategory.CategoryName = updateCategory.CategoryName;
-//             return NoContent();
-//         }
+        //             foundCategory.Id = updateCategory.Id;
+        //             foundCategory.CategoryName = updateCategory.CategoryName;
+        //             return NoContent();
+        //         }
 
-//     }
-// }
+    }
+}
