@@ -3,6 +3,11 @@ using FusionTech.Service.PersonService;
 using FusionTech.src.Config;
 using FusionTech.src.Database;
 using FusionTech.src.Repository;
+
+using FusionTech.src.Services;
+using FusionTech.src.Services.category;
+using FusionTech.src.Services.payment;
+
 using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -18,6 +23,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseNpgsql(dataSourceBuilder.Build());
 });
 
+
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
 // add DI services
@@ -28,6 +34,11 @@ builder
 builder
     .Services.AddScoped<ICustomerService, CustomerService>()
     .AddScoped<CustomerRepository, CustomerRepository>();
+
+
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+builder.Services.AddScoped<ICategoryService, CategoryService>().AddScoped<CategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>().AddScoped<PaymentRepository, PaymentRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

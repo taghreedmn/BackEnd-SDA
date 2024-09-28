@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using FusionTech.src.Entity;
 using System.Linq;
+using FusionTech.src.Entity;
 
 namespace FusionTech.src.Controllers
+
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -11,9 +12,36 @@ namespace FusionTech.src.Controllers
     {
         private List<Order> Order = new List<Order>
         {
-            new Order { OrderId = 1, OrderDate = new DateTime(2020, 12, 12), TotalPrice = 150, PaymentId = 1, StoreId = 1, EmployeeId = 1, CustomerId = 101 },
-            new Order { OrderId = 2, OrderDate = new DateTime(2021, 1, 15), TotalPrice = 250, PaymentId = 2, StoreId = 1, EmployeeId = 2, CustomerId = 102 },
-            new Order { OrderId = 3, OrderDate = new DateTime(2021, 2, 20), TotalPrice = 350, PaymentId = 3, StoreId = 2, EmployeeId = 1, CustomerId = 103 }
+            new Order 
+            { 
+                OrderId = 1,
+                OrderDate = new DateTime(2020, 12, 12),
+                TotalPrice = 150,
+                PaymentId = 1,
+                StoreId = 1,
+                EmployeeId = 1,
+                CustomerId = 101 
+            },
+            new Order
+             { 
+                OrderId = 2,
+                OrderDate = new DateTime(2021, 1, 15),
+                TotalPrice = 250, 
+                PaymentId = 2, 
+                StoreId = 1, 
+                EmployeeId = 2,
+                CustomerId = 102
+             },
+            new Order 
+            { 
+                OrderId = 3,
+                OrderDate = new DateTime(2021, 2, 20), 
+                TotalPrice = 350,
+                PaymentId = 3, 
+                StoreId = 2,
+                EmployeeId = 1, 
+                CustomerId = 103 
+            }
         };
 
         // Create a new order

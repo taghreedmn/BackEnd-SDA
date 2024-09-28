@@ -1,3 +1,4 @@
+
 using AutoMapper;
 using FusionTech.src.Entity;
 using static FusionTech.src.DTO.CustomerDTO;
@@ -5,12 +6,23 @@ using static FusionTech.src.DTO.PersonDTO;
 using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using FusionTech.src.Entity;
+using static FusionTech.src.DTO.CategoryDTO;
+using static FusionTech.src.DTO.PaymentDTO;
+
+
 namespace FusionTech.src.Utils
 {
     public class MapperProfile : Profile
     {
         public MapperProfile()
         {
+
             // Person mappings
             CreateMap<PersonCreateDto, Person>();
             CreateMap<Person, PersonReadDto>();
@@ -33,3 +45,21 @@ namespace FusionTech.src.Utils
         }
     }
 }
+
+            //Category 
+            CreateMap<Category, CategoryReadDto>();
+            CreateMap<CategoryCreateDto, Category>();
+            CreateMap<CategoryUpdateDto, Category>().
+            ForAllMembers(Opts => Opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            //Payment 
+            CreateMap<Payment, PaymentReadDto>();
+            CreateMap<PaymentCreateDto, Payment>();
+            CreateMap<PaymentUpdateDto, Payment>().
+            ForAllMembers(Opts => Opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+        }
+
+    }
+}
+
