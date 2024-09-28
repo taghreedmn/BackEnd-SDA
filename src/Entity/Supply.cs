@@ -1,12 +1,13 @@
-namespace  FusionTech.src.Entity
- {
-    public class Supply 
+
+namespace FusionTech.src.Entity
+{
+    public class Supply
     {
-        public int SupplierId { get; set; }
-        public int GamesId { get; set; }
+        public Guid SupplyId { get; set; } 
+        public Guid SupplierId { get; set; }
+        public Guid GamesId { get; set; }
         public float SupplierQuantity { get; set; }
         public DateTime SupplierDate { get; set; }
-        public int InventoryId { get; set; }
-        
+        public Guid InventoryId { get; set; }
     }
 }

@@ -10,25 +10,25 @@ namespace FusionTech.src.Controllers
     [Route("api/v1/[controller]")]
     public class SupplierController : ControllerBase
     {
-        public List<Supplier> suppliers = new List<Supplier>()
+        private List<Supplier> suppliers = new List<Supplier>
         {
             new Supplier
             {
-                SupplierId = 1,
+                SupplierId = Guid.NewGuid(),
                 SupplierName = "Supplier A",
                 SupplierContact = "123-456-7890",
                 SupplierBankInfo = "Bank A Info"
             },
             new Supplier
             {
-                SupplierId = 2,
+                SupplierId = Guid.NewGuid(),
                 SupplierName = "Supplier B",
                 SupplierContact = "987-654-3210",
                 SupplierBankInfo = "Bank B Info"
             },
             new Supplier
             {
-                SupplierId = 3,
+                SupplierId = Guid.NewGuid(),
                 SupplierName = "Supplier C",
                 SupplierContact = "555-555-5555",
                 SupplierBankInfo = "Bank C Info"
@@ -37,16 +37,16 @@ namespace FusionTech.src.Controllers
 
         // Get all suppliers
         [HttpGet]
-        public ActionResult GetSuppliers()
+        public ActionResult<IEnumerable<Supplier>> GetSuppliers()
         {
             return Ok(suppliers);
         }
 
         // Get supplier by ID
         [HttpGet("{id}")]
-        public ActionResult GetSupplierById(int id)
+        public ActionResult<Supplier> GetSupplierById(Guid id) // Change to Guid
         {
-            Supplier? foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
+            var foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
             if (foundSupplier == null)
             {
                 return NotFound();
@@ -56,9 +56,9 @@ namespace FusionTech.src.Controllers
 
         // Add a new supplier
         [HttpPost]
-        public ActionResult CreateSupplier(Supplier newSupplier)
+        public ActionResult<Supplier> CreateSupplier(Supplier newSupplier)
         {
-            newSupplier.SupplierId = suppliers.Max(s => s.SupplierId) + 1; // Incrementing SupplierId
+            newSupplier.SupplierId = Guid.NewGuid(); // Generate new SupplierId
             suppliers.Add(newSupplier);
             return CreatedAtAction(
                 nameof(GetSupplierById),
@@ -69,9 +69,9 @@ namespace FusionTech.src.Controllers
 
         // Delete supplier
         [HttpDelete("{id}")]
-        public ActionResult DeleteSupplier(int id)
+        public ActionResult DeleteSupplier(Guid id) // Change to Guid
         {
-            Supplier? foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
+            var foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
             if (foundSupplier == null)
             {
                 return NotFound();
@@ -82,9 +82,9 @@ namespace FusionTech.src.Controllers
 
         // Update supplier
         [HttpPut("{id}")]
-        public ActionResult UpdateSupplier(int id, Supplier updatedSupplier)
+        public ActionResult UpdateSupplier(Guid id, Supplier updatedSupplier) // Change to Guid
         {
-            Supplier? foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
+            var foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
             if (foundSupplier == null)
             {
                 return NotFound();

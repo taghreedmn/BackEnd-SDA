@@ -14,27 +14,30 @@ namespace FusionTech.src.Controllers
         {
             new Supply 
             { 
-                SupplierId = 1,
-                GamesId = 1,
+                SupplyId = Guid.NewGuid(), 
+                SupplierId = Guid.NewGuid(), 
+                GamesId = Guid.NewGuid(), 
                 SupplierQuantity = 50,
                 SupplierDate = new DateTime(2020, 12, 12),
-                InventoryId = 1
+                InventoryId = Guid.NewGuid() 
             },
             new Supply
             { 
-                SupplierId = 2,
-                GamesId = 2,
+                SupplyId = Guid.NewGuid(), 
+                SupplierId = Guid.NewGuid(), 
+                GamesId = Guid.NewGuid(), 
                 SupplierQuantity = 100,
                 SupplierDate = new DateTime(2019, 1, 10),
-                InventoryId = 2
+                InventoryId = Guid.NewGuid() 
             },
             new Supply 
             { 
-                SupplierId = 3,
-                GamesId = 3,
+                SupplyId = Guid.NewGuid(), 
+                SupplierId = Guid.NewGuid(),
+                GamesId = Guid.NewGuid(),
                 SupplierQuantity = 250,
                 SupplierDate = new DateTime(2022, 3, 4),
-                InventoryId = 3
+                InventoryId = Guid.NewGuid() 
             }
         };
 
@@ -47,9 +50,9 @@ namespace FusionTech.src.Controllers
 
         // Get supply by ID
         [HttpGet("{id}")]
-        public ActionResult<Supply> GetSupplyById(int id)
+        public ActionResult<Supply> GetSupplyById(Guid id) // Change to Guid
         {
-            var supplyItem = supplies.FirstOrDefault(s => s.SupplierId == id);
+            var supplyItem = supplies.FirstOrDefault(s => s.SupplyId == id); // Use SupplyId
             if (supplyItem == null)
             {
                 return NotFound();
@@ -61,16 +64,16 @@ namespace FusionTech.src.Controllers
         [HttpPost]
         public ActionResult<Supply> CreateSupply(Supply newSupply)
         {
-            newSupply.SupplierId = supplies.Max(s => s.SupplierId) + 1; // Increment SupplierId
+            newSupply.SupplyId = Guid.NewGuid(); // Generate new SupplyId
             supplies.Add(newSupply);
-            return CreatedAtAction(nameof(GetSupplyById), new { id = newSupply.SupplierId }, newSupply);
+            return CreatedAtAction(nameof(GetSupplyById), new { id = newSupply.SupplyId }, newSupply);
         }
 
         // Update supply
         [HttpPut("{id}")]
-        public ActionResult UpdateSupply(int id, Supply updatedSupply)
+        public ActionResult UpdateSupply(Guid id, Supply updatedSupply) // Change to Guid
         {
-            var supplyItem = supplies.FirstOrDefault(s => s.SupplierId == id);
+            var supplyItem = supplies.FirstOrDefault(s => s.SupplyId == id); // Use SupplyId
             if (supplyItem == null)
             {
                 return NotFound();
@@ -86,9 +89,9 @@ namespace FusionTech.src.Controllers
 
         // Delete supply
         [HttpDelete("{id}")]
-        public ActionResult DeleteSupply(int id)
+        public ActionResult DeleteSupply(Guid id) // Change to Guid
         {
-            var supplyItem = supplies.FirstOrDefault(s => s.SupplierId == id);
+            var supplyItem = supplies.FirstOrDefault(s => s.SupplyId == id); // Use SupplyId
             if (supplyItem == null)
             {
                 return NotFound();
@@ -96,7 +99,5 @@ namespace FusionTech.src.Controllers
             supplies.Remove(supplyItem);
             return NoContent();
         }
-
-
     }
 }
