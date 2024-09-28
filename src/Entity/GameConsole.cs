@@ -4,7 +4,7 @@ namespace  FusionTech.src.Entity
 {
     public class GameConsole
     {
-        public int ConsoleId { get; set; }
+        public Guid ConsoleId { get; set; }
         public string ConsoleName { get; set;}
     }
 }
