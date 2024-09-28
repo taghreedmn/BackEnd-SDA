@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
+using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Repository
@@ -25,8 +26,13 @@ namespace FusionTech.src.Repository
             await _databaseContext.SaveChangesAsync();
             return newPayment;
         }
+        public async Task<List<Payment>> GetAllAsync(PaginationOptions paginationOptions)
+        {
+            var result = _payment.Where(c => c.PaymentMethod.ToLower().Contains(paginationOptions.Search.ToLower()));
+            return await result.Skip(paginationOptions.Offset).Take(paginationOptions.Limit).ToListAsync();
+        }
 
-        public async Task<Payment> GetIdAsync(Guid id)
+        public async Task<Payment> GetByIdAsync(Guid id)
         {
             return await _payment.FindAsync(id);
         }
