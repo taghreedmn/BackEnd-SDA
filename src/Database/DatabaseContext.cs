@@ -13,10 +13,11 @@ namespace FusionTech.src.Database
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
-        public DbSet<Supplier> Supplier { get; set; }
-        public DbSet<Supply> Supply { get; set; }
+        public DbSet<Supplier> Supplier { get; set; } 
+        public DbSet<Supply> Supply { get; set; }     
+        // Config
+        public DbSet<PersonIdCounter> PersonIdCounters { get; set; 
         public DbSet<GameConsole> Console { get; set; }
-
         public DbSet<GameStudio> Studio { get; set; }
 
         public DatabaseContext(DbContextOptions options)
@@ -123,9 +124,10 @@ namespace FusionTech.src.Database
                 .WithOne()
                 .HasForeignKey<SystemAdmin>(sa => sa.PersonId); // Set foreign key
 
-            base.OnModelCreating(modelBuilder);
+             base.OnModelCreating(modelBuilder);
 
             // Console data
+
             modelBuilder
                 .Entity<GameConsole>()
                 .HasData(new GameConsole { ConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" });
@@ -143,8 +145,37 @@ namespace FusionTech.src.Database
                 .Entity<GameStudio>()
                 .HasData(new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Studio 2" });
             modelBuilder
-                .Entity<GameStudio>()
+              .Entity<GameStudio>()
                 .HasData(new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Studio 3" });
+        
+           
+            // Id Generation counter Data
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .HasData(
+                    new PersonIdCounter
+                    {
+                        PersonIdCounterId = PersonType.SystemAdmin,
+                        CurrentId = 0,
+                    }
+                );
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .HasData(
+                    new PersonIdCounter
+                    {
+                        PersonIdCounterId = PersonType.StoreEmployee,
+                        CurrentId = 0,
+                    }
+                );
+            modelBuilder
+                .Entity<PersonIdCounter>()
+                .HasData(
+                    new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
+                );
+
+
+
         }
     }
 }
