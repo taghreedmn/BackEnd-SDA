@@ -3,13 +3,15 @@
 //2-update Console
 //3-get Console by id
 //4-get all Consoles
-//5-delete all Consoles
-//6-delete Console by id
+//5-delete Console by id
 
 using System.Collections.Generic;
 using System.Linq;
 using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
+using sda_3_online_Backend_Teamwork.src.Service;
+using sda_3_online_Backend_Teamwork.src.Service.Console;
+using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
 
 namespace FusionTech.src.Controllers
 {
@@ -17,82 +19,59 @@ namespace FusionTech.src.Controllers
     [Route("api/v1/[controller]")]
     public class ConsoleController : ControllerBase
     {
-        public static List<GameConsole> consoles = new List<GameConsole>
+       protected readonly  IConsoleService _consoleService;
+
+        public ConsoleController(IConsoleService consoleService)
         {
-            new GameConsole { ConsoleId = 508, ConsoleName = "PlayStation 5" },
-            new GameConsole { ConsoleId = 340, ConsoleName = "Steam Deck" },
-            new GameConsole { ConsoleId = 933, ConsoleName = "Atari 2600" },
-        };
+            _consoleService = consoleService;
+        }
+
 
         //1-Create Console:
         [HttpPost]
-        public ActionResult CreateConsole(GameConsole NewConsole)
+        public async Task<ActionResult<ReadConsoleDTO>> CreateOneAsync(CreatConsoleDTO createDTO)
         {
-            consoles.Add(NewConsole);
-            //return Ok("New Console added !");
-            return CreatedAtAction(
-                nameof(GetConsoleById),
-                new { id = NewConsole.ConsoleId },
-                NewConsole
-            );
+            var consoleCreated = await _consoleService.CreateOneAsync(createDTO);
+            return Created($"api/v1/Console/{consoleCreated.ConsoleName}", consoleCreated);
         }
 
         //2-update Console
         [HttpPut("{id}")]
-        public ActionResult UpdateConsole(GameConsole updatedConsole, int id)
+        
+        public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateConsoleDTO consoleName)
         {
-            GameConsole? foundConsole = consoles.FirstOrDefault(console => console.ConsoleId == id);
-
-            // if not fount
-            if (foundConsole == null)
+            var foundconsole = await _consoleService.GetIdAsync(id);
+            if (foundconsole == null)
             {
-                return NotFound();
+                return false;
             }
-            //if found
-            foundConsole.ConsoleName = updatedConsole.ConsoleName;
-            //return Ok();
-            return CreatedAtAction(
-                nameof(GetConsoleById),
-                new { id = updatedConsole.ConsoleId },
-                updatedConsole
-            );
+
+            return Ok(foundconsole);
         }
 
         //3-get Console by id
         [HttpGet("{id}")]
-        public ActionResult GetConsoleById(int id)
+    
+        public async Task<ActionResult<ReadConsoleDTO>> GetIdAsync(Guid id)
         {
-            GameConsole? foundConsole = consoles.FirstOrDefault(console => console.ConsoleId == id);
-
-            // if not fount
-            if (foundConsole == null)
-            {
-                return NotFound();
-            }
-            //if found
-            return Ok(foundConsole);
+            var foundcosole = await _consoleService.GetIdAsync(id);
+            return Ok(foundcosole);
         }
 
         //4-get all Consoles
         [HttpGet]
-        public ActionResult GetConsoles()
+       public async Task<ActionResult<ReadConsoleDTO>> GetAllAsync()
         {
-            return Ok(consoles);
+            var Listconsole = await _consoleService.GetAllAsync();
+            return Ok(Listconsole );
         }
 
-        //5-delete all Consoles
-        [HttpDelete]
-        public ActionResult DeleteAllConsoles()
-        {
-            consoles.Clear();
-            return Ok();
-        }
-
-        //6-delete Console by id
+    
+        //5-delete Console by id
         [HttpDelete("{id}")]
-        public ActionResult DeleteConsoleById(int id)
+        public async Task<ActionResult<bool>> DeleteId(Guid id)
         {
-            GameConsole? foundConsole = consoles.FirstOrDefault(console => console.ConsoleId == id);
+            var foundConsole = await _consoleService.GetIdAsync(id);
 
             // if not fount
             if (foundConsole == null)
@@ -100,7 +79,7 @@ namespace FusionTech.src.Controllers
                 return NotFound();
             }
             //if found
-            consoles.Remove(foundConsole);
+            await  _consoleService.DeleteIdAsync(foundConsole.ConsoleId);
             return NoContent();
         }
     }
