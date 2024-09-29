@@ -5,9 +5,8 @@ namespace  FusionTech.src.Entity
     public class GameStudio
     {
         
-        public int StudioId { get; set; }
+        public Guid StudioId { get; set; }
         public string StudioName { get; set;}
-
         public string StudioPicturePath { get; set; }
 
 

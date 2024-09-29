@@ -1,67 +1,73 @@
-
 //This Controller will do:
 //1-Create Studio
 //2-update Studio
 //3-get Studio by id
 //4-get all Studios
-//5-delete all Studios
-//6-delete Studio by id
+//5-delete Studio by id
 
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using FusionTech.src.Entity;
 using System.Linq;
+using FusionTech.src.Entity;
+using Microsoft.AspNetCore.Mvc;
+using sda_3_online_Backend_Teamwork.src.Service.Studio;
+using static sda_3_online_Backend_Teamwork.src.DTO.StudioDTO;
 
 namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-
     public class GameStudioController : ControllerBase
     {
-        public static List<GameStudio> studios = new List<GameStudio>
-        {
-            new GameStudio { StudioId  = 508, StudioName = "GameSphere Studios" ,StudioPicturePath =""},
-            new GameStudio { StudioId  = 340, StudioName = "Pixel Playhouse",StudioPicturePath = ""},
-            new GameStudio { StudioId  = 933, StudioName = "GameGlow Studios" ,StudioPicturePath =""},
-        };
+        protected readonly IStudioService _studioService;
 
+        public GameStudioController(IStudioService studioService)
+        {
+            _studioService = studioService;
+        }
 
         //1-Create Studio:
 
         [HttpPost]
-        public ActionResult CreateStudio(GameStudio NewStudio)
+        public async Task<ActionResult<ReadStudioDTO>> CreateOneAsync(CreatStudioDTO createDTO)
         {
-            studios.Add(NewStudio);
-            //return Ok("New Studio added !");
-              return CreatedAtAction(
-                nameof(GetStudioById),
-                new { id = NewStudio.StudioId },
-                NewStudio
-            );
+            var studioCreated = await _studioService.CreateOneAsync(createDTO);
+            return Created($"api/v1/GameStudio/{studioCreated.StudioName}", studioCreated);
         }
 
         //2-update Studio:
         [HttpPut("{id}")]
-        public ActionResult UpdateStudio(GameStudio updatedStudio, int id)
+        public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateStudioDTO studioName)
         {
-            GameStudio? foundSudio = studios.FirstOrDefault(studio => studio .StudioId== id);
-
-            // if not fount
-            if (foundSudio == null)
+            var foundstudio = await _studioService.GetIdAsync(id);
+            if (foundstudio == null)
             {
-                return NotFound();
+                return false;
             }
-            //if found
-            foundSudio.StudioName = updatedStudio.StudioName;
-            return Ok(updatedStudio);
+
+            return Ok(foundstudio);
         }
 
         //3-get Studio by id
         [HttpGet("{id}")]
-        public ActionResult GetStudioById(int id)
+        public async Task<ActionResult<ReadStudioDTO>> GetIdAsync(Guid id)
         {
-            GameStudio? foundSudio= studios.FirstOrDefault(studio => studio.StudioId== id);
+            var foundstudio = await _studioService.GetIdAsync(id);
+            return Ok(foundstudio);
+        }
+
+        //4-get all Studios
+        [HttpGet]
+        public async Task<ActionResult<ReadStudioDTO>> GetAllAsync()
+        {
+            var Liststudio = await _studioService.GetAllAsync();
+            return Ok(Liststudio);
+        }
+
+        //5-delete Studio by id
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteId(Guid id)
+        {
+            var foundSudio = await _studioService.GetIdAsync(id);
 
             // if not fount
             if (foundSudio == null)
@@ -69,41 +75,8 @@ namespace FusionTech.src.Controllers
                 return NotFound();
             }
             //if found
-            return Ok(foundSudio);
-        }
-
-    
-
-        //4-get all Studios
-        [HttpGet]
-        public ActionResult GetStudios()
-        {
-            return Ok(studios);
-        }
-
-        //5-delete all Studios
-        [HttpDelete]
-        public ActionResult DeleteAllStudios()
-        {
-            studios.Clear();
-            return Ok();
-        }
-
-        //6-delete Studio by id
-        [HttpDelete("{id}")]
-        public ActionResult DeleteStudioById(int id)
-        {
-            GameStudio? foundSudio= studios.FirstOrDefault(studio => studio .StudioId== id);
-
-            // if not fount
-            if (foundSudio== null)
-            {
-                return NotFound();
-            }
-            //if found
-            studios.Remove(foundSudio);
+            await _studioService.DeleteIdAsync(foundSudio.StudioId);
             return NoContent();
-            
         }
     }
 }
