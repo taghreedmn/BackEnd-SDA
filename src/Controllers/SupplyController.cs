@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using FusionTech.src.Entity;
+using System.ComponentModel;
+using System.Data;
 using FusionTech.src.Services.supply;
 using FusionTech.src.DTO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.SupplyDTO;
 
 namespace FusionTech.src.Controllers
@@ -22,11 +25,13 @@ namespace FusionTech.src.Controllers
 
         // Get all supplies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupplyReadDto>>> GetSupplies()
+        public async Task<ActionResult<SupplyReadDto>> GetSupplies([FromQuery] PaginationOptions paginationOptions)
         {
-            var supplies = await _supplyService.GetAllAsync();
-            return Ok(supplies);
+            var paginatedSupplies = await _supplyService.GetAllAsync(paginationOptions);
+             return Ok(paginatedSupplies);
         }
+
+        
 
         // Get supply by ID
         [HttpGet("{id}")]
@@ -41,13 +46,16 @@ namespace FusionTech.src.Controllers
         }
 
         // Create a new supply
+        
         [HttpPost]
         public async Task<ActionResult<SupplyReadDto>> CreateOne(SupplyCreateDto createDto)
-        {
-            var supplyCreated = await _supplyService.CreateOneAsync(createDto);
-            return CreatedAtAction(nameof(GetSupplyById), new { id = supplyCreated.SupplyId }, supplyCreated);
-        }
+       {
+          var supplyCreated = await _supplyService.CreateOneAsync(createDto);
+           return Created($"api/v1/supplies/{supplyCreated.SupplyId}", supplyCreated);
+       }
 
+         
+     
         // Update supply
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateSupply(Guid id, SupplyUpdateDto updateDto) // Use SupplyUpdateDto

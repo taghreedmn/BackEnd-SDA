@@ -31,7 +31,7 @@ namespace FusionTech.src.Repository
             return newSupply; // Return the created supply
         }
 
-        public async Task<List<Supply>> GetAllAsync()
+        public async Task<List<Supply>> GetAllAsync(Utils.PaginationOptions paginationOptions)
         {
             return await _supply.ToListAsync();
         }

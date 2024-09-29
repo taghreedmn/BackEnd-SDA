@@ -3,7 +3,8 @@ using FusionTech.src.DTO;
 using FusionTech.src.Repository;
 using FusionTech.src.Entity;
 using static FusionTech.src.DTO.SupplyDTO;
-
+using FusionTech.src.Utils;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 
 
@@ -29,11 +30,11 @@ namespace FusionTech.src.Services.supply
            return _mapper.Map<Supply, SupplyReadDto>(supplyCreated);
 
         }
-        public async Task<List<SupplyReadDto>> GetAllAsync()
-        {
-             var supplyList = await _supplyRepo.GetAllAsync();
+        public async Task<List<SupplyReadDto>> GetAllAsync(PaginationOptions paginationOptions)
+         {
+             var supplyList = await _supplyRepo.GetAllAsync(paginationOptions);
              return _mapper.Map<List<Supply>, List<SupplyReadDto>>(supplyList);
-        }
+         }
         public async Task<SupplyReadDto> GetByIdAsync(Guid ID)
         {
            var foundSupply = await _supplyRepo.GetByIdAsync(ID);
