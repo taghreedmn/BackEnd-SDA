@@ -1,4 +1,3 @@
-using System;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +12,9 @@ namespace FusionTech.src.Database
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
-        public DbSet<Supplier> Supplier { get; set; } 
-        public DbSet<Supply> Supply { get; set; }     
-        // Config
-        public DbSet<PersonIdCounter> PersonIdCounters { get; set; 
+        public DbSet<Supplier> Supplier { get; set; }
+        public DbSet<Supply> Supply { get; set; }
+        public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
 
@@ -25,6 +23,8 @@ namespace FusionTech.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Person>().UseTptMappingStrategy();
+
             base.OnModelCreating(modelBuilder);
 
             // Seed Payment data
@@ -93,62 +93,55 @@ namespace FusionTech.src.Database
                     }
                 );
 
-            // Person table: PersonId as Primary Key
-            modelBuilder.Entity<Person>().ToTable("Persons").HasKey(p => p.PersonId);
-
-            //Customer table
-            modelBuilder.Entity<Customer>().ToTable("Customers").HasKey(c => c.PersonId); // Set primary key
-            //Has relationship with table Person
-            modelBuilder
-                .Entity<Customer>()
-                .HasOne<Person>()
-                .WithOne()
-                .HasForeignKey<Customer>(c => c.PersonId); // Set foreign key
-
-            // // StoreEmployee table
-            modelBuilder
-                .Entity<StoreEmployee>()
-                .ToTable("StoreEmployees")
-                .HasKey(se => se.PersonId); // Set primary key
-            modelBuilder
-                .Entity<StoreEmployee>()
-                .HasOne<Person>()
-                .WithOne()
-                .HasForeignKey<StoreEmployee>(se => se.PersonId); // Set foreign key
-
-            // // SystemAdmin entity configuration
-            modelBuilder.Entity<SystemAdmin>().ToTable("SystemAdmins").HasKey(sa => sa.PersonId); // Set primary key
-            modelBuilder
-                .Entity<SystemAdmin>()
-                .HasOne<Person>()
-                .WithOne()
-                .HasForeignKey<SystemAdmin>(sa => sa.PersonId); // Set foreign key
-
-             base.OnModelCreating(modelBuilder);
-
             // Console data
 
             modelBuilder
                 .Entity<GameConsole>()
-                .HasData(new GameConsole { ConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" });
+                .HasData(
+                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }
+                );
             modelBuilder
                 .Entity<GameConsole>()
-                .HasData(new GameConsole { ConsoleId = Guid.NewGuid(), ConsoleName = "Console 2" });
+                .HasData(
+                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 2" }
+                );
             modelBuilder
                 .Entity<GameConsole>()
-                .HasData(new GameConsole { ConsoleId = Guid.NewGuid(), ConsoleName = "Console 3" });
+                .HasData(
+                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 3" }
+                );
             // Studio data
             modelBuilder
                 .Entity<GameStudio>()
-                .HasData(new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Studio 1" });
+                .HasData(
+                    new GameStudio
+                    {
+                        GameStudioId = Guid.NewGuid(),
+                        StudioName = "Studio 1",
+                        StudioPicturePath = "",
+                    }
+                );
             modelBuilder
                 .Entity<GameStudio>()
-                .HasData(new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Studio 2" });
+                .HasData(
+                    new GameStudio
+                    {
+                        GameStudioId = Guid.NewGuid(),
+                        StudioName = "Studio 2",
+                        StudioPicturePath = "",
+                    }
+                );
             modelBuilder
-              .Entity<GameStudio>()
-                .HasData(new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Studio 3" });
-        
-           
+                .Entity<GameStudio>()
+                .HasData(
+                    new GameStudio
+                    {
+                        GameStudioId = Guid.NewGuid(),
+                        StudioName = "Studio 3",
+                        StudioPicturePath = "",
+                    }
+                );
+
             // Id Generation counter Data
             modelBuilder
                 .Entity<PersonIdCounter>()
@@ -173,9 +166,6 @@ namespace FusionTech.src.Database
                 .HasData(
                     new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
                 );
-
-
-
         }
     }
 }

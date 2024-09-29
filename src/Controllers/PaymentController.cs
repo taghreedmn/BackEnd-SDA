@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FusionTech.src.Entity;
-using FusionTech.src.Services.category;
-using FusionTech.src.Services.payment;
+using FusionTech.src.Services.Payment;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.PaymentDTO;
@@ -16,20 +10,26 @@ namespace FusionTech.src.Controllers
     public class PaymentController : ControllerBase
     {
         protected readonly IPaymentService _paymentService;
+
         public PaymentController(IPaymentService paymentService)
         {
             _paymentService = paymentService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<PaymentReadDto>> CreateOne([FromBody] PaymentCreateDto createDto)
+        public async Task<ActionResult<PaymentReadDto>> CreateOne(
+            [FromBody] PaymentCreateDto createDto
+        )
         {
             var paymentCreated = await _paymentService.CreateOneAsync(createDto);
             return Created($"api/v1/payment/{paymentCreated.Id}", paymentCreated);
             // return Ok(paymentCreated);
         }
+
         [HttpGet]
-        public async Task<ActionResult<PaymentReadDto>> GetPayment(PaginationOptions paginationOptions)
+        public async Task<ActionResult<PaymentReadDto>> GetPayment(
+            PaginationOptions paginationOptions
+        )
         {
             var paymentList = await _paymentService.GetAllAsync(paginationOptions);
             return Ok(paymentList);
@@ -41,6 +41,7 @@ namespace FusionTech.src.Controllers
             var payment = await _paymentService.GetByIdAsync(id);
             return Ok(payment);
         }
+
         [HttpDelete("{Id}")]
         public async Task<ActionResult<PaymentReadDto>> DeleteOne([FromRoute] Guid id)
         {

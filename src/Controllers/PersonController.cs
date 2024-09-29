@@ -1,4 +1,4 @@
-using FusionTech.Service.PersonService;
+using FusionTech.Service.Person;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.PersonDTO;
 
