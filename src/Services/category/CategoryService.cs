@@ -3,6 +3,7 @@ using FusionTech.src.DTO;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Utils;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore.Metadata;
 using static FusionTech.src.DTO.CategoryDTO;
 
@@ -60,5 +61,6 @@ namespace FusionTech.src.Services.category
             return await _categoryRepository.UpdateOneAsync(foundCategory);
 
         }
+
     }
 }

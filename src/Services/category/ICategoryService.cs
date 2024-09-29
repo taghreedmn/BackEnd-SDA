@@ -10,5 +10,6 @@ namespace FusionTech.src.Services
         Task<CategoryReadDto> GetByIdAsync(Guid id);
         Task<bool> DeleteOneAsync(Guid id);
         Task<bool> UpdateOneAsync(Guid id, CategoryUpdateDto updateDto);
+
     }
 }
