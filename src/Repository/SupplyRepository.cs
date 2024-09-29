@@ -31,6 +31,11 @@ namespace FusionTech.src.Repository
             return newSupply; // Return the created supply
         }
 
+        public async Task<List<Supply>> GetAllAsync()
+        {
+            return await _supply.ToListAsync();
+        }
+
         // Asynchronously retrieve a Supply by its ID
         public async Task<Supply?> GetByIdAsync(int Id)
         {
@@ -56,6 +61,11 @@ namespace FusionTech.src.Repository
             // Save changes to the database
             await _databaseContext.SaveChangesAsync();
             return true; // Indicate success
+        }
+
+        internal async Task<Supply> GetByIdAsync(Guid iD)
+        {
+            throw new NotImplementedException();
         }
     }
 }
