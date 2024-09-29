@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FusionTech.src.Entity;
 using FusionTech.src.Services;
@@ -38,7 +33,7 @@ namespace FusionTech.src.Controllers
             return Ok(categoryList);
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid id)
         {
             var category = await _categoryService.GetByIdAsync(id);
@@ -46,7 +41,7 @@ namespace FusionTech.src.Controllers
         }
 
 
-        [HttpDelete("{Id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid id)
         {
             var category = await _categoryService.GetByIdAsync(id);

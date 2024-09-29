@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FusionTech.src.Entity;
 using FusionTech.src.Services.category;
 using FusionTech.src.Services.payment;
@@ -35,13 +31,13 @@ namespace FusionTech.src.Controllers
             return Ok(paymentList);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<PaymentReadDto>> GetCategoryById([FromRoute] Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PaymentReadDto>> GetPaymentById([FromRoute] Guid id)
         {
             var payment = await _paymentService.GetByIdAsync(id);
             return Ok(payment);
         }
-        [HttpDelete("{Id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<PaymentReadDto>> DeleteOne([FromRoute] Guid id)
         {
             var payment = await _paymentService.GetByIdAsync(id);

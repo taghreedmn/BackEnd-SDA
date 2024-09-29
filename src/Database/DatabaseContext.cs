@@ -67,6 +67,9 @@ namespace FusionTech.src.Database
             modelBuilder
             .Entity<Payment>()
             .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
+            modelBuilder
+            .Entity<Payment>()
+            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
             // Category data
             modelBuilder
                 .Entity<Category>()
@@ -83,6 +86,12 @@ namespace FusionTech.src.Database
             modelBuilder
            .Entity<Category>()
            .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 5" });
+            modelBuilder
+           .Entity<Category>()
+           .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 6" });
+            modelBuilder
+            .Entity<Category>()
+            .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 7" });
 
         }
     }
