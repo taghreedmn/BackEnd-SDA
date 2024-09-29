@@ -23,6 +23,10 @@ namespace FusionTech.src.Repository
             await _databaseContext.SaveChangesAsync();
             return newOrder;
         }
+        public async Task<List<Order>> GetAllAsync()
+        {
+            return await _order.ToListAsync();
+        }
         public async Task<Order> GetIdAsync(Guid id)
         {
             return await _order.FindAsync(id);

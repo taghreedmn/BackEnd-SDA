@@ -1,4 +1,8 @@
+using FusionTech.Service.CustomerService;
+using FusionTech.Service.PersonService;
+using FusionTech.src.Config;
 using FusionTech.src.Database;
+
 using FusionTech.src.utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -7,6 +11,8 @@ using FusionTech.src.Repository;
 using FusionTech.src.Services;
 
 
+
+=======
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,12 +25,41 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
-// add auto_mapper
-builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
 
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddScoped<ISupplyService, SupplyService>().AddScoped<SupplyRepository, SupplyRepository>();
+=======
+
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+// add DI services
+builder
+    .Services.AddScoped<IPersonService, PersonService>()
+    .AddScoped<PersonRepository, PersonRepository>();
+
+builder
+    .Services.AddScoped<ICustomerService, CustomerService>()
+    .AddScoped<CustomerRepository, CustomerRepository>();
+
+
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+builder.Services.AddScoped<ICategoryService, CategoryService>().AddScoped<CategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>().AddScoped<PaymentRepository, PaymentRepository>();
+
+//add auto mapper
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+builder
+    .Services.AddScoped<IConsoleService, ConsoleService>()
+    .AddScoped<ConsoleRepository, ConsoleRepository>();
+
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+builder
+    .Services.AddScoped<IStudioService, StudioService>()
+    .AddScoped<StudioRepository, StudioRepository>();
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
