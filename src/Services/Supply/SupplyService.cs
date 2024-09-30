@@ -67,8 +67,7 @@ namespace FusionTech.src.Services.supply
 
              return await _supplyRepo.UpdateOneAsync(foundSupply);
 
-           
-
+        
 
         }
 
