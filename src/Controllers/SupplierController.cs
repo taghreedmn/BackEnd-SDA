@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using FusionTech.src.Entity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FusionTech.src.Controllers
 {
@@ -17,22 +14,22 @@ namespace FusionTech.src.Controllers
                 SupplierId = Guid.NewGuid(),
                 SupplierName = "Supplier A",
                 SupplierContact = "123-456-7890",
-                SupplierBankInfo = "Bank A Info"
+                SupplierBankInfo = "Bank A Info",
             },
             new Supplier
             {
                 SupplierId = Guid.NewGuid(),
                 SupplierName = "Supplier B",
                 SupplierContact = "987-654-3210",
-                SupplierBankInfo = "Bank B Info"
+                SupplierBankInfo = "Bank B Info",
             },
             new Supplier
             {
                 SupplierId = Guid.NewGuid(),
                 SupplierName = "Supplier C",
                 SupplierContact = "555-555-5555",
-                SupplierBankInfo = "Bank C Info"
-            }
+                SupplierBankInfo = "Bank C Info",
+            },
         };
 
         // Get all suppliers

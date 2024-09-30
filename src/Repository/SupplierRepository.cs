@@ -8,7 +8,7 @@ namespace FusionTech.src.Repository
     {
         // DbSet for accessing Supplier entities in the database
         protected DbSet<Supplier> _supplier;
-        
+
         // Database context for interacting with the database
         protected DatabaseContext _databaseContext;
 

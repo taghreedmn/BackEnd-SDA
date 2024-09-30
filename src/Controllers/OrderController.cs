@@ -1,10 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using FusionTech.src.Entity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FusionTech.src.Controllers
-
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -12,36 +9,36 @@ namespace FusionTech.src.Controllers
     {
         private List<Order> Order = new List<Order>
         {
-            new Order 
-            { 
+            new Order
+            {
                 OrderId = 1,
                 OrderDate = new DateTime(2020, 12, 12),
                 TotalPrice = 150,
                 PaymentId = 1,
                 StoreId = 1,
                 EmployeeId = 1,
-                CustomerId = 101 
+                CustomerId = 101,
             },
             new Order
-             { 
+            {
                 OrderId = 2,
                 OrderDate = new DateTime(2021, 1, 15),
-                TotalPrice = 250, 
-                PaymentId = 2, 
-                StoreId = 1, 
+                TotalPrice = 250,
+                PaymentId = 2,
+                StoreId = 1,
                 EmployeeId = 2,
-                CustomerId = 102
-             },
-            new Order 
-            { 
+                CustomerId = 102,
+            },
+            new Order
+            {
                 OrderId = 3,
-                OrderDate = new DateTime(2021, 2, 20), 
+                OrderDate = new DateTime(2021, 2, 20),
                 TotalPrice = 350,
-                PaymentId = 3, 
+                PaymentId = 3,
                 StoreId = 2,
-                EmployeeId = 1, 
-                CustomerId = 103 
-            }
+                EmployeeId = 1,
+                CustomerId = 103,
+            },
         };
 
         // Create a new order
@@ -91,7 +88,7 @@ namespace FusionTech.src.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteOrder(int id)
         {
-             Order? foundOrder = Order.FirstOrDefault(o => o.OrderId == id);
+            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId == id);
             if (foundOrder == null)
             {
                 return NotFound();
