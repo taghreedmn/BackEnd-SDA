@@ -3,8 +3,7 @@ using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using static FusionTech.src.DTO.ConsoleDTO;
 
-namespace FusionTech.src.Service.Console
-
+namespace FusionTech.src.Services.Console
 {
     public class ConsoleService : IConsoleService
     {

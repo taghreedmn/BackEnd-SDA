@@ -7,7 +7,7 @@ namespace FusionTech.src.DTO
             public int Age { get; set; }
         }
 
-        public class CustomerReadDto : PersonReadDto
+        public class CustomerReadDto : PersonSignInDTO
         {
             public int Age { get; set; }
         }

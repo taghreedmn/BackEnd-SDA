@@ -10,7 +10,7 @@ namespace FusionTech.src.DTO
             public bool ManageCustomers { get; private set; } = false;
         }
 
-        public class SystemAdminReadDto : PersonReadDto
+        public class SystemAdminReadDto : PersonSignInDTO
         {
             public bool ManageStores { get; private set; }
             public bool ManageEmployees { get; private set; }

@@ -25,6 +25,7 @@ namespace FusionTech.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>().UseTptMappingStrategy();
+            modelBuilder.HasPostgresEnum<PersonType>();
 
             base.OnModelCreating(modelBuilder);
 
