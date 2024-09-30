@@ -6,39 +6,17 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace FusionTech.src.Utils
 {
-    public class TokenUtlis
+    public class TokenUtils
     {
         private readonly IConfiguration _config;
 
-        public TokenUtlis(IConfiguration config)
+        public TokenUtils(IConfiguration config)
         {
             _config = config;
         }
 
         public string generateToken(Person person)
         {
-            // Ensure person fields are not null
-            if (person == null)
-            {
-                throw new ArgumentNullException(nameof(person), "Person object cannot be null.");
-            }
-
-            if (string.IsNullOrEmpty(person.PersonEmail))
-            {
-                throw new ArgumentNullException(
-                    nameof(person.PersonEmail),
-                    "Person email cannot be null or empty."
-                );
-            }
-
-            if (person.PersonId == 0)
-            {
-                throw new ArgumentNullException(
-                    nameof(person.PersonId),
-                    "PersonId cannot be zero or null."
-                );
-            }
-
             var role = person switch
             {
                 SystemAdmin => SystemAdmin.PersonType.ToString(),
@@ -66,10 +44,11 @@ namespace FusionTech.src.Utils
             {
                 Issuer = issuer,
                 Audience = audience,
-                Expires = DateTime.Now.AddMinutes(60),
+                Expires = DateTime.Now.AddMinutes(10),
                 Subject = new ClaimsIdentity(claims),
                 SigningCredentials = signingCredentials,
             };
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(descriptor);
             return tokenHandler.WriteToken(token);

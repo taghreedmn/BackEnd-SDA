@@ -9,6 +9,7 @@ using FusionTech.src.Services.Console;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.ConsoleDTO;
 
+
 namespace FusionTech.src.Controllers
 {
     [ApiController]

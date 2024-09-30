@@ -58,7 +58,7 @@ namespace FusionTech.src.Services.Person
             {
                 return "Unauthorized";
             }
-            var tokenUtils = new TokenUtlis(_config);
+            var tokenUtils = new TokenUtils(_config);
             return tokenUtils.generateToken(foundPerson);
         }
     }

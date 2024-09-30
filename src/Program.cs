@@ -6,6 +6,7 @@ using FusionTech.src.Services.Customer;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;
+using FusionTech.src.Services.supply;
 using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -20,6 +21,11 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
+
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+builder
+    .Services.AddScoped<ISupplyService, SupplyService>()
+    .AddScoped<SupplyRepository, SupplyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
