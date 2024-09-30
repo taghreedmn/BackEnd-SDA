@@ -10,6 +10,12 @@ using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
+
+
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 //connect the database
@@ -20,6 +26,13 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
+
+
+
+
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+builder.Services.AddScoped<ISupplyService, SupplyService>().AddScoped<SupplyRepository, SupplyRepository>();
+
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
@@ -51,9 +64,12 @@ builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
 
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 

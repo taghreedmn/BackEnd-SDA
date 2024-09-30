@@ -4,6 +4,7 @@ using FusionTech.src.Repository;
 using static FusionTech.src.DTO.ConsoleDTO;
 
 namespace FusionTech.src.Service.Console
+
 {
     public class ConsoleService : IConsoleService
     {

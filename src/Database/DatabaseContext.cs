@@ -12,6 +12,7 @@ namespace FusionTech.src.Database
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
+
         public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Supply> Supply { get; set; }
         public DbSet<PersonIdCounter> PersonIdCounters { get; set; }

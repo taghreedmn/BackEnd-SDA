@@ -1,3 +1,4 @@
+
 using AutoMapper;
 using FusionTech.src.Entity;
 using static FusionTech.src.DTO.CategoryDTO;
@@ -10,11 +11,22 @@ using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
 
 namespace FusionTech.src.Utils
+
 {
     public class MapperProfile : Profile
     {
         public MapperProfile()
-        {
+
+
+        {   //Supply
+            CreateMap<Supply, SupplyReadDto>();
+            CreateMap<SupplyCreateDto, Supply>();
+            CreateMap<SupplyUpdateDto, Supply>().
+            ForAllMembers(opts => opts.Condition((src, dest, strProperty)=> strProperty != null));
+
+
+
+{
             // Person mappings
             CreateMap<PersonCreateDto, Person>();
             CreateMap<Person, PersonReadDto>();
@@ -67,3 +79,4 @@ namespace FusionTech.src.Utils
         }
     }
 }
+

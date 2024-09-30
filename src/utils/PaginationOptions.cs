@@ -1,3 +1,4 @@
+
 namespace FusionTech.src.Utils
 {
     public class PaginationOptions
@@ -8,3 +9,5 @@ namespace FusionTech.src.Utils
         public string Search { get; set; } = string.Empty;
     }
 }
+}
+
