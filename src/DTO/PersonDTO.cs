@@ -1,5 +1,3 @@
-using FusionTech.src.Entity;
-
 namespace FusionTech.src.DTO
 {
     public class PersonDTO

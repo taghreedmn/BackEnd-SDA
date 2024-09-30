@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using FusionTech.src.Entity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FusionTech.src.Controllers
 {
@@ -12,33 +9,33 @@ namespace FusionTech.src.Controllers
     {
         private List<Supply> supplies = new List<Supply>
         {
-            new Supply 
-            { 
-                SupplyId = Guid.NewGuid(), 
-                SupplierId = Guid.NewGuid(), 
-                GamesId = Guid.NewGuid(), 
+            new Supply
+            {
+                SupplyId = Guid.NewGuid(),
+                SupplierId = Guid.NewGuid(),
+                GamesId = Guid.NewGuid(),
                 SupplierQuantity = 50,
                 SupplierDate = new DateTime(2020, 12, 12),
-                InventoryId = Guid.NewGuid() 
+                InventoryId = Guid.NewGuid(),
             },
             new Supply
-            { 
-                SupplyId = Guid.NewGuid(), 
-                SupplierId = Guid.NewGuid(), 
-                GamesId = Guid.NewGuid(), 
+            {
+                SupplyId = Guid.NewGuid(),
+                SupplierId = Guid.NewGuid(),
+                GamesId = Guid.NewGuid(),
                 SupplierQuantity = 100,
                 SupplierDate = new DateTime(2019, 1, 10),
-                InventoryId = Guid.NewGuid() 
+                InventoryId = Guid.NewGuid(),
             },
-            new Supply 
-            { 
-                SupplyId = Guid.NewGuid(), 
+            new Supply
+            {
+                SupplyId = Guid.NewGuid(),
                 SupplierId = Guid.NewGuid(),
                 GamesId = Guid.NewGuid(),
                 SupplierQuantity = 250,
                 SupplierDate = new DateTime(2022, 3, 4),
-                InventoryId = Guid.NewGuid() 
-            }
+                InventoryId = Guid.NewGuid(),
+            },
         };
 
         // Get all supplies
@@ -66,7 +63,11 @@ namespace FusionTech.src.Controllers
         {
             newSupply.SupplyId = Guid.NewGuid(); // Generate new SupplyId
             supplies.Add(newSupply);
-            return CreatedAtAction(nameof(GetSupplyById), new { id = newSupply.SupplyId }, newSupply);
+            return CreatedAtAction(
+                nameof(GetSupplyById),
+                new { id = newSupply.SupplyId },
+                newSupply
+            );
         }
 
         // Update supply

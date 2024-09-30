@@ -2,7 +2,7 @@ using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace sda_3_online_Backend_Teamwork.src.Repository
+namespace FusionTech.src.Repository
 {
     public class StudioRepository
     {

@@ -2,7 +2,7 @@ using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace sda_3_online_Backend_Teamwork.src.Repository
+namespace FusionTech.src.Repository
 {
     public class ConsoleRepository
     {
@@ -40,9 +40,10 @@ namespace sda_3_online_Backend_Teamwork.src.Repository
             await _databaseContext.SaveChangesAsync();
             return true;
         }
-        public async Task<List<GameConsole>> GetAllAsync(){
-            return await _console.ToListAsync();
 
+        public async Task<List<GameConsole>> GetAllAsync()
+        {
+            return await _console.ToListAsync();
         }
     }
 }

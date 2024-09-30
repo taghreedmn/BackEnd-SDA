@@ -1,16 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using FusionTech.src.Entity;
-using FusionTech.src.Services;
-using static FusionTech.src.DTO.CategoryDTO;
-using FusionTech.src.DTO;
-using System.Data;
+using FusionTech.src.Services.Category;
 using FusionTech.src.Utils;
-using FusionTech.src.Services.category;
+using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.CategoryDTO;
 
 namespace FusionTech.src.Controllers
 {
@@ -19,37 +10,42 @@ namespace FusionTech.src.Controllers
     public class CategoriesController : ControllerBase
     {
         protected readonly ICategoryService _categoryService;
+
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<CategoryReadDto>> CreateOne([FromBody] CategoryCreateDto createDto)
+        public async Task<ActionResult<CategoryReadDto>> CreateOne(
+            [FromBody] CategoryCreateDto createDto
+        )
         {
             var categoryCreated = await _categoryService.CreateOneAsync(createDto);
             return Created($"api/v1/categories/{categoryCreated.Id}", categoryCreated);
             // return Ok(categoryCreated);
         }
+
         [HttpGet]
-        public async Task<ActionResult<CategoryReadDto>> GetCategory([FromQuery] PaginationOptions paginationOptions)
+        public async Task<ActionResult<CategoryReadDto>> GetCategory(
+            [FromQuery] PaginationOptions paginationOptions
+        )
         {
             var categoryList = await _categoryService.GetAllAsync(paginationOptions);
             return Ok(categoryList);
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid id)
+        public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid Id)
         {
-            var category = await _categoryService.GetByIdAsync(id);
+            var category = await _categoryService.GetByIdAsync(Id);
             return Ok(category);
         }
 
-
         [HttpDelete("{Id}")]
-        public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid id)
+        public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid Id)
         {
-            var category = await _categoryService.GetByIdAsync(id);
+            var category = await _categoryService.GetByIdAsync(Id);
             if (category == null)
             {
                 return NotFound();
@@ -71,6 +67,5 @@ namespace FusionTech.src.Controllers
         //             foundCategory.CategoryName = updateCategory.CategoryName;
         //             return NoContent();
         //         }
-
     }
 }

@@ -1,10 +1,8 @@
 using AutoMapper;
-using FusionTech.src.DTO;
-using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using static FusionTech.src.DTO.PersonDTO;
 
-namespace FusionTech.Service.PersonService
+namespace FusionTech.Service.Person
 {
     public class PersonService : IPersonService
     {
@@ -20,7 +18,8 @@ namespace FusionTech.Service.PersonService
         public async Task<PersonReadDto> GetByIdAsync(int id)
         {
             var foundPerson = await _personRepository.GetByIdAsync(id);
-            return _mapper.Map<Person, PersonReadDto>(foundPerson);
+            // Naming it only Person makes the compiler get confused between the namespace and the Person class
+            return _mapper.Map<src.Entity.Person, PersonReadDto>(foundPerson);
         }
 
         public Task<bool> EditPassword(int personId, string oldPassword, string newPassword)

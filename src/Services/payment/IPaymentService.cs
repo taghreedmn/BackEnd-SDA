@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FusionTech.src.Utils;
 using static FusionTech.src.DTO.PaymentDTO;
 
-namespace FusionTech.src.Services.payment
+namespace FusionTech.src.Services.Payment
 {
     public interface IPaymentService
     {

@@ -1,6 +1,6 @@
 using static FusionTech.src.DTO.PersonDTO;
 
-namespace FusionTech.Service.PersonService
+namespace FusionTech.Service.Person
 {
     public interface IPersonService
     {
