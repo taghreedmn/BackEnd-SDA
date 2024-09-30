@@ -1,7 +1,7 @@
 using static FusionTech.src.DTO.CustomerDTO;
 using static FusionTech.src.DTO.StoreEmployeeDTO;
 
-namespace FusionTech.Service.StoreEmployee
+namespace FusionTech.src.Services.StoreEmployee
 {
     public class StoreEmployeeService : IStoreEmployeeService
     {

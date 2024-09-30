@@ -17,7 +17,7 @@ namespace FusionTech.src.Utils
         {
             // Person mappings
             CreateMap<PersonCreateDto, Person>();
-            CreateMap<Person, PersonReadDto>();
+            CreateMap<Person, PersonSignInDTO>();
             // CreateMap<PersonUpdateDto, Person>();
 
             // Customer mappings

@@ -5,7 +5,7 @@
 //4-get all Studios
 //5-delete Studio by id
 
-using FusionTech.src.Service.Studio;
+using FusionTech.src.Services.Studio;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.StudioDTO;
 

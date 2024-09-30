@@ -1,0 +1,78 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using FusionTech.src.Entity;
+using Microsoft.IdentityModel.Tokens;
+
+namespace FusionTech.src.Utils
+{
+    public class TokenUtlis
+    {
+        private readonly IConfiguration _config;
+
+        public TokenUtlis(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public string generateToken(Person person)
+        {
+            // Ensure person fields are not null
+            if (person == null)
+            {
+                throw new ArgumentNullException(nameof(person), "Person object cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(person.PersonEmail))
+            {
+                throw new ArgumentNullException(
+                    nameof(person.PersonEmail),
+                    "Person email cannot be null or empty."
+                );
+            }
+
+            if (person.PersonId == 0)
+            {
+                throw new ArgumentNullException(
+                    nameof(person.PersonId),
+                    "PersonId cannot be zero or null."
+                );
+            }
+
+            var role = person switch
+            {
+                SystemAdmin => SystemAdmin.PersonType.ToString(),
+                StoreEmployee => StoreEmployee.PersonType.ToString(),
+                Customer => Customer.PersonType.ToString(),
+                _ => Person.PersonType.ToString(),
+            };
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, person.PersonEmail!),
+                new Claim(ClaimTypes.NameIdentifier, person.PersonId.ToString()),
+                new Claim(ClaimTypes.Role, role),
+            };
+
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value!)
+            );
+            var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var issuer = _config.GetSection("Jwt:Issuer").Value;
+            var audience = _config.GetSection("Jwt:Audience").Value;
+
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Issuer = issuer,
+                Audience = audience,
+                Expires = DateTime.Now.AddMinutes(60),
+                Subject = new ClaimsIdentity(claims),
+                SigningCredentials = signingCredentials,
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(descriptor);
+            return tokenHandler.WriteToken(token);
+        }
+    }
+}

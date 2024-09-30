@@ -1,25 +1,32 @@
 using AutoMapper;
 using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.PersonDTO;
 
-namespace FusionTech.Service.Person
+namespace FusionTech.src.Services.Person
 {
     public class PersonService : IPersonService
     {
         private readonly PersonRepository _personRepository;
         protected readonly IMapper _mapper;
+        private readonly IConfiguration _config;
 
-        public PersonService(PersonRepository personRepository, IMapper mapper)
+        public PersonService(
+            PersonRepository personRepository,
+            IMapper mapper,
+            IConfiguration config
+        )
         {
             _personRepository = personRepository;
             _mapper = mapper;
+            _config = config;
         }
 
-        public async Task<PersonReadDto> GetByIdAsync(int id)
+        public async Task<PersonSignInDTO> GetByIdAsync(int id)
         {
             var foundPerson = await _personRepository.GetByIdAsync(id);
             // Naming it only Person makes the compiler get confused between the namespace and the Person class
-            return _mapper.Map<src.Entity.Person, PersonReadDto>(foundPerson);
+            return _mapper.Map<Entity.Person, PersonSignInDTO>(foundPerson);
         }
 
         public Task<bool> EditPassword(int personId, string oldPassword, string newPassword)
@@ -37,9 +44,22 @@ namespace FusionTech.Service.Person
             throw new NotImplementedException();
         }
 
-        public Task<PersonReadDto> SignIn(string email, string password)
+        public async Task<string> SignInAsync(PersonSignInDTO personSignInDTO)
         {
-            throw new NotImplementedException();
+            var foundPerson = await _personRepository.FindPersonByEmail(
+                personSignInDTO.PersonEmail
+            );
+            bool isMatched = PasswordUtils.isPasswordEqual(
+                personSignInDTO.PersonPassword,
+                foundPerson.PersonPassword,
+                foundPerson.salt
+            );
+            if (!isMatched)
+            {
+                return "Unauthorized";
+            }
+            var tokenUtils = new TokenUtlis(_config);
+            return tokenUtils.generateToken(foundPerson);
         }
     }
 }
