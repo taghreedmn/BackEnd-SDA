@@ -1,10 +1,9 @@
 using AutoMapper;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
-using sda_3_online_Backend_Teamwork.src.Repository;
-using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
+using static FusionTech.src.DTO.ConsoleDTO;
 
-namespace sda_3_online_Backend_Teamwork.src.Service.Console
+namespace FusionTech.src.Services.Console
 {
     public class ConsoleService : IConsoleService
     {
@@ -17,9 +16,9 @@ namespace sda_3_online_Backend_Teamwork.src.Service.Console
             _maper = maper;
         }
 
-        public async Task<ReadConsoleDTO> CreateOneAsync(CreatConsoleDTO createDTO)
+        public async Task<ReadConsoleDTO> CreateOneAsync(CreateConsoleDTO createDTO)
         {
-            var console = _maper.Map<CreatConsoleDTO, GameConsole>(createDTO);
+            var console = _maper.Map<CreateConsoleDTO, GameConsole>(createDTO);
 
             var consoleCreated = await _consoleRepository.CreateOneAsync(console);
 

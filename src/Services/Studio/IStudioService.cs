@@ -1,6 +1,6 @@
-using static sda_3_online_Backend_Teamwork.src.DTO.StudioDTO;
+using static FusionTech.src.DTO.StudioDTO;
 
-namespace sda_3_online_Backend_Teamwork.src.Service.Studio
+namespace FusionTech.src.Services.Studio
 {
     public interface IStudioService
     {

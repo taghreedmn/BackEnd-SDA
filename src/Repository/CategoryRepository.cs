@@ -22,12 +22,18 @@ namespace FusionTech.src.Repository
             await _databaseContext.SaveChangesAsync();
             return newCategory;
         }
+
         public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
         {
-            var result = _category.Where(c => c.CategoryName.ToLower().Contains(paginationOptions.Search.ToLower()));
-            return await result.Skip(paginationOptions.Offset).Take(paginationOptions.Limit).ToListAsync();
-
+            var result = _category.Where(c =>
+                c.CategoryName.ToLower().Contains(paginationOptions.Search.ToLower())
+            );
+            return await result
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToListAsync();
         }
+
         public async Task<Category> GetByIdAsync(Guid id)
         {
             return await _category.FindAsync(id);
@@ -46,6 +52,5 @@ namespace FusionTech.src.Repository
             await _databaseContext.SaveChangesAsync();
             return true;
         }
-
     }
 }

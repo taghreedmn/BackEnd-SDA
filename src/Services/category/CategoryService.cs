@@ -1,39 +1,44 @@
 using AutoMapper;
 using FusionTech.src.DTO;
-using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore.Metadata;
 using static FusionTech.src.DTO.CategoryDTO;
 
-namespace FusionTech.src.Services.category
+namespace FusionTech.src.Services.Category
 {
     public class CategoryService : ICategoryService
     {
         protected readonly CategoryRepository _categoryRepository;
         protected readonly IMapper _mapper;
+
         public CategoryService(CategoryRepository categoryRepository, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
-        public async Task<CategoryDTO.CategoryReadDto> CreateOneAsync(CategoryDTO.CategoryCreateDto createDto)
-        {
-            var category = _mapper.Map<CategoryCreateDto, Category>(createDto);
-            var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Category, CategoryReadDto>(categoryCreated);
 
+        public async Task<CategoryDTO.CategoryReadDto> CreateOneAsync(
+            CategoryDTO.CategoryCreateDto createDto
+        )
+        {
+            var category = _mapper.Map<CategoryCreateDto, Entity.Category>(createDto);
+            var categoryCreated = await _categoryRepository.CreateOneAsync(category);
+            return _mapper.Map<Entity.Category, CategoryReadDto>(categoryCreated);
         }
-        public async Task<List<CategoryDTO.CategoryReadDto>> GetAllAsync(PaginationOptions paginationOptions)
+
+        public async Task<List<CategoryDTO.CategoryReadDto>> GetAllAsync(
+            PaginationOptions paginationOptions
+        )
         {
             var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Category>, List<CategoryReadDto>>(categoryList);
+            return _mapper.Map<List<Entity.Category>, List<CategoryReadDto>>(categoryList);
         }
+
         public async Task<CategoryDTO.CategoryReadDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
-            return _mapper.Map<Category, CategoryReadDto>(foundCategory);
+            return _mapper.Map<Entity.Category, CategoryReadDto>(foundCategory);
         }
 
         public async Task<bool> DeleteOneAsync(Guid id)
@@ -59,7 +64,6 @@ namespace FusionTech.src.Services.category
             }
             _mapper.Map(updateDto, foundCategory);
             return await _categoryRepository.UpdateOneAsync(foundCategory);
-
         }
 
     }

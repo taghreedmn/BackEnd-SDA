@@ -8,31 +8,37 @@ namespace FusionTech.src.Repository
     {
         protected DbSet<Order> _order;
         protected DatabaseContext _databaseContext;
+
         public OrderRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
             _order = databaseContext.Set<Order>();
         }
+
         public async Task<Order> CreateOneAsync(Order newOrder)
         {
             await _order.AddAsync(newOrder);
             await _databaseContext.SaveChangesAsync();
             return newOrder;
         }
+
         public async Task<List<Order>> GetAllAsync()
         {
             return await _order.ToListAsync();
         }
+
         public async Task<Order> GetIdAsync(Guid id)
         {
             return await _order.FindAsync(id);
         }
+
         public async Task<bool> DeleteOneAsync(Order order)
         {
             _order.Remove(order);
             await _databaseContext.SaveChangesAsync();
             return true;
         }
+
         public async Task<bool> UpdateOneAsync(Order updateOrder)
         {
             _order.Update(updateOrder);

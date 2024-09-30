@@ -8,7 +8,7 @@ namespace FusionTech.src.Repository
     {
         // DbSet for accessing Supply entities in the database
         protected DbSet<Supply> _supply;
-        
+
         // Database context for interacting with the database
         protected DatabaseContext _databaseContext;
 
@@ -29,6 +29,11 @@ namespace FusionTech.src.Repository
             // Save changes to the database
             await _databaseContext.SaveChangesAsync();
             return newSupply; // Return the created supply
+        }
+
+        public async Task<List<Supply>> GetAllAsync(Utils.PaginationOptions paginationOptions)
+        {
+            return await _supply.ToListAsync();
         }
 
         // Asynchronously retrieve a Supply by its ID
@@ -56,6 +61,11 @@ namespace FusionTech.src.Repository
             // Save changes to the database
             await _databaseContext.SaveChangesAsync();
             return true; // Indicate success
+        }
+
+        internal async Task<Supply> GetByIdAsync(Guid iD)
+        {
+            throw new NotImplementedException();
         }
     }
 }

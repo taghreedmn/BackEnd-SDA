@@ -1,4 +1,4 @@
-namespace sda_3_online_Backend_Teamwork.src.DTO
+namespace FusionTech.src.DTO
 {
     public class StudioDTO
     {
@@ -9,13 +9,13 @@ namespace sda_3_online_Backend_Teamwork.src.DTO
 
         public class ReadStudioDTO
         {
-            public Guid StudioId { get; set; }
+            public Guid GameStudioId { get; set; }
             public string StudioName { get; set; }
         }
 
         public class UpdateStudioDTO
         {
-            public Guid StudioId { get; set; }
+            public Guid GameStudioId { get; set; }
             public string StudioName { get; set; }
         }
     }

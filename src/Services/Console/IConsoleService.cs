@@ -1,16 +1,13 @@
-using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
+using static FusionTech.src.DTO.ConsoleDTO;
 
-namespace sda_3_online_Backend_Teamwork.src.Service
+namespace FusionTech.src.Services.Console
 {
     public interface IConsoleService
     {
-
-        
-        Task<ReadConsoleDTO> CreateOneAsync(CreatConsoleDTO createDTO);
+        Task<ReadConsoleDTO> CreateOneAsync(CreateConsoleDTO createDTO);
         Task<List<ReadConsoleDTO>> GetAllAsync();
         Task<ReadConsoleDTO> GetIdAsync(Guid id);
         Task<bool> DeleteIdAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id , UpdateConsoleDTO ConsoleName);
-        
+        Task<bool> UpdateAsync(Guid id, UpdateConsoleDTO ConsoleName);
     }
 }

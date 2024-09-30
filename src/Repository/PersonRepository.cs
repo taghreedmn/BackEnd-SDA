@@ -15,30 +15,20 @@ namespace FusionTech.src.Repository
             _Person = _databaseContext.Set<Person>();
         }
 
-        public async Task<Person> LogIn(string email, string password)
-        {
-            Person? person = await _Person.FirstOrDefaultAsync(p => p.PersonEmail == email);
-            if (person == null)
-            {
-                // return NotFound("User doesn't exists");
-                throw new Exception();
-            }
-            if (!person.trySignIn(password))
-            {
-                // return NotFound("Wrong Password");
-                throw new Exception();
-            }
-            return person;
-        }
-
         public async Task<Person> FindPersonById(int id)
         {
             return await _Person.FindAsync(id);
         }
 
+        public async Task<Person> FindPersonByEmail(string email)
+        {
+            return await _Person.FirstOrDefaultAsync(e => e.PersonEmail == email);
+        }
+
         public async Task<bool> DeletePersonById(int id)
         {
-            return DeletePerson(FindPersonById(id).Result).Result;
+            var result = await DeletePerson(GetByIdAsync(id).Result);
+            return result;
         }
 
         public async Task<bool> DeletePerson(Person person)
@@ -46,6 +36,11 @@ namespace FusionTech.src.Repository
             _Person.Remove(person);
             await _databaseContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<Person?> GetByIdAsync(int id)
+        {
+            return await _Person.FindAsync(id);
         }
     }
 }

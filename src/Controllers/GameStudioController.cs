@@ -5,12 +5,9 @@
 //4-get all Studios
 //5-delete Studio by id
 
-using System.Collections.Generic;
-using System.Linq;
-using FusionTech.src.Entity;
+using FusionTech.src.Services.Studio;
 using Microsoft.AspNetCore.Mvc;
-using sda_3_online_Backend_Teamwork.src.Service.Studio;
-using static sda_3_online_Backend_Teamwork.src.DTO.StudioDTO;
+using static FusionTech.src.DTO.StudioDTO;
 
 namespace FusionTech.src.Controllers
 {
@@ -75,7 +72,7 @@ namespace FusionTech.src.Controllers
                 return NotFound();
             }
             //if found
-            await _studioService.DeleteIdAsync(foundSudio.StudioId);
+            await _studioService.DeleteIdAsync(foundSudio.GameStudioId);
             return NoContent();
         }
     }

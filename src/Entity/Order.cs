@@ -1,6 +1,6 @@
-namespace  FusionTech.src.Entity
- {
-    public class Order 
+namespace FusionTech.src.Entity
+{
+    public class Order
     {
         public Guid OrderId { get; set; }
         public DateTime OrderDate { get; set; }
@@ -8,6 +8,6 @@ namespace  FusionTech.src.Entity
         public Guid PaymentId { get; set; }
         public Guid StoreId { get; set; }
         public Guid EmployeeId { get; set; }
-        public Guid CustomerId { get; set; } 
+        public Guid CustomerId { get; set; }
     }
 }

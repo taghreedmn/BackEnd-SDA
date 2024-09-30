@@ -1,9 +1,9 @@
 using AutoMapper;
 using FusionTech.src.Entity;
-using sda_3_online_Backend_Teamwork.src.Repository;
-using static sda_3_online_Backend_Teamwork.src.DTO.StudioDTO;
+using FusionTech.src.Repository;
+using static FusionTech.src.DTO.StudioDTO;
 
-namespace sda_3_online_Backend_Teamwork.src.Service.Studio
+namespace FusionTech.src.Services.Studio
 {
     public class StudioService : IStudioService
     {
