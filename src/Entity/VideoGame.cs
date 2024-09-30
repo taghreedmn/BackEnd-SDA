@@ -1,14 +1,31 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FusionTech.src.Entity
 {
     public class VideoGame
     {
         public int GameId { get; set; }
+
+        [Required(ErrorMessage = "Game name is required.")]
+        [StringLength(100, ErrorMessage = "Game name cannot exceed 100 characters.")]
         public string? GameName { get; set; }
+
+        [Required(ErrorMessage = "Price is required.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
         public float Price { get; set; }
+
+        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
         public string? Description { get; set; }
+
+        [Required(ErrorMessage = "Year of release is required.")]
+        [DataType(DataType.Date)]
         public DateTime YearOfRelease { get; set; }
+
+        [Range(1, 5, ErrorMessage = "Total rating must be between 1 and 5.")]
         public int TotalRating { get; set; }
         public int PublisherId { get; set; }
+
+        [StringLength(200, ErrorMessage = "Game picture path cannot exceed 200 characters.")]
         public string? GamePicturePath { get; set; }
     }
 }
