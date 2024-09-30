@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using FusionTech.src.utils;
 

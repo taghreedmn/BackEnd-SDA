@@ -24,6 +24,7 @@ namespace FusionTech.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasPostgresEnum<PersonType>();
             base.OnModelCreating(modelBuilder);
 
             // Seed Payment data
