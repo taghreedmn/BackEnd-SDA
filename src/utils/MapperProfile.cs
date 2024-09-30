@@ -1,25 +1,14 @@
 
-
-
-using AutoMapper;
-using FusionTech.src.Entity;
-using static FusionTech.src.DTO.CustomerDTO;
-using static FusionTech.src.DTO.PersonDTO;
-using static FusionTech.src.DTO.StoreEmployeeDTO;
-using static FusionTech.src.DTO.SystemAdminDTO;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using FusionTech.src.Entity;
 using static FusionTech.src.DTO.CategoryDTO;
+using static FusionTech.src.DTO.ConsoleDTO;
+using static FusionTech.src.DTO.CustomerDTO;
 using static FusionTech.src.DTO.PaymentDTO;
-using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
-using static sda_3_online_Backend_Teamwork.src.DTO.StudioDTO;
-using static FusionTech.src.DTO.SupplyDTO;
-
+using static FusionTech.src.DTO.PersonDTO;
+using static FusionTech.src.DTO.StoreEmployeeDTO;
+using static FusionTech.src.DTO.StudioDTO;
+using static FusionTech.src.DTO.SystemAdminDTO;
 
 namespace FusionTech.src.Utils
 
@@ -27,6 +16,7 @@ namespace FusionTech.src.Utils
     public class MapperProfile : Profile
     {
         public MapperProfile()
+
 
         {   //Supply
             CreateMap<Supply, SupplyReadDto>();
@@ -36,7 +26,7 @@ namespace FusionTech.src.Utils
 
 
 
-
+{
             // Person mappings
             CreateMap<PersonCreateDto, Person>();
             CreateMap<Person, PersonReadDto>();
@@ -75,7 +65,7 @@ namespace FusionTech.src.Utils
             //Console
             CreateMap<GameConsole, ReadConsoleDTO>();
             CreateMap<UpdateConsoleDTO, GameConsole>();
-            CreateMap<CreatConsoleDTO, GameConsole>()
+            CreateMap<CreateConsoleDTO, GameConsole>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
@@ -89,5 +79,4 @@ namespace FusionTech.src.Utils
         }
     }
 }
-
 
