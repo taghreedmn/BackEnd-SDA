@@ -13,10 +13,10 @@ namespace FusionTech.src.Database
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
-        public DbSet<Supplier> Supplier { get; set; } 
-        public DbSet<Supply> Supply { get; set; }     
+        public DbSet<Supplier> Supplier { get; set; }
+        public DbSet<Supply> Supply { get; set; }
         // Config
-        public DbSet<PersonIdCounter> PersonIdCounters { get; set; 
+        public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
 
@@ -124,7 +124,7 @@ namespace FusionTech.src.Database
                 .WithOne()
                 .HasForeignKey<SystemAdmin>(sa => sa.PersonId); // Set foreign key
 
-             base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
             // Console data
 
@@ -147,8 +147,8 @@ namespace FusionTech.src.Database
             modelBuilder
               .Entity<GameStudio>()
                 .HasData(new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Studio 3" });
-        
-           
+
+
             // Id Generation counter Data
             modelBuilder
                 .Entity<PersonIdCounter>()
