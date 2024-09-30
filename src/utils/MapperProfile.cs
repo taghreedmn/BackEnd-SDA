@@ -8,6 +8,7 @@ using static FusionTech.src.DTO.PersonDTO;
 using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
+using static FusionTech.src.Entity.InventoryDTO;
 
 namespace FusionTech.src.Utils
 {
@@ -61,6 +62,14 @@ namespace FusionTech.src.Utils
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
             CreateMap<CreatStudioDTO, GameStudio>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            //inventory
+            CreateMap<Inventory, InventoryReadDto>();
+            CreateMap<InventoryUpdateDto, Inventory>();
+            CreateMap<InventoryCreateDto, Inventory>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );

@@ -17,7 +17,7 @@ namespace FusionTech.src.Database
         public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
-
+        public DbSet<Inventory> Inventory { get; set; }
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
 
@@ -93,9 +93,33 @@ namespace FusionTech.src.Database
                     }
                 );
 
-            // Console data
+            // Seed Inventory data
+            var inventory1Id = Guid.NewGuid();
+            var inventory2Id = Guid.NewGuid();
 
             modelBuilder
+                .Entity<Inventory>()
+                .HasData(
+                    new Inventory
+                    {
+                        InventoryId = inventory1Id,
+                        GameId = Guid.NewGuid(),  
+                        StoreId = Guid.NewGuid(), 
+                        InventoryQuantity = 50
+                    },
+                    new Inventory
+                    {
+                        InventoryId = inventory2Id,
+                        GameId = Guid.NewGuid(),  
+                        StoreId = Guid.NewGuid(), 
+                        InventoryQuantity = 100
+                    }
+                );
+        
+
+        // Console data
+
+        modelBuilder
                 .Entity<GameConsole>()
                 .HasData(
                     new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }

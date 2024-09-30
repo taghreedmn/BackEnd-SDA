@@ -1,6 +1,7 @@
 using FusionTech.Service.Customer;
 using FusionTech.Service.Person;
 using FusionTech.src.Database;
+using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Service.Console;
 using FusionTech.src.Service.Studio;
@@ -39,6 +40,9 @@ builder
 builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
+builder
+.Services.AddScoped<IInventoryService, InventoryService>()
+.AddScoped<InventoryRepository, InventoryRepository>();
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
