@@ -9,10 +9,17 @@ using Npgsql;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Repository;
 using FusionTech.src.Services;
+using FusionTech.src.Utils;
+using FusionTech.src.Services.category;
+using FusionTech.src.Services.payment;
+using sda_3_online_Backend_Teamwork.src.Service;
+using FusionTech.Service.Console;
+using sda_3_online_Backend_Teamwork.src.Repository;
+using sda_3_online_Backend_Teamwork.src.Service.Studio;
 
 
 
-=======
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +37,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddScoped<ISupplyService, SupplyService>().AddScoped<SupplyRepository, SupplyRepository>();
-=======
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 

@@ -18,6 +18,7 @@ using static FusionTech.src.DTO.CategoryDTO;
 using static FusionTech.src.DTO.PaymentDTO;
 using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
 using static sda_3_online_Backend_Teamwork.src.DTO.StudioDTO;
+using static FusionTech.src.DTO.SupplyDTO;
 
 
 namespace FusionTech.src.Utils

@@ -1,6 +1,6 @@
 using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
 
-namespace sda_3_online_Backend_Teamwork.src.Service
+namespace FusionTech.Service.Console
 {
     public interface IConsoleService
     {

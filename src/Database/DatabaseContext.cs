@@ -1,4 +1,3 @@
-using System;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +15,7 @@ namespace FusionTech.src.Database
         public DbSet<Supplier> Supplier { get; set; } 
         public DbSet<Supply> Supply { get; set; }     
         // Config
-        public DbSet<PersonIdCounter> PersonIdCounters { get; set; 
+        public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
 

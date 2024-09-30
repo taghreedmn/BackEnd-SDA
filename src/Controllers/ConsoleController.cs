@@ -10,7 +10,7 @@ using System.Linq;
 using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
 using sda_3_online_Backend_Teamwork.src.Service;
-using sda_3_online_Backend_Teamwork.src.Service.Console;
+using FusionTech.Service.Console;
 using static sda_3_online_Backend_Teamwork.src.DTO.ConsoleDTO;
 
 namespace FusionTech.src.Controllers
