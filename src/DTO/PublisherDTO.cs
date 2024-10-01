@@ -12,7 +12,7 @@ namespace FusionTech.src.DTO
            
         }
 
-        // read data = get data
+   
         public class PublisherReadDto
         {
             public Guid PublisherId { get; set; }
@@ -23,13 +23,13 @@ namespace FusionTech.src.DTO
 
         }
 
-        // update
+     
         public class PublisherUpdateDto
         {
             public string? PublisherName { get; set; }
-            public string Email { get; set; }
-            public string Website { get; set; }
-            public string PublisherPicturePath { get; set; }
+            public string? Email { get; set; }
+            public string? Website { get; set; }
+            public string? PublisherPicturePath { get; set; }
 
         }
     }
