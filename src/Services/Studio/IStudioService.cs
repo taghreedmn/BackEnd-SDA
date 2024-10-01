@@ -1,6 +1,6 @@
 using static FusionTech.src.DTO.StudioDTO;
 
-namespace FusionTech.src.Service.Studio
+namespace FusionTech.src.Services.Studio
 {
     public interface IStudioService
     {

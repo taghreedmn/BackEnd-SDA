@@ -1,9 +1,9 @@
 using AutoMapper;
-using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.CustomerDTO;
 
-namespace FusionTech.Service.Customer
+namespace FusionTech.src.Services.Customer
 {
     public class CustomerService : ICustomerService
     {
@@ -20,12 +20,17 @@ namespace FusionTech.Service.Customer
         public async Task<CustomerReadDto> CreateOneAsync(CustomerCreateDto createDto)
         {
             // TODO: Check if password and other information are valid
-            src.Entity.Customer customer = _mapper.Map<CustomerCreateDto, src.Entity.Customer>(
-                createDto
+            Entity.Customer customer = _mapper.Map<CustomerCreateDto, Entity.Customer>(createDto);
+            PasswordUtils.HashPassword(
+                createDto.PersonPassword,
+                out string hashedPassword,
+                out byte[] salt
             );
             customer.PersonId = await _CustomerRepo.GetNextIdCustomerAsync();
-            src.Entity.Customer categoryCreated = await _CustomerRepo.CreateOneAsync(customer);
-            return _mapper.Map<src.Entity.Customer, CustomerReadDto>(categoryCreated);
+            customer.PersonPassword = hashedPassword;
+            customer.salt = salt;
+            Entity.Customer categoryCreated = await _CustomerRepo.CreateOneAsync(customer);
+            return _mapper.Map<Entity.Customer, CustomerReadDto>(categoryCreated);
         }
 
         public Task<bool> UpdateAgeAsync(int customerId, int age)

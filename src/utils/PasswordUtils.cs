@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FusionTech.src.utils
+namespace FusionTech.src.Utils
 {
     public static class PasswordUtils
     {

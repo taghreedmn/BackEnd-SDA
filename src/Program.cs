@@ -1,15 +1,17 @@
-using FusionTech.Service.Customer;
-using FusionTech.Service.Person;
 using FusionTech.src.Database;
 using FusionTech.src.Repository;
-using FusionTech.src.Service.Console;
-using FusionTech.src.Service.Studio;
 using FusionTech.src.Services.Category;
+using FusionTech.src.Services.Console;
+using FusionTech.src.Services.Customer;
 using FusionTech.src.Services.Payment;
+using FusionTech.src.Services.Person;
+using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+
+
 
 
 
@@ -24,12 +26,10 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseNpgsql(dataSourceBuilder.Build());
 });
 
-
-
-
 builder.Services.AddAutoMapper(typeof(MapperProfile));
-builder.Services.AddScoped<ISupplyService, SupplyService>().AddScoped<SupplyRepository, SupplyRepository>();
-
+builder
+    .Services.AddScoped<ISupplyService, SupplyService>()
+    .AddScoped<SupplyRepository, SupplyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
@@ -61,12 +61,9 @@ builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
 
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 var app = builder.Build();
 

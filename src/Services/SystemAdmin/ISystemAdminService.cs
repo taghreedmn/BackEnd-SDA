@@ -1,7 +1,7 @@
 using static FusionTech.src.DTO.CustomerDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
 
-namespace FusionTech.Service.SystemAdmin
+namespace FusionTech.src.Services.SystemAdmin
 {
     public interface ISystemAdminService
     {

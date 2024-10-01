@@ -1,4 +1,4 @@
-using FusionTech.Service.Person;
+using FusionTech.src.Services.Person;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.PersonDTO;
 
@@ -16,10 +16,19 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PersonReadDto>> GetPerson([FromQuery] int id)
+        public async Task<ActionResult<PersonSignInDTO>> GetPerson([FromQuery] int id)
         {
             var person = await _personService.GetByIdAsync(id);
             return Ok(person); // 200
+        }
+
+        [HttpPost("signIn")]
+        public async Task<ActionResult<string>> SignInPerson(
+            [FromBody] PersonSignInDTO personSignInDTO
+        )
+        {
+            var token = await _personService.SignInAsync(personSignInDTO);
+            return Ok(token); // 200
         }
     }
 }

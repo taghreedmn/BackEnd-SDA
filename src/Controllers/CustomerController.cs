@@ -1,4 +1,4 @@
-using FusionTech.Service.Customer;
+using FusionTech.src.Services.Customer;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.CustomerDTO;
 
