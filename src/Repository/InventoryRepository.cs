@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FusionTech.src.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,16 +14,21 @@ namespace FusionTech.src.Entity
             _Inventory = databaseContext.Set<Inventory>();
         }
 
-        public async Task<Inventory> GetByIdAsync(int id)
+        public async Task<Inventory> GetByIdAsync(Guid id)
         {
             return await _Inventory.FindAsync(id);
         }
 
-        public async Task<Inventory> AddAsync(Inventory newInventory)
+        public async Task<Inventory> CreateOneAsync(Inventory newInventory)
         {
             await _Inventory.AddAsync(newInventory);
             await _databaseContext.SaveChangesAsync();
             return newInventory;
+        }
+
+        public async Task<List<Inventory>> GetAllAsync()
+        {
+            return await _Inventory.ToListAsync();
         }
 
         public async Task<bool> UpdateOnAsync(Inventory updateInventory)
@@ -39,9 +40,9 @@ namespace FusionTech.src.Entity
 
         public async Task<bool> DeleteOnAsync(Inventory inventory)
         {
-            
-                _Inventory.Remove(inventory);
-                await _databaseContext.SaveChangesAsync();
+
+            _Inventory.Remove(inventory);
+            await _databaseContext.SaveChangesAsync();
             return true;
         }
     }

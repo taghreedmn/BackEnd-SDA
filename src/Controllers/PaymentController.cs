@@ -1,3 +1,5 @@
+using FusionTech.src.Entity;
+using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -35,14 +37,14 @@ namespace FusionTech.src.Controllers
             return Ok(paymentList);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<PaymentReadDto>> GetCategoryById([FromRoute] Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PaymentReadDto>> GetPaymentById([FromRoute] Guid id)
         {
             var payment = await _paymentService.GetByIdAsync(id);
             return Ok(payment);
         }
 
-        [HttpDelete("{Id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<PaymentReadDto>> DeleteOne([FromRoute] Guid id)
         {
             var payment = await _paymentService.GetByIdAsync(id);

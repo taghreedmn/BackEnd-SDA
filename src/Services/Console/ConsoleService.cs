@@ -48,12 +48,12 @@ namespace FusionTech.src.Services.Console
         public async Task<bool> UpdateAsync(Guid id, UpdateConsoleDTO ConsoleName)
         {
             var foundconsole = await _consoleRepository.GetIdAsync(id);
-            var UpdateConsole = await _consoleRepository.UpdateOneAsync(foundconsole);
+
             if (foundconsole == null)
             {
                 return false;
             }
-            _maper.Map(UpdateConsole, foundconsole);
+            _maper.Map(ConsoleName, foundconsole);
             return await _consoleRepository.UpdateOneAsync(foundconsole);
         }
     }

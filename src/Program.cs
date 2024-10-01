@@ -15,6 +15,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 //connect the database
@@ -53,6 +57,9 @@ builder
 builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
+builder
+.Services.AddScoped<IInventoryService, InventoryService>()
+.AddScoped<InventoryRepository, InventoryRepository>();
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
