@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Repository
 {
-    public class PaginationRepository 
+    public class PublisherRepository 
     {
 
         protected DbSet<Publisher> _publisher;
         protected DatabaseContext _databaseContext;
 
-        public PaginationRepository (DatabaseContext databaseContext)
+        public PublisherRepository (DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
 
