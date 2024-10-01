@@ -11,6 +11,7 @@ using static FusionTech.src.DTO.CategoryDTO;
 
 namespace FusionTech.src.Controllers
 {
+
     [ApiController]
     [Route("/api/v1/[controller]")]
     public class CategoriesController : ControllerBase

@@ -1,5 +1,6 @@
 using FusionTech.Middlewares;
 using FusionTech.src.Database;
+using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Console;
@@ -11,6 +12,10 @@ using FusionTech.src.Services.supply;
 using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +51,9 @@ builder
 builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
+builder
+.Services.AddScoped<IInventoryService, InventoryService>()
+.AddScoped<InventoryRepository, InventoryRepository>();
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);

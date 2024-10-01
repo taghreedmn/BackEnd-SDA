@@ -22,7 +22,7 @@ namespace FusionTech.src.Controllers
 
         public SupplyController(ISupplyService service)
         {
-            _supplyService = service; // Correct assignment
+            _supplyService = service; 
         }
 
         // Get all supplies
