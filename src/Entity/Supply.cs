@@ -9,11 +9,13 @@ namespace FusionTech.src.Entity
         public Guid SupplierId { get; set; }
         public Guid GamesId { get; set; }
 
-        [Required(ErrorMessage = "Quantity is required")]
-        [Range(0.01, float.MaxValue, ErrorMessage = "Quantity must be greater than zero")]
+
+        [Required(ErrorMessage = "Supplier quantity is required.")]
+        [Range(0.01, float.MaxValue, ErrorMessage = "Supplier quantity must be greater than zero.")]
         public float SupplierQuantity { get; set; }
 
-        [Required(ErrorMessage = "Date is required")]
+        [Required(ErrorMessage = "Supplier date is required.")]
+        [DataType(DataType.Date)]    
         public DateTime SupplierDate { get; set; }
         public Guid InventoryId { get; set; }
     }

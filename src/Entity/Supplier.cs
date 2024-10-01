@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace FusionTech.src.Entity
 {
     public class Supplier
+
+    
    {
        public Guid SupplierId { get; set; } 
 
@@ -19,5 +21,6 @@ namespace FusionTech.src.Entity
 
          public string SupplierPicturePath { get; set; }
    } 
+
 }
 

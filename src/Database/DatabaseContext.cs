@@ -25,6 +25,7 @@ namespace FusionTech.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Person>().UseTptMappingStrategy();
             modelBuilder.HasPostgresEnum<PersonType>();
 
@@ -104,6 +105,26 @@ namespace FusionTech.src.Database
                         StudioPicturePath = "",
                     }
                 );
+            modelBuilder
+
+            .Entity<Payment>()
+            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
+            modelBuilder
+            .Entity<Payment>()
+            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
+            // Category data
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 4" });
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 5" });
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 6" });
+            modelBuilder
+                .Entity<Category>()
+                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 7" });
             modelBuilder
                 .Entity<GameStudio>()
                 .HasData(
