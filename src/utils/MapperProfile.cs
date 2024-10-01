@@ -9,7 +9,9 @@ using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SupplyDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
+using static FusionTech.src.Entity.InventoryDTO;
 using static FusionTech.src.DTO.PublisherDTO;
+
 
 namespace FusionTech.src.Utils
 {
@@ -81,6 +83,19 @@ namespace FusionTech.src.Utils
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
             CreateMap<CreatStudioDTO, GameStudio>()
+
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            //inventory
+            CreateMap<Inventory, InventoryReadDto>();
+            CreateMap<InventoryUpdateDto, Inventory>();
+            CreateMap<InventoryCreateDto, Inventory>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
             // Publisher mappings
@@ -89,36 +104,11 @@ namespace FusionTech.src.Utils
             CreateMap<PublisherCreateDto, Publisher>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
-                //Category
-                CreateMap<Category, CategoryReadDto>();
-                CreateMap<CategoryCreateDto, Category>();
-                CreateMap<CategoryUpdateDto, Category>()
-                    .ForAllMembers(Opts =>
-                        Opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                    );
+                
+                    
 
-                //Payment
-                CreateMap<Payment, PaymentReadDto>();
-                CreateMap<PaymentCreateDto, Payment>();
-                CreateMap<PaymentUpdateDto, Payment>()
-                    .ForAllMembers(Opts =>
-                        Opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                    );
-                //Console
-                CreateMap<GameConsole, ReadConsoleDTO>();
-                CreateMap<UpdateConsoleDTO, GameConsole>();
-                CreateMap<CreateConsoleDTO, GameConsole>()
-                    .ForAllMembers(opts =>
-                        opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                    );
-                //studio
-                CreateMap<GameStudio, ReadStudioDTO>();
-                CreateMap<UpdateStudioDTO, GameStudio>();
-                CreateMap<CreatStudioDTO, GameStudio>()
-                    .ForAllMembers(opts =>
-                        opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                    );
             }
+
 
         }
     }
