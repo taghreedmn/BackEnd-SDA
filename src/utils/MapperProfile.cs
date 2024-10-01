@@ -25,12 +25,12 @@ namespace FusionTech.src.Utils
 
             {
                 // Person mappings
-                CreateMap<PersonCreateDto, Person>();
+                CreateMap<PersonSignUpDTO, Person>();
                 CreateMap<Person, PersonSignInDTO>();
                 // CreateMap<PersonUpdateDto, Person>();
 
                 // Customer mappings
-                CreateMap<CustomerCreateDto, Customer>();
+                CreateMap<CustomerSignUpDTO, Customer>();
                 CreateMap<Customer, CustomerReadDto>();
                 // CreateMap<CustomerUpdateDto, Customer>();
 

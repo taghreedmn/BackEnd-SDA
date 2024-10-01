@@ -1,13 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FusionTech.src.DTO
 {
     public class CustomerDTO : PersonDTO
     {
-        public class CustomerCreateDto : PersonCreateDto
+        public class CustomerSignUpDTO : PersonSignUpDTO
         {
+            [Range(0, 120, ErrorMessage = "Age must be between 0 and 120.")]
             public int Age { get; set; }
         }
 
-        public class CustomerReadDto : PersonSignInDTO
+        public class CustomerReadDto : PersonReadDto
         {
             public int Age { get; set; }
         }

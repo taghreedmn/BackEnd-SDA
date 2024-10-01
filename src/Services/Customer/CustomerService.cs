@@ -17,12 +17,12 @@ namespace FusionTech.src.Services.Customer
             _mapper = mapper;
         }
 
-        public async Task<CustomerReadDto> CreateOneAsync(CustomerCreateDto createDto)
+        public async Task<CustomerReadDto> CreateOneAsync(CustomerSignUpDTO createDto)
         {
             // TODO: Check if password and other information are valid
-            Entity.Customer customer = _mapper.Map<CustomerCreateDto, Entity.Customer>(createDto);
+            Entity.Customer customer = _mapper.Map<CustomerSignUpDTO, Entity.Customer>(createDto);
             PasswordUtils.HashPassword(
-                createDto.PersonPassword,
+                createDto.PersonPassword!,
                 out string hashedPassword,
                 out byte[] salt
             );
