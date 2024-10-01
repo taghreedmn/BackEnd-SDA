@@ -18,6 +18,7 @@ namespace FusionTech.src.Database
         public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
+         public DbSet<Publisher> Publisher { get; set; }
 
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
