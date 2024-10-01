@@ -9,7 +9,6 @@ using FusionTech.src.Services.Console;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.ConsoleDTO;
 
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -35,13 +34,12 @@ namespace FusionTech.src.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateConsoleDTO consoleName)
         {
-            var foundconsole = await _consoleService.GetIdAsync(id);
-            if (foundconsole == null)
+            var updated = await _consoleService.UpdateAsync(id, consoleName);
+            if (!updated)
             {
-                return false;
+                return NotFound();
             }
-
-            return Ok(foundconsole);
+            return NoContent();
         }
 
         //3-get Console by id

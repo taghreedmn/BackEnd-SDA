@@ -120,7 +120,7 @@ namespace FusionTech.src.Database
                     {
                         GameStudioId = Guid.NewGuid(),
                         StudioName = "Studio 1",
-                        StudioPicturePath = "",
+                        StudioPicturePath = "pic1/png",
                     }
                 );
             modelBuilder
@@ -130,7 +130,7 @@ namespace FusionTech.src.Database
                     {
                         GameStudioId = Guid.NewGuid(),
                         StudioName = "Studio 2",
-                        StudioPicturePath = "",
+                        StudioPicturePath = "pic2/png",
                     }
                 );
             modelBuilder
@@ -140,7 +140,7 @@ namespace FusionTech.src.Database
                     {
                         GameStudioId = Guid.NewGuid(),
                         StudioName = "Studio 3",
-                        StudioPicturePath = "",
+                        StudioPicturePath = "pic3/png",
                     }
                 );
 

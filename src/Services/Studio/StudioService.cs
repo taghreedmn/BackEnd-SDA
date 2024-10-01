@@ -48,12 +48,12 @@ namespace FusionTech.src.Services.Studio
         public async Task<bool> UpdateAsync(Guid id, UpdateStudioDTO studioName)
         {
             var foundstudio = await _studioRepository.GetIdAsync(id);
-            var Updatestudio = await _studioRepository.UpdateOneAsync(foundstudio);
+
             if (foundstudio == null)
             {
                 return false;
             }
-            _maper.Map(Updatestudio, foundstudio);
+            _maper.Map(studioName, foundstudio);
             return await _studioRepository.UpdateOneAsync(foundstudio);
         }
     }

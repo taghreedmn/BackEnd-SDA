@@ -35,13 +35,12 @@ namespace FusionTech.src.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateStudioDTO studioName)
         {
-            var foundstudio = await _studioService.GetIdAsync(id);
-            if (foundstudio == null)
+            var updated = await _studioService.UpdateAsync(id, studioName);
+            if (!updated)
             {
-                return false;
+                return NotFound();
             }
-
-            return Ok(foundstudio);
+            return NoContent();
         }
 
         //3-get Studio by id
