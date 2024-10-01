@@ -1,5 +1,4 @@
-using FusionTech.src.Service.Console;
-using FusionTech.src.Entity;
+using FusionTech.src.Service.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.Entity.InventoryDTO;
 
@@ -48,7 +47,10 @@ namespace FusionTech.src.Controllers
 
         // Updates an inventory item by ID
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateItem([FromRoute] Guid id, [FromBody] InventoryUpdateDto updateDto)
+        public async Task<ActionResult> UpdateItem(
+            [FromRoute] Guid id,
+            [FromBody] InventoryUpdateDto updateDto
+        )
         {
             var itemUpdated = await _inventoryService.UpdateItemAsync(id, updateDto);
             if (!itemUpdated)

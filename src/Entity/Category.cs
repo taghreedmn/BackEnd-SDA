@@ -6,4 +6,3 @@ namespace FusionTech.src.Entity
         public required string CategoryName { get; set; }
     }
 }
-

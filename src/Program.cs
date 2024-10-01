@@ -2,6 +2,7 @@ using System.Text;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Service.Inventory;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Console;
 using FusionTech.src.Services.Customer;
@@ -14,10 +15,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
-
-
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,8 +55,8 @@ builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
 builder
-.Services.AddScoped<IInventoryService, InventoryService>()
-.AddScoped<InventoryRepository, InventoryRepository>();
+    .Services.AddScoped<IInventoryService, InventoryService>()
+    .AddScoped<InventoryRepository, InventoryRepository>();
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);

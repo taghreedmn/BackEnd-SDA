@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static FusionTech.src.Entity.InventoryDTO;
 
-namespace FusionTech.src.Service.Console
+namespace FusionTech.src.Service.Inventory
 {
     public interface IInventoryService
     {

@@ -1,9 +1,8 @@
-
 using AutoMapper;
 using FusionTech.src.Entity;
 using static FusionTech.src.Entity.InventoryDTO;
 
-namespace FusionTech.src.Service.Console
+namespace FusionTech.src.Service.Inventory
 {
     public class InventoryService : IInventoryService
     {
@@ -18,23 +17,21 @@ namespace FusionTech.src.Service.Console
 
         public async Task<InventoryReadDto> CreateOneAsync(InventoryCreateDto inventoryCreateDto)
         {
-            var inventory = _mapper.Map<InventoryCreateDto, Inventory>(inventoryCreateDto);
+            var inventory = _mapper.Map<InventoryCreateDto, Entity.Inventory>(inventoryCreateDto);
             var inventoryAdded = await _inventoryRepo.CreateOneAsync(inventory);
-            return _mapper.Map<Inventory, InventoryReadDto>(inventoryAdded);
+            return _mapper.Map<Entity.Inventory, InventoryReadDto>(inventoryAdded);
         }
-
-
 
         public async Task<List<InventoryReadDto>> GetAllItemsAsync()
         {
             var inventoryList = await _inventoryRepo.GetAllAsync();
-            return _mapper.Map<List<Inventory>, List<InventoryReadDto>>(inventoryList);
+            return _mapper.Map<List<Entity.Inventory>, List<InventoryReadDto>>(inventoryList);
         }
 
         public async Task<InventoryReadDto> GetItemByIdAsync(Guid id)
         {
             var foundInventory = await _inventoryRepo.GetByIdAsync(id);
-            return _mapper.Map<Inventory, InventoryReadDto>(foundInventory);
+            return _mapper.Map<Entity.Inventory, InventoryReadDto>(foundInventory);
         }
 
         public async Task<bool> RemoveItemAsync(Guid id)
@@ -46,7 +43,6 @@ namespace FusionTech.src.Service.Console
                 return true;
             }
             return false;
-
         }
 
         public async Task<bool> UpdateItemAsync(Guid id, InventoryUpdateDto inventoryUpdateDto)
