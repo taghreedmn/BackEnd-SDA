@@ -9,6 +9,7 @@ using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SupplyDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
+using static FusionTech.src.DTO.PublisherDTO;
 
 namespace FusionTech.src.Utils
 {
@@ -64,6 +65,12 @@ namespace FusionTech.src.Utils
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
             CreateMap<CreatStudioDTO, GameStudio>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // Publisher mappings
+            CreateMap<Publisher, PublisherReadDto>();
+            CreateMap<PublisherUpdateDto, Publisher>();
+            CreateMap<PublisherCreateDto, Publisher>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
         }
     }
