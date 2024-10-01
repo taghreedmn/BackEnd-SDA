@@ -1,96 +1,69 @@
-using FusionTech.src.Entity;
+
+using FusionTech.src.Services.supplier;
 using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.SupplierDTO;
 
 namespace FusionTech.src.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class SupplierController : ControllerBase
     {
-        private List<Supplier> suppliers = new List<Supplier>
-        {
-            new Supplier
-            {
-                SupplierId = Guid.NewGuid(),
-                SupplierName = "Supplier A",
-                SupplierContact = "123-456-7890",
-                SupplierBankInfo = "Bank A Info",
-            },
-            new Supplier
-            {
-                SupplierId = Guid.NewGuid(),
-                SupplierName = "Supplier B",
-                SupplierContact = "987-654-3210",
-                SupplierBankInfo = "Bank B Info",
-            },
-            new Supplier
-            {
-                SupplierId = Guid.NewGuid(),
-                SupplierName = "Supplier C",
-                SupplierContact = "555-555-5555",
-                SupplierBankInfo = "Bank C Info",
-            },
-        };
+        private readonly ISupplierService _supplierService;
 
-        // Get all suppliers
-        [HttpGet]
-        public ActionResult<IEnumerable<Supplier>> GetSuppliers()
+        public SupplierController(ISupplierService supplierService)
         {
+            _supplierService = supplierService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<SupplierReadDto>>> GetAllSuppliers()
+        {
+            var suppliers = await _supplierService.GetAllAsync();
             return Ok(suppliers);
         }
 
-        // Get supplier by ID
         [HttpGet("{id}")]
-        public ActionResult<Supplier> GetSupplierById(Guid id) // Change to Guid
+        public async Task<ActionResult<SupplierReadDto>> GetSupplierById(Guid id)
         {
-            var foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
-            if (foundSupplier == null)
+            var supplier = await _supplierService.GetByIdAsync(id);
+            if (supplier == null)
             {
                 return NotFound();
             }
-            return Ok(foundSupplier);
+            return Ok(supplier);
         }
 
-        // Add a new supplier
         [HttpPost]
-        public ActionResult<Supplier> CreateSupplier(Supplier newSupplier)
+        public async Task<ActionResult<SupplierReadDto>> CreateSupplier(SupplierCreateDto createDto)
         {
-            newSupplier.SupplierId = Guid.NewGuid(); // Generate new SupplierId
-            suppliers.Add(newSupplier);
-            return CreatedAtAction(
-                nameof(GetSupplierById),
-                new { id = newSupplier.SupplierId },
-                newSupplier
-            );
+            var supplierCreated = await _supplierService.CreateOneAsync(createDto);
+            return Created($"api/supplier/{supplierCreated.SupplierId}", supplierCreated);
         }
 
-        // Delete supplier
-        [HttpDelete("{id}")]
-        public ActionResult DeleteSupplier(Guid id) // Change to Guid
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateSupplier(Guid id, SupplierUpdateDto updateDto)
         {
-            var foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
+            var foundSupplier = await _supplierService.GetByIdAsync(id);
             if (foundSupplier == null)
             {
                 return NotFound();
             }
-            suppliers.Remove(foundSupplier);
+
+            await _supplierService.UpdateOneAsync(id, updateDto);
             return NoContent();
         }
 
-        // Update supplier
-        [HttpPut("{id}")]
-        public ActionResult UpdateSupplier(Guid id, Supplier updatedSupplier) // Change to Guid
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSupplier(Guid id)
         {
-            var foundSupplier = suppliers.FirstOrDefault(s => s.SupplierId == id);
+            var foundSupplier = await _supplierService.GetByIdAsync(id);
             if (foundSupplier == null)
             {
                 return NotFound();
             }
 
-            foundSupplier.SupplierName = updatedSupplier.SupplierName;
-            foundSupplier.SupplierContact = updatedSupplier.SupplierContact;
-            foundSupplier.SupplierBankInfo = updatedSupplier.SupplierBankInfo;
-
+            await _supplierService.DeleteOneAsync(id);
             return NoContent();
         }
     }

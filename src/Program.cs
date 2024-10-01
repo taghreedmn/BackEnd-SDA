@@ -11,6 +11,10 @@ using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 //connect the database
