@@ -23,6 +23,8 @@ namespace FusionTech.src.Database
 
          public DbSet<Publisher> Publisher { get; set; }
 
+         public DbSet<Store> Store { get; set; }
+
 
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
@@ -53,7 +55,7 @@ namespace FusionTech.src.Database
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
                 );
-
+/* 
              // Seed Supplier data
             var supplier1Id = Guid.NewGuid();
             var supplier2Id = Guid.NewGuid();
@@ -79,7 +81,7 @@ namespace FusionTech.src.Database
             .HasData(
                 new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com" },
                 new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com" }
-            ); 
+            );  */
 
             // Seed Inventory data
             var inventory1Id = Guid.NewGuid();
@@ -103,11 +105,38 @@ namespace FusionTech.src.Database
                         InventoryQuantity = 100
                     }
                 );
-        
 
-        // Console data
+            // Seed Store data
+            var employeeId1 = Guid.NewGuid(); 
+            var employeeId2 = Guid.NewGuid(); 
 
-        modelBuilder
+            modelBuilder
+                .Entity<Store>()
+    .HasData(
+                    new Store
+                    {
+                        StoreId = Guid.NewGuid(), 
+                        InventoryId = inventory1Id,
+                        NumberOfEmployee = 5,
+                        WorkHours = 40,
+                        EmployeeId = employeeId1,
+                        Location = "Location 1"
+                    },
+                    new Store
+                    {
+                        StoreId = Guid.NewGuid(), 
+                        InventoryId = inventory2Id,
+                        NumberOfEmployee = 8,
+                        WorkHours = 35,
+                        EmployeeId = employeeId2,
+                        Location = "Location 2"
+                    }
+                );
+
+
+            // Console data
+
+            modelBuilder
                 .Entity<GameConsole>()
                 .HasData(
                     new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }

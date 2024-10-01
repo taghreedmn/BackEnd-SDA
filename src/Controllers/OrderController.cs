@@ -1,4 +1,4 @@
-using FusionTech.src.Entity;
+/* using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FusionTech.src.Controllers
@@ -98,4 +98,4 @@ namespace FusionTech.src.Controllers
         }
     }
 }
- 
+  */

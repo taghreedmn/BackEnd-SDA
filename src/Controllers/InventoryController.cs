@@ -1,5 +1,4 @@
-using FusionTech.src.Service.Console;
-using FusionTech.src.Entity;
+
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.InventoryDTO;
 using FusionTech.src.Services.Inventory;

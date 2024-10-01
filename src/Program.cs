@@ -1,6 +1,6 @@
 using FusionTech.src.Database;
-using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Service.Store;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Console;
 using FusionTech.src.Services.Customer;
@@ -54,6 +54,9 @@ builder
 builder
 .Services.AddScoped<IInventoryService, InventoryService>()
 .AddScoped<InventoryRepository, InventoryRepository>();
+builder
+.Services.AddScoped<IStoreService, StoreService>()
+.AddScoped<StoreRepository, StoreRepository>();
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);

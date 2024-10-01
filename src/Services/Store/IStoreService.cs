@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FusionTech.src.Entity;
 
-namespace FusionTech.src.Service.Console
+using static FusionTech.src.DTO.StoreDTO;
+
+namespace FusionTech.src.Service.Store
 {
     public interface IStoreService
     {
-        Task<Store> GetByIdAsync(Guid id);
-        Task<Store> CreateOneAsync(Store newStore);
-        Task<List<Store>> GetAllAsync();
-        Task<bool> UpdateOneAsync(Store updateStore);
-        Task<bool> DeleteOneAsync(Guid id);
+        Task<StoreReadDto> CreateOneAsync(StoreCreateDto newStore); 
+        Task<StoreReadDto> GetByIdAsync(Guid id); 
+        Task<List<StoreReadDto>> GetAllAsync(); 
+        Task<bool> UpdateOneAsync(StoreUpdateDto updateStore); 
+        Task<bool> DeleteOneAsync(Guid id); 
     }
 }
