@@ -54,7 +54,7 @@ namespace FusionTech.src.Database
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
                 );
 
-            // Seed Supplier data
+             // Seed Supplier data
             var supplier1Id = Guid.NewGuid();
             var supplier2Id = Guid.NewGuid();
 
@@ -71,15 +71,15 @@ namespace FusionTech.src.Database
                 .HasData(
                     new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow,InventoryId = Guid.NewGuid(),},
                     new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50,  SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(),}
-                    );
+                    ); 
 
            // Seed Publisher data
-            modelBuilder
+             modelBuilder
             .Entity<Publisher>()
             .HasData(
                 new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com" },
                 new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com" }
-            );
+            ); 
 
             // Seed Inventory data
             var inventory1Id = Guid.NewGuid();

@@ -59,9 +59,9 @@ namespace FusionTech.src.Controllers
 
         // Get a specific order by ID
         [HttpGet("{id}")]
-        public ActionResult GetOrderById(int id)
+        public ActionResult GetOrderById(Guid id)
         {
-            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId == id);
+            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId += id);
             if (foundOrder == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace FusionTech.src.Controllers
 
         // Update an existing order
         [HttpPut("{id}")]
-        public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
+        public ActionResult UpdateOrder(Guid id, [FromBody] Order updatedOrder)
         {
             var index = Order.FindIndex(o => o.OrderId == id);
             if (index == -1)
@@ -86,7 +86,7 @@ namespace FusionTech.src.Controllers
 
         // Delete an order
         [HttpDelete("{id}")]
-        public ActionResult DeleteOrder(int id)
+        public ActionResult DeleteOrder(Guid id)
         {
             Order? foundOrder = Order.FirstOrDefault(o => o.OrderId == id);
             if (foundOrder == null)
@@ -98,3 +98,4 @@ namespace FusionTech.src.Controllers
         }
     }
 }
+ 

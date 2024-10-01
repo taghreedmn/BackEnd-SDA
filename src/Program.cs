@@ -4,6 +4,7 @@ using FusionTech.src.Repository;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Console;
 using FusionTech.src.Services.Customer;
+using FusionTech.src.Services.Inventory;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;

@@ -9,8 +9,8 @@ using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SupplyDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
-using static FusionTech.src.Entity.InventoryDTO;
 using static FusionTech.src.DTO.PublisherDTO;
+using static FusionTech.src.DTO.InventoryDTO;
 
 
 namespace FusionTech.src.Utils
@@ -18,7 +18,7 @@ namespace FusionTech.src.Utils
     public class MapperProfile : Profile
     {
         public MapperProfile()
-
+{
             // Supply mappings
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
@@ -30,7 +30,7 @@ namespace FusionTech.src.Utils
             CreateMap<Person, PersonReadDto>();
             // CreateMap<PersonUpdateDto, Person>();
 
-        { //Supply
+         //Supply
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
             CreateMap<SupplyUpdateDto, Supply>()
@@ -38,7 +38,7 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, strProperty) => strProperty != null)
                 );
 
-            {
+            
                 // Person mappings
                 CreateMap<PersonCreateDto, Person>();
                 CreateMap<Person, PersonSignInDTO>();
@@ -90,13 +90,12 @@ namespace FusionTech.src.Utils
 
             //inventory
             CreateMap<Inventory, InventoryReadDto>();
-            CreateMap<InventoryUpdateDto, Inventory>();
+            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
             CreateMap<InventoryCreateDto, Inventory>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
             // Publisher mappings
             CreateMap<Publisher, PublisherReadDto>();
@@ -106,10 +105,10 @@ namespace FusionTech.src.Utils
 
                 
                     
-
             }
-
-
-        }
-    }
+            }
 }
+            
+
+
+
