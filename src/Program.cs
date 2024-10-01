@@ -1,3 +1,4 @@
+using FusionTech.Middlewares;
 using FusionTech.src.Database;
 using FusionTech.src.Repository;
 using FusionTech.src.Services.Category;
@@ -63,6 +64,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
 {
@@ -83,6 +85,7 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine($"Databse connection failed:{ex.Message}");
     }
 }
+app.UseMiddleware<LoggingMiddleware>();
 
 // Enable Swagger for API documentation
 if (app.Environment.IsDevelopment())
