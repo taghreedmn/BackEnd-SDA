@@ -20,6 +20,11 @@ namespace FusionTech.src.Repository
             return await _Person.FindAsync(id);
         }
 
+        public async Task<Person> FindPersonByEmail(string email)
+        {
+            return await _Person.FirstOrDefaultAsync(e => e.PersonEmail == email);
+        }
+
         public async Task<bool> DeletePersonById(int id)
         {
             var result = await DeletePerson(GetByIdAsync(id).Result);

@@ -9,7 +9,7 @@ namespace FusionTech.src.DTO
             public int YearsOfService { get; set; } = 0;
         }
 
-        public class StoreEmployeeReadDto : PersonReadDto
+        public class StoreEmployeeReadDto : PersonSignInDTO
         {
             public string? Role { get; set; }
             public float Salary { get; set; }

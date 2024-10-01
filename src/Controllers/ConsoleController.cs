@@ -5,9 +5,10 @@
 //4-get all Consoles
 //5-delete Console by id
 
-using FusionTech.src.Service.Console;
+using FusionTech.src.Services.Console;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.ConsoleDTO;
+
 
 namespace FusionTech.src.Controllers
 {

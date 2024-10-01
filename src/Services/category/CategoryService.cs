@@ -2,6 +2,7 @@ using AutoMapper;
 using FusionTech.src.DTO;
 using FusionTech.src.Repository;
 using FusionTech.src.Utils;
+using Microsoft.EntityFrameworkCore.Metadata;
 using static FusionTech.src.DTO.CategoryDTO;
 
 namespace FusionTech.src.Services.Category
@@ -64,5 +65,6 @@ namespace FusionTech.src.Services.Category
             _mapper.Map(updateDto, foundCategory);
             return await _categoryRepository.UpdateOneAsync(foundCategory);
         }
+
     }
 }

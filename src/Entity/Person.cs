@@ -25,5 +25,8 @@ namespace FusionTech.src.Entity
         public string? PersonPhone { get; set; }
 
         public string? ProfilePicturePath { get; set; }
+        public static readonly PersonType PersonType = PersonType.Person;
+
+        public byte[] salt { get; set; }
     }
 }

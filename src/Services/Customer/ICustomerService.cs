@@ -1,6 +1,6 @@
 using static FusionTech.src.DTO.CustomerDTO;
 
-namespace FusionTech.Service.Customer
+namespace FusionTech.src.Services.Customer
 {
     public interface ICustomerService
     {

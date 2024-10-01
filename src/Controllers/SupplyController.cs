@@ -1,5 +1,16 @@
-using FusionTech.src.Entity;
+
 using Microsoft.AspNetCore.Mvc;
+using FusionTech.src.Entity;
+using System.ComponentModel;
+using System.Data;
+using FusionTech.src.Services.supply;
+using FusionTech.src.DTO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FusionTech.src.Utils;
+using static FusionTech.src.DTO.SupplyDTO;
+
 
 namespace FusionTech.src.Controllers
 {
@@ -7,49 +18,28 @@ namespace FusionTech.src.Controllers
     [Route("api/v1/[controller]")]
     public class SupplyController : ControllerBase
     {
-        private List<Supply> supplies = new List<Supply>
+        protected readonly ISupplyService _supplyService;
+
+        public SupplyController(ISupplyService service)
         {
-            new Supply
-            {
-                SupplyId = Guid.NewGuid(),
-                SupplierId = Guid.NewGuid(),
-                GamesId = Guid.NewGuid(),
-                SupplierQuantity = 50,
-                SupplierDate = new DateTime(2020, 12, 12),
-                InventoryId = Guid.NewGuid(),
-            },
-            new Supply
-            {
-                SupplyId = Guid.NewGuid(),
-                SupplierId = Guid.NewGuid(),
-                GamesId = Guid.NewGuid(),
-                SupplierQuantity = 100,
-                SupplierDate = new DateTime(2019, 1, 10),
-                InventoryId = Guid.NewGuid(),
-            },
-            new Supply
-            {
-                SupplyId = Guid.NewGuid(),
-                SupplierId = Guid.NewGuid(),
-                GamesId = Guid.NewGuid(),
-                SupplierQuantity = 250,
-                SupplierDate = new DateTime(2022, 3, 4),
-                InventoryId = Guid.NewGuid(),
-            },
-        };
+            _supplyService = service; 
+        }
 
         // Get all supplies
         [HttpGet]
-        public ActionResult<IEnumerable<Supply>> GetSupplies()
+        public async Task<ActionResult<SupplyReadDto>> GetSupplies([FromQuery] PaginationOptions paginationOptions)
         {
-            return Ok(supplies);
+            var paginatedSupplies = await _supplyService.GetAllAsync(paginationOptions);
+             return Ok(paginatedSupplies);
         }
+
+        
 
         // Get supply by ID
         [HttpGet("{id}")]
-        public ActionResult<Supply> GetSupplyById(Guid id) // Change to Guid
+        public async Task<ActionResult<SupplyReadDto>> GetSupplyById(Guid id)
         {
-            var supplyItem = supplies.FirstOrDefault(s => s.SupplyId == id); // Use SupplyId
+            var supplyItem = await _supplyService.GetByIdAsync(id);
             if (supplyItem == null)
             {
                 return NotFound();
@@ -58,46 +48,37 @@ namespace FusionTech.src.Controllers
         }
 
         // Create a new supply
+        
         [HttpPost]
-        public ActionResult<Supply> CreateSupply(Supply newSupply)
-        {
-            newSupply.SupplyId = Guid.NewGuid(); // Generate new SupplyId
-            supplies.Add(newSupply);
-            return CreatedAtAction(
-                nameof(GetSupplyById),
-                new { id = newSupply.SupplyId },
-                newSupply
-            );
-        }
+        public async Task<ActionResult<SupplyReadDto>> CreateOne(SupplyCreateDto createDto)
+       {
+          var supplyCreated = await _supplyService.CreateOneAsync(createDto);
+           return Created($"api/v1/supplies/{supplyCreated.SupplyId}", supplyCreated);
+       }
 
+         
+     
         // Update supply
         [HttpPut("{id}")]
-        public ActionResult UpdateSupply(Guid id, Supply updatedSupply) // Change to Guid
+        public async Task<ActionResult> UpdateSupply(Guid id, SupplyUpdateDto updateDto) // Use SupplyUpdateDto
         {
-            var supplyItem = supplies.FirstOrDefault(s => s.SupplyId == id); // Use SupplyId
-            if (supplyItem == null)
+            var isUpdated = await _supplyService.UpdateOnAsync(id, updateDto);
+            if (!isUpdated)
             {
                 return NotFound();
             }
-
-            supplyItem.GamesId = updatedSupply.GamesId;
-            supplyItem.SupplierQuantity = updatedSupply.SupplierQuantity;
-            supplyItem.SupplierDate = updatedSupply.SupplierDate;
-            supplyItem.InventoryId = updatedSupply.InventoryId;
-
             return NoContent();
         }
 
         // Delete supply
         [HttpDelete("{id}")]
-        public ActionResult DeleteSupply(Guid id) // Change to Guid
+        public async Task<ActionResult> DeleteSupply(Guid id)
         {
-            var supplyItem = supplies.FirstOrDefault(s => s.SupplyId == id); // Use SupplyId
-            if (supplyItem == null)
+            var isDeleted = await _supplyService.DeleteOneAsync(id);
+            if (!isDeleted)
             {
                 return NotFound();
             }
-            supplies.Remove(supplyItem);
             return NoContent();
         }
     }
