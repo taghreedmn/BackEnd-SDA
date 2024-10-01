@@ -9,12 +9,25 @@ using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SupplyDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
+using static FusionTech.src.DTO.PublisherDTO;
 
 namespace FusionTech.src.Utils
 {
     public class MapperProfile : Profile
     {
         public MapperProfile()
+
+            // Supply mappings
+            CreateMap<Supply, SupplyReadDto>();
+            CreateMap<SupplyCreateDto, Supply>();
+            CreateMap<SupplyUpdateDto, Supply>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // Person mappings
+            CreateMap<PersonCreateDto, Person>();
+            CreateMap<Person, PersonReadDto>();
+            // CreateMap<PersonUpdateDto, Person>();
+
         { //Supply
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
@@ -28,6 +41,7 @@ namespace FusionTech.src.Utils
                 CreateMap<PersonCreateDto, Person>();
                 CreateMap<Person, PersonSignInDTO>();
                 // CreateMap<PersonUpdateDto, Person>();
+
 
                 // Customer mappings
                 CreateMap<CustomerCreateDto, Customer>();
@@ -43,6 +57,37 @@ namespace FusionTech.src.Utils
                 CreateMap<SystemAdminCreateDto, SystemAdmin>();
                 CreateMap<SystemAdmin, SystemAdminReadDto>();
                 // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
+
+
+            // Category mappings
+            CreateMap<Category, CategoryReadDto>();
+            CreateMap<CategoryCreateDto, Category>();
+            CreateMap<CategoryUpdateDto, Category>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // Payment mappings
+            CreateMap<Payment, PaymentReadDto>();
+            CreateMap<PaymentCreateDto, Payment>();
+            CreateMap<PaymentUpdateDto, Payment>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // Console mappings
+            CreateMap<GameConsole, ReadConsoleDTO>();
+            CreateMap<UpdateConsoleDTO, GameConsole>();
+            CreateMap<CreateConsoleDTO, GameConsole>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // Studio mappings
+            CreateMap<GameStudio, ReadStudioDTO>();
+            CreateMap<UpdateStudioDTO, GameStudio>();
+            CreateMap<CreatStudioDTO, GameStudio>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // Publisher mappings
+            CreateMap<Publisher, PublisherReadDto>();
+            CreateMap<PublisherUpdateDto, Publisher>();
+            CreateMap<PublisherCreateDto, Publisher>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
                 //Category
                 CreateMap<Category, CategoryReadDto>();
@@ -74,6 +119,7 @@ namespace FusionTech.src.Utils
                         opts.Condition((src, dest, srcProperty) => srcProperty != null)
                     );
             }
+
         }
     }
 }
