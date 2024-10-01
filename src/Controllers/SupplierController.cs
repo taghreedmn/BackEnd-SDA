@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using FusionTech.src.Services.supplier;
-using static FusionTech.src.DTO.SupplierDTO;
-using FusionTech.src.Entity;
 
+using FusionTech.src.Services.supplier;
+using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.SupplierDTO;
 
 namespace FusionTech.src.Controllers
 {
