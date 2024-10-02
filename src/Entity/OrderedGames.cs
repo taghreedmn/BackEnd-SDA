@@ -4,6 +4,7 @@ namespace FusionTech.src.Entity
 {
     public class OrderedGames
     {
+        public Guid Id { get; set; }
         public Guid OrderId { get; set; }
         public Guid videoGameID { get; set; }
 

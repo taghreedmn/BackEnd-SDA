@@ -1,18 +1,19 @@
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
+using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Repository
 {
     public class OrderRepository
     {
-        protected DbSet<Order> _order;
-        protected DatabaseContext _databaseContext;
+        protected readonly DbSet<Order> _order;
+        protected readonly DatabaseContext _databaseContext;
 
         public OrderRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
-            _order = databaseContext.Set<Order>();
+            _order = _databaseContext.Set<Order>();
         }
 
         public async Task<Order> CreateOneAsync(Order newOrder)
@@ -22,14 +23,20 @@ namespace FusionTech.src.Repository
             return newOrder;
         }
 
-        public async Task<List<Order>> GetAllAsync()
+        public async Task<List<Order>> GetAllAsync(PaginationOptions paginationOptions)
         {
-            return await _order.ToListAsync();
+            var result = _order.Where(ord => 
+            ord.OrderDate != null)
+            .OrderByDescending(ord => ord.OrderDate);
+            return await result
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToListAsync();
         }
 
-        public async Task<Order> GetIdAsync(Guid id)
+        public async Task<Order> GetByIdAsync(Guid id)
         {
-            return await _order.FindAsync(id);
+            return await _order.Include(ord => ord.Customer).FirstOrDefaultAsync(ord => ord.OrderId == id);
         }
 
         public async Task<bool> DeleteOneAsync(Order order)

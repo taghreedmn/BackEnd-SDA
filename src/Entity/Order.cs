@@ -17,10 +17,12 @@ namespace FusionTech.src.Entity
         public Guid StoreId { get; set; }
         public Guid EmployeeId { get; set; }
         public Guid CustomerId { get; set; }
-        public Payment Payment{ get; set; }
+        public Payment Payment { get; set; }
         // public Store Store { get; set; }
         // public Employee Employee{ get; set; }
-        public Customer Customer{ get; set; }   
+        public Customer Customer { get; set; }
+        public List<OrderedGames> OrderedGames { get; set; }
+
     }
 }
 

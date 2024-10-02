@@ -4,7 +4,7 @@ using FusionTech.src.Services;
 using static FusionTech.src.DTO.CategoryDTO;
 using FusionTech.src.DTO;
 using System.Data;
-using FusionTech.src.Services.Category;
+using FusionTech.src.Services.category;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.CategoryDTO;

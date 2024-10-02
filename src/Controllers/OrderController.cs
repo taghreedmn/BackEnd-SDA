@@ -1,5 +1,9 @@
+using System.Security.Claims;
 using FusionTech.src.Entity;
+using FusionTech.src.Services.order;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.OrderDTO;
 
 namespace FusionTech.src.Controllers
 {
@@ -7,94 +11,42 @@ namespace FusionTech.src.Controllers
     [Route("api/v1/[controller]")]
     public class OrderController : ControllerBase
     {
-        private List<Order> Order = new List<Order>
+        protected readonly IOrderService _orderService;
+        public OrderController(IOrderService orderService)
         {
-            new Order
-            {
-                OrderId = 1,
-                OrderDate = new DateTime(2020, 12, 12),
-                TotalPrice = 150,
-                PaymentId = 1,
-                StoreId = 1,
-                EmployeeId = 1,
-                CustomerId = 101,
-            },
-            new Order
-            {
-                OrderId = 2,
-                OrderDate = new DateTime(2021, 1, 15),
-                TotalPrice = 250,
-                PaymentId = 2,
-                StoreId = 1,
-                EmployeeId = 2,
-                CustomerId = 102,
-            },
-            new Order
-            {
-                OrderId = 3,
-                OrderDate = new DateTime(2021, 2, 20),
-                TotalPrice = 350,
-                PaymentId = 3,
-                StoreId = 2,
-                EmployeeId = 1,
-                CustomerId = 103,
-            },
-        };
+            _orderService = orderService;
+        }
 
         // Create a new order
         [HttpPost]
-        public ActionResult CreateOrder(Order newOrder)
+        [Authorize]
+        public async Task<ActionResult<OrderReadDto>> CreateOneAsync([FromBody] OrderCreateDto orderCreateDto)
         {
-            newOrder.OrderId = Order.Count > 0 ? Order.Max(o => o.OrderId) + 1 : 1;
-            Order.Add(newOrder);
-            return CreatedAtAction(nameof(GetOrderById), new { id = newOrder.OrderId }, newOrder);
+            var authenticateClaims = HttpContext.User;
+            var userId = authenticateClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+            var userGuid = new Guid(userId);
+            return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
         }
 
         // Get all orders
         [HttpGet]
         public ActionResult GetAllOrders()
         {
-            return Ok(Order);
+
         }
 
         // Get a specific order by ID
         [HttpGet("{id}")]
         public ActionResult GetOrderById(int id)
         {
-            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId == id);
-            if (foundOrder == null)
-            {
-                return NotFound();
-            }
-            return Ok(foundOrder);
-        }
 
+        }
         // Update an existing order
         [HttpPut("{id}")]
         public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
         {
-            var index = Order.FindIndex(o => o.OrderId == id);
-            if (index == -1)
-            {
-                return NotFound();
-            }
 
-            updatedOrder.OrderId = id; // Keep the original ID
-            Order[index] = updatedOrder;
-            return Ok(updatedOrder);
         }
 
-        // Delete an order
-        [HttpDelete("{id}")]
-        public ActionResult DeleteOrder(int id)
-        {
-            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId == id);
-            if (foundOrder == null)
-            {
-                return NotFound();
-            }
-            Order.Remove(foundOrder);
-            return NoContent();
-        }
     }
 }

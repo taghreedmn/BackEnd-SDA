@@ -2,9 +2,11 @@ using FusionTech.Middlewares;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Services.category;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Console;
 using FusionTech.src.Services.Customer;
+using FusionTech.src.Services.order;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;
@@ -51,6 +53,9 @@ builder
 builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
+builder
+.Services.AddScoped<IOrderService,OrderService>()
+.AddScoped<OrderRepository, OrderRepository>();
 builder
 .Services.AddScoped<IInventoryService, InventoryService>()
 .AddScoped<InventoryRepository, InventoryRepository>();

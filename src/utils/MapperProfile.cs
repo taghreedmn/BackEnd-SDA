@@ -18,7 +18,7 @@ namespace FusionTech.src.Utils
     public class MapperProfile : Profile
     {
         public MapperProfile()
-
+        {
             // Supply mappings
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
@@ -30,7 +30,7 @@ namespace FusionTech.src.Utils
             CreateMap<Person, PersonReadDto>();
             // CreateMap<PersonUpdateDto, Person>();
 
-        { //Supply
+        //Supply
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
             CreateMap<SupplyUpdateDto, Supply>()
@@ -96,16 +96,11 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
-
             // Publisher mappings
             CreateMap<Publisher, PublisherReadDto>();
             CreateMap<PublisherUpdateDto, Publisher>();
             CreateMap<PublisherCreateDto, Publisher>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
-
-                
-                    
 
             }
 

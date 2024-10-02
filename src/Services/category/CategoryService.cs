@@ -1,11 +1,12 @@
 using AutoMapper;
 using FusionTech.src.DTO;
+using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore.Metadata;
 using static FusionTech.src.DTO.CategoryDTO;
 
-namespace FusionTech.src.Services.Category
+namespace FusionTech.src.Services.category
 {
     public class CategoryService : ICategoryService
     {
@@ -24,7 +25,7 @@ namespace FusionTech.src.Services.Category
         {
             var category = _mapper.Map<CategoryCreateDto, Entity.Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Entity.Category, CategoryReadDto>(categoryCreated);
+            return _mapper.Map<Category, CategoryReadDto>(categoryCreated);
         }
 
         public async Task<List<CategoryDTO.CategoryReadDto>> GetAllAsync(
@@ -32,13 +33,13 @@ namespace FusionTech.src.Services.Category
         )
         {
             var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Entity.Category>, List<CategoryReadDto>>(categoryList);
+            return _mapper.Map<List<Category>, List<CategoryReadDto>>(categoryList);
         }
 
         public async Task<CategoryDTO.CategoryReadDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
-            return _mapper.Map<Entity.Category, CategoryReadDto>(foundCategory);
+            return _mapper.Map<Category, CategoryReadDto>(foundCategory);
         }
 
         public async Task<bool> DeleteOneAsync(Guid id)
