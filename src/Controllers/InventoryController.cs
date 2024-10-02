@@ -1,6 +1,6 @@
-using FusionTech.src.Service.Inventory;
 using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.Entity.InventoryDTO;
+using static FusionTech.src.DTO.InventoryDTO;
+using FusionTech.src.Services.Inventory;
 
 namespace FusionTech.src.Controllers
 {
@@ -15,7 +15,7 @@ namespace FusionTech.src.Controllers
             _inventoryService = inventoryService;
         }
 
-        // Creates a new inventory item
+        // Creates a new inventory Game
         [HttpPost]
         public async Task<ActionResult<InventoryReadDto>> CreateOne(
             [FromBody] InventoryCreateDto createDto
@@ -25,19 +25,19 @@ namespace FusionTech.src.Controllers
             return Created($"api/v1/inventory/{inventoryCreated.InventoryId}", inventoryCreated);
         }
 
-        // Retrieves all inventory items with pagination
+        // Retrieves all inventory Games with pagination
         [HttpGet]
         public async Task<ActionResult<List<InventoryReadDto>>> GetAllItems()
         {
-            var inventoryList = await _inventoryService.GetAllItemsAsync();
+            var inventoryList = await _inventoryService.GetAllGamesAsync();
             return Ok(inventoryList);
         }
 
-        // Retrieves an inventory item by ID
+        // Retrieves an inventory Game by ID
         [HttpGet("{id}")]
         public async Task<ActionResult<InventoryReadDto>> GetItemById([FromRoute] Guid id)
         {
-            var inventoryItem = await _inventoryService.GetItemByIdAsync(id);
+            var inventoryItem = await _inventoryService.GetGameByIdAsync(id);
             if (inventoryItem == null)
             {
                 return NotFound();
@@ -45,31 +45,41 @@ namespace FusionTech.src.Controllers
             return Ok(inventoryItem);
         }
 
+
         // Updates an inventory item by ID
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateItem(
             [FromRoute] Guid id,
             [FromBody] InventoryUpdateDto updateDto
         )
+
+
+
+
+        // Adds a game to the inventory 
+        [HttpPost("add-game")]
+        public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
+
         {
-            var itemUpdated = await _inventoryService.UpdateItemAsync(id, updateDto);
-            if (!itemUpdated)
+            var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
+            if (!gameAdded)
             {
                 return NotFound();
             }
-            return NoContent();
+            return NoContent(); // No content returned on successful addition
         }
 
-        // Deletes an inventory item
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> RemoveItem([FromRoute] Guid id)
+
+        // Removes a game from the inventory 
+        [HttpDelete("remove-game")]
+        public async Task<ActionResult> RemoveGameFromInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
         {
-            var itemRemoved = await _inventoryService.RemoveItemAsync(id);
-            if (!itemRemoved)
+            var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);
+            if (!gameRemoved)
             {
                 return NotFound();
             }
-            return NoContent(); // No content returned on successful deletion
+            return NoContent(); // No content returned on successful removal
         }
     }
 }
