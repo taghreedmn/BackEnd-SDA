@@ -52,12 +52,12 @@ namespace FusionTech.src.Utils
                     // CreateMap<CustomerUpdateDto, Customer>();
 
                     // StoreEmployee mappings
-                    CreateMap<StoreEmployeeCreateDto, StoreEmployee>();
+                    CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
                     CreateMap<StoreEmployee, StoreEmployeeReadDto>();
                     // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
 
                     // SystemAdmin mappings
-                    CreateMap<SystemAdminCreateDto, SystemAdmin>();
+                    CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
                     CreateMap<SystemAdmin, SystemAdminReadDto>();
                     // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
 

@@ -10,6 +10,7 @@ using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supply;
+using FusionTech.src.Services.SystemAdmin;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,10 @@ builder
     .Services.AddScoped<ICustomerService, CustomerService>()
     .AddScoped<CustomerRepository, CustomerRepository>();
 
+builder
+    .Services.AddScoped<ISystemAdminService, SystemAdminService>()
+    .AddScoped<SystemAdminRepository, SystemAdminRepository>();
+
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder
     .Services.AddScoped<ICategoryService, CategoryService>()
@@ -83,7 +88,7 @@ builder
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:issuer"],
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value!)
@@ -93,9 +98,16 @@ builder
 
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("Admin", policy => policy.RequireRole(PersonType.SystemAdmin.ToString()));
+    options.AddPolicy("Employee", policy => policy.RequireRole(PersonType.SystemAdmin.ToString()));
+    options.AddPolicy("Customer", policy => policy.RequireRole(PersonType.Customer.ToString()));
     options.AddPolicy(
-        "Admin Only",
-        policy => policy.RequireRole(PersonType.SystemAdmin.ToString())
+        "EmployeeOrAdmin",
+        policy =>
+            policy.RequireRole(
+                PersonType.SystemAdmin.ToString(),
+                PersonType.StoreEmployee.ToString()
+            )
     );
 });
 
@@ -135,6 +147,7 @@ if (app.Environment.IsDevelopment())
 
 // Configure the HTTP request pipeline
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Map the controllers

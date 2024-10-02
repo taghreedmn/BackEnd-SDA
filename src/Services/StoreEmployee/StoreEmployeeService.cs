@@ -10,7 +10,7 @@ namespace FusionTech.src.Services.StoreEmployee
             throw new NotImplementedException();
         }
 
-        public Task<StoreEmployeeReadDto> SignUpEmployee(StoreEmployeeCreateDto createDto)
+        public Task<StoreEmployeeReadDto> SignUpEmployee(StoreEmployeeSignUpDTO createDto)
         {
             throw new NotImplementedException();
         }
