@@ -11,6 +11,7 @@ using static FusionTech.src.DTO.SupplyDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
 using static FusionTech.src.DTO.PublisherDTO;
 using static FusionTech.src.DTO.InventoryDTO;
+using static FusionTech.src.DTO.StoreDTO;
 
 
 namespace FusionTech.src.Utils
@@ -103,9 +104,13 @@ namespace FusionTech.src.Utils
             CreateMap<PublisherCreateDto, Publisher>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
-                
-                    
-            }
+
+            // Store mappings
+            CreateMap<Store, StoreReadDto>();
+            CreateMap<StoreCreateDto, Store>();
+            CreateMap<StoreUpdateDto, Store>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+        }
             }
 }
             
