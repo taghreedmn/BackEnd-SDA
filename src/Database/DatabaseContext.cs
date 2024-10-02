@@ -11,6 +11,7 @@ namespace FusionTech.src.Database
         public DbSet<SystemAdmin> SystemAdmins { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderedGames> OrderedGames { get; set; }
         public DbSet<Payment> Payment { get; set; }
 
         public DbSet<Supplier> Supplier { get; set; }
@@ -21,7 +22,7 @@ namespace FusionTech.src.Database
 
         public DbSet<Inventory> Inventory { get; set; }
 
-         public DbSet<Publisher> Publisher { get; set; }
+        public DbSet<Publisher> Publisher { get; set; }
 
 
         public DatabaseContext(DbContextOptions options)
@@ -61,24 +62,24 @@ namespace FusionTech.src.Database
             modelBuilder
                 .Entity<Supplier>()
                 .HasData(
-                    new Supplier{ SupplierId = supplier1Id,SupplierName = "Supplier 1",SupplierContact = "Contact 1", SupplierBankInfo = "Bank Info 1",},
-                    new Supplier{SupplierId = supplier2Id, SupplierName = "Supplier 2",SupplierContact = "Contact 2", SupplierBankInfo = "Bank Info 2",}
+                    new Supplier { SupplierId = supplier1Id, SupplierName = "Supplier 1", SupplierContact = "Contact 1", SupplierBankInfo = "Bank Info 1", },
+                    new Supplier { SupplierId = supplier2Id, SupplierName = "Supplier 2", SupplierContact = "Contact 2", SupplierBankInfo = "Bank Info 2", }
                 );
 
             // Seed Supply data
             modelBuilder
                 .Entity<Supply>()
                 .HasData(
-                    new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow,InventoryId = Guid.NewGuid(),},
-                    new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50,  SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(),}
+                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(),  },
+                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(), }
                     );
 
-           // Seed Publisher data
+            // Seed Publisher data
             modelBuilder
             .Entity<Publisher>()
             .HasData(
-                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com" },
-                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com" }
+                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com", PublisherPicturePath = "" },
+                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com", PublisherPicturePath = "" }
             );
 
             // Seed Inventory data
@@ -91,27 +92,27 @@ namespace FusionTech.src.Database
                     new Inventory
                     {
                         InventoryId = inventory1Id,
-                        GameId = Guid.NewGuid(),  
-                        StoreId = Guid.NewGuid(), 
+                        GameId = Guid.NewGuid(),
+                        StoreId = Guid.NewGuid(),
                         InventoryQuantity = 50
                     },
                     new Inventory
                     {
                         InventoryId = inventory2Id,
-                        GameId = Guid.NewGuid(),  
-                        StoreId = Guid.NewGuid(), 
+                        GameId = Guid.NewGuid(),
+                        StoreId = Guid.NewGuid(),
                         InventoryQuantity = 100
                     }
                 );
-        
 
-        // Console data
 
-        modelBuilder
-                .Entity<GameConsole>()
-                .HasData(
-                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }
-                );
+            // Console data
+
+            modelBuilder
+                    .Entity<GameConsole>()
+                    .HasData(
+                        new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }
+                    );
             modelBuilder
                 .Entity<GameConsole>()
                 .HasData(
@@ -198,9 +199,9 @@ namespace FusionTech.src.Database
                 .HasData(
                     new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
                 );
-                
-            
-        
+
+
+
         }
     }
 }

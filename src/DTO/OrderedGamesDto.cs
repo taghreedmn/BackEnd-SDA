@@ -12,7 +12,7 @@ namespace FusionTech.src.DTO
         {
             public Guid Id { get; set; }
             public int OrderQuantity { get; set; }
-            public VideoGameReadDto VideoGameRead { get; set; }
+          //  public VideoGameReadDto VideoGameRead { get; set; }
         }
         public class OrderedGamesCreateDto()
         {

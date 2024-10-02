@@ -13,10 +13,6 @@ namespace FusionTech.src.Middlewares
         {
             _next = next;
         }
-
-        
-        
-
             
     }
 }

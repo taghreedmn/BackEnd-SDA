@@ -19,7 +19,6 @@ namespace FusionTech.src.Entity
        [Required(ErrorMessage = "Bank information is required")]
         public string SupplierBankInfo { get; set; }
 
-         public string SupplierPicturePath { get; set; }
    } 
 
 }

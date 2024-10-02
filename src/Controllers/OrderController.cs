@@ -29,24 +29,24 @@ namespace FusionTech.src.Controllers
         }
 
         // Get all orders
-        [HttpGet]
-        public ActionResult GetAllOrders()
-        {
+        // [HttpGet]
+        // public ActionResult GetAllOrders()
+        // {
 
-        }
+        // }
 
-        // Get a specific order by ID
-        [HttpGet("{id}")]
-        public ActionResult GetOrderById(int id)
-        {
+        // // Get a specific order by ID
+        // [HttpGet("{id}")]
+        // public ActionResult GetOrderById(int id)
+        // {
 
-        }
-        // Update an existing order
-        [HttpPut("{id}")]
-        public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
-        {
+        // }
+        // // Update an existing order
+        // [HttpPut("{id}")]
+        // public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
+        // {
 
-        }
+        // }
 
     }
 }
