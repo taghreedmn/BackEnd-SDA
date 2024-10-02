@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static FusionTech.src.Entity.InventoryDTO;
+using static FusionTech.src.DTO.InventoryDTO;
+namespace FusionTech.src.Services.Inventory
 
-namespace FusionTech.src.Service.Inventory
 {
     public interface IInventoryService
     {
         Task<InventoryReadDto> CreateOneAsync(InventoryCreateDto inventoryCreateDto);
-        Task<List<InventoryReadDto>> GetAllItemsAsync();
-        Task<InventoryReadDto> GetItemByIdAsync(Guid id);
-        Task<bool> RemoveItemAsync(Guid id);
-        Task<bool> UpdateItemAsync(Guid id, InventoryUpdateDto inventoryUpdateDto);
+        Task<List<InventoryReadDto>> GetAllGamesAsync();
+        Task<InventoryReadDto> GetGameByIdAsync(Guid id);
+        Task<bool> RemoveGameAsync(InventoryModifyGameQuantityDTO inventoryModifyDto);  
+        Task<bool> AddGameAsync(InventoryModifyGameQuantityDTO inventoryModifyDto);
     }
 }

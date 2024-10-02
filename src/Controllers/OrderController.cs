@@ -1,4 +1,4 @@
-using FusionTech.src.Entity;
+/* using FusionTech.src.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FusionTech.src.Controllers
@@ -23,23 +23,33 @@ namespace FusionTech.src.Controllers
 
         // Get a specific order by ID
         [HttpGet("{id}")]
-        public ActionResult GetOrderById(int id)
+        public ActionResult GetOrderById(Guid id)
         {
+
             throw new NotImplementedException();
+
+            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId += id);
+            if (foundOrder == null)
+            {
+                return NotFound();
+            }
+            return Ok(foundOrder);
+
         }
 
         // Update an existing order
         [HttpPut("{id}")]
-        public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
+        public ActionResult UpdateOrder(Guid id, [FromBody] Order updatedOrder)
         {
             throw new NotImplementedException();
         }
 
         // Delete an order
         [HttpDelete("{id}")]
-        public ActionResult DeleteOrder(int id)
+        public ActionResult DeleteOrder(Guid id)
         {
             throw new NotImplementedException();
         }
     }
 }
+  */

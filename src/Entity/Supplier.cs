@@ -16,5 +16,8 @@ namespace FusionTech.src.Entity
         public string SupplierContact { get; set; }
 
         public string SupplierBankInfo { get; set; }
-    }
+
+        
+   } 
+
 }
