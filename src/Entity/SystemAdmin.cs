@@ -6,6 +6,6 @@ namespace FusionTech.src.Entity
         public bool ManageEmployees { get; private set; }
         public bool ManageGames { get; private set; }
         public bool ManageCustomers { get; private set; }
-        public static readonly PersonType PersonType = PersonType.SystemAdmin;
+        public static new readonly PersonType PersonType = PersonType.SystemAdmin;
     }
 }

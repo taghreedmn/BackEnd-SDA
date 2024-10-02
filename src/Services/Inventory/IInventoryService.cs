@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static FusionTech.src.DTO.InventoryDTO;
-
 namespace FusionTech.src.Services.Inventory
+
 {
     public interface IInventoryService
     {

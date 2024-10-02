@@ -1,3 +1,4 @@
+using System.Text;
 using FusionTech.src.Database;
 using FusionTech.src.Repository;
 using FusionTech.src.Service.Store;
@@ -10,12 +11,10 @@ using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Npgsql;
-
-
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
     builder.Configuration.GetConnectionString("local")
 );
+
+// I might remove this, as I don't see the need nor if I acutally have PersonType in our Databas
+// future me, if you decide to remove it, don't forgot to remove it in TokenUtils.cs too
+dataSourceBuilder.MapEnum<PersonType>();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
@@ -52,6 +55,7 @@ builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
 builder
+
 .Services.AddScoped<IInventoryService, InventoryService>()
 .AddScoped<InventoryRepository, InventoryRepository>();
 builder
@@ -68,6 +72,36 @@ builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
+
+builder
+    .Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value!)
+            ),
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(
+        "Admin Only",
+        policy => policy.RequireRole(PersonType.SystemAdmin.ToString())
+    );
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

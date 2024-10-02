@@ -3,6 +3,7 @@ using FusionTech.src.Repository;
 using static FusionTech.src.DTO.InventoryDTO;
 
 namespace FusionTech.src.Services.Inventory
+
 {
    
     public class InventoryService : IInventoryService
@@ -23,9 +24,8 @@ namespace FusionTech.src.Services.Inventory
             return _mapper.Map<Entity.Inventory, InventoryReadDto>(inventoryAdded);
         }
 
-
-
         public async Task<List<InventoryReadDto>> GetAllGamesAsync()
+
         {
             var inventoryList = await _inventoryRepo.GetAllAsync();
             return _mapper.Map<List<Entity.Inventory>, List<InventoryReadDto>>(inventoryList);
@@ -46,7 +46,6 @@ namespace FusionTech.src.Services.Inventory
                 return true;
             }
             return false;
-
         }
 
 
