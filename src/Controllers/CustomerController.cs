@@ -16,7 +16,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerReadDto>> CreateOne(CustomerCreateDto createDto)
+        public async Task<ActionResult<CustomerReadDto>> SignUp(CustomerSignUpDTO createDto)
         {
             var personCreated = await _customerService.CreateOneAsync(createDto);
             return Ok(personCreated);

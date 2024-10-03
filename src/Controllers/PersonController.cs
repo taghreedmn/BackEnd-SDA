@@ -15,13 +15,6 @@ namespace FusionTech.src.Controllers
             _personService = personService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<PersonSignInDTO>> GetPerson([FromQuery] int id)
-        {
-            var person = await _personService.GetByIdAsync(id);
-            return Ok(person); // 200
-        }
-
         [HttpPost("signIn")]
         public async Task<ActionResult<string>> SignInPerson(
             [FromBody] PersonSignInDTO personSignInDTO

@@ -1,10 +1,11 @@
-
 using AutoMapper;
-using FusionTech.src.Entity;
-using static FusionTech.src.Entity.InventoryDTO;
+using FusionTech.src.Repository;
+using static FusionTech.src.DTO.InventoryDTO;
 
-namespace FusionTech.src.Service.Console
+namespace FusionTech.src.Services.Inventory
+
 {
+   
     public class InventoryService : IInventoryService
     {
         protected readonly InventoryRepository _inventoryRepo;
@@ -18,26 +19,25 @@ namespace FusionTech.src.Service.Console
 
         public async Task<InventoryReadDto> CreateOneAsync(InventoryCreateDto inventoryCreateDto)
         {
-            var inventory = _mapper.Map<InventoryCreateDto, Inventory>(inventoryCreateDto);
+            var inventory = _mapper.Map<InventoryCreateDto, Entity.Inventory>(inventoryCreateDto);
             var inventoryAdded = await _inventoryRepo.CreateOneAsync(inventory);
-            return _mapper.Map<Inventory, InventoryReadDto>(inventoryAdded);
+            return _mapper.Map<Entity.Inventory, InventoryReadDto>(inventoryAdded);
         }
 
+        public async Task<List<InventoryReadDto>> GetAllGamesAsync()
 
-
-        public async Task<List<InventoryReadDto>> GetAllItemsAsync()
         {
             var inventoryList = await _inventoryRepo.GetAllAsync();
-            return _mapper.Map<List<Inventory>, List<InventoryReadDto>>(inventoryList);
+            return _mapper.Map<List<Entity.Inventory>, List<InventoryReadDto>>(inventoryList);
         }
 
-        public async Task<InventoryReadDto> GetItemByIdAsync(Guid id)
+        public async Task<InventoryReadDto> GetGameByIdAsync(Guid id)
         {
             var foundInventory = await _inventoryRepo.GetByIdAsync(id);
-            return _mapper.Map<Inventory, InventoryReadDto>(foundInventory);
+            return _mapper.Map<Entity.Inventory, InventoryReadDto>(foundInventory);
         }
 
-        public async Task<bool> RemoveItemAsync(Guid id)
+        public async Task<bool> RemoveGameAsync(Guid id)
         {
             var foundInventory = await _inventoryRepo.GetByIdAsync(id);
             bool isDeleted = await _inventoryRepo.DeleteOnAsync(foundInventory);
@@ -46,18 +46,36 @@ namespace FusionTech.src.Service.Console
                 return true;
             }
             return false;
-
         }
 
-        public async Task<bool> UpdateItemAsync(Guid id, InventoryUpdateDto inventoryUpdateDto)
-        {
-            var foundInventory = await _inventoryRepo.GetByIdAsync(id);
 
+        public async Task<bool> AddGameAsync(InventoryModifyGameQuantityDTO modifyGameQuantityDto)
+        {
+            var foundInventory = await _inventoryRepo.GetByIdAsync(modifyGameQuantityDto.InventoryId);
             if (foundInventory == null)
             {
                 return false;
             }
-            _mapper.Map(inventoryUpdateDto, foundInventory);
+            foundInventory.InventoryQuantity += modifyGameQuantityDto.Quantity;
+            return await _inventoryRepo.UpdateOnAsync(foundInventory);
+        }
+
+
+        // Remove a game from the inventory 
+        public async Task<bool> RemoveGameAsync(InventoryModifyGameQuantityDTO modifyGameQuantityDto)
+        {
+            var foundInventory = await _inventoryRepo.GetByIdAsync(modifyGameQuantityDto.InventoryId);
+            if (foundInventory == null)
+            {
+                return false;
+            }
+            foundInventory.InventoryQuantity -= modifyGameQuantityDto.Quantity;
+
+            if (foundInventory.InventoryQuantity == 0)
+            {
+                return await _inventoryRepo.DeleteOnAsync(foundInventory);
+            }
+
             return await _inventoryRepo.UpdateOnAsync(foundInventory);
         }
     }

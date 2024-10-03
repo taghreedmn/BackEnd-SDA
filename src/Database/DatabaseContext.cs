@@ -24,6 +24,8 @@ namespace FusionTech.src.Database
 
         public DbSet<Publisher> Publisher { get; set; }
 
+         public DbSet<Store> Store { get; set; }
+
 
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
@@ -53,9 +55,9 @@ namespace FusionTech.src.Database
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 1" },
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
-                );
+                ); 
 
-            // Seed Supplier data
+             // Seed Supplier data
             var supplier1Id = Guid.NewGuid();
             var supplier2Id = Guid.NewGuid();
 
@@ -70,17 +72,17 @@ namespace FusionTech.src.Database
             modelBuilder
                 .Entity<Supply>()
                 .HasData(
-                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(),  },
-                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(), }
-                    );
+                    new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow,InventoryId = Guid.NewGuid(),},
+                    new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50,  SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(),}
+                    ); 
 
-            // Seed Publisher data
-            modelBuilder
+           // Seed Publisher data
+             modelBuilder
             .Entity<Publisher>()
             .HasData(
-                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com", PublisherPicturePath = "" },
-                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com", PublisherPicturePath = "" }
-            );
+                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com" ,PublisherPicturePath=""},
+                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com",PublisherPicturePath = "" }
+            );  
 
             // Seed Inventory data
             var inventory1Id = Guid.NewGuid();
@@ -105,14 +107,41 @@ namespace FusionTech.src.Database
                     }
                 );
 
+            // Seed Store data
+            var employeeId1 = Guid.NewGuid(); 
+            var employeeId2 = Guid.NewGuid(); 
+
+            modelBuilder
+                .Entity<Store>()
+    .HasData(
+                    new Store
+                    {
+                        StoreId = Guid.NewGuid(), 
+                        InventoryId = inventory1Id,
+                        NumberOfEmployee = 5,
+                        WorkHours = 40,
+                        EmployeeId = employeeId1,
+                        Location = "Location 1"
+                    },
+                    new Store
+                    {
+                        StoreId = Guid.NewGuid(), 
+                        InventoryId = inventory2Id,
+                        NumberOfEmployee = 8,
+                        WorkHours = 35,
+                        EmployeeId = employeeId2,
+                        Location = "Location 2"
+                    }
+                );
+
 
             // Console data
 
             modelBuilder
-                    .Entity<GameConsole>()
-                    .HasData(
-                        new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }
-                    );
+                .Entity<GameConsole>()
+                .HasData(
+                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }
+                );
             modelBuilder
                 .Entity<GameConsole>()
                 .HasData(
