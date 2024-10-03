@@ -12,6 +12,7 @@ using static FusionTech.src.DTO.SystemAdminDTO;
 using static FusionTech.src.DTO.PublisherDTO;
 using static FusionTech.src.DTO.InventoryDTO;
 using static FusionTech.src.DTO.StoreDTO;
+using static FusionTech.src.DTO.VideoGameInfoDTO;
 
 
 namespace FusionTech.src.Utils
@@ -109,6 +110,12 @@ namespace FusionTech.src.Utils
             CreateMap<Store, StoreReadDto>();
             CreateMap<StoreCreateDto, Store>();
             CreateMap<StoreUpdateDto, Store>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // VideoGameInfo mappings
+            CreateMap<VideoGameInfo, VideoGameInfoReadDto>();
+            CreateMap<VideoGameInfoCreateDto, VideoGameInfo>();
+            CreateMap<VideoGameInfoUpdateDto, VideoGameInfo>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
         }
             }
