@@ -10,6 +10,7 @@ using FusionTech.src.Services.Customer;
 using FusionTech.src.Services.Inventory;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
+using FusionTech.src.Services.StoreEmployee;
 using FusionTech.src.Services.Publisher;
 using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supplier;
@@ -24,6 +25,7 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 //connect the database
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
     builder.Configuration.GetConnectionString("local")
@@ -36,7 +38,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
-
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services
@@ -56,6 +57,10 @@ builder
     .AddScoped<CustomerRepository, CustomerRepository>();
 
 builder
+    .Services.AddScoped<IStoreEmployeeService, StoreEmployeeService>()
+    .AddScoped<StoreEmployeeRepository, StoreEmployeeRepository>();
+
+builder
     .Services.AddScoped<ISystemAdminService, SystemAdminService>()
     .AddScoped<SystemAdminRepository, SystemAdminRepository>();
 
@@ -67,15 +72,15 @@ builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
 builder
-.Services.AddScoped<IInventoryService, InventoryService>()
-.AddScoped<InventoryRepository, InventoryRepository>();
+    .Services.AddScoped<IInventoryService, InventoryService>()
+    .AddScoped<InventoryRepository, InventoryRepository>();
 
 builder
-.Services.AddScoped<IStoreService, StoreService>()
-.AddScoped<StoreRepository, StoreRepository>();
+    .Services.AddScoped<IStoreService, StoreService>()
+    .AddScoped<StoreRepository, StoreRepository>();
 builder
-.Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
-.AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
+    .Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
+    .AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
 
 
 //add auto mapper

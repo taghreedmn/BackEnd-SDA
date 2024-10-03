@@ -26,13 +26,31 @@ namespace FusionTech.src.Utils
     {
         public MapperProfile()
         {
-            //Supply
+
+            // Supply mappings
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
             CreateMap<SupplyUpdateDto, Supply>()
                 .ForAllMembers(opts =>
-                    opts.Condition((src, dest, strProperty) => strProperty != null)
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
+
+            // Person mappings
+            CreateMap<PersonSignUpDTO, Person>();
+            CreateMap<Person, PersonReadDto>();
+            // CreateMap<PersonUpdateDto, Person>();
+
+
+            // Customer mappings
+            CreateMap<CustomerSignUpDTO, Customer>();
+            CreateMap<Customer, CustomerReadDto>();
+            // CreateMap<CustomerUpdateDto, Customer>();
+
+            // StoreEmployee mappings
+            CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
+            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
+            // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
+
             // Supplier mappings
             CreateMap<Supplier, SupplierReadDto>();
             CreateMap<SupplierCreateDto, Supplier>();
@@ -44,9 +62,11 @@ namespace FusionTech.src.Utils
             CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
 
 
+
             // SystemAdmin mappings
             CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
             CreateMap<SystemAdmin, SystemAdminReadDto>();
+
 
 
             // Category mappings
@@ -65,6 +85,7 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
+
             // Studio mappings
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
@@ -81,14 +102,7 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-            // Person mappings
-            CreateMap<PersonSignInDTO, Person>();
-            CreateMap<Person, PersonReadDto>();
-
-
-            // Customer mappings
-            CreateMap<CustomerSignUpDTO, Customer>();
-            CreateMap<Customer, CustomerReadDto>();
+       
 
             // Console mappings
             CreateMap<GameConsole, ReadConsoleDTO>();
@@ -143,4 +157,5 @@ namespace FusionTech.src.Utils
         }
     }
 }
+
 

@@ -32,5 +32,21 @@ namespace FusionTech.src.Controllers
                 return Unauthorized(e.Message);
             }
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<bool>> DeletePerson(int personId)
+        {
+            var adminEmail = User.FindFirst(ClaimTypes.Email)!.Value;
+            bool isDeleted;
+            try
+            {
+                isDeleted = await _systemAdminService.DeletePersonAsync(personId, adminEmail);
+            }
+            catch (Exception e)
+            {
+                return Unauthorized(e.Message);
+            }
+            return Ok(isDeleted);
+        }
     }
 }

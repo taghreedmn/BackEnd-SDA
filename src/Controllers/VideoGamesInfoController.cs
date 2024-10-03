@@ -1,4 +1,3 @@
-using FusionTech.src.Entity;
 using FusionTech.src.Services.VideoGamesInfo;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.VideoGameInfoDTO;
@@ -41,7 +40,11 @@ namespace FusionTech.src.Controllers
         public async Task<IActionResult> CreateVideoGame(VideoGameInfoCreateDto newVideoGameDto)
         {
             var createdVideoGame = await _videoGameInfoService.CreateOneAsync(newVideoGameDto);
-            return CreatedAtAction(nameof(GetVideoGameById), new { id = createdVideoGame.GameId }, createdVideoGame);
+            return CreatedAtAction(
+                nameof(GetVideoGameById),
+                new { id = createdVideoGame.GameId },
+                createdVideoGame
+            );
         }
 
         // Delete video game
@@ -58,7 +61,10 @@ namespace FusionTech.src.Controllers
 
         // Update video game
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVideoGame(Guid id, VideoGameInfoUpdateDto updatedVideoGameDto)
+        public async Task<IActionResult> UpdateVideoGame(
+            Guid id,
+            VideoGameInfoUpdateDto updatedVideoGameDto
+        )
         {
             var isUpdated = await _videoGameInfoService.UpdateOnAsync(id, updatedVideoGameDto);
             if (!isUpdated)
@@ -69,4 +75,3 @@ namespace FusionTech.src.Controllers
         }
     }
 }
-
