@@ -1,4 +1,5 @@
 using FusionTech.src.Entity;
+using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Database
@@ -34,11 +35,33 @@ namespace FusionTech.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Person>().UseTptMappingStrategy();
             modelBuilder.HasPostgresEnum<PersonType>();
 
             base.OnModelCreating(modelBuilder);
+
+            // Seed Super Admin
+            // this is an extremly sensitive information, it should be removed in a real world scenario.
+            PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword, out byte[] salt);
+            modelBuilder
+                .Entity<SystemAdmin>()
+                .HasData(
+                    new SystemAdmin
+                    {
+                        PersonId = -1,
+                        PersonEmail = "admin@mail.com",
+                        PersonName = "Super Admin",
+                        PersonPassword = hashedPassword,
+                        PersonPhone = "+966500000000",
+                        ProfilePicturePath = "",
+                        salt = salt,
+                        ManageGames = true,
+                        ManageCustomers = true,
+                        ManageEmployees = true,
+                        ManageStores = true,
+                        ManageSystemAdmins = true,
+                    }
+                );
 
             // Seed Payment data
             modelBuilder
@@ -66,8 +89,20 @@ namespace FusionTech.src.Database
             modelBuilder
                 .Entity<Supplier>()
                 .HasData(
-                    new Supplier { SupplierId = supplier1Id, SupplierName = "Supplier 1", SupplierContact = "Contact 1", SupplierBankInfo = "Bank Info 1", },
-                    new Supplier { SupplierId = supplier2Id, SupplierName = "Supplier 2", SupplierContact = "Contact 2", SupplierBankInfo = "Bank Info 2", }
+                    new Supplier
+                    {
+                        SupplierId = supplier1Id,
+                        SupplierName = "Supplier 1",
+                        SupplierContact = "Contact 1",
+                        SupplierBankInfo = "Bank Info 1",
+                    },
+                    new Supplier
+                    {
+                        SupplierId = supplier2Id,
+                        SupplierName = "Supplier 2",
+                        SupplierContact = "Contact 2",
+                        SupplierBankInfo = "Bank Info 2",
+                    }
                 );
 
             // Seed Supply data
@@ -105,7 +140,7 @@ namespace FusionTech.src.Database
                         InventoryId = inventory2Id,
                         GameId = Guid.NewGuid(),
                         StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 100
+                        InventoryQuantity = 100,
                     }
                 );
 
@@ -196,12 +231,11 @@ namespace FusionTech.src.Database
                     }
                 );
             modelBuilder
-
-            .Entity<Payment>()
-            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
             modelBuilder
-            .Entity<Payment>()
-            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
             // Category data
             modelBuilder
                 .Entity<Category>()
@@ -260,9 +294,6 @@ namespace FusionTech.src.Database
                 .HasData(
                     new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
                 );
-
-
-
         }
     }
 }
