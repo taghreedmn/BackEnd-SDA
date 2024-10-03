@@ -1,6 +1,7 @@
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace FusionTech.src.Repository
 {
@@ -36,13 +37,6 @@ namespace FusionTech.src.Repository
             return await _supply.ToListAsync();
         }
 
-        // Asynchronously retrieve a Supply by its ID
-        public async Task<Supply?> GetByIdAsync(int Id)
-        {
-            // Find and return the supply by ID
-            return await _supply.FindAsync(Id);
-        }
-
         // Asynchronously delete a given Supply from the database
         public async Task<bool> DeleteOneAsync(Supply supply)
         {
@@ -63,9 +57,25 @@ namespace FusionTech.src.Repository
             return true; // Indicate success
         }
 
-        internal async Task<Supply> GetByIdAsync(Guid iD)
-        {
-            throw new NotImplementedException();
-        }
+       internal async Task<Supply> GetByIdAsync(Guid id)
+       {
+            return await _supply.Include(p => p.Supplier).Include(p => p.Inventory).FirstOrDefaultAsync(p => p.SupplyId == id);
+       }
+      
+      /* internal async Task<Supply> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+     {
+         var supply = await _supply
+             .Include(p => p.Supplier) // Include the Supplier entity
+             .Include(p => p.Inventory) // Include the Inventory entity
+             .FirstOrDefaultAsync(p => p.SupplyId == id, cancellationToken);
+
+
+         return supply;
+     }
+   */
+
+        
+
+
     }
 }

@@ -1,3 +1,5 @@
+using FusionTech.src.Entity;
+
 namespace FusionTech.src.DTO
 {
     public class SupplyDTO
@@ -6,6 +8,11 @@ namespace FusionTech.src.DTO
         {
             public float SupplierQuantity { get; set; }
             public DateTime SupplierDate { get; set; }
+            public Guid SupplierId { get; set; }
+            public Guid InventoryId { get; set; }
+            public Guid ViduoGameVersionId { get; set; }
+            
+            }
         }
 
         public class SupplyReadDto
@@ -16,6 +23,8 @@ namespace FusionTech.src.DTO
             public float SupplierQuantity { get; set; }
             public DateTime SupplierDate { get; set; }
             public Guid InventoryId { get; set; }
+            public Supplier? Supplier { get; set; }
+            public Inventory? Inventory{ get; set; }
         }
 
         public class SupplyUpdateDto
@@ -24,4 +33,4 @@ namespace FusionTech.src.DTO
             public DateTime SupplierDate { get; set; }
         }
     }
-}
+
