@@ -14,6 +14,8 @@ using FusionTech.src.Services.Publisher;
 using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supplier;
 using FusionTech.src.Services.supply;
+using FusionTech.src.Services.SystemAdmin;
+using FusionTech.src.Services.VideoGamesInfo;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //connect the database
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
     builder.Configuration.GetConnectionString("local")
@@ -34,6 +36,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
+
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services
@@ -52,6 +55,10 @@ builder
     .Services.AddScoped<ICustomerService, CustomerService>()
     .AddScoped<CustomerRepository, CustomerRepository>();
 
+builder
+    .Services.AddScoped<ISystemAdminService, SystemAdminService>()
+    .AddScoped<SystemAdminRepository, SystemAdminRepository>();
+
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder
     .Services.AddScoped<ICategoryService, CategoryService>()
@@ -62,6 +69,14 @@ builder
 builder
 .Services.AddScoped<IInventoryService, InventoryService>()
 .AddScoped<InventoryRepository, InventoryRepository>();
+
+builder
+.Services.AddScoped<IStoreService, StoreService>()
+.AddScoped<StoreRepository, StoreRepository>();
+builder
+.Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
+.AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
+
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
@@ -105,7 +120,7 @@ builder
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:issuer"],
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value!)
@@ -115,9 +130,16 @@ builder
 
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("Admin", policy => policy.RequireRole(PersonType.SystemAdmin.ToString()));
+    options.AddPolicy("Employee", policy => policy.RequireRole(PersonType.SystemAdmin.ToString()));
+    options.AddPolicy("Customer", policy => policy.RequireRole(PersonType.Customer.ToString()));
     options.AddPolicy(
-        "Admin Only",
-        policy => policy.RequireRole(PersonType.SystemAdmin.ToString())
+        "EmployeeOrAdmin",
+        policy =>
+            policy.RequireRole(
+                PersonType.SystemAdmin.ToString(),
+                PersonType.StoreEmployee.ToString()
+            )
     );
 });
 
@@ -157,6 +179,7 @@ if (app.Environment.IsDevelopment())
 
 // Configure the HTTP request pipeline
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Map the controllers

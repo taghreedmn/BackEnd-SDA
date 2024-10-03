@@ -4,7 +4,7 @@ namespace FusionTech.src.DTO
 {
     public class StoreEmployeeDTO : PersonDTO
     {
-        public class StoreEmployeeCreateDto : PersonSignUpDTO
+        public class StoreEmployeeSignUpDTO : PersonSignUpDTO
         {
             public string? Role { get; set; }
 

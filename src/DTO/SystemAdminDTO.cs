@@ -2,12 +2,12 @@ namespace FusionTech.src.DTO
 {
     public class SystemAdminDTO : PersonDTO
     {
-        public class SystemAdminCreateDto : PersonSignUpDTO
+        public class SystemAdminSignUpDTO : PersonSignUpDTO
         {
-            public bool ManageStores { get; private set; } = false;
-            public bool ManageEmployees { get; private set; } = false;
-            public bool ManageGames { get; private set; } = false;
-            public bool ManageCustomers { get; private set; } = false;
+            public required bool ManageStores { get; set; }
+            public required bool ManageEmployees { get; set; }
+            public required bool ManageGames { get; set; }
+            public required bool ManageCustomers { get; set; }
         }
 
         public class SystemAdminReadDto : PersonSignInDTO

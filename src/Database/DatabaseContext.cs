@@ -1,10 +1,12 @@
 using FusionTech.src.Entity;
+using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
     {
+        
         public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
@@ -21,9 +23,11 @@ namespace FusionTech.src.Database
 
         public DbSet<Inventory> Inventory { get; set; }
 
-         public DbSet<Publisher> Publisher { get; set; }
+        public DbSet<Publisher> Publisher { get; set; }
 
-         public DbSet<Store> Store { get; set; }
+        public DbSet<Store> Store { get; set; }
+
+        public DbSet<VideoGameInfo> VideoGameInfo { get; set; }
 
 
         public DatabaseContext(DbContextOptions options)
@@ -31,11 +35,33 @@ namespace FusionTech.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Person>().UseTptMappingStrategy();
             modelBuilder.HasPostgresEnum<PersonType>();
 
             base.OnModelCreating(modelBuilder);
+
+            // Seed Super Admin
+            // this is an extremly sensitive information, it should be removed in a real world scenario.
+            PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword, out byte[] salt);
+            modelBuilder
+                .Entity<SystemAdmin>()
+                .HasData(
+                    new SystemAdmin
+                    {
+                        PersonId = -1,
+                        PersonEmail = "admin@mail.com",
+                        PersonName = "Super Admin",
+                        PersonPassword = hashedPassword,
+                        PersonPhone = "+966500000000",
+                        ProfilePicturePath = "",
+                        salt = salt,
+                        ManageGames = true,
+                        ManageCustomers = true,
+                        ManageEmployees = true,
+                        ManageStores = true,
+                        ManageSystemAdmins = true,
+                    }
+                );
 
             // Seed Payment data
             modelBuilder
@@ -54,34 +80,48 @@ namespace FusionTech.src.Database
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 1" },
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
-                ); 
+                );
 
-             // Seed Supplier data
+            // Seed Supplier data
             var supplier1Id = Guid.NewGuid();
             var supplier2Id = Guid.NewGuid();
 
             modelBuilder
                 .Entity<Supplier>()
                 .HasData(
-                    new Supplier{ SupplierId = supplier1Id,SupplierName = "Supplier 1",SupplierContact = "Contact 1", SupplierBankInfo = "Bank Info 1",},
-                    new Supplier{SupplierId = supplier2Id, SupplierName = "Supplier 2",SupplierContact = "Contact 2", SupplierBankInfo = "Bank Info 2",}
+                    new Supplier
+                    {
+                        SupplierId = supplier1Id,
+                        SupplierName = "Supplier 1",
+                        SupplierContact = "Contact 1",
+                        SupplierBankInfo = "Bank Info 1",
+                    },
+                    new Supplier
+                    {
+                        SupplierId = supplier2Id,
+                        SupplierName = "Supplier 2",
+                        SupplierContact = "Contact 2",
+                        SupplierBankInfo = "Bank Info 2",
+                    }
                 );
 
             // Seed Supply data
             modelBuilder
                 .Entity<Supply>()
                 .HasData(
+
                     new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow,InventoryId = Guid.NewGuid(),},
                     new Supply { SupplyId = Guid.NewGuid(),SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50,  SupplierDate = DateTime.UtcNow.AddDays(-1), InventoryId = Guid.NewGuid(),}
                     ); 
 
-           // Seed Publisher data
-             modelBuilder
-            .Entity<Publisher>()
-            .HasData(
-                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com" ,PublisherPicturePath=""},
-                new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com",PublisherPicturePath = "" }
-            );  
+
+            // Seed Publisher data
+            modelBuilder
+           .Entity<Publisher>()
+           .HasData(
+               new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com", PublisherPicturePath = "" },
+               new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com", PublisherPicturePath = "" }
+           );
 
             // Seed Inventory data
             var inventory1Id = Guid.NewGuid();
@@ -93,29 +133,29 @@ namespace FusionTech.src.Database
                     new Inventory
                     {
                         InventoryId = inventory1Id,
-                        GameId = Guid.NewGuid(),  
-                        StoreId = Guid.NewGuid(), 
+                        GameId = Guid.NewGuid(),
+                        StoreId = Guid.NewGuid(),
                         InventoryQuantity = 50
                     },
                     new Inventory
                     {
                         InventoryId = inventory2Id,
-                        GameId = Guid.NewGuid(),  
-                        StoreId = Guid.NewGuid(), 
-                        InventoryQuantity = 100
+                        GameId = Guid.NewGuid(),
+                        StoreId = Guid.NewGuid(),
+                        InventoryQuantity = 100,
                     }
                 );
 
             // Seed Store data
-            var employeeId1 = Guid.NewGuid(); 
-            var employeeId2 = Guid.NewGuid(); 
+            var employeeId1 = Guid.NewGuid();
+            var employeeId2 = Guid.NewGuid();
 
             modelBuilder
                 .Entity<Store>()
     .HasData(
                     new Store
                     {
-                        StoreId = Guid.NewGuid(), 
+                        StoreId = Guid.NewGuid(),
                         InventoryId = inventory1Id,
                         NumberOfEmployee = 5,
                         WorkHours = 40,
@@ -124,7 +164,7 @@ namespace FusionTech.src.Database
                     },
                     new Store
                     {
-                        StoreId = Guid.NewGuid(), 
+                        StoreId = Guid.NewGuid(),
                         InventoryId = inventory2Id,
                         NumberOfEmployee = 8,
                         WorkHours = 35,
@@ -132,8 +172,38 @@ namespace FusionTech.src.Database
                         Location = "Location 2"
                     }
                 );
+            modelBuilder.Entity<VideoGameInfo>()
+                   .HasKey(vg => vg.GameId);
+
+             // Seed VideoGameInfo data
+            var videoGame1Id = Guid.NewGuid();
+            var videoGame2Id = Guid.NewGuid();
 
 
+            modelBuilder
+                .Entity<VideoGameInfo>()
+                .HasData(
+                    new VideoGameInfo
+                    {
+                        GameId = videoGame1Id,
+                        GameName = "Game 1",
+                        Price = 100,
+                        Description = "Description for Game 1",
+                        YearOfRelease = "2019-07-04",
+                        TotalRating = 3,
+                        PublisherId = Guid.NewGuid()
+                    },
+                    new VideoGameInfo
+                    {
+                        GameId = videoGame2Id,
+                        GameName = "Game 2",
+                        Price = 150,
+                        Description = "Description for Game 2",
+                        YearOfRelease = "2023-04-08",
+                        TotalRating = 5,
+                        PublisherId = Guid.NewGuid()
+                    }
+                ); 
             // Console data
 
             modelBuilder
@@ -163,12 +233,11 @@ namespace FusionTech.src.Database
                     }
                 );
             modelBuilder
-
-            .Entity<Payment>()
-            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
             modelBuilder
-            .Entity<Payment>()
-            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
             // Category data
             modelBuilder
                 .Entity<Category>()
@@ -227,9 +296,6 @@ namespace FusionTech.src.Database
                 .HasData(
                     new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
                 );
-                
-            
-        
         }
     }
 }
