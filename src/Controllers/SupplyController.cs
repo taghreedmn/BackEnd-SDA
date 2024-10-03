@@ -1,7 +1,10 @@
+
+using FusionTech.src.DTO;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.SupplyDTO;
+using static FusionTech.src.DTO.SupplyReadDto;
 
 namespace FusionTech.src.Controllers
 {
@@ -28,15 +31,18 @@ namespace FusionTech.src.Controllers
 
         // Get supply by ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<SupplyReadDto>> GetSupplyById(Guid id)
-        {
-            var supplyItem = await _supplyService.GetByIdAsync(id);
-            if (supplyItem == null)
-            {
-                return NotFound();
-            }
-            return Ok(supplyItem);
-        }
+public async Task<ActionResult> GetSupplyById(Guid id)
+{
+    var supplyItem = await _supplyService.GetByIdAsync(id);
+    if (supplyItem == null)
+    {
+        return NotFound();
+    }
+    return Ok(supplyItem);
+}
+
+
+
 
         // Create a new supply
 

@@ -46,11 +46,20 @@ namespace FusionTech.src.Controllers
         }
 
         // Updates an inventory item by ID
+
         // [HttpPut("{id}")]
         // public async Task<ActionResult> UpdateItem(
         //     [FromRoute] Guid id,
         //     [FromBody] InventoryUpdateDto updateDto
         // ) { }
+
+       // [HttpPut("{id}")]
+       // public async Task<ActionResult> UpdateItem(
+        //    [FromRoute] Guid id,
+        //    [FromBody] InventoryUpdateDto updateDto);
+
+
+
 
         // Adds a game to the inventory
         [HttpPost("add-game")]
