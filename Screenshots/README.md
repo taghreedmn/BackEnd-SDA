@@ -38,6 +38,11 @@ In database design, the ERD and RDS serve complementary roles. The ERD focuses o
 - Price: Price of the Game
 - Game_Picture_Path : The path of Game's picture 
 
+#### Video Game Version
+**Description:** Represents a specific  edition of a video game. Each version may have distinct console, price, or changes compared to other versions of the same game.
+- GameVersion_ID :Unique identifier for the video Version
+- Price: Price of the Game 
+
 
 
 #### Order
@@ -115,7 +120,7 @@ In database design, the ERD and RDS serve complementary roles. The ERD focuses o
 
 ### Relationships
 - **Developed By:** Relates game studios to the games they develop.
-- **Played On:** Relates games to the consoles they can be played on.
+- **Played In:** Relates games to the consoles they can be played on.
 - **VideoGame_Category:** Associates games with their genre categories.
 - **Rated By:** Stores user ratings for individual games.
 - **Published By:** Relates games to their publishing companies.
