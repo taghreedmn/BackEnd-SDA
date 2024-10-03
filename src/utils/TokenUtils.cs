@@ -17,13 +17,7 @@ namespace FusionTech.src.Utils
 
         public string generateToken(Person person)
         {
-            var role = person switch
-            {
-                SystemAdmin => SystemAdmin.PersonType.ToString(),
-                StoreEmployee => StoreEmployee.PersonType.ToString(),
-                Customer => Customer.PersonType.ToString(),
-                _ => Person.PersonType.ToString(),
-            };
+            var role = PersonTypeUtils.GetPersonType(person).ToString();
 
             var claims = new List<Claim>
             {

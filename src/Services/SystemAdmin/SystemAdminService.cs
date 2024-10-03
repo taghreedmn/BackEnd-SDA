@@ -74,5 +74,35 @@ namespace FusionTech.src.Services.SystemAdmin
             await _personRepo.UpdatePersonIdCounter(idCounter);
             return _mapper.Map<Entity.SystemAdmin, SystemAdminReadDto>(createdSystemAdmin);
         }
+
+        public async Task<bool> DeletePersonAsync(int id, string adminEmail)
+        {
+            var toBeDeletedPerson = await _personRepo.GetByIdAsync(id);
+            if (toBeDeletedPerson == null)
+            {
+                throw new ArgumentNullException("Person doesn't exist");
+            }
+            var adminPerson = await _personRepo.FindPersonByEmail(adminEmail);
+            var admin = await _systemAdminRepository.GetByIdAsync(adminPerson!.PersonId);
+            switch (PersonTypeUtils.GetPersonType(toBeDeletedPerson))
+            {
+                case Entity.PersonType.SystemAdmin:
+                    if (admin!.ManageSystemAdmins)
+                        return await _personRepo.DeletePerson(toBeDeletedPerson);
+                    throw new UnauthorizedAccessException("Unauthorized");
+                case Entity.PersonType.StoreEmployee:
+                    if (admin!.ManageEmployees)
+                        return await _personRepo.DeletePerson(toBeDeletedPerson);
+                    throw new UnauthorizedAccessException("Unauthorized");
+                case Entity.PersonType.Customer:
+                    if (admin!.ManageCustomers)
+                        return await _personRepo.DeletePerson(toBeDeletedPerson);
+                    throw new UnauthorizedAccessException("Unauthorized");
+                default:
+                    throw new ArgumentNullException(
+                        "Something is wrong, the type of the person is undefined"
+                    );
+            }
+        }
     }
 }
