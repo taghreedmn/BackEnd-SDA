@@ -28,5 +28,9 @@ namespace FusionTech.src.Entity
 
         [StringLength(200, ErrorMessage = "Game picture path cannot exceed 200 characters.")]
         public string? GamePicturePath { get; set; }
+
+          public ICollection<Played> PlayedIn { get; set; }
+
+        public ICollection<Developed> DevelopedBy{ get; set; }
     }
 }
