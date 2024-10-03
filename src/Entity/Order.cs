@@ -10,17 +10,15 @@ namespace FusionTech.src.Entity
         [DataType(DataType.Date)]
         public DateTime OrderDate { get; set; }
 
-        [Required(ErrorMessage = "Total price is required.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Total price must be greater than zero.")]
         public float TotalPrice { get; set; }
         public Guid PaymentId { get; set; }
         public Guid StoreId { get; set; }
         public Guid EmployeeId { get; set; }
         public Guid CustomerId { get; set; }
-        public Payment Payment { get; set; }
+        // public Payment Payment { get; set; }
         // public Store Store { get; set; }
         // public Employee Employee{ get; set; }
-        public Customer Customer { get; set; }
+        // public Customer Customer { get; set; }
         public List<OrderedGames> OrderedGames { get; set; }
 
     }

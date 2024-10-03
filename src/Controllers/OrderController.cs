@@ -19,13 +19,33 @@ namespace FusionTech.src.Controllers
 
         // Create a new order
         [HttpPost]
-        [Authorize]
+        [Authorize(Policy = "Customer")]
         public async Task<ActionResult<OrderReadDto>> CreateOneAsync([FromBody] OrderCreateDto orderCreateDto)
         {
             var authenticateClaims = HttpContext.User;
-            var userId = authenticateClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
-            var userGuid = new Guid(userId);
+            var userIdClaim = authenticateClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return BadRequest("User ID not found in claims or is not a valid integer.");
+            }
+
+            var userGuid = ConvertIntToGuid(userId); //  using int to Guid conversion
+            
             return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
+        }
+        private Guid ConvertIntToGuid(int customerId)
+        {
+            byte[] guidBytes = new byte[16];
+            BitConverter.GetBytes(customerId).CopyTo(guidBytes, 0);
+
+            // Set the rest of the bytes to zero or handle as needed
+            for (int i = 4; i < guidBytes.Length; i++)
+            {
+                guidBytes[i] = 0;
+            }
+
+            return new Guid(guidBytes);
         }
 
         // Get all orders
@@ -50,4 +70,3 @@ namespace FusionTech.src.Controllers
 
     }
 }
-  

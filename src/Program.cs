@@ -14,7 +14,9 @@ using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Services.VideoGamesInfo;
+using FusionTech.src.Services.videoGameVersion;
 using FusionTech.src.Utils;
+using FusionTech.videoGameVersion;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -73,6 +75,10 @@ builder
 .Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
 .AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
 
+//Video Game Version mapper 
+builder
+.Services.AddScoped<IVideoGameVersionService, VideoGameVersionService>()
+.AddScoped<VideoGameVersionRepository, VideoGameVersionRepository>();
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
@@ -108,9 +114,16 @@ builder
 
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("Admin", policy => policy.RequireRole(PersonType.SystemAdmin.ToString()));
+    options.AddPolicy("Employee", policy => policy.RequireRole(PersonType.SystemAdmin.ToString()));
+    options.AddPolicy("Customer", policy => policy.RequireRole(PersonType.Customer.ToString()));
     options.AddPolicy(
-        "Admin Only",
-        policy => policy.RequireRole(PersonType.SystemAdmin.ToString())
+        "EmployeeOrAdmin",
+        policy =>
+            policy.RequireRole(
+                PersonType.SystemAdmin.ToString(),
+                PersonType.StoreEmployee.ToString()
+            )
     );
 });
 

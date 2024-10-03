@@ -4,6 +4,7 @@ namespace FusionTech.src.Entity
 {
     public class Payment
     {
+        [Key]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Payment method is required.")]

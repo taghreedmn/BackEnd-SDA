@@ -5,7 +5,7 @@ namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
     {
-        
+
         public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
@@ -28,6 +28,7 @@ namespace FusionTech.src.Database
         public DbSet<Store> Store { get; set; }
 
         public DbSet<VideoGameInfo> VideoGameInfo { get; set; }
+        public DbSet<VideoGameVersion> VideoGameVersion { get; set; }
 
 
         public DatabaseContext(DbContextOptions options)
@@ -59,6 +60,15 @@ namespace FusionTech.src.Database
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
                     new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
                 );
+
+            //seed video games version 
+            modelBuilder
+               .Entity<VideoGameVersion>()
+               .HasData(
+                   new VideoGameVersion { Id = Guid.NewGuid(), Price = 10.50 },
+                   new VideoGameVersion { Id = Guid.NewGuid(), Price = 100 },
+                   new VideoGameVersion { Id = Guid.NewGuid(), Price = 75 }
+               );
 
             // Seed Supplier data
             var supplier1Id = Guid.NewGuid();
@@ -139,7 +149,7 @@ namespace FusionTech.src.Database
             modelBuilder.Entity<VideoGameInfo>()
                    .HasKey(vg => vg.GameId);
 
-             // Seed VideoGameInfo data
+            // Seed VideoGameInfo data
             var videoGame1Id = Guid.NewGuid();
             var videoGame2Id = Guid.NewGuid();
 
@@ -167,7 +177,7 @@ namespace FusionTech.src.Database
                         TotalRating = 5,
                         PublisherId = Guid.NewGuid()
                     }
-                ); 
+                );
             // Console data
 
             modelBuilder

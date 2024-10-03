@@ -20,15 +20,15 @@ namespace FusionTech.src.Services.category
         }
 
         public async Task<CategoryDTO.CategoryReadDto> CreateOneAsync(
-            CategoryDTO.CategoryCreateDto createDto
+          CategoryCreateDto createDto
         )
         {
-            var category = _mapper.Map<CategoryCreateDto, Entity.Category>(createDto);
+            var category = _mapper.Map<CategoryCreateDto,Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
             return _mapper.Map<Category, CategoryReadDto>(categoryCreated);
         }
 
-        public async Task<List<CategoryDTO.CategoryReadDto>> GetAllAsync(
+        public async Task<List<CategoryReadDto>> GetAllAsync(
             PaginationOptions paginationOptions
         )
         {
@@ -36,7 +36,7 @@ namespace FusionTech.src.Services.category
             return _mapper.Map<List<Category>, List<CategoryReadDto>>(categoryList);
         }
 
-        public async Task<CategoryDTO.CategoryReadDto> GetByIdAsync(Guid id)
+        public async Task<CategoryReadDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             return _mapper.Map<Category, CategoryReadDto>(foundCategory);

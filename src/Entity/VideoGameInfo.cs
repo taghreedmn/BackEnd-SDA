@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FusionTech.src.Entity
 {
     public class VideoGameInfo
     {
+        [Key]
         public Guid GameId { get; set; }
 
         [Required(ErrorMessage = "Game name is required.")]
@@ -20,7 +22,7 @@ namespace FusionTech.src.Entity
         [Required(ErrorMessage = "Year of release is required.")]
         [DataType(DataType.Date)]
         public string YearOfRelease { get; set; }
-        
+
 
         [Range(1, 5, ErrorMessage = "Total rating must be between 1 and 5.")]
         public int TotalRating { get; set; }
@@ -28,7 +30,8 @@ namespace FusionTech.src.Entity
 
         [StringLength(200, ErrorMessage = "Game picture path cannot exceed 200 characters.")]
         public string? GamePicturePath { get; set; }
-        public Guid CategoryId  { get; set; }
-        public Category Category{ get; set; }
+        // [ForeignKey("Category")]
+        public Guid CategoryId { get; set; }
+        // public Category Category{ get; set; }
     }
 }

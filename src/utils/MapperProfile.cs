@@ -15,6 +15,7 @@ using static FusionTech.src.DTO.StoreDTO;
 using static FusionTech.src.DTO.VideoGameInfoDTO;
 using static FusionTech.src.DTO.OrderedGamesDto;
 using static FusionTech.src.DTO.OrderDTO;
+using static FusionTech.src.DTO.VideoGameVersionDTO;
 
 namespace FusionTech.src.Utils
 {
@@ -82,7 +83,7 @@ namespace FusionTech.src.Utils
             // order mappings
             CreateMap<Order, OrderReadDto>();
             CreateMap<OrderCreateDto, Order>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+                 .ForMember(dest => dest.CustomerId, opt => opt.Condition((src, dest, srcProperty) => srcProperty != null));
 
             // Console mappings
             CreateMap<GameConsole, ReadConsoleDTO>();
@@ -195,7 +196,14 @@ namespace FusionTech.src.Utils
             CreateMap<VideoGameInfoCreateDto, VideoGameInfo>();
             CreateMap<VideoGameInfoUpdateDto, VideoGameInfo>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+
+            // VideoGameVersion mappings
+            CreateMap<VideoGameVersion, VideoGameVersionReadDto>();
+            CreateMap<VideoGameVersionCreateDto, VideoGameVersion>();
+            CreateMap<VideoGameVersionUpdateDto, VideoGameVersion>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
         }
+
     }
 }
 
