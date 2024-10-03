@@ -11,6 +11,7 @@ using FusionTech.src.Services.Person;
 using FusionTech.src.Services.Studio;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Services.SystemAdmin;
+using FusionTech.src.Services.VideoGamesInfo;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //connect the database
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
     builder.Configuration.GetConnectionString("local")
@@ -31,6 +32,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseNpgsql(dataSourceBuilder.Build());
 });
+
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder
@@ -66,6 +68,9 @@ builder
 builder
 .Services.AddScoped<IStoreService, StoreService>()
 .AddScoped<StoreRepository, StoreRepository>();
+builder
+.Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
+.AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
