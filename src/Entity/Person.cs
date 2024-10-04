@@ -10,11 +10,12 @@ namespace FusionTech.src.Entity
 
         public required string PersonPassword { get; set; }
 
-        public string? PersonPhone { get; set; }
+        public string? PersonPhoneNumber { get; set; }
 
         public string? ProfilePicturePath { get; set; }
         public static readonly PersonType PersonType = PersonType.Person;
 
         public required byte[] salt { get; set; }
+        
     }
 }

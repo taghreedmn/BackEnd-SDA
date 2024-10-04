@@ -7,6 +7,6 @@ namespace FusionTech.src.Entity
         public Guid InventoryId { get; set; }
         public Guid GameId { get; set; }
         public Guid StoreId { get; set; }
-        public int InventoryQuantity { get; set; }
+        public int GameQuantity { get; set; }
     }
 }

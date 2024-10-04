@@ -23,7 +23,7 @@ namespace FusionTech.src.Controllers
         )
         {
             var categoryCreated = await _categoryService.CreateOneAsync(createDto);
-            return Created($"api/v1/categories/{categoryCreated.Id}", categoryCreated);
+            return Created($"api/v1/categories/{categoryCreated.CategoryId}", categoryCreated);
             // return Ok(categoryCreated);
         }
 
@@ -51,7 +51,7 @@ namespace FusionTech.src.Controllers
             {
                 return NotFound();
             }
-            await _categoryService.DeleteOneAsync(category.Id);
+            await _categoryService.DeleteOneAsync(category.CategoryId);
             return Ok(category);
         }
 

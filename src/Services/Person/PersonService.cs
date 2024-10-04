@@ -65,7 +65,7 @@ namespace FusionTech.src.Services.Person
         public async Task<bool> EditPhone(string email, string newPhone)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.PersonPhone = newPhone;
+            person.PersonPhoneNumber = newPhone;
             var result = await _personRepository.UpdateAsync(person);
             return result;
         }
