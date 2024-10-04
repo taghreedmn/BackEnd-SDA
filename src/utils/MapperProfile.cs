@@ -59,7 +59,7 @@ namespace FusionTech.src.Utils
 
             // StoreEmployee mappings
             CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
-            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
+            CreateMap<StoreEmployee, StoreEmployeeSignUpDTO>();
 
 
 

@@ -2,7 +2,7 @@ namespace FusionTech.src.Entity
 {
     public class Category
     {
-        public Guid Id { get; set; }
+        public Guid CategoryId { get; set; }
         public required string CategoryName { get; set; }
     }
 }
