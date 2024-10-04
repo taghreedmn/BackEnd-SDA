@@ -6,7 +6,7 @@ namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
     {
-        
+
         public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
@@ -173,7 +173,7 @@ namespace FusionTech.src.Database
             modelBuilder.Entity<VideoGameInfo>()
                    .HasKey(vg => vg.GameId);
 
-             // Seed VideoGameInfo data
+            // Seed VideoGameInfo data
             var videoGame1Id = Guid.NewGuid();
             var videoGame2Id = Guid.NewGuid();
 
@@ -185,7 +185,7 @@ namespace FusionTech.src.Database
                     {
                         GameId = videoGame1Id,
                         GameName = "Game 1",
-                        Price = 100,
+
                         Description = "Description for Game 1",
                         YearOfRelease = "2019-07-04",
                         TotalRating = 3,
@@ -195,13 +195,13 @@ namespace FusionTech.src.Database
                     {
                         GameId = videoGame2Id,
                         GameName = "Game 2",
-                        Price = 150,
+
                         Description = "Description for Game 2",
                         YearOfRelease = "2023-04-08",
                         TotalRating = 5,
                         PublisherId = Guid.NewGuid()
                     }
-                ); 
+                );
             // Console data
 
             modelBuilder

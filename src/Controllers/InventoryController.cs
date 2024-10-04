@@ -23,7 +23,7 @@ namespace FusionTech.src.Controllers
         {
             var inventoryCreated = await _inventoryService.CreateOneAsync(createDto);
             return Created($"api/v1/inventory/{inventoryCreated.InventoryId}", inventoryCreated);
-        }
+        } 
 
         // Retrieves all inventory Games with pagination
         [HttpGet]
@@ -46,18 +46,8 @@ namespace FusionTech.src.Controllers
         }
 
 
-        // Updates an inventory item by ID
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateItem(
-            [FromRoute] Guid id,
-            [FromBody] InventoryUpdateDto updateDto
-        )
-
-
-
-
-        // Adds a game to the inventory 
-        [HttpPost("add-game")]
+       /*  // Adds a game to the inventory 
+        [HttpPost]
         public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
 
         {
@@ -67,11 +57,11 @@ namespace FusionTech.src.Controllers
                 return NotFound();
             }
             return NoContent(); // No content returned on successful addition
-        }
+        } */
 
 
         // Removes a game from the inventory 
-        [HttpDelete("remove-game")]
+        [HttpDelete]
         public async Task<ActionResult> RemoveGameFromInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
         {
             var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);

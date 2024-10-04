@@ -1,5 +1,6 @@
 using System.Text;
 using FusionTech.src.Database;
+using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Service.Store;
 using FusionTech.src.Services.Category;

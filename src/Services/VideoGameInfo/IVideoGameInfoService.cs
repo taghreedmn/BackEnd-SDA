@@ -10,10 +10,12 @@ namespace FusionTech.src.Services.VideoGamesInfo
     public interface IVideoGameInfoService
     {
 
-        Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto newGameInfo);
+        Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto newGameInfo,string email);
         Task<List<VideoGameInfoReadDto>> GetAllAsync();
         Task<VideoGameInfoReadDto> GetByIdAsync(Guid id);
-        Task<bool> UpdateOnAsync(Guid id, VideoGameInfoUpdateDto updateGameInfo);
         Task<bool> DeleteAsync(Guid id);
+        Task<bool> UpdateGameNameAsync(Guid id, string newGameName);
+        Task<bool> UpdateYearOfReleaseAsync(Guid id, string newYearOfRelease);
+        //Task<bool> UpdateOnAsync(VideoGameInfoUpdateDto updatedVideoGameDto);
     }
 }

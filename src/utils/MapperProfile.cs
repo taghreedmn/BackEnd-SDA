@@ -10,7 +10,6 @@ using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SupplyDTO;
 using static FusionTech.src.DTO.SystemAdminDTO;
-using static FusionTech.src.DTO.PublisherDTO;
 using static FusionTech.src.DTO.InventoryDTO;
 using static FusionTech.src.DTO.StoreDTO;
 using static FusionTech.src.DTO.VideoGameInfoDTO;
@@ -28,7 +27,7 @@ namespace FusionTech.src.Utils
             CreateMap<SupplyUpdateDto, Supply>().ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
 
             // Person mappings
-            CreateMap<PersonCreateDto, Person>();
+            CreateMap<PersonSignUpDTO, Person>();
             CreateMap<Person, PersonReadDto>();
             // CreateMap<PersonUpdateDto, Person>();
 
@@ -42,23 +41,23 @@ namespace FusionTech.src.Utils
 
             
                 // Person mappings
-                CreateMap<PersonCreateDto, Person>();
+                CreateMap<PersonSignUpDTO, Person>();
                 CreateMap<Person, PersonSignInDTO>();
                 // CreateMap<PersonUpdateDto, Person>();
 
 
                 // Customer mappings
-                CreateMap<CustomerCreateDto, Customer>();
+                CreateMap<CustomerSignUpDTO, Customer>();
                 CreateMap<Customer, CustomerReadDto>();
                 // CreateMap<CustomerUpdateDto, Customer>();
 
                 // StoreEmployee mappings
-                CreateMap<StoreEmployeeCreateDto, StoreEmployee>();
+                CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
                 CreateMap<StoreEmployee, StoreEmployeeReadDto>();
                 // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
 
                 // SystemAdmin mappings
-                CreateMap<SystemAdminCreateDto, SystemAdmin>();
+                CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
                 CreateMap<SystemAdmin, SystemAdminReadDto>();
                 // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
 
@@ -169,7 +168,7 @@ namespace FusionTech.src.Utils
 
                     //inventory
                     CreateMap<Inventory, InventoryReadDto>();
-                    CreateMap<InventoryUpdateDto, Inventory>();
+                    CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
                     CreateMap<InventoryCreateDto, Inventory>()
                         .ForAllMembers(opts =>
                             opts.Condition((src, dest, srcProperty) => srcProperty != null)
@@ -198,5 +197,8 @@ namespace FusionTech.src.Utils
         }
             }
 }
+    }
+}
+
             
 

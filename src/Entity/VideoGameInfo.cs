@@ -12,14 +12,14 @@ namespace FusionTech.src.Entity
 
         [Required(ErrorMessage = "Price is required.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
-        public float Price { get; set; }
+      
 
         [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Year of release is required.")]
         [DataType(DataType.Date)]
-        public string YearOfRelease { get; set; }
+        public string? YearOfRelease { get; set; }
         
 
         [Range(1, 5, ErrorMessage = "Total rating must be between 1 and 5.")]

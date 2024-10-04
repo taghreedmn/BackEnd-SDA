@@ -21,7 +21,7 @@ namespace FusionTech.src.DTO
             public Guid InventoryId { get; set; }
             public int NumberOfEmployee { get; set; }
             public int WorkHours { get; set; }
-            public string Location { get; set; }
+            public string? Location { get; set; }
         }
 
         public class StoreUpdateDto
