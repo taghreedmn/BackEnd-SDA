@@ -31,7 +31,7 @@ namespace FusionTech.src.Controllers
             }
 
             var userGuid = ConvertIntToGuid(userId); //  using int to Guid conversion
-            
+
             return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
         }
         private Guid ConvertIntToGuid(int customerId)
@@ -49,18 +49,22 @@ namespace FusionTech.src.Controllers
         }
 
         // Get all orders
-        // [HttpGet]
-        // public ActionResult GetAllOrders()
+        [HttpGet("Customer/{CustomerId}")]
+        [Authorize]
+        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync([FromRoute]Guid CustomerId)
+        {
+            var orders = await _orderService.GetOrderByIdAsync(CustomerId);
+            return Ok(orders);
+        }
+        // public async Task<ActionResult<List<OrderReadDto>>> GetAllOrdersAsync()
         // {
-
+        //     var storeList = await _orderService.GetAllOrdersAsync();
+        //     return Ok(storeList);
         // }
 
         // // Get a specific order by ID
         // [HttpGet("{id}")]
-        // public ActionResult GetOrderById(int id)
-        // {
 
-        // }
         // // Update an existing order
         // [HttpPut("{id}")]
         // public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)

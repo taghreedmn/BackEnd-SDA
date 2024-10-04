@@ -9,8 +9,6 @@ namespace FusionTech.src.Entity
         [Required(ErrorMessage = "Order date is required.")]
         [DataType(DataType.Date)]
         public DateTime OrderDate { get; set; }
-
-        public float TotalPrice { get; set; }
         public Guid PaymentId { get; set; }
         public Guid StoreId { get; set; }
         public Guid EmployeeId { get; set; }

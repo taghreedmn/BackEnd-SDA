@@ -14,25 +14,23 @@ namespace FusionTech.Middlewares
 
         public LoggingMiddleware(RequestDelegate next, ILogger<LoggingMiddleware> logger)
         {
-            _logger = logger;
             _next = next;
+            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
-            //request
-            _logger.LogInformation($"Incoming request: {context.Request.Method}, {context.Request.Path}");
-
-            //measure how long request
-            var stopWatch = Stopwatch.StartNew();
+            // request
+            _logger.LogInformation($"Incoming request: {context.Request.Method} , {context.Request.Path}");
+            // how long request
+            var stopwatch = Stopwatch.StartNew();
+            // server 
             await _next(context);
-            stopWatch.Stop();
+            stopwatch.Stop();
+            // response
+            _logger.LogInformation($"Outgoing request: {context.Response.StatusCode} takes ({stopwatch.ElapsedMilliseconds}ms)");
 
-            //response
-            _logger.LogInformation($"Outgoing request: {context.Response.StatusCode}, takes {stopWatch.ElapsedMilliseconds}");
         }
-
-
 
 
     }

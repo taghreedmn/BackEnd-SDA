@@ -27,41 +27,17 @@ namespace FusionTech.src.Services.order
             return _mapper.Map<Order, OrderReadDto>(order);
         }
 
-        public async Task<List<OrderReadDto>> GetAllAsync(PaginationOptions paginationOptions)
+        public async Task<List<OrderReadDto>> GetAllOrdersAsync()
         {
-            var orderList = await _orderRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Order>, List<OrderReadDto>>(orderList);
+            var storeList = await _orderRepository.GetAllOrdersAsync();
+            return _mapper.Map<List<OrderReadDto>>(storeList);
         }
 
-        public async Task<OrderReadDto> GetByIdAsync(Guid id)
+        public async Task<List<OrderReadDto>> GetOrderByIdAsync(Guid CustomerId)
         {
-            var foundOrder = await _orderRepository.GetByIdAsync(id);
-            return _mapper.Map<Order, OrderReadDto>(foundOrder);
-        }
-
-        public async Task<bool> DeleteOneAsync(Guid id)
-        {
-            var foundOrder = await _orderRepository.GetByIdAsync(id);
-            bool isDelete = await _orderRepository.DeleteOneAsync(foundOrder);
-            if (isDelete)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> UpdateOneAsync(Guid id, OrderUpdateDto updateDto)
-        {
-            var foundOrder = await _orderRepository.GetByIdAsync(id);
-            if (foundOrder == null)
-            {
-                return false;
-            }
-            _mapper.Map(updateDto, foundOrder);
-            return await _orderRepository.UpdateOneAsync(foundOrder);
+            var orders = await _orderRepository.GetOrderByIdAsync(CustomerId);
+            var orderLists = _mapper.Map<List<Order>, List<OrderReadDto>>(orders);
+            return orderLists;
         }
 
     }

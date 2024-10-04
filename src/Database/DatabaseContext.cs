@@ -14,7 +14,6 @@ namespace FusionTech.src.Database
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderedGames> OrderedGames { get; set; }
         public DbSet<Payment> Payment { get; set; }
-
         public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Supply> Supply { get; set; }
         public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
@@ -51,14 +50,16 @@ namespace FusionTech.src.Database
                     new Payment { Id = Guid.NewGuid(), PaymentMethod = "Mada" },
                     new Payment { Id = Guid.NewGuid(), PaymentMethod = "Apple Pay" }
                 );
-
+                var category1Id = Guid.NewGuid();
+                var category2Id = Guid.NewGuid();
+                var category3Id = Guid.NewGuid();
             // Seed Category data
             modelBuilder
                 .Entity<Category>()
                 .HasData(
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 1" },
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
+                    new Category { Id = category1Id, CategoryName = "Category 1" },
+                    new Category { Id = category2Id, CategoryName = "Category 2" },
+                    new Category { Id = category3Id, CategoryName = "Category 3" }
                 );
 
             //seed video games version 
@@ -152,6 +153,7 @@ namespace FusionTech.src.Database
             // Seed VideoGameInfo data
             var videoGame1Id = Guid.NewGuid();
             var videoGame2Id = Guid.NewGuid();
+            var categoryIdFk = modelBuilder.Entity<Category>().Property(x => x.Id);
 
 
             modelBuilder
@@ -165,7 +167,8 @@ namespace FusionTech.src.Database
                         Description = "Description for Game 1",
                         YearOfRelease = "2019-07-04",
                         TotalRating = 3,
-                        PublisherId = Guid.NewGuid()
+                        PublisherId = Guid.NewGuid(),
+                        CategoryId = category1Id
                     },
                     new VideoGameInfo
                     {
@@ -175,7 +178,8 @@ namespace FusionTech.src.Database
                         Description = "Description for Game 2",
                         YearOfRelease = "2023-04-08",
                         TotalRating = 5,
-                        PublisherId = Guid.NewGuid()
+                        PublisherId = Guid.NewGuid(),
+                        CategoryId = category2Id
                     }
                 );
             // Console data

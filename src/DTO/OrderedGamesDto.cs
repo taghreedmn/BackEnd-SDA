@@ -12,15 +12,18 @@ namespace FusionTech.src.DTO
         public class OrderedGamesReadDto()
         {
             public Guid Id { get; set; }
-            public Guid videoGameVersionID { get; set; }
-            
+            public Guid VideoGameVersionID { get; set; }
+            public Guid OrderId { get; set; }
             public int Quantity { get; set; }
-             public VideoGameVersionReadDto VideoGameRead { get; set; }
+            public VideoGameVersionReadDto VideoGameRead { get; set; }
         }
         public class OrderedGamesCreateDto()
         {
-            public Guid videoGameVersionID { get; set; }
+            public Guid OrderId { get; set; }
+            public Guid VideoGameVersionID { get; set; }
             public int Quantity { get; set; }
+
+            // public VideoGameVersionReadDto VideoGameRead { get; set; }
         }
         public class OrderedGamesUpdateDto()
         {
