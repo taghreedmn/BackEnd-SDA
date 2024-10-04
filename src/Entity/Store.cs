@@ -11,5 +11,6 @@ namespace FusionTech.src.Entity
         public int NumberOfEmployee { get; set; }
         public int WorkHours { get; set; }
         public string Location { get; set; }
+
     }
 }

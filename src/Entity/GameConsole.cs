@@ -7,5 +7,7 @@ namespace FusionTech.src.Entity
         public Guid GameConsoleId { get; set; }
         public string ConsoleName { get; set; }
         public ICollection<VideoGameVersion> VideoGames { get; set; }
+        public string? ConsoleName { get; set; }
+
     }
 }

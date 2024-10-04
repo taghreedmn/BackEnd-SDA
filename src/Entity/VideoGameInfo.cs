@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 
 namespace FusionTech.src.Entity
 {
+
   public class VideoGameInfo
   {
     public Guid VideoGameInfoId { get; set; }
@@ -32,4 +32,5 @@ namespace FusionTech.src.Entity
     public ICollection<Category> Categoreis { get; set; }
 
   }
+
 }

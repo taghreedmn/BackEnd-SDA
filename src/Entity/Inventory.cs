@@ -11,6 +11,6 @@ namespace FusionTech.src.Entity
         [ForeignKey("ViedoGameVersion")]
         public Guid VideoGameVersionId { get; set; }
         public Guid StoreId { get; set; }
-        public int InventoryQuantity { get; set; }
+        public int GameQuantity { get; set; }
     }
 }
