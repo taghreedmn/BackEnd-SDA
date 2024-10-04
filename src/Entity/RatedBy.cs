@@ -12,8 +12,7 @@ namespace FusionTech.src.Entity
 
         [StringLength(500, ErrorMessage = "Comment cannot exceed 500 characters.")]
         public string Comment { get; set; }
-        public Guid GameId  { get; set; }
-
+        public Guid VideoGameVersionId  { get; set; }
         public Guid PersonId { get; set; }
     }
 }

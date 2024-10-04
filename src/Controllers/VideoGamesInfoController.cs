@@ -72,7 +72,7 @@ namespace FusionTech.src.Controllers
         }
 
         [Authorize(Policy = "admin")]
-        [HttpPut("{id}/name")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateGameName(Guid id, string newGameName)
         {
             var isUpdated = await _videoGameInfoService.UpdateGameNameAsync(id, newGameName);
@@ -100,4 +100,3 @@ namespace FusionTech.src.Controllers
         }
     }
 }
-

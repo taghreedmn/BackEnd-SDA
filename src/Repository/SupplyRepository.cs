@@ -2,6 +2,7 @@ using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace FusionTech.src.Repository
 {
     public class SupplyRepository
@@ -36,13 +37,6 @@ namespace FusionTech.src.Repository
             return await _supply.ToListAsync();
         }
 
-        // Asynchronously retrieve a Supply by its ID
-        public async Task<Supply?> GetByIdAsync(int Id)
-        {
-            // Find and return the supply by ID
-            return await _supply.FindAsync(Id);
-        }
-
         // Asynchronously delete a given Supply from the database
         public async Task<bool> DeleteOneAsync(Supply supply)
         {
@@ -63,9 +57,11 @@ namespace FusionTech.src.Repository
             return true; // Indicate success
         }
 
-        internal async Task<Supply> GetByIdAsync(Guid iD)
-        {
-            throw new NotImplementedException();
-        }
+       internal async Task<Supply> GetByIdAsync(Guid id)
+       {
+            return await _supply.Include(p => p.Supplier).Include(p => p.Inventory).Include(p => p.VideoGameVersion).FirstOrDefaultAsync(p => p.SupplyId == id);
+       }
+      
+
     }
 }

@@ -10,7 +10,7 @@ namespace FusionTech.src.DTO
         // read data = get data
         public class CategoryReadDto
         {
-            public Guid Id { get; set; }
+            public Guid CategoryId { get; set; }
             public string? CategoryName { get; set; }
         }
 

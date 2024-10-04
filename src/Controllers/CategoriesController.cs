@@ -1,3 +1,4 @@
+using FusionTech.src.Entity;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace FusionTech.src.Controllers
         )
         {
             var categoryCreated = await _categoryService.CreateOneAsync(createDto);
-            return Created($"api/v1/categories/{categoryCreated.Id}", categoryCreated);
+            return Created($"api/v1/categories/{categoryCreated.CategoryId}", categoryCreated);
             // return Ok(categoryCreated);
         }
 
@@ -50,22 +51,20 @@ namespace FusionTech.src.Controllers
             {
                 return NotFound();
             }
-            await _categoryService.DeleteOneAsync(category.Id);
+            await _categoryService.DeleteOneAsync(category.CategoryId);
             return Ok(category);
         }
 
-        //         [HttpPut("{Id}")]
-        //         public ActionResult PutCategory(Guid id, Category updateCategory)
-        //         {
-        //             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-        //             if (foundCategory == null)
-        //             {
-        //                 return NotFound();
-        //             }
+        [HttpPut("{Id}")]
+        public async Task<ActionResult> UpdateCategory(Guid id, CategoryUpdateDto updateDto)
+        {
+            var isUpdated = await _categoryService.UpdateOneAsync(id, updateDto);
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
 
-        //             foundCategory.Id = updateCategory.Id;
-        //             foundCategory.CategoryName = updateCategory.CategoryName;
-        //             return NoContent();
-        //         }
+            return NoContent();
+        }
     }
 }

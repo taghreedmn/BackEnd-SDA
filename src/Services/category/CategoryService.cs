@@ -55,7 +55,7 @@ namespace FusionTech.src.Services.Category
             }
         }
 
-        public async Task<bool> UpdateOneAsync(Guid id, CategoryDTO.CategoryUpdateDto updateDto)
+        public async Task<bool> UpdateOneAsync(Guid id, CategoryUpdateDto updateDto)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)

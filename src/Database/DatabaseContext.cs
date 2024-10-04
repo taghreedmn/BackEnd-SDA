@@ -6,7 +6,6 @@ namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
     {
-
         public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
@@ -14,21 +13,17 @@ namespace FusionTech.src.Database
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Payment> Payment { get; set; }
-
+        public DbSet<Store> Store { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Supply> Supply { get; set; }
         public DbSet<PersonIdCounter> PersonIdCounters { get; set; }
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
-
-        public DbSet<Inventory> Inventory { get; set; }
-
         public DbSet<Publisher> Publisher { get; set; }
-
-        public DbSet<Store> Store { get; set; }
+        public DbSet<VideoGameVersion> VideoGameVersion { get; set; }
 
         public DbSet<VideoGameInfo> VideoGameInfo { get; set; }
-
 
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
@@ -63,23 +58,32 @@ namespace FusionTech.src.Database
                     }
                 );
 
+            var payment1 = Guid.NewGuid();
+            var payment2 = Guid.NewGuid();
+            var payment3 = Guid.NewGuid();
+            var payment4 = Guid.NewGuid();
+
             // Seed Payment data
             modelBuilder
                 .Entity<Payment>()
                 .HasData(
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Cash on delivery" },
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Visa" },
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Mada" },
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Apple Pay" }
+                    new Payment { Id = payment1, PaymentMethod = "Cash on delivery" },
+                    new Payment { Id = payment2, PaymentMethod = "Visa" },
+                    new Payment { Id = payment3, PaymentMethod = "Mada" },
+                    new Payment { Id = payment4, PaymentMethod = "Apple Pay" }
                 );
 
             // Seed Category data
+
+            var category1 = Guid.NewGuid();
+            var category2 = Guid.NewGuid();
+            var category3 = Guid.NewGuid();
             modelBuilder
                 .Entity<Category>()
                 .HasData(
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 1" },
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
+                    new Category { CategoryId = category1, CategoryName = "Category 1" },
+                    new Category { CategoryId = category2, CategoryName = "Category 2" },
+                    new Category { CategoryId = category3, CategoryName = "Category 3" }
                 );
 
             // Seed Supplier data
@@ -105,168 +109,178 @@ namespace FusionTech.src.Database
                     }
                 );
 
-            // Seed Supply data
-            modelBuilder
-                .Entity<Supply>()
-                .HasData(
-                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(), },
-                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(), }
-                    );
-
-            // Seed Publisher data
-            modelBuilder
-           .Entity<Publisher>()
-           .HasData(
-               new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com", PublisherPicturePath = "" },
-               new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com", PublisherPicturePath = "" }
-           );
-
-            // Seed Inventory data
-            var inventory1Id = Guid.NewGuid();
-            var inventory2Id = Guid.NewGuid();
-
-            modelBuilder
-                .Entity<Inventory>()
-                .HasData(
-                    new Inventory
-                    {
-                        InventoryId = inventory1Id,
-                        GameId = Guid.NewGuid(),
-                        StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 50
-                    },
-                    new Inventory
-                    {
-                        InventoryId = inventory2Id,
-                        GameId = Guid.NewGuid(),
-                        StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 100,
-                    }
-                );
-
             // Seed Store data
-            var employeeId1 = Guid.NewGuid();
-            var employeeId2 = Guid.NewGuid();
-
+            var Store1Id = Guid.NewGuid();
+            var Store2Id = Guid.NewGuid();
             modelBuilder
                 .Entity<Store>()
-    .HasData(
+                .HasData(
                     new Store
                     {
-                        StoreId = Guid.NewGuid(),
-                        InventoryId = inventory1Id,
+                        StoreId = Store1Id,
                         NumberOfEmployee = 5,
                         WorkHours = 40,
-                        EmployeeId = employeeId1,
-                        Location = "Location 1"
+                        Location = "Location 1",
                     },
                     new Store
                     {
-                        StoreId = Guid.NewGuid(),
-                        InventoryId = inventory2Id,
+                        StoreId = Store2Id,
                         NumberOfEmployee = 8,
                         WorkHours = 35,
-                        EmployeeId = employeeId2,
-                        Location = "Location 2"
+                        Location = "Location 2",
                     }
                 );
-            modelBuilder.Entity<VideoGameInfo>()
-                   .HasKey(vg => vg.GameId);
+
+            // Console data
+            var GameConsoleId1 = Guid.NewGuid();
+            var GameConsoleId2 = Guid.NewGuid();
+            var GameConsoleId3 = Guid.NewGuid();
+
+            modelBuilder
+                .Entity<GameConsole>()
+                .HasData(
+                    new GameConsole { GameConsoleId = GameConsoleId1, ConsoleName = "Console 1" }
+                );
+            modelBuilder
+                .Entity<GameConsole>()
+                .HasData(
+                    new GameConsole { GameConsoleId = GameConsoleId2, ConsoleName = "Console 2" }
+                );
+            modelBuilder
+                .Entity<GameConsole>()
+                .HasData(
+                    new GameConsole { GameConsoleId = GameConsoleId3, ConsoleName = "Console 3" }
+                );
+            // Studio data
+            var GameStudio1Id = Guid.NewGuid();
+            modelBuilder
+                .Entity<GameStudio>()
+                .HasData(
+                    new GameStudio
+                    {
+                        GameStudioId = GameStudio1Id,
+                        StudioName = "Studio 1",
+                        StudioPicturePath = "pic1/png",
+                    }
+                );
+
+            // Seed Publisher data
+            var Publisher1Id = Guid.NewGuid();
+            var Publisher2Id = Guid.NewGuid();
+            modelBuilder
+                .Entity<Publisher>()
+                .HasData(
+                    new Publisher
+                    {
+                        PublisherId = Publisher1Id,
+                        PublisherName = "Publisher 1",
+                        PublisherEmail = "publisher1@example.com",
+                        PublisherPicturePath = "",
+                    },
+                    new Publisher
+                    {
+                        PublisherId = Publisher2Id,
+                        PublisherName = "Publisher 2",
+                        PublisherEmail = "publisher2@example.com",
+                        PublisherPicturePath = "",
+                    }
+                );
 
             // Seed VideoGameInfo data
-            var videoGame1Id = Guid.NewGuid();
-            var videoGame2Id = Guid.NewGuid();
-
+            var VideoGameInfoId1 = Guid.NewGuid();
+            var VideoGameInfoId2 = Guid.NewGuid();
 
             modelBuilder
                 .Entity<VideoGameInfo>()
                 .HasData(
                     new VideoGameInfo
                     {
-                        GameId = videoGame1Id,
+                        VideoGameInfoId = VideoGameInfoId1,
                         GameName = "Game 1",
-
                         Description = "Description for Game 1",
                         YearOfRelease = "2019-07-04",
                         TotalRating = 3,
-                        PublisherId = Guid.NewGuid()
+                        PublisherId = Publisher1Id,
                     },
                     new VideoGameInfo
                     {
-                        GameId = videoGame2Id,
+                        VideoGameInfoId = VideoGameInfoId2,
                         GameName = "Game 2",
-
                         Description = "Description for Game 2",
                         YearOfRelease = "2023-04-08",
                         TotalRating = 5,
-                        PublisherId = Guid.NewGuid()
+                        PublisherId = Publisher2Id,
                     }
                 );
-            // Console data
 
+            var VideoGameVersionId1 = Guid.NewGuid();
+            var VideoGameVersionId2 = Guid.NewGuid();
+            //seed VideoGameVersion data
             modelBuilder
-                .Entity<GameConsole>()
+                .Entity<VideoGameVersion>()
                 .HasData(
-                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 1" }
-                );
-            modelBuilder
-                .Entity<GameConsole>()
-                .HasData(
-                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 2" }
-                );
-            modelBuilder
-                .Entity<GameConsole>()
-                .HasData(
-                    new GameConsole { GameConsoleId = Guid.NewGuid(), ConsoleName = "Console 3" }
-                );
-            // Studio data
-            modelBuilder
-                .Entity<GameStudio>()
-                .HasData(
-                    new GameStudio
+                    new VideoGameVersion
                     {
-                        GameStudioId = Guid.NewGuid(),
-                        StudioName = "Studio 1",
-                        StudioPicturePath = "pic1/png",
+                        VideoGameVersionId = VideoGameVersionId1,
+                        Price = 200,
+                        ConsoleId = GameConsoleId1,
+                        VideoGameInfoId = VideoGameInfoId1,
+                    },
+                    new VideoGameVersion
+                    {
+                        VideoGameVersionId = VideoGameVersionId2,
+                        Price = 200,
+                        ConsoleId = GameConsoleId2,
+                        VideoGameInfoId = VideoGameInfoId1,
                     }
                 );
+
+            var inventory1Id = Guid.NewGuid();
+            var inventory2Id = Guid.NewGuid();
+
+            // Seed Inventory data
             modelBuilder
-                .Entity<Payment>()
-                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
-            modelBuilder
-                .Entity<Payment>()
-                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
-            // Category data
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 4" });
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 5" });
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 6" });
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 7" });
-            modelBuilder
-                .Entity<GameStudio>()
+                .Entity<Inventory>()
                 .HasData(
-                    new GameStudio
+                    new Inventory
                     {
-                        GameStudioId = Guid.NewGuid(),
-                        StudioName = "Studio 2",
-                        StudioPicturePath = "pic2/png",
+                        InventoryId = inventory1Id,
+                        VideoGameVersionId = VideoGameVersionId1,
+                        StoreId = Store1Id,
+                        InventoryQuantity = 50,
+                    },
+                    new Inventory
+                    {
+                        InventoryId = inventory2Id,
+                        VideoGameVersionId = VideoGameVersionId2,
+                        StoreId = Store2Id,
+                        InventoryQuantity = 100,
                     }
                 );
+
+            // Seed Supply data
+            var Supply1Id = Guid.NewGuid();
+            var Supply2Id = Guid.NewGuid();
             modelBuilder
-                .Entity<GameStudio>()
+                .Entity<Supply>()
                 .HasData(
-                    new GameStudio
+                    new Supply
                     {
-                        GameStudioId = Guid.NewGuid(),
-                        StudioName = "Studio 3",
-                        StudioPicturePath = "pic3/png",
+                        SupplyId = Supply1Id,
+                        SupplierId = supplier1Id,
+                        VideoGameVersionId = VideoGameVersionId1,
+                        SupplyQuantity = 100,
+                        SupplierDate = DateTime.UtcNow,
+                        InventoryId = inventory2Id,
+                    },
+                    new Supply
+                    {
+                        SupplyId = Supply2Id,
+                        SupplierId = supplier2Id,
+                        VideoGameVersionId = VideoGameVersionId2,
+                        SupplyQuantity = 50,
+                        SupplierDate = DateTime.UtcNow.AddDays(-1),
+                        InventoryId = inventory1Id,
                     }
                 );
 

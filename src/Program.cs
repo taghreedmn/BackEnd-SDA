@@ -2,6 +2,7 @@ using System.Text;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Service.publisher;
 using FusionTech.src.Service.Store;
 using FusionTech.src.Services.Category;
 using FusionTech.src.Services.Console;
@@ -9,7 +10,10 @@ using FusionTech.src.Services.Customer;
 using FusionTech.src.Services.Inventory;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
+using FusionTech.src.Services.StoreEmployee;
+using FusionTech.src.Services.Publisher;
 using FusionTech.src.Services.Studio;
+using FusionTech.src.Services.supplier;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Services.SystemAdmin;
 using FusionTech.src.Services.VideoGamesInfo;
@@ -21,6 +25,7 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 //connect the database
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
     builder.Configuration.GetConnectionString("local")
@@ -34,13 +39,13 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseNpgsql(dataSourceBuilder.Build());
 });
 
-
 builder.Services.AddAutoMapper(typeof(MapperProfile));
-builder
-    .Services.AddScoped<ISupplyService, SupplyService>()
+builder.Services
+    .AddScoped<ISupplyService, SupplyService>()
     .AddScoped<SupplyRepository, SupplyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
 
 // add DI services
 builder
@@ -50,6 +55,10 @@ builder
 builder
     .Services.AddScoped<ICustomerService, CustomerService>()
     .AddScoped<CustomerRepository, CustomerRepository>();
+
+builder
+    .Services.AddScoped<IStoreEmployeeService, StoreEmployeeService>()
+    .AddScoped<StoreEmployeeRepository, StoreEmployeeRepository>();
 
 builder
     .Services.AddScoped<ISystemAdminService, SystemAdminService>()
@@ -63,15 +72,16 @@ builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
 builder
+    .Services.AddScoped<IInventoryService, InventoryService>()
+    .AddScoped<InventoryRepository, InventoryRepository>();
 
-.Services.AddScoped<IInventoryService, InventoryService>()
-.AddScoped<InventoryRepository, InventoryRepository>();
 builder
-.Services.AddScoped<IStoreService, StoreService>()
-.AddScoped<StoreRepository, StoreRepository>();
+    .Services.AddScoped<IStoreService, StoreService>()
+    .AddScoped<StoreRepository, StoreRepository>();
 builder
-.Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
-.AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
+    .Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
+    .AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
+
 
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
@@ -83,6 +93,23 @@ builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
+
+    
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+builder
+    .Services.AddScoped<ISupplierService, SupplierService>()
+    .AddScoped<SupplierRepository, SupplierRepository>();
+    
+    builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+builder
+    .Services.AddScoped<ISupplyService, SupplyService>()
+    .AddScoped<SupplyRepository, SupplyRepository>();
+
+   
+    builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+builder
+    .Services.AddScoped<IPublisherService, PublisherService>()
+    .AddScoped<PublisherRepository, PublisherRepository>();
 
 builder
     .Services.AddAuthentication(options =>

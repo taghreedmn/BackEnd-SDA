@@ -1,6 +1,6 @@
+using FusionTech.src.Services.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.InventoryDTO;
-using FusionTech.src.Services.Inventory;
 
 namespace FusionTech.src.Controllers
 {
@@ -15,15 +15,6 @@ namespace FusionTech.src.Controllers
             _inventoryService = inventoryService;
         }
 
-        // Creates a new inventory Game
-        [HttpPost]
-        public async Task<ActionResult<InventoryReadDto>> CreateOne(
-            [FromBody] InventoryCreateDto createDto
-        )
-        {
-            var inventoryCreated = await _inventoryService.CreateOneAsync(createDto);
-            return Created($"api/v1/inventory/{inventoryCreated.InventoryId}", inventoryCreated);
-        } 
 
         // Retrieves all inventory Games with pagination
         [HttpGet]
@@ -46,7 +37,8 @@ namespace FusionTech.src.Controllers
         }
 
 
-       /*  // Adds a game to the inventory 
+
+        // Adds a game to the inventory 
         [HttpPost]
         public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
 
@@ -57,7 +49,7 @@ namespace FusionTech.src.Controllers
                 return NotFound();
             }
             return NoContent(); // No content returned on successful addition
-        } */
+        }
 
 
         // Removes a game from the inventory 

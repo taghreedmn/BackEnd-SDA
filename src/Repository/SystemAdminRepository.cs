@@ -1,4 +1,3 @@
-using FusionTech.src.Config;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
