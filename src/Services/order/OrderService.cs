@@ -7,23 +7,66 @@ using static FusionTech.src.DTO.OrderDTO;
 
 namespace FusionTech.src.Services.order
 {
-    public class OrderService: IOrderService
+    public class OrderService : IOrderService
     {
-
         protected readonly OrderRepository _orderRepository;
+        protected readonly VideoGameVersionRepository _videoGameVersionRepository;
         protected readonly IMapper _mapper;
 
-        public OrderService(OrderRepository orderRepository, IMapper mapper)
+        public OrderService(
+            OrderRepository orderRepository,
+            VideoGameVersionRepository videoGameVersionRepository,
+            IMapper mapper
+        )
         {
             _orderRepository = orderRepository;
+            _videoGameVersionRepository = videoGameVersionRepository;
             _mapper = mapper;
         }
 
-        public async Task<OrderReadDto> CreateOneAsync(Guid userId, OrderCreateDto createDto)
+        public async Task<OrderReadDto> CreateOneAsync(int userId, OrderCreateDto createDto)
         {
-            var order = _mapper.Map<OrderCreateDto, Order>(createDto);
-            order.CustomerId = userId;
+            // var order = _mapper.Map<OrderCreateDto, Order>(createDto);
+            Guid orderId = Guid.NewGuid();
+            List<OrderedGames> orderedGames = new List<OrderedGames>(createDto.OrderedGames.Count);
+            double totalPrice = 0;
+            foreach (var orderedGameDTO in createDto.OrderedGames)
+            {
+                var videoGameVersion = await _videoGameVersionRepository.GetVersionByIdAsync(
+                    orderedGameDTO.videoGameVersionID
+                );
+                if (videoGameVersion == null)
+                {
+                    throw new ArgumentNullException(
+                        $"An invalid video game reference {orderedGameDTO.videoGameVersionID}"
+                    );
+                }
+                // Check for Quantity, it could be zero or negative
+                totalPrice += videoGameVersion.Price * orderedGameDTO.Quantity;
+                orderedGames.Add(
+                    new OrderedGames
+                    {
+                        OrderId = orderId,
+                        VideoGameVersionId = videoGameVersion.Id,
+                        Quantity = orderedGameDTO.Quantity,
+                    }
+                );
+            }
+            Order order = new Order
+            {
+                OrderId = orderId,
+                OrderDate = DateTime.Now,
+                TotalPrice = totalPrice,
+                PaymentId = createDto.PaymentId, // For Future improvment, make it an enum (Now it is Guid)
+                StoreId = createDto.StoreId,
+                EmployeeId = createDto.EmployeeId,
+                CustomerId = userId,
+                OrderedGames = orderedGames,
+            };
             await _orderRepository.CreateOneAsync(order);
+
+            // Adjust the inventory accordingly
+
             return _mapper.Map<Order, OrderReadDto>(order);
         }
 
@@ -63,6 +106,5 @@ namespace FusionTech.src.Services.order
             _mapper.Map(updateDto, foundOrder);
             return await _orderRepository.UpdateOneAsync(foundOrder);
         }
-
     }
 }

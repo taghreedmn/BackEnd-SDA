@@ -18,22 +18,24 @@ namespace FusionTech.src.Repository
 
         public async Task<Order> CreateOneAsync(Order newOrder)
         {
-            newOrder.OrderDate = DateTime.Now;
             await _order.AddAsync(newOrder);
             await _databaseContext.SaveChangesAsync();
             await _order.Entry(newOrder).Collection(o => o.OrderedGames).LoadAsync();
             foreach (var details in newOrder.OrderedGames)
             {
-                await _databaseContext.Entry(details).Reference(od => od.VideoGameVersion).LoadAsync();
+                await _databaseContext
+                    .Entry(details)
+                    .Reference(od => od.VideoGameVersion)
+                    .LoadAsync();
             }
             return newOrder;
         }
 
         public async Task<List<Order>> GetAllAsync(PaginationOptions paginationOptions)
         {
-            var result = _order.Where(ord =>
-            ord.OrderDate != null)
-            .OrderByDescending(ord => ord.OrderDate);
+            var result = _order
+                .Where(ord => ord.OrderDate != null)
+                .OrderByDescending(ord => ord.OrderDate);
             return await result
                 .Skip(paginationOptions.Offset)
                 .Take(paginationOptions.Limit)
@@ -42,7 +44,9 @@ namespace FusionTech.src.Repository
 
         public async Task<Order> GetByIdAsync(Guid id)
         {
-            return await _order.Include(ord => ord.CustomerId).FirstOrDefaultAsync(ord => ord.OrderId == id);
+            return await _order
+                .Include(ord => ord.CustomerId)
+                .FirstOrDefaultAsync(ord => ord.OrderId == id);
         }
 
         public async Task<bool> DeleteOneAsync(Order order)

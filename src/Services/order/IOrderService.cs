@@ -6,7 +6,7 @@ namespace FusionTech.src.Services.order
 {
     public interface IOrderService
     {
-        Task<OrderReadDto> CreateOneAsync(Guid userId, OrderCreateDto createDto);
+        Task<OrderReadDto> CreateOneAsync(int userId, OrderCreateDto createDto);
         Task<List<OrderReadDto>> GetAllAsync(PaginationOptions paginationOptions);
         Task<OrderReadDto> GetByIdAsync(Guid Id);
         Task<bool> DeleteOneAsync(Guid Id);

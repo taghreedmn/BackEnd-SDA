@@ -7,15 +7,16 @@ namespace FusionTech.src.Entity
     {
         [Key]
         public Guid Id { get; set; }
+
         [ForeignKey("Order")]
         public Guid OrderId { get; set; }
-        // [ForeignKey("VideoGameVersion")]
-        public Guid videoGameVerionID { get; set; }
+
+        [ForeignKey("VideoGameVersion")]
+        public Guid VideoGameVersionId { get; set; }
 
         [Required(ErrorMessage = "Order quantity is required.")]
         [Range(1, int.MaxValue, ErrorMessage = "Order quantity must be at least 1.")]
         public int Quantity { get; set; }
-        public VideoGameVersion VideoGameVersion{ get; set; }
-        
+        public VideoGameVersion VideoGameVersion { get; set; }
     }
 }
