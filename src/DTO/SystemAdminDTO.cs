@@ -8,7 +8,9 @@ namespace FusionTech.src.DTO
             public required bool ManageEmployees { get; set; }
             public required bool ManageGames { get; set; }
             public required bool ManageCustomers { get; set; }
+            public required bool ManageSystemAdmins { get; set; }
         }
+        
 
         public class SystemAdminReadDto : PersonSignInDTO
         {
@@ -16,6 +18,8 @@ namespace FusionTech.src.DTO
             public bool ManageEmployees { get; private set; }
             public bool ManageGames { get; private set; }
             public bool ManageCustomers { get; private set; }
+            public required bool ManageSystemAdmins { get; set; }
+
         }
     }
 }

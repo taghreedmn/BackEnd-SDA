@@ -1,27 +1,41 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace FusionTech.src.DTO
 {
     public class SupplierDTO
     {
         public class SupplierCreateDto
         {
-            public String? SupplierName { get; set; }
-            public String? SupplierContact { get; set; }
-            public String? SupplierBankInfo { get; set; }
+            [Required(ErrorMessage = "Supplier name is required.")]
+            [StringLength(100, ErrorMessage = "Supplier name cannot exceed 100 characters.")]
+            public string? SupplierName { get; set; }
+
+            [Phone(ErrorMessage = "Invalid contact number format.")]
+            public string? SupplierContact { get; set; }
+
+            [StringLength(200, ErrorMessage = "Supplier bank info cannot exceed 200 characters.")]
+            public string? SupplierBankInfo { get; set; }
         }
 
         public class SupplierReadDto
         {
             public Guid SupplierId { get; set; }
-            public String? SupplierName { get; set; }
-            public String? SupplierContact { get; set; }
-            public String? SupplierBankInfo { get; set; }
+            public string? SupplierName { get; set; }
+            public string? SupplierContact { get; set; }
+            public string? SupplierBankInfo { get; set; }
         }
 
         public class SupplierUpdateDto
         {
-            public String? SupplierName { get; set; }
-            public String? SupplierContact { get; set; }
-            public String? SupplierBankInfo { get; set; }
+            [StringLength(100, ErrorMessage = "Supplier name cannot exceed 100 characters.")]
+            public string? SupplierName { get; set; }
+
+            [Phone(ErrorMessage = "Invalid contact number format.")]
+            public string? SupplierContact { get; set; }
+
+            [StringLength(200, ErrorMessage = "Supplier bank info cannot exceed 200 characters.")]
+            public string? SupplierBankInfo { get; set; }
         }
     }
 }

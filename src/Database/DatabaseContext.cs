@@ -52,7 +52,7 @@ namespace FusionTech.src.Database
                         PersonEmail = "admin@mail.com",
                         PersonName = "Super Admin",
                         PersonPassword = hashedPassword,
-                        PersonPhone = "+966500000000",
+                        PersonPhoneNumber = "+966500000000",
                         ProfilePicturePath = "",
                         salt = salt,
                         ManageGames = true,
@@ -67,19 +67,19 @@ namespace FusionTech.src.Database
             modelBuilder
                 .Entity<Payment>()
                 .HasData(
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Cash on delivery" },
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Visa" },
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Mada" },
-                    new Payment { Id = Guid.NewGuid(), PaymentMethod = "Apple Pay" }
+                    new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Cash on delivery" },
+                    new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Visa" },
+                    new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Mada" },
+                    new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Apple Pay" }
                 );
 
             // Seed Category data
             modelBuilder
                 .Entity<Category>()
                 .HasData(
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 1" },
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 2" },
-                    new Category { Id = Guid.NewGuid(), CategoryName = "Category 3" }
+                    new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 1" },
+                    new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 2" },
+                    new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 3" }
                 );
 
             // Seed Supplier data
@@ -93,14 +93,14 @@ namespace FusionTech.src.Database
                     {
                         SupplierId = supplier1Id,
                         SupplierName = "Supplier 1",
-                        SupplierContact = "Contact 1",
+                        SupplierContactInfo = "Contact 1",
                         SupplierBankInfo = "Bank Info 1",
                     },
                     new Supplier
                     {
                         SupplierId = supplier2Id,
                         SupplierName = "Supplier 2",
-                        SupplierContact = "Contact 2",
+                        SupplierContactInfo = "Contact 2",
                         SupplierBankInfo = "Bank Info 2",
                     }
                 );
@@ -135,14 +135,14 @@ namespace FusionTech.src.Database
                         InventoryId = inventory1Id,
                         GameId = Guid.NewGuid(),
                         StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 50
+                        GameQuantity = 50
                     },
                     new Inventory
                     {
                         InventoryId = inventory2Id,
                         GameId = Guid.NewGuid(),
                         StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 100,
+                        GameQuantity = 100,
                     }
                 );
 
@@ -227,36 +227,36 @@ namespace FusionTech.src.Database
                 .HasData(
                     new GameStudio
                     {
-                        GameStudioId = Guid.NewGuid(),
+                        StudioId = Guid.NewGuid(),
                         StudioName = "Studio 1",
                         StudioPicturePath = "pic1/png",
                     }
                 );
             modelBuilder
                 .Entity<Payment>()
-                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
+                .HasData(new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Master Card" });
             modelBuilder
                 .Entity<Payment>()
-                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
+                .HasData(new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Using points" });
             // Category data
             modelBuilder
                 .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 4" });
+                .HasData(new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 4" });
             modelBuilder
                 .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 5" });
+                .HasData(new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 5" });
             modelBuilder
                 .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 6" });
+                .HasData(new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 6" });
             modelBuilder
                 .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 7" });
+                .HasData(new Category { CategoryId = Guid.NewGuid(), CategoryName = "Category 7" });
             modelBuilder
                 .Entity<GameStudio>()
                 .HasData(
                     new GameStudio
                     {
-                        GameStudioId = Guid.NewGuid(),
+                        StudioId = Guid.NewGuid(),
                         StudioName = "Studio 2",
                         StudioPicturePath = "pic2/png",
                     }
@@ -266,7 +266,7 @@ namespace FusionTech.src.Database
                 .HasData(
                     new GameStudio
                     {
-                        GameStudioId = Guid.NewGuid(),
+                        StudioId = Guid.NewGuid(),
                         StudioName = "Studio 3",
                         StudioPicturePath = "pic3/png",
                     }
