@@ -1,7 +1,7 @@
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+
 
 namespace FusionTech.src.Repository
 {
@@ -62,20 +62,6 @@ namespace FusionTech.src.Repository
             return await _supply.Include(p => p.Supplier).Include(p => p.Inventory).FirstOrDefaultAsync(p => p.SupplyId == id);
        }
       
-      /* internal async Task<Supply> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
-     {
-         var supply = await _supply
-             .Include(p => p.Supplier) // Include the Supplier entity
-             .Include(p => p.Inventory) // Include the Inventory entity
-             .FirstOrDefaultAsync(p => p.SupplyId == id, cancellationToken);
-
-
-         return supply;
-     }
-   */
-
-        
-
 
     }
 }
