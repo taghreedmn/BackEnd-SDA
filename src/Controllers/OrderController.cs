@@ -12,6 +12,7 @@ namespace FusionTech.src.Controllers
     public class OrderController : ControllerBase
     {
         protected readonly IOrderService _orderService;
+
         public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
@@ -20,20 +21,26 @@ namespace FusionTech.src.Controllers
         // Create a new order
         [HttpPost]
         [Authorize(Policy = "Customer")]
-        public async Task<ActionResult<OrderReadDto>> CreateOneAsync([FromBody] OrderCreateDto orderCreateDto)
+        public async Task<ActionResult<OrderReadDto>> CreateOneAsync(
+            [FromBody] OrderCreateDto orderCreateDto
+        )
         {
             var authenticateClaims = HttpContext.User;
-            var userIdClaim = authenticateClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
 
             if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
             {
                 return BadRequest("User ID not found in claims or is not a valid integer.");
             }
 
-            var userGuid = ConvertIntToGuid(userId); //  using int to Guid conversion
+            // var userGuid = ConvertIntToGuid(userId); //  using int to Guid conversion
 
-            return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
+            // return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
+            return await _orderService.CreateOneAsync(userId, orderCreateDto);
         }
+
         private Guid ConvertIntToGuid(int customerId)
         {
             byte[] guidBytes = new byte[16];
@@ -51,7 +58,7 @@ namespace FusionTech.src.Controllers
         // Get all orders
         [HttpGet("Customer/{CustomerId}")]
         [Authorize]
-        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync([FromRoute]Guid CustomerId)
+        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync([FromRoute]int CustomerId)
         {
             var orders = await _orderService.GetOrderByIdAsync(CustomerId);
             return Ok(orders);
@@ -71,6 +78,5 @@ namespace FusionTech.src.Controllers
         // {
 
         // }
-
     }
 }

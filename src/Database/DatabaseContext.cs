@@ -5,7 +5,6 @@ namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
     {
-
         public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
@@ -29,13 +28,11 @@ namespace FusionTech.src.Database
         public DbSet<VideoGameInfo> VideoGameInfo { get; set; }
         public DbSet<VideoGameVersion> VideoGameVersion { get; set; }
 
-
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Person>().UseTptMappingStrategy();
             modelBuilder.HasPostgresEnum<PersonType>();
 
@@ -62,14 +59,14 @@ namespace FusionTech.src.Database
                     new Category { Id = category3Id, CategoryName = "Category 3" }
                 );
 
-            //seed video games version 
+            //seed video games version
             modelBuilder
-               .Entity<VideoGameVersion>()
-               .HasData(
-                   new VideoGameVersion { Id = Guid.NewGuid(), Price = 10.50 },
-                   new VideoGameVersion { Id = Guid.NewGuid(), Price = 100 },
-                   new VideoGameVersion { Id = Guid.NewGuid(), Price = 75 }
-               );
+                .Entity<VideoGameVersion>()
+                .HasData(
+                    new VideoGameVersion { Id = Guid.NewGuid(), Price = 10.50 },
+                    new VideoGameVersion { Id = Guid.NewGuid(), Price = 100 },
+                    new VideoGameVersion { Id = Guid.NewGuid(), Price = 75 }
+                );
 
             // Seed Supplier data
             var supplier1Id = Guid.NewGuid();
@@ -78,25 +75,65 @@ namespace FusionTech.src.Database
             modelBuilder
                 .Entity<Supplier>()
                 .HasData(
-                    new Supplier { SupplierId = supplier1Id, SupplierName = "Supplier 1", SupplierContact = "Contact 1", SupplierBankInfo = "Bank Info 1", },
-                    new Supplier { SupplierId = supplier2Id, SupplierName = "Supplier 2", SupplierContact = "Contact 2", SupplierBankInfo = "Bank Info 2", }
+                    new Supplier
+                    {
+                        SupplierId = supplier1Id,
+                        SupplierName = "Supplier 1",
+                        SupplierContact = "Contact 1",
+                        SupplierBankInfo = "Bank Info 1",
+                    },
+                    new Supplier
+                    {
+                        SupplierId = supplier2Id,
+                        SupplierName = "Supplier 2",
+                        SupplierContact = "Contact 2",
+                        SupplierBankInfo = "Bank Info 2",
+                    }
                 );
 
             // Seed Supply data
             modelBuilder
                 .Entity<Supply>()
                 .HasData(
-                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier1Id, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(), },
-                    new Supply { SupplyId = Guid.NewGuid(), SupplierId = supplier2Id, GamesId = Guid.NewGuid(), SupplierQuantity = 50, SupplierDate = DateTime.UtcNow, InventoryId = Guid.NewGuid(), }
-                    );
+                    new Supply
+                    {
+                        SupplyId = Guid.NewGuid(),
+                        SupplierId = supplier1Id,
+                        GamesId = Guid.NewGuid(),
+                        SupplierQuantity = 100,
+                        SupplierDate = DateTime.UtcNow,
+                        InventoryId = Guid.NewGuid(),
+                    },
+                    new Supply
+                    {
+                        SupplyId = Guid.NewGuid(),
+                        SupplierId = supplier2Id,
+                        GamesId = Guid.NewGuid(),
+                        SupplierQuantity = 50,
+                        SupplierDate = DateTime.UtcNow,
+                        InventoryId = Guid.NewGuid(),
+                    }
+                );
 
             // Seed Publisher data
             modelBuilder
-           .Entity<Publisher>()
-           .HasData(
-               new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 1", Email = "publisher1@example.com", PublisherPicturePath = "" },
-               new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Publisher 2", Email = "publisher2@example.com", PublisherPicturePath = "" }
-           );
+                .Entity<Publisher>()
+                .HasData(
+                    new Publisher
+                    {
+                        PublisherId = Guid.NewGuid(),
+                        PublisherName = "Publisher 1",
+                        Email = "publisher1@example.com",
+                        PublisherPicturePath = "",
+                    },
+                    new Publisher
+                    {
+                        PublisherId = Guid.NewGuid(),
+                        PublisherName = "Publisher 2",
+                        Email = "publisher2@example.com",
+                        PublisherPicturePath = "",
+                    }
+                );
 
             // Seed Inventory data
             var inventory1Id = Guid.NewGuid();
@@ -110,14 +147,14 @@ namespace FusionTech.src.Database
                         InventoryId = inventory1Id,
                         GameId = Guid.NewGuid(),
                         StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 50
+                        InventoryQuantity = 50,
                     },
                     new Inventory
                     {
                         InventoryId = inventory2Id,
                         GameId = Guid.NewGuid(),
                         StoreId = Guid.NewGuid(),
-                        InventoryQuantity = 100
+                        InventoryQuantity = 100,
                     }
                 );
 
@@ -127,7 +164,7 @@ namespace FusionTech.src.Database
 
             modelBuilder
                 .Entity<Store>()
-    .HasData(
+                .HasData(
                     new Store
                     {
                         StoreId = Guid.NewGuid(),
@@ -135,7 +172,7 @@ namespace FusionTech.src.Database
                         NumberOfEmployee = 5,
                         WorkHours = 40,
                         EmployeeId = employeeId1,
-                        Location = "Location 1"
+                        Location = "Location 1",
                     },
                     new Store
                     {
@@ -144,17 +181,15 @@ namespace FusionTech.src.Database
                         NumberOfEmployee = 8,
                         WorkHours = 35,
                         EmployeeId = employeeId2,
-                        Location = "Location 2"
+                        Location = "Location 2",
                     }
                 );
-            modelBuilder.Entity<VideoGameInfo>()
-                   .HasKey(vg => vg.GameId);
+            modelBuilder.Entity<VideoGameInfo>().HasKey(vg => vg.GameId);
 
             // Seed VideoGameInfo data
             var videoGame1Id = Guid.NewGuid();
             var videoGame2Id = Guid.NewGuid();
             var categoryIdFk = modelBuilder.Entity<Category>().Property(x => x.Id);
-
 
             modelBuilder
                 .Entity<VideoGameInfo>()
@@ -168,7 +203,7 @@ namespace FusionTech.src.Database
                         YearOfRelease = "2019-07-04",
                         TotalRating = 3,
                         PublisherId = Guid.NewGuid(),
-                        CategoryId = category1Id
+                        CategoryId = category1Id,
                     },
                     new VideoGameInfo
                     {
@@ -179,7 +214,7 @@ namespace FusionTech.src.Database
                         YearOfRelease = "2023-04-08",
                         TotalRating = 5,
                         PublisherId = Guid.NewGuid(),
-                        CategoryId = category2Id
+                       CategoryId= category2Id,
                     }
                 );
             // Console data
@@ -211,25 +246,12 @@ namespace FusionTech.src.Database
                     }
                 );
             modelBuilder
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
+            modelBuilder
+                .Entity<Payment>()
+                .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
 
-            .Entity<Payment>()
-            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Master Card" });
-            modelBuilder
-            .Entity<Payment>()
-            .HasData(new Payment { Id = Guid.NewGuid(), PaymentMethod = "Using points" });
-            // Category data
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 4" });
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 5" });
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 6" });
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category { Id = Guid.NewGuid(), CategoryName = "Category 7" });
             modelBuilder
                 .Entity<GameStudio>()
                 .HasData(
@@ -275,9 +297,6 @@ namespace FusionTech.src.Database
                 .HasData(
                     new PersonIdCounter { PersonIdCounterId = PersonType.Customer, CurrentId = 0 }
                 );
-
-
-
         }
     }
 }

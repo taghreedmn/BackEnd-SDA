@@ -23,15 +23,14 @@ namespace FusionTech.src.Entity
         [DataType(DataType.Date)]
         public string YearOfRelease { get; set; }
 
-
         [Range(1, 5, ErrorMessage = "Total rating must be between 1 and 5.")]
         public int TotalRating { get; set; }
         public Guid PublisherId { get; set; }
 
         [StringLength(200, ErrorMessage = "Game picture path cannot exceed 200 characters.")]
         public string? GamePicturePath { get; set; }
-        // [ForeignKey("Category")]
+        
+        [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
-        public Category Category{ get; set; }
     }
 }

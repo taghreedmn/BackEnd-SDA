@@ -1,17 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using FusionTech.src.DTO;
 using FusionTech.src.Entity;
 using FusionTech.src.Services;
-using static FusionTech.src.DTO.CategoryDTO;
-using FusionTech.src.DTO;
-using System.Data;
 using FusionTech.src.Services.category;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.CategoryDTO;
 using static FusionTech.src.DTO.CategoryDTO;
 
 namespace FusionTech.src.Controllers
 {
-
     [ApiController]
     [Route("/api/v1/[controller]")]
     public class CategoriesController : ControllerBase
