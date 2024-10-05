@@ -30,13 +30,15 @@ namespace FusionTech.src.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVideoGameById(Guid id)
         {
-            var videoGame = await _videoGameInfoService.GetByIdAsync(id);
+            var videoGame = await _videoGameInfoService.GetVideoGameVersionByIdAsync(id);
+
             if (videoGame == null)
             {
                 return NotFound();
             }
             return Ok(videoGame);
         }
+
 
         [Authorize(Policy = "admin")]
         // Add a new video game

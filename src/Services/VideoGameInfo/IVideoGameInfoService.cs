@@ -13,6 +13,7 @@ namespace FusionTech.src.Services.VideoGamesInfo
         Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto newGameInfo,string email);
         Task<List<VideoGameInfoReadDto>> GetAllAsync();
         Task<VideoGameInfoReadDto> GetByIdAsync(Guid id);
+        Task<List<VideoGameInfoReadDto>> GetVideoGameVersionByIdAsync(Guid id);
         Task<bool> DeleteAsync(Guid id);
         Task<bool> UpdateGameNameAsync(Guid id, string newGameName);
         Task<bool> UpdateYearOfReleaseAsync(Guid id, string newYearOfRelease);
