@@ -52,7 +52,7 @@ namespace FusionTech.src.Services.StoreEmployee
                 out byte[] salt
             );
             var idCounter = await _personRepo.GetIdCounterAsync(Entity.StoreEmployee.PersonType);
-            storeEmployee.PersonId = PersonIdConfig.StoreEmployeeStartIndex + idCounter.CurrentId;
+            storeEmployee.PersonId = PersonIdConfig.StoreEmployeeStartIndex + idCounter.CurrentId + 1;
             storeEmployee.PersonPassword = hashedPassword;
             storeEmployee.salt = salt;
             Entity.StoreEmployee createdStoreEmployee = await _storeEmployeeRepo.CreateOneAsync(

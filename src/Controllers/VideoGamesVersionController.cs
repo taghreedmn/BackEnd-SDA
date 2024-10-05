@@ -25,7 +25,7 @@ namespace FusionTech.src.Controllers
         )
         {
             var videoGameVersionCreated = await _versionService.CreateOneAsync(createDto);
-            return Created($"api/v1/categories/{videoGameVersionCreated.Id}", videoGameVersionCreated);
+            return Created($"api/v1/categories/{videoGameVersionCreated.VideoGameVersionId}", videoGameVersionCreated);
             // return Ok(categoryCreated);
         }
 
@@ -54,22 +54,22 @@ namespace FusionTech.src.Controllers
             {
                 return NotFound();
             }
-            await _versionService.DeleteOneAsync(version.Id);
+            await _versionService.DeleteOneAsync(version.VideoGameVersionId);
             return Ok(version);
         }
 
-        //         [HttpPut("{Id}")]
-        //         public ActionResult PutCategory(Guid id, Category updateCategory)
-        //         {
-        //             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-        //             if (foundCategory == null)
-        //             {
-        //                 return NotFound();
-        //             }
+        [Authorize(Policy = "admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOneAsync(Guid id, VideoGameVersionUpdateDto updateGameVersion)
+        {
+            var isUpdated = await _versionService.UpdateOneAsync(id, updateGameVersion);
 
-        //             foundCategory.Id = updateCategory.Id;
-        //             foundCategory.CategoryName = updateCategory.CategoryName;
-        //             return NoContent();
-        //         }
+            if (!isUpdated)
+            {
+                return NotFound("Video game not found or update failed.");
+            }
+
+            return NoContent();
+        }
     }
 }

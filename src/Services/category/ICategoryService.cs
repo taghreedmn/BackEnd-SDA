@@ -7,6 +7,7 @@ namespace FusionTech.src.Services.category
         Task<CategoryReadDto> CreateOneAsync(CategoryCreateDto createDto);
         Task<List<CategoryReadDto>> GetAllAsync(PaginationOptions paginationOptions);
         Task<CategoryReadDto> GetByIdAsync(Guid Id);
+        Task<List<CategoryReadDto>> GetCategoryDetailsByNameAsync(string CategoryName);
         Task<bool> DeleteOneAsync(Guid Id);
         Task<bool> UpdateOneAsync(Guid Id, CategoryUpdateDto updateDto);
     }

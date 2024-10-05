@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations; // Added
 using FusionTech.src.Entity;
+using static FusionTech.src.DTO.CategoryDTO;
+using static FusionTech.src.DTO.VideoGameVersionDTO;
 
 namespace FusionTech.src.DTO
 {
@@ -14,10 +16,6 @@ namespace FusionTech.src.DTO
             [Required(ErrorMessage = "Game name is required.")]
             [StringLength(100, ErrorMessage = "Game name cannot exceed 100 characters.")]
             public string? GameName { get; set; }
-
-            [Required(ErrorMessage = "Price is required.")]
-            [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
-            public float Price { get; set; }
 
             [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
             public string? Description { get; set; }
@@ -38,9 +36,6 @@ namespace FusionTech.src.DTO
             [StringLength(100, ErrorMessage = "Game name cannot exceed 100 characters.")]
             public string? GameName { get; set; }
 
-            [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
-            public float? Price { get; set; }
-
             [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
             public string? Description { get; set; }
 
@@ -59,8 +54,6 @@ namespace FusionTech.src.DTO
 
             public string? GameName { get; set; }
 
-            public float Price { get; set; }
-
             public string? Description { get; set; }
 
             public string? YearOfRelease { get; set; }
@@ -70,7 +63,9 @@ namespace FusionTech.src.DTO
             public Guid PublisherId { get; set; }
 
             public string? GamePicturePath { get; set; }
-            public Category Category { get; set; }
+
+            public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
+
         }
     }
 }

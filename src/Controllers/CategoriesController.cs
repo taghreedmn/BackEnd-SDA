@@ -36,10 +36,16 @@ namespace FusionTech.src.Controllers
             return Ok(categoryList);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid Id)
+        // [HttpGet("{Id}")]
+        // public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid Id)
+        // {
+        //     var category = await _categoryService.GetByIdAsync(Id);
+        //     return Ok(category);
+        // }
+        [HttpGet("{CategoryName}")]
+        public async Task<ActionResult<CategoryReadDto>> GetCategoryDetailsByNameAsync([FromRoute] string CategoryName)
         {
-            var category = await _categoryService.GetByIdAsync(Id);
+            var category = await _categoryService.GetCategoryDetailsByNameAsync(CategoryName);
             return Ok(category);
         }
 

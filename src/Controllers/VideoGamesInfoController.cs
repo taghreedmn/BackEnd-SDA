@@ -1,6 +1,6 @@
 using System.Security.Claims;
-using FusionTech.src.Entity;
 using FusionTech.src.Services.VideoGamesInfo;
+using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.VideoGameInfoDTO;
@@ -20,17 +20,18 @@ namespace FusionTech.src.Controllers
 
         // Get all video games
         [HttpGet]
-        public async Task<IActionResult> GetVideoGames()
+        public async Task<ActionResult> GetVideoGames([FromQuery] SearchParameters searchParameters)
         {
-            var videoGames = await _videoGameInfoService.GetAllAsync();
+            var videoGames = await _videoGameInfoService.GetAllAsync(searchParameters);
             return Ok(videoGames);
         }
 
         // Get by ID
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetVideoGameById(Guid id)
+        public async Task<ActionResult> GetVideoGameById(Guid id)
         {
-            var videoGame = await _videoGameInfoService.GetByIdAsync(id);
+            var videoGame = await _videoGameInfoService.GetVideoGameVersionByIdAsync(id);
+
             if (videoGame == null)
             {
                 return NotFound();
@@ -38,10 +39,11 @@ namespace FusionTech.src.Controllers
             return Ok(videoGame);
         }
 
+
         [Authorize(Policy = "admin")]
         // Add a new video game
         [HttpPost]
-        public async Task<IActionResult> CreateVideoGame(VideoGameInfoCreateDto newVideoGameDto)
+        public async Task<ActionResult> CreateVideoGame(VideoGameInfoCreateDto newVideoGameDto)
         {
             string? userEmail = User.FindFirstValue(ClaimTypes.Email);
             if (string.IsNullOrEmpty(userEmail))
@@ -49,19 +51,26 @@ namespace FusionTech.src.Controllers
                 return Unauthorized("User email not found");
             }
 
-            var createdVideoGame = await _videoGameInfoService.CreateOneAsync(newVideoGameDto,userEmail);
+            var createdVideoGame = await _videoGameInfoService.CreateOneAsync(
+                newVideoGameDto,
+                userEmail
+            );
             if (createdVideoGame == null)
             {
                 return BadRequest("Failed to create video game");
             }
 
-            return CreatedAtAction(nameof(GetVideoGameById), new { id = createdVideoGame.VideoGameInfoId }, createdVideoGame);
+            return CreatedAtAction(
+                nameof(GetVideoGameById),
+                new { id = createdVideoGame.VideoGameInfoId },
+                createdVideoGame
+            );
         }
 
         [Authorize(Policy = "admin")]
         // Delete video game
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVideoGame(Guid id)
+        public async Task<ActionResult> DeleteVideoGame(Guid id)
         {
             var isDeleted = await _videoGameInfoService.DeleteAsync(id);
             if (!isDeleted)
@@ -73,7 +82,7 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateGameName(Guid id, string newGameName)
+        public async Task<ActionResult> UpdateGameName(Guid id, string newGameName)
         {
             var isUpdated = await _videoGameInfoService.UpdateGameNameAsync(id, newGameName);
 
@@ -87,9 +96,12 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPut("{id}/year")]
-        public async Task<IActionResult> UpdateYearOfRelease(Guid id, string newYearOfRelease)
+        public async Task<ActionResult> UpdateYearOfRelease(Guid id, string newYearOfRelease)
         {
-            var isUpdated = await _videoGameInfoService.UpdateYearOfReleaseAsync(id, newYearOfRelease);
+            var isUpdated = await _videoGameInfoService.UpdateYearOfReleaseAsync(
+                id,
+                newYearOfRelease
+            );
 
             if (!isUpdated)
             {

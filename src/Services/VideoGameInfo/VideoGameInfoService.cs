@@ -1,7 +1,8 @@
-
+using System.Security.Authentication;
 using AutoMapper;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.VideoGameInfoDTO;
 
 namespace FusionTech.src.Services.VideoGamesInfo
@@ -14,8 +15,12 @@ namespace FusionTech.src.Services.VideoGamesInfo
 
         protected readonly IMapper _mapper;
 
-        public VideoGameInfoService(VideoGameInfoRepository videoGameInfoRepository, PersonRepository personRepo,
-            SystemAdminRepository systemAdminRepository, IMapper mapper)
+        public VideoGameInfoService(
+            VideoGameInfoRepository videoGameInfoRepository,
+            PersonRepository personRepo,
+            SystemAdminRepository systemAdminRepository,
+            IMapper mapper
+        )
         {
             _videoGameInfoRepo = videoGameInfoRepository;
             _mapper = mapper;
@@ -23,12 +28,15 @@ namespace FusionTech.src.Services.VideoGamesInfo
             _systemAdminRepository = systemAdminRepository;
         }
 
-        
-        public async Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto createGameInfo, string email)
+        public async Task<VideoGameInfoReadDto> CreateOneAsync(
+            VideoGameInfoCreateDto createGameInfo,
+            string email
+        )
         {
-          
             var originalPerson = await _personRepo.FindPersonByEmail(email);
-            var originalSystemAdmin = await _systemAdminRepository.GetByIdAsync(originalPerson!.PersonId);
+            var originalSystemAdmin = await _systemAdminRepository.GetByIdAsync(
+                originalPerson!.PersonId
+            );
 
             if (originalSystemAdmin!.ManageGames)
             {
@@ -57,9 +65,37 @@ namespace FusionTech.src.Services.VideoGamesInfo
             return await _videoGameInfoRepo.DeleteOnAsync(foundGameInfo);
         }
 
-        public async Task<List<VideoGameInfoReadDto>> GetAllAsync()
+        public async Task<List<VideoGameInfoReadDto>> GetAllAsync(SearchParameters searchParameters)
         {
             var videoGameList = await _videoGameInfoRepo.GetAllAsync();
+            searchParameters.IsValid(); // Throws an error incase of a wrong parameters
+            videoGameList = videoGameList
+                .Where(a =>
+                    a.GameName!.Contains(
+                        searchParameters.Title!,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                .ToList();
+
+            videoGameList = searchParameters.SortBy switch
+            {
+                SortingTypes.ByRating => searchParameters.Descending
+                    ? videoGameList.OrderByDescending(vg => vg.TotalRating).ToList()
+                    : videoGameList.OrderBy(vg => vg.TotalRating).ToList(),
+
+                SortingTypes.ByTitle => searchParameters.Descending
+                    ? videoGameList.OrderByDescending(vg => vg.GameName).ToList()
+                    : videoGameList.OrderBy(vg => vg.GameName).ToList(),
+
+                _ => videoGameList,
+            };
+
+            videoGameList = videoGameList
+                .Skip(searchParameters.PaginationOptions.Offset)
+                .Take(searchParameters.PaginationOptions.Limit)
+                .ToList();
+
             return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(videoGameList);
         }
 
@@ -67,6 +103,11 @@ namespace FusionTech.src.Services.VideoGamesInfo
         {
             var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
             return _mapper.Map<VideoGameInfo, VideoGameInfoReadDto>(foundGameInfo);
+        }
+        public async Task<List<VideoGameInfoReadDto>> GetVideoGameVersionByIdAsync(Guid id)
+        {
+            var foundGameInfo = await _videoGameInfoRepo.GetVideoGameVersionByIdAsync(id);
+            return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(foundGameInfo);
         }
 
         /* public async Task<bool> UpdateOnAsync(Guid id, VideoGameInfoUpdateDto updateGameInfo)

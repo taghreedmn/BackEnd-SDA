@@ -38,6 +38,11 @@ namespace FusionTech.src.Repository
         {
             return await _category.FindAsync(id);
         }
+        public async Task<List<Category>> GetCategoryDetailsByNameAsync(string CategoryName)
+        {
+            return await _category
+            .Include(c => c.Categories).Where(c => c.CategoryName.ToLower() == CategoryName.ToLower()).ToListAsync();
+        }
 
         public async Task<bool> DeleteOneAsync(Category category)
         {

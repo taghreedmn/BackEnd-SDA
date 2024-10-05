@@ -41,6 +41,12 @@ namespace FusionTech.src.Services.category
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             return _mapper.Map<Category, CategoryReadDto>(foundCategory);
         }
+        public async Task<List<CategoryReadDto>> GetCategoryDetailsByNameAsync(string CategoryName)
+        {
+            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryReadDto>>(foundCategory);
+            return categoryLists;
+        }
 
         public async Task<bool> DeleteOneAsync(Guid id)
         {

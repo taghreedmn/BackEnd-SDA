@@ -36,13 +36,13 @@ namespace FusionTech.src.Services.Person
         {
             var person = await _personRepository.FindPersonByEmail(email);
 
-            return person.PersonId;
+            return person!.PersonId;
         }
 
         public async Task<bool> UpdateNameAsync(string email, string name)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.PersonName = name;
+            person!.PersonName = name;
             var result = await _personRepository.UpdateAsync(person);
             return result;
         }
@@ -50,7 +50,7 @@ namespace FusionTech.src.Services.Person
         public async Task<bool> EditPassword(string email, string oldPassword, string newPassword)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            if (!PasswordUtils.isPasswordEqual(oldPassword, person.PersonPassword, person.salt))
+            if (!PasswordUtils.isPasswordEqual(oldPassword, person!.PersonPassword, person.salt))
             {
                 throw new UnauthorizedAccessException("Old password does not match.");
             }
@@ -65,7 +65,7 @@ namespace FusionTech.src.Services.Person
         public async Task<bool> EditPhone(string email, string newPhone)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.PersonPhoneNumber = newPhone;
+            person!.PersonPhoneNumber = newPhone;
             var result = await _personRepository.UpdateAsync(person);
             return result;
         }
@@ -73,7 +73,7 @@ namespace FusionTech.src.Services.Person
         public async Task<bool> EditProfilePicture(string email, string picturePath)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.ProfilePicturePath = picturePath;
+            person!.ProfilePicturePath = picturePath;
             var result = await _personRepository.UpdateAsync(person);
             return result;
         }
@@ -83,6 +83,11 @@ namespace FusionTech.src.Services.Person
             var foundPerson = await _personRepository.FindPersonByEmail(
                 personSignInDTO.PersonEmail
             );
+
+            if (foundPerson == null)
+            {
+                throw new UnauthorizedAccessException("Wrong Email or Password"); // Yes, I'm lying here
+            }
             bool isMatched = PasswordUtils.isPasswordEqual(
                 personSignInDTO.PersonPassword,
                 foundPerson.PersonPassword,
