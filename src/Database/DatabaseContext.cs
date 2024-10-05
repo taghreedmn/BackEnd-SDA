@@ -21,8 +21,7 @@ namespace FusionTech.src.Database
         public DbSet<GameConsole> Console { get; set; }
         public DbSet<GameStudio> Studio { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
-       // public DbSet<VideoGameVersion> VideoGameVersion { get; set; }
-
+        public DbSet<VideoGameVersion> VideoGameVersion { get; set; }
         public DbSet<VideoGameInfo> VideoGameInfo { get; set; }
 
         public DatabaseContext(DbContextOptions options)
@@ -176,11 +175,12 @@ namespace FusionTech.src.Database
                     VideoGameInfo2
 
                 );
-                /* modelBuilder
+                 modelBuilder
                 .Entity<VideoGameVersion>()
                 .HasData(
                    
-                );*/
+                );
+                
                 modelBuilder
                 .Entity<Inventory>()
                 .HasData(
@@ -206,3 +206,5 @@ namespace FusionTech.src.Database
         }
     }
 }
+
+                

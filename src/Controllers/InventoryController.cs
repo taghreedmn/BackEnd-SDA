@@ -15,15 +15,6 @@ namespace FusionTech.src.Controllers
             _inventoryService = inventoryService;
         }
 
-        // Creates a new inventory Game
-        [HttpPost]
-        public async Task<ActionResult<InventoryReadDto>> CreateOne(
-            [FromBody] InventoryCreateDto createDto
-        )
-        {
-            var inventoryCreated = await _inventoryService.CreateOneAsync(createDto);
-            return Created($"api/v1/inventory/{inventoryCreated.InventoryId}", inventoryCreated);
-        }
 
         // Retrieves all inventory Games with pagination
         [HttpGet]
@@ -45,27 +36,12 @@ namespace FusionTech.src.Controllers
             return Ok(inventoryItem);
         }
 
-        // Updates an inventory item by ID
-
-        // [HttpPut("{id}")]
-        // public async Task<ActionResult> UpdateItem(
-        //     [FromRoute] Guid id,
-        //     [FromBody] InventoryUpdateDto updateDto
-        // ) { }
-
-       // [HttpPut("{id}")]
-       // public async Task<ActionResult> UpdateItem(
-        //    [FromRoute] Guid id,
-        //    [FromBody] InventoryUpdateDto updateDto);
 
 
+        // Adds a game to the inventory 
+        [HttpPost]
+        public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
 
-
-        // Adds a game to the inventory
-        [HttpPost("add-game")]
-        public async Task<ActionResult> AddGameToInventory(
-            [FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto
-        )
         {
             var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
             if (!gameAdded)
@@ -75,11 +51,10 @@ namespace FusionTech.src.Controllers
             return NoContent(); // No content returned on successful addition
         }
 
-        // Removes a game from the inventory
-        [HttpDelete("remove-game")]
-        public async Task<ActionResult> RemoveGameFromInventory(
-            [FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto
-        )
+
+        // Removes a game from the inventory 
+        [HttpDelete]
+        public async Task<ActionResult> RemoveGameFromInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
         {
             var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);
             if (!gameRemoved)

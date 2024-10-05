@@ -52,8 +52,8 @@ namespace FusionTech.src.Controllers
             }
         }
 
-        // I wasted 3 hours on this
-        // I could've done so many great things in these 3 hours
+        // I wasted so many hours on this
+        // I could've done so many great things in these hours
         // Instead, I wasted it here, didn't progress nor learned anything
 
         // Please run away. don't try to solve it. This is impossible
