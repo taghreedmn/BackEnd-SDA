@@ -1,11 +1,12 @@
 using AutoMapper;
 using FusionTech.src.DTO;
+using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore.Metadata;
 using static FusionTech.src.DTO.CategoryDTO;
 
-namespace FusionTech.src.Services.Category
+namespace FusionTech.src.Services.category
 {
     public class CategoryService : ICategoryService
     {
@@ -19,44 +20,55 @@ namespace FusionTech.src.Services.Category
         }
 
         public async Task<CategoryDTO.CategoryReadDto> CreateOneAsync(
-            CategoryDTO.CategoryCreateDto createDto
+          CategoryCreateDto createDto
         )
         {
-            var category = _mapper.Map<CategoryCreateDto, Entity.Category>(createDto);
+            var category = _mapper.Map<CategoryCreateDto, Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Entity.Category, CategoryReadDto>(categoryCreated);
+            return _mapper.Map<Category, CategoryReadDto>(categoryCreated);
         }
 
-        public async Task<List<CategoryDTO.CategoryReadDto>> GetAllAsync(
+        public async Task<List<CategoryReadDto>> GetAllAsync(
             PaginationOptions paginationOptions
         )
         {
             var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Entity.Category>, List<CategoryReadDto>>(categoryList);
+            return _mapper.Map<List<Category>, List<CategoryReadDto>>(categoryList);
         }
 
-        public async Task<CategoryDTO.CategoryReadDto> GetByIdAsync(Guid id)
+        public async Task<CategoryReadDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
-            if(foundCategory==null)
+            if (foundCategory == null)
             {
-                throw CustomExeption.NotFound($"category with {id} can not find");
+                throw CustomExeption.NotFound($"Category with ID {id} not found");
             }
-            return _mapper.Map<Entity.Category, CategoryReadDto>(foundCategory);
+            return _mapper.Map<Category, CategoryReadDto>(foundCategory);
+        }
+        public async Task<List<CategoryReadDto>> GetCategoryDetailsByNameAsync(string CategoryName)
+        {
+            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
+            if (foundCategory == null || foundCategory.Count == 0)
+            {
+                throw CustomExeption.NotFound($"No categories found with the name {CategoryName}");
+            }
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryReadDto>>(foundCategory);
+            return categoryLists;
         }
 
         public async Task<bool> DeleteOneAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
+            if (foundCategory == null)
+            {
+                throw CustomExeption.NotFound($"Category with ID {id} not found");
+            }
             bool isDelete = await _categoryRepository.DeleteOneAsync(foundCategory);
-            if (isDelete)
+            if (!isDelete)
             {
-                return true;
+                throw CustomExeption.InternalError("Failed to delete the category");
             }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
         public async Task<bool> UpdateOneAsync(Guid id, CategoryUpdateDto updateDto)

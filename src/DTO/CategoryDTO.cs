@@ -1,22 +1,30 @@
+using System.ComponentModel.DataAnnotations;
+using static FusionTech.src.DTO.VideoGameInfoDTO;
+
 namespace FusionTech.src.DTO
 {
     public class CategoryDTO
     {
         public class CategoryCreateDto
         {
+            [Required(ErrorMessage = "Category name is required.")]
+            [StringLength(100, ErrorMessage = "Category name cannot exceed 100 characters.")]
             public string? CategoryName { get; set; }
         }
 
-        // read data = get data
         public class CategoryReadDto
         {
             public Guid CategoryId { get; set; }
+
             public string? CategoryName { get; set; }
+            public List<VideoGameInfoReadDto> Categories { get; set; }
+            // public VideoGameInfoReadDto VideoGameInfo { get; set; }
+
         }
 
-        // update
         public class CategoryUpdateDto
         {
+            [StringLength(100, ErrorMessage = "Category name cannot exceed 100 characters.")]
             public string? CategoryName { get; set; }
         }
     }

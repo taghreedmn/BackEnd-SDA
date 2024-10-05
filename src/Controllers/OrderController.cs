@@ -1,5 +1,9 @@
-/* using FusionTech.src.Entity;
+using System.Security.Claims;
+using FusionTech.src.Entity;
+using FusionTech.src.Services.order;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.OrderDTO;
 
 
 namespace FusionTech.src.Controllers
@@ -8,49 +12,53 @@ namespace FusionTech.src.Controllers
     [Route("api/v1/[controller]")]
     public class OrderController : ControllerBase
     {
+        protected readonly IOrderService _orderService;
+
+        public OrderController(IOrderService orderService)
+        {
+            _orderService = orderService;
+        }
+
         // Create a new order
         [HttpPost]
-        public ActionResult CreateOrder(Order newOrder)
+        [Authorize(Policy = "Customer")]
+        public async Task<ActionResult<OrderReadDto>> CreateOneAsync(
+            [FromBody] OrderCreateDto orderCreateDto
+        )
         {
-            throw new NotImplementedException();
+            var authenticateClaims = HttpContext.User;
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return BadRequest("User ID not found in claims or is not a valid integer.");
+            }
+
+            // var userGuid = ConvertIntToGuid(userId); //  using int to Guid conversion
+
+            // return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
+            return await _orderService.CreateOneAsync(userId, orderCreateDto);
         }
 
         // Get all orders
         [HttpGet]
-        public ActionResult GetAllOrders()
+        [Authorize]
+        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync()
         {
-            throw new NotImplementedException();
-        }
+            var authenticateClaims = HttpContext.User;
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
 
-        // Get a specific order by ID
-        [HttpGet("{id}")]
-        public ActionResult GetOrderById(Guid id)
-        {
-
-            throw new NotImplementedException();
-
-            Order? foundOrder = Order.FirstOrDefault(o => o.OrderId += id);
-            if (foundOrder == null)
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
             {
-                return NotFound();
+                return BadRequest("User ID not found in claims or is not a valid integer.");
             }
-            return Ok(foundOrder);
-
+            var orders = await _orderService.GetOrderByIdAsync(userId);
+            return Ok(orders);
         }
 
-        // Update an existing order
-        [HttpPut("{id}")]
-        public ActionResult UpdateOrder(Guid id, [FromBody] Order updatedOrder)
-        {
-            throw new NotImplementedException();
-        }
-
-        // Delete an order
-        [HttpDelete("{id}")]
-        public ActionResult DeleteOrder(Guid id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
-  */

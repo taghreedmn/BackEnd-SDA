@@ -16,9 +16,9 @@ namespace FusionTech.src.Services.Studio
             _maper = maper;
         }
 
-        public async Task<ReadStudioDTO> CreateOneAsync(CreatStudioDTO createDTO)
+        public async Task<ReadStudioDTO> CreateOneAsync(CreateStudioDTO createDTO)
         {
-            var studio = _maper.Map<CreatStudioDTO, GameStudio>(createDTO);
+            var studio = _maper.Map<CreateStudioDTO, GameStudio>(createDTO);
 
             var studioCreated = await _studioRepository.CreateOneAsync(studio);
 

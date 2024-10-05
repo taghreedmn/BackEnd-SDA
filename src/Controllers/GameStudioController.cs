@@ -25,7 +25,7 @@ namespace FusionTech.src.Controllers
         //1-Create Studio:
 
         [HttpPost]
-        public async Task<ActionResult<ReadStudioDTO>> CreateOneAsync(CreatStudioDTO createDTO)
+        public async Task<ActionResult<ReadStudioDTO>> CreateOneAsync(CreateStudioDTO createDTO)
         {
             var studioCreated = await _studioService.CreateOneAsync(createDTO);
             return Created($"api/v1/GameStudio/{studioCreated.StudioName}", studioCreated);

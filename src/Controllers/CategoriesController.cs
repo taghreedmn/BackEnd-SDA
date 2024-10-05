@@ -1,5 +1,4 @@
-using FusionTech.src.Entity;
-using FusionTech.src.Services.Category;
+using FusionTech.src.Services.category;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.CategoryDTO;
@@ -24,7 +23,6 @@ namespace FusionTech.src.Controllers
         {
             var categoryCreated = await _categoryService.CreateOneAsync(createDto);
             return Created($"api/v1/categories/{categoryCreated.CategoryId}", categoryCreated);
-            // return Ok(categoryCreated);
         }
 
         [HttpGet]
@@ -36,10 +34,16 @@ namespace FusionTech.src.Controllers
             return Ok(categoryList);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid Id)
+        // [HttpGet("{Id}")]
+        // public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid Id)
+        // {
+        //     var category = await _categoryService.GetByIdAsync(Id);
+        //     return Ok(category);
+        // }
+        [HttpGet("{CategoryName}")]
+        public async Task<ActionResult<CategoryReadDto>> GetCategoryDetailsByNameAsync([FromRoute] string CategoryName)
         {
-            var category = await _categoryService.GetByIdAsync(Id);
+            var category = await _categoryService.GetCategoryDetailsByNameAsync(CategoryName);
             return Ok(category);
         }
 

@@ -30,13 +30,15 @@ namespace FusionTech.src.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVideoGameById(Guid id)
         {
-            var videoGame = await _videoGameInfoService.GetByIdAsync(id);
+            var videoGame = await _videoGameInfoService.GetVideoGameVersionByIdAsync(id);
+
             if (videoGame == null)
             {
                 return NotFound();
             }
             return Ok(videoGame);
         }
+
 
         [Authorize(Policy = "admin")]
         // Add a new video game
@@ -55,7 +57,7 @@ namespace FusionTech.src.Controllers
                 return BadRequest("Failed to create video game");
             }
 
-            return CreatedAtAction(nameof(GetVideoGameById), new { id = createdVideoGame.GameId }, createdVideoGame);
+            return CreatedAtAction(nameof(GetVideoGameById), new { id = createdVideoGame.VideoGameInfoId }, createdVideoGame);
         }
 
         [Authorize(Policy = "admin")]

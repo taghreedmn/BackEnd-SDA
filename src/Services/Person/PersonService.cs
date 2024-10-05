@@ -27,7 +27,7 @@ namespace FusionTech.src.Services.Person
             var foundPerson = await _personRepository.GetByIdAsync(id);
             if (foundPerson == null)
             {
-                throw new KeyNotFoundException("Person not found.");
+                throw CustomExeption.NotFound($"Person with ID {id} not found.");
             }
             return _mapper.Map<Entity.Person, PersonSignInDTO>(foundPerson);
         }
@@ -35,29 +35,48 @@ namespace FusionTech.src.Services.Person
         public async Task<int> GetIdByEmailAsync(string email)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-
-            return person.PersonId;
+            if (person == null)
+            {
+                throw CustomExeption.NotFound($"Person with email {email} not found.");
+            }
+            return person!.PersonId;
         }
 
         public async Task<bool> UpdateNameAsync(string email, string name)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.PersonName = name;
+            if (person == null)
+            {
+                throw CustomExeption.NotFound($"Person with email {email} not found.");
+            }
+            person!.PersonName = name;
             var result = await _personRepository.UpdateAsync(person);
+            if (!result)
+            {
+                throw CustomExeption.InternalError("Failed to update person name.");
+            }
             return result;
         }
 
         public async Task<bool> EditPassword(string email, string oldPassword, string newPassword)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            if (!PasswordUtils.isPasswordEqual(oldPassword, person.PersonPassword, person.salt))
+            if (person == null)
             {
-                throw new UnauthorizedAccessException("Old password does not match.");
+                throw CustomExeption.NotFound($"Person with email {email} not found.");
+            }
+            if (!PasswordUtils.isPasswordEqual(oldPassword, person!.PersonPassword, person.salt))
+            {
+                throw CustomExeption.UnAthorized("Old password does not match.");
             }
             PasswordUtils.HashPassword(newPassword, out string hashedPassword, out byte[] salt);
             person.PersonPassword = hashedPassword;
             person.salt = salt;
             var result = await _personRepository.UpdateAsync(person);
+            if (!result)
+            {
+                throw CustomExeption.InternalError("Failed to update password.");
+            }
 
             return result;
         }
@@ -65,7 +84,7 @@ namespace FusionTech.src.Services.Person
         public async Task<bool> EditPhone(string email, string newPhone)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.PersonPhone = newPhone;
+            person!.PersonPhoneNumber = newPhone;
             var result = await _personRepository.UpdateAsync(person);
             return result;
         }
@@ -73,8 +92,17 @@ namespace FusionTech.src.Services.Person
         public async Task<bool> EditProfilePicture(string email, string picturePath)
         {
             var person = await _personRepository.FindPersonByEmail(email);
-            person.ProfilePicturePath = picturePath;
+            if (person == null)
+            {
+                throw CustomExeption.NotFound($"Person with email {email} not found.");
+            }
+
+            person!.ProfilePicturePath = picturePath;
             var result = await _personRepository.UpdateAsync(person);
+            if (!result)
+            {
+                throw CustomExeption.InternalError("Failed to update phone number.");
+            }
             return result;
         }
 
@@ -83,6 +111,11 @@ namespace FusionTech.src.Services.Person
             var foundPerson = await _personRepository.FindPersonByEmail(
                 personSignInDTO.PersonEmail
             );
+
+            if (foundPerson == null)
+            {
+                throw CustomExeption.UnAthorized("Wrong email or password.");
+            }
             bool isMatched = PasswordUtils.isPasswordEqual(
                 personSignInDTO.PersonPassword,
                 foundPerson.PersonPassword,
@@ -90,7 +123,7 @@ namespace FusionTech.src.Services.Person
             );
             if (!isMatched)
             {
-                throw new UnauthorizedAccessException("Invalid credentials.");
+                throw CustomExeption.UnAthorized("Invalid credentials.");
             }
             var tokenUtils = new TokenUtils(_config);
             return tokenUtils.generateToken(foundPerson);
