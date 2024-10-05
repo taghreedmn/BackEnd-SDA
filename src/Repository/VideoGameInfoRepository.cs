@@ -7,7 +7,7 @@ namespace FusionTech.src.Repository
 {
     public class VideoGameInfoRepository
     {
-          protected DbSet<VideoGameInfo> _videoGameInfos;
+        protected DbSet<VideoGameInfo> _videoGameInfos;
         protected DatabaseContext _databaseContext;
 
         public VideoGameInfoRepository(DatabaseContext databaseContext)
@@ -21,6 +21,7 @@ namespace FusionTech.src.Repository
         {
             return await _videoGameInfos.FindAsync(id);
         }
+
 
         // Create a new video game
         public async Task<VideoGameInfo> CreateOneAsync(VideoGameInfo newGameInfo)
@@ -52,4 +53,4 @@ namespace FusionTech.src.Repository
             return true;
         }
     }
-    }
+}

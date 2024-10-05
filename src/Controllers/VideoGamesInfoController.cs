@@ -36,6 +36,7 @@ namespace FusionTech.src.Controllers
             return Ok(videoGame);
         }
 
+
         // Add a new video game
         [HttpPost]
         public async Task<IActionResult> CreateVideoGame(VideoGameInfoCreateDto newVideoGameDto)

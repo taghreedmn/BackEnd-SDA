@@ -189,7 +189,7 @@ namespace FusionTech.src.Database
             // Seed VideoGameInfo data
             var videoGame1Id = Guid.NewGuid();
             var videoGame2Id = Guid.NewGuid();
-            var categoryIdFk = modelBuilder.Entity<Category>().Property(x => x.Id);
+            // var categoryIdFk = modelBuilder.Entity<Category>().Property(x => x.Id);
 
             modelBuilder
                 .Entity<VideoGameInfo>()
