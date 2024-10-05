@@ -116,10 +116,11 @@ You can test the API using tools like Postman or cURL.
 
 ## Project structure
 - Controllers: API controllers with request and response
-— Database : DbContext and Database Configurations
+- Database : DbContext and Database Configurations
 - DTOs : Data Transfer Objects
 - Entities : Database Entities (User, Product, Category, Order)
-- Middleware : Logging, request, response and Error Handler Repositories # Repository Layer for database operations
+- Middleware : Logging, request, response and Error Handler 
+- Repositories # Repository Layer for database operations
 - Services : Business Logic Layer 
 - Utils : Common logics
 - Migrations : Entity Framework Migrations
