@@ -1,6 +1,7 @@
 using FusionTech.src.DTO;
 using FusionTech.src.Utils;
 using FusionTech.videoGameVersion;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.VideoGameVersionDTO;
 
@@ -55,18 +56,18 @@ namespace FusionTech.src.Controllers
             return Ok(version);
         }
 
-        //         [HttpPut("{Id}")]
-        //         public ActionResult PutCategory(Guid id, Category updateCategory)
-        //         {
-        //             Category? foundCategory = categories.FirstOrDefault(c => c.Id == id);
-        //             if (foundCategory == null)
-        //             {
-        //                 return NotFound();
-        //             }
+        [Authorize(Policy = "admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOneAsync(Guid id, VideoGameVersionUpdateDto updateGameVersion)
+        {
+            var isUpdated = await _versionService.UpdateOneAsync(id, updateGameVersion);
 
-        //             foundCategory.Id = updateCategory.Id;
-        //             foundCategory.CategoryName = updateCategory.CategoryName;
-        //             return NoContent();
-        //         }
+            if (!isUpdated)
+            {
+                return NotFound("Video game not found or update failed.");
+            }
+
+            return NoContent();
+        }
     }
 }
