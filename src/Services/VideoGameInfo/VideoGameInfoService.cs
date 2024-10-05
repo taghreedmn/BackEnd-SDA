@@ -104,6 +104,11 @@ namespace FusionTech.src.Services.VideoGamesInfo
             var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
             return _mapper.Map<VideoGameInfo, VideoGameInfoReadDto>(foundGameInfo);
         }
+        public async Task<List<VideoGameInfoReadDto>> GetVideoGameVersionByIdAsync(Guid id)
+        {
+            var foundGameInfo = await _videoGameInfoRepo.GetVideoGameVersionByIdAsync(id);
+            return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(foundGameInfo);
+        }
 
         /* public async Task<bool> UpdateOnAsync(Guid id, VideoGameInfoUpdateDto updateGameInfo)
         {

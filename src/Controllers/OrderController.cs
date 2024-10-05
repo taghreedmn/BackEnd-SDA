@@ -42,42 +42,23 @@ namespace FusionTech.src.Controllers
             return await _orderService.CreateOneAsync(userId, orderCreateDto);
         }
 
-        private Guid ConvertIntToGuid(int customerId)
-        {
-            byte[] guidBytes = new byte[16];
-            BitConverter.GetBytes(customerId).CopyTo(guidBytes, 0);
-
-            // Set the rest of the bytes to zero or handle as needed
-            for (int i = 4; i < guidBytes.Length; i++)
-            {
-                guidBytes[i] = 0;
-            }
-
-            return new Guid(guidBytes);
-        }
-
         // Get all orders
-        [HttpGet("Customer/{CustomerId}")]
+        [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync([FromRoute]int CustomerId)
+        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync()
         {
-            var orders = await _orderService.GetOrderByIdAsync(CustomerId);
+            var authenticateClaims = HttpContext.User;
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return BadRequest("User ID not found in claims or is not a valid integer.");
+            }
+            var orders = await _orderService.GetOrderByIdAsync(userId);
             return Ok(orders);
         }
-        // public async Task<ActionResult<List<OrderReadDto>>> GetAllOrdersAsync()
-        // {
-        //     var storeList = await _orderService.GetAllOrdersAsync();
-        //     return Ok(storeList);
-        // }
 
-        // // Get a specific order by ID
-        // [HttpGet("{id}")]
-
-        // // Update an existing order
-        // [HttpPut("{id}")]
-        // public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
-        // {
-
-        // }
     }
 }
