@@ -19,6 +19,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<VideoGameVersionReadDto>> CreateOne(
             [FromBody] VideoGameVersionCreateDto createDto
         )
@@ -45,6 +46,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpDelete("{Id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<VideoGameVersionReadDto>> DeleteOneAsync([FromRoute] Guid Id)
         {
             var version = await _versionService.GetVersionByIdAsync(Id);

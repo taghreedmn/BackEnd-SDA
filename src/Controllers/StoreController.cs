@@ -1,5 +1,6 @@
 
 using FusionTech.src.Service.Store;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.StoreDTO;
 
@@ -18,6 +19,7 @@ namespace FusionTech.src.Controllers
 
         // Creates a new store
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<StoreReadDto>> CreateOne([FromBody] StoreCreateDto createDto)
         {
             var storeCreated = await _storeService.CreateOneAsync(createDto);
@@ -46,6 +48,7 @@ namespace FusionTech.src.Controllers
 
         // Updates a store by ID
         [HttpPut("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> UpdateStore([FromRoute] Guid id, [FromBody] StoreUpdateDto updateDto)
         {
             if (id != updateDto.StoreId)
@@ -63,6 +66,7 @@ namespace FusionTech.src.Controllers
 
         // Deletes a store by ID
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> DeleteStore([FromRoute] Guid id)
         {
             var isDeleted = await _storeService.DeleteOneAsync(id);

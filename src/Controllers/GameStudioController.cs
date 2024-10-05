@@ -6,6 +6,7 @@
 //5-delete Studio by id
 
 using FusionTech.src.Services.Studio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.StudioDTO;
 
@@ -25,6 +26,7 @@ namespace FusionTech.src.Controllers
         //1-Create Studio:
 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<ReadStudioDTO>> CreateOneAsync(CreateStudioDTO createDTO)
         {
             var studioCreated = await _studioService.CreateOneAsync(createDTO);
@@ -33,6 +35,7 @@ namespace FusionTech.src.Controllers
 
         //2-update Studio:
         [HttpPut("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateStudioDTO studioName)
         {
             var updated = await _studioService.UpdateAsync(id, studioName);
@@ -61,6 +64,7 @@ namespace FusionTech.src.Controllers
 
         //5-delete Studio by id
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> DeleteId(Guid id)
         {
             var foundSudio = await _studioService.GetIdAsync(id);

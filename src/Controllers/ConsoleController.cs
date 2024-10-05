@@ -6,6 +6,7 @@
 //5-delete Console by id
 
 using FusionTech.src.Services.Console;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.ConsoleDTO;
 
@@ -24,6 +25,7 @@ namespace FusionTech.src.Controllers
 
         //1-Create Console:
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<ReadConsoleDTO>> CreateOneAsync(CreateConsoleDTO createDTO)
         {
             var consoleCreated = await _consoleService.CreateOneAsync(createDTO);
@@ -32,6 +34,7 @@ namespace FusionTech.src.Controllers
 
         //2-update Console
         [HttpPut("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateConsoleDTO consoleName)
         {
             var updated = await _consoleService.UpdateAsync(id, consoleName);
@@ -60,6 +63,7 @@ namespace FusionTech.src.Controllers
 
         //5-delete Console by id
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> DeleteId(Guid id)
         {
             var foundConsole = await _consoleService.GetIdAsync(id);
