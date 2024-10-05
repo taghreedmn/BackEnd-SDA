@@ -23,7 +23,7 @@ namespace FusionTech.src.Controllers
         )
         {
             var videoGameVersionCreated = await _versionService.CreateOneAsync(createDto);
-            return Created($"api/v1/categories/{videoGameVersionCreated.Id}", videoGameVersionCreated);
+            return Created($"api/v1/categories/{videoGameVersionCreated.VideoGameVersionId}", videoGameVersionCreated);
             // return Ok(categoryCreated);
         }
 
@@ -51,7 +51,7 @@ namespace FusionTech.src.Controllers
             {
                 return NotFound();
             }
-            await _versionService.DeleteOneAsync(version.Id);
+            await _versionService.DeleteOneAsync(version.VideoGameVersionId);
             return Ok(version);
         }
 
