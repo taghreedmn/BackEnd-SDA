@@ -12,6 +12,7 @@ namespace FusionTech.src.Entity
         public Guid OrderId { get; set; }
 
         [ForeignKey("VideoGameVersion")]
+
         public Guid VideoGameVersionId { get; set; }
 
         [Required(ErrorMessage = "Order quantity is required.")]

@@ -5,6 +5,7 @@ namespace FusionTech.src.Entity
 {
     public class GameStudio
     {
+
         public Guid GameStudioId { get; set; }
 
         [Required(ErrorMessage = "Studio name is required.")]
@@ -15,5 +16,7 @@ namespace FusionTech.src.Entity
 
         [StringLength(200, ErrorMessage = "Studio picture path cannot exceed 200 characters.")]
         public string StudioPicturePath { get; set; }
+        public ICollection<VideoGameInfo> VideoGames { get; set; }
+
     }
 }

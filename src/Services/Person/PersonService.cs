@@ -25,23 +25,57 @@ namespace FusionTech.src.Services.Person
         public async Task<PersonSignInDTO> GetByIdAsync(int id)
         {
             var foundPerson = await _personRepository.GetByIdAsync(id);
-            // Naming it only Person makes the compiler get confused between the namespace and the Person class
+            if (foundPerson == null)
+            {
+                throw new KeyNotFoundException("Person not found.");
+            }
             return _mapper.Map<Entity.Person, PersonSignInDTO>(foundPerson);
         }
 
-        public Task<bool> EditPassword(int personId, string oldPassword, string newPassword)
+        public async Task<int> GetIdByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var person = await _personRepository.FindPersonByEmail(email);
+
+            return person.PersonId;
         }
 
-        public Task<bool> EditPhone(int personId, string newPhone)
+        public async Task<bool> UpdateNameAsync(string email, string name)
         {
-            throw new NotImplementedException();
+            var person = await _personRepository.FindPersonByEmail(email);
+            person.PersonName = name;
+            var result = await _personRepository.UpdateAsync(person);
+            return result;
         }
 
-        public Task<bool> EditProfilePicture(int personId, string picturePath)
+        public async Task<bool> EditPassword(string email, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            var person = await _personRepository.FindPersonByEmail(email);
+            if (!PasswordUtils.isPasswordEqual(oldPassword, person.PersonPassword, person.salt))
+            {
+                throw new UnauthorizedAccessException("Old password does not match.");
+            }
+            PasswordUtils.HashPassword(newPassword, out string hashedPassword, out byte[] salt);
+            person.PersonPassword = hashedPassword;
+            person.salt = salt;
+            var result = await _personRepository.UpdateAsync(person);
+
+            return result;
+        }
+
+        public async Task<bool> EditPhone(string email, string newPhone)
+        {
+            var person = await _personRepository.FindPersonByEmail(email);
+            person.PersonPhoneNumber = newPhone;
+            var result = await _personRepository.UpdateAsync(person);
+            return result;
+        }
+
+        public async Task<bool> EditProfilePicture(string email, string picturePath)
+        {
+            var person = await _personRepository.FindPersonByEmail(email);
+            person.ProfilePicturePath = picturePath;
+            var result = await _personRepository.UpdateAsync(person);
+            return result;
         }
 
         public async Task<string> SignInAsync(PersonSignInDTO personSignInDTO)
@@ -56,7 +90,7 @@ namespace FusionTech.src.Services.Person
             );
             if (!isMatched)
             {
-                return "Unauthorized";
+                throw new UnauthorizedAccessException("Invalid credentials.");
             }
             var tokenUtils = new TokenUtils(_config);
             return tokenUtils.generateToken(foundPerson);

@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using FusionTech.src.Entity;
 
 namespace FusionTech.src.DTO
 {
@@ -7,29 +6,30 @@ namespace FusionTech.src.DTO
     {
         public class PersonSignUpDTO
         {
-            [StringLength(
-                100,
-                MinimumLength = 3,
-                ErrorMessage = "Name must be between 3 and 100 characters"
-            )]
+            [Required(ErrorMessage = "Person name is required.")]
+            [StringLength(100, ErrorMessage = "Person name cannot exceed 100 characters.")]
             public required string PersonName { get; set; }
 
-            [EmailAddress(ErrorMessage = "Invalid Email Address")]
+            [Required(ErrorMessage = "Person email is required.")]
+            [EmailAddress(ErrorMessage = "Invalid email format.")]
             public required string PersonEmail { get; set; }
 
-            [DataType(DataType.Password)]
-            [MinLength(8)]
+            [Required(ErrorMessage = "Person password is required.")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters long and cannot exceed 100 characters.")]
             public required string PersonPassword { get; set; }
 
-            [Phone(ErrorMessage = "Invalid phone number")]
+            [Phone(ErrorMessage = "Invalid phone number format.")]
             public string? PersonPhone { get; set; }
             public string? ProfilePicturePath { get; set; }
         }
 
         public class PersonSignInDTO
         {
+            [Required(ErrorMessage = "Person email is required.")]
+            [EmailAddress(ErrorMessage = "Invalid email format.")]
             public required string PersonEmail { get; set; }
 
+            [Required(ErrorMessage = "Person password is required.")]
             public required string PersonPassword { get; set; }
         }
 

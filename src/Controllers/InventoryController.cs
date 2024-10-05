@@ -1,6 +1,6 @@
+using FusionTech.src.Services.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.InventoryDTO;
-using FusionTech.src.Services.Inventory;
 
 namespace FusionTech.src.Controllers
 {
@@ -13,16 +13,6 @@ namespace FusionTech.src.Controllers
         public InventoryController(IInventoryService inventoryService)
         {
             _inventoryService = inventoryService;
-        }
-
-        // Creates a new inventory Game
-        [HttpPost]
-        public async Task<ActionResult<InventoryReadDto>> CreateOne(
-            [FromBody] InventoryCreateDto createDto
-        )
-        {
-            var inventoryCreated = await _inventoryService.CreateOneAsync(createDto);
-            return Created($"api/v1/inventory/{inventoryCreated.InventoryId}", inventoryCreated);
         }
 
         // Retrieves all inventory Games with pagination
@@ -45,21 +35,21 @@ namespace FusionTech.src.Controllers
             return Ok(inventoryItem);
         }
 
-
         // Updates an inventory item by ID
-        // [HttpPut("{id}")]
-        // public async Task<ActionResult> UpdateItemAsync([FromRoute] Guid id, [FromBody] InventoryModifyGameQuantityDTO updateDto)
-        // {
-          
-        // }
-
-
-
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateItemAsync([FromRoute] Guid id, [FromBody] InventoryModifyGameQuantityDTO updateDto)
+        {
+            var isUpdated = await _inventoryService.UpdateGameQuantityAsync(id, updateDto); // Assuming a method exists for this
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
 
         // Adds a game to the inventory 
-        [HttpPost("add-game")]
+        [HttpPost]
         public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
-
         {
             var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
             if (!gameAdded)
@@ -69,9 +59,8 @@ namespace FusionTech.src.Controllers
             return NoContent(); // No content returned on successful addition
         }
 
-
         // Removes a game from the inventory 
-        [HttpDelete("remove-game")]
+        [HttpDelete]
         public async Task<ActionResult> RemoveGameFromInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
         {
             var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);
@@ -83,3 +72,4 @@ namespace FusionTech.src.Controllers
         }
     }
 }
+
