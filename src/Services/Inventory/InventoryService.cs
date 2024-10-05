@@ -56,7 +56,7 @@ namespace FusionTech.src.Services.Inventory
             {
                 return false;
             }
-            foundInventory.InventoryQuantity += modifyGameQuantityDto.Quantity;
+            foundInventory.GameQuantity += modifyGameQuantityDto.GameQuantity;
             return await _inventoryRepo.UpdateOnAsync(foundInventory);
         }
 
@@ -69,9 +69,9 @@ namespace FusionTech.src.Services.Inventory
             {
                 return false;
             }
-            foundInventory.InventoryQuantity -= modifyGameQuantityDto.Quantity;
+            foundInventory.GameQuantity -= modifyGameQuantityDto.GameQuantity;
 
-            if (foundInventory.InventoryQuantity == 0)
+            if (foundInventory.GameQuantity == 0)
             {
                 return await _inventoryRepo.DeleteOnAsync(foundInventory);
             }
