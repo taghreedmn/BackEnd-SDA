@@ -38,6 +38,10 @@ namespace FusionTech.src.Services.Category
         public async Task<CategoryDTO.CategoryReadDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
+            if(foundCategory==null)
+            {
+                throw CustomExeption.NotFound($"category with {id} can not find");
+            }
             return _mapper.Map<Entity.Category, CategoryReadDto>(foundCategory);
         }
 
@@ -60,10 +64,15 @@ namespace FusionTech.src.Services.Category
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
-                return false;
+                throw CustomExeption.NotFound($"Category with ID {id} not found");
             }
             _mapper.Map(updateDto, foundCategory);
-            return await _categoryRepository.UpdateOneAsync(foundCategory);
+            bool isUpdated = await _categoryRepository.UpdateOneAsync(foundCategory);
+            if (!isUpdated)
+            {
+                throw CustomExeption.InternalError("Failed to update the category");
+            }
+            return true;
         }
 
     }
