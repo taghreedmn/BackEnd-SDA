@@ -1,8 +1,9 @@
+using System.Data;
+using FusionTech.src.DTO;
 using FusionTech.src.Entity;
-using FusionTech.src.Services.Category;
+using FusionTech.src.Services.Category; // Correct casing
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.CategoryDTO;
 
 namespace FusionTech.src.Controllers
 {
@@ -24,7 +25,6 @@ namespace FusionTech.src.Controllers
         {
             var categoryCreated = await _categoryService.CreateOneAsync(createDto);
             return Created($"api/v1/categories/{categoryCreated.CategoryId}", categoryCreated);
-            // return Ok(categoryCreated);
         }
 
         [HttpGet]

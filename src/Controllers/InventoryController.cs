@@ -15,7 +15,6 @@ namespace FusionTech.src.Controllers
             _inventoryService = inventoryService;
         }
 
-
         // Retrieves all inventory Games with pagination
         [HttpGet]
         public async Task<ActionResult<List<InventoryReadDto>>> GetAllItems()
@@ -36,12 +35,21 @@ namespace FusionTech.src.Controllers
             return Ok(inventoryItem);
         }
 
-
+        // Updates an inventory item by ID
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateItemAsync([FromRoute] Guid id, [FromBody] InventoryModifyGameQuantityDTO updateDto)
+        {
+            var isUpdated = await _inventoryService.UpdateGameQuantityAsync(id, updateDto); // Assuming a method exists for this
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
 
         // Adds a game to the inventory 
         [HttpPost]
         public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
-
         {
             var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
             if (!gameAdded)
@@ -50,7 +58,6 @@ namespace FusionTech.src.Controllers
             }
             return NoContent(); // No content returned on successful addition
         }
-
 
         // Removes a game from the inventory 
         [HttpDelete]
@@ -65,3 +72,4 @@ namespace FusionTech.src.Controllers
         }
     }
 }
+

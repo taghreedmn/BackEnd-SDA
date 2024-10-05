@@ -6,6 +6,7 @@ namespace FusionTech.src.Entity
     {
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
+        public List<OrderedGames> OrderedGames { get; set; }
         public float TotalPrice { get; set; }
         [ForeignKey("PaymentId")]
         public int PaymentId { get; set; }
@@ -14,4 +15,3 @@ namespace FusionTech.src.Entity
         public int CustomerId { get; set; }
     }
 }
-

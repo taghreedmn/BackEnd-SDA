@@ -17,5 +17,6 @@ namespace FusionTech.src.Entity
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string PublisherEmail { get; set; }
         public string? PublisherPicturePath { get; set; }
+
     }
 }

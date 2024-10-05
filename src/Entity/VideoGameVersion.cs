@@ -1,5 +1,4 @@
 
-
 namespace FusionTech.src.Entity
 {
     public class VideoGameVersion

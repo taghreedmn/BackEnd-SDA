@@ -6,12 +6,14 @@ namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
     {
+
        public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<StoreEmployee> StoreEmployees { get; set; }
         public DbSet<SystemAdmin> SystemAdmins { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderedGames> OrderedGames { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
@@ -23,6 +25,7 @@ namespace FusionTech.src.Database
         public DbSet<Publisher> Publisher { get; set; }
         public DbSet<VideoGameVersion> VideoGameVersion { get; set; }
         public DbSet<VideoGameInfo> VideoGameInfo { get; set; }
+
 
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
@@ -52,26 +55,19 @@ namespace FusionTech.src.Database
             var Payment2 = new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Visa" };
             var Payment3 = new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Mada" };
             var Payment4 = new Payment { PaymentId = Guid.NewGuid(), PaymentMethod = "Apple Pay" };
-           
-        
 
               // Seed Inventory data
             var Inventory1 = new Inventory { InventoryId = Guid.NewGuid(),VideoGameVersionId = Guid.NewGuid(), StoreId = Guid.NewGuid(), GameQuantity = 250 };
             var Inventory2 = new Inventory { InventoryId = Guid.NewGuid(),VideoGameVersionId = Guid.NewGuid(), StoreId = Guid.NewGuid(), GameQuantity = 400 };
 
-            
-       
                 // Seed Supplier data
             var Supplier1 = new Supplier { SupplierId = Guid.NewGuid(), SupplierName = "Tech Supplies Co", SupplierContactInfo = "contact@techsupplies.com, +966-800-555-0199", SupplierBankInfo = "Account No: 123456789" };
             var Supplier2 = new Supplier { SupplierId = Guid.NewGuid(), SupplierName = "Gaming Goods Ltd", SupplierContactInfo = "support@gaminggoods.com, +966-800-555-0198", SupplierBankInfo = "Account No: 987654321" };
-
                 
 
               // Seed Supply data
             var Supply1 = new Supply { SupplyId = Guid.NewGuid(), SupplierId = Supplier1.SupplierId, GamesId = Guid.NewGuid(), SupplyQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Inventory1.InventoryId };
             var Supply2 = new Supply { SupplyId = Guid.NewGuid(), SupplierId = Supplier2.SupplierId, GamesId = Guid.NewGuid(), SupplyQuantity = 50, SupplierDate = DateTime.UtcNow.AddDays(-1), InventoryId = Inventory2.InventoryId };
-
-                
 
             // Seed PersonIdCounter data
             var PersonIdCounter1 =   new PersonIdCounter { PersonIdCounterId = PersonType.SystemAdmin, CurrentId = 0 };
@@ -91,7 +87,6 @@ namespace FusionTech.src.Database
           var Studio2 = new GameStudio { GameStudioId = Guid.NewGuid(), StudioName = "Treyarch", StudioPicturePath = "pic2/png" };          
           var Studio3 = new GameStudio { GameStudioId = Guid.NewGuid(), StudioName = "Valve", StudioPicturePath = "pic3/png" };
 
-         
 
             // Seed Publisher data
          
@@ -106,10 +101,7 @@ namespace FusionTech.src.Database
             var Store1 = new {StoreId = Guid.NewGuid(), InventoryId = InventoryId2,NumberOfEmployee = 20,WorkHours = 35, Location = "Riyadh"};
             var Store2 = new {StoreId = Guid.NewGuid(), InventoryId = InventoryId2,NumberOfEmployee = 12,WorkHours = 40, Location = "Jeddah"};
 
-           
-          
-
-             // Seed VideoGameInfo data
+            // Seed VideoGameInfo data
             var videoGame1Id = Guid.NewGuid();
             var videoGame2Id = Guid.NewGuid();
 
@@ -156,6 +148,7 @@ namespace FusionTech.src.Database
                 );
                  modelBuilder
                 .Entity<GameConsole>()
+
                 .HasData(
                     Console1,
                     Console2,
@@ -202,7 +195,6 @@ namespace FusionTech.src.Database
                     PersonIdCounter3
                 );
 
-               
         }
     }
 }

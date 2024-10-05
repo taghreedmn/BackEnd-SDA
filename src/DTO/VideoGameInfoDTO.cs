@@ -1,4 +1,9 @@
-using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations; // Added
+using FusionTech.src.Entity;
 
 namespace FusionTech.src.DTO
 {
@@ -25,6 +30,7 @@ namespace FusionTech.src.DTO
             public int TotalRating { get; set; }
             public Guid PublisherId { get; set; }
             public string? GamePicturePath { get; set; }
+            public Guid CategoryId { get; set; }
         }
 
         public class VideoGameInfoUpdateDto
@@ -64,6 +70,7 @@ namespace FusionTech.src.DTO
             public Guid PublisherId { get; set; }
 
             public string? GamePicturePath { get; set; }
+            public Category Category { get; set; }
         }
     }
 }
