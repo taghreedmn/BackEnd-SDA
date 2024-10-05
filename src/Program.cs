@@ -165,8 +165,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseRouting();
+app.MapGet("/", ()=> "server is running");
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
 

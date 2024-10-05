@@ -1,5 +1,6 @@
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.PaymentDTO;
 
@@ -17,6 +18,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<PaymentReadDto>> CreateOne(
             [FromBody] PaymentCreateDto createDto
         )
@@ -43,6 +45,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<PaymentReadDto>> DeleteOne([FromRoute] Guid id)
         {
             var payment = await _paymentService.GetByIdAsync(id);

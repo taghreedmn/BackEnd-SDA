@@ -2,6 +2,7 @@
 using FusionTech.src.DTO;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.SupplyDTO;
 
@@ -47,6 +48,7 @@ namespace FusionTech.src.Controllers
         // Create a new supply
 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<SupplyReadDto>> CreateOne(SupplyCreateDto createDto)
         {
             var supplyCreated = await _supplyService.CreateOneAsync(createDto);
@@ -55,6 +57,7 @@ namespace FusionTech.src.Controllers
 
         // Update supply
         [HttpPut("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> UpdateSupply(Guid id, SupplyUpdateDto updateDto) // Use SupplyUpdateDto
         {
             var isUpdated = await _supplyService.UpdateOnAsync(id, updateDto);
@@ -67,6 +70,7 @@ namespace FusionTech.src.Controllers
 
         // Delete supply
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> DeleteSupply(Guid id)
         {
             var isDeleted = await _supplyService.DeleteOneAsync(id);

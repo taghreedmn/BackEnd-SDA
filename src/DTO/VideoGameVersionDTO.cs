@@ -16,7 +16,7 @@ namespace FusionTech.src.DTO
         public class VideoGameVersionUpdateDto
         {
             public Guid VideoGameVersionId { get; set; }
-            public double? Price { get; set; }   
+            public float? Price { get; set; }
         }
 
         public class VideoGameVersionReadDto

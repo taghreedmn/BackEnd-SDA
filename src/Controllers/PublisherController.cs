@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FusionTech.src.Services.Publisher;
 using static FusionTech.src.DTO.PublisherDTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FusionTech.src.Controllers
 {
@@ -38,6 +39,7 @@ namespace FusionTech.src.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<PublisherReadDto>> CreatePublisher(PublisherCreateDto createDto)
         {
             var publisherCreated = await _publisherService.CreateOneAsync(createDto);
@@ -46,6 +48,7 @@ namespace FusionTech.src.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<IActionResult> UpdatePublisher(Guid id, PublisherUpdateDto updateDto)
         {
             var foundPublisher = await _publisherService.GetByIdAsync(id);
@@ -60,6 +63,7 @@ namespace FusionTech.src.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<IActionResult> DeletePublisher(Guid id)
         {
             var foundPublisher = await _publisherService.GetByIdAsync(id);

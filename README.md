@@ -1,52 +1,152 @@
-# E-commerce Application API
+#  Video Game E-commerce Backend Project
 
-This repository contains ASP.NET Core application with RESTful API endpoints for e-commerce application. The API allows you to interact with products in the store.
 
-`This is a teamwork assignment where you will work as a team within your group`
+## Project Overview
+This is a comprehensive solution designed to facilitate the online buying and selling of video games. In a rapidly evolving digital landscape, where gamers seek not only quality products but also seamless shopping experiences, this project aims to provide a robust backend infrastructure that supports a wide range of functionalities tailored to both consumers and administrators.
 
-**_DEADLINE: 06.10.2024_**
+## Project Objective
+The primary goal of this project is to create a scalable and efficient platform that allows users to browse, purchase, and review video games while providing administrators with the necessary tools to manage inventory, process orders, and oversee user interactions. By leveraging modern web technologies and best practices, this project aims to deliver a secure, user-friendly, and responsive experience for all stakeholders involved.
 
-## How to work
 
-1. One team member (admin) should fork the repo and add other members to that admin repo as collaborators.
-2. The other team members should fork then clone the forked repo (the admin repo).
-3. Any change/update made should be submitted to admin repo as pull request.
-4. Each change should be done in a separate pull request.
-5. Pull request must be reviewed by at least 2 members before merged to admin repo.
-6. Admin should open a PR to the original (Integrify) repo.
+ ## Key Features
 
-Please ask your instructor or supporting instructor if you have any questions or need help.
+### For Customers:
 
-## Level 1: Basic Requirements
+#### User Registration and Authentication:
+- Secure user registration and login options using email and password.
 
-In this level, the application includes the following features:
+#### Product Catalog:
+- A dynamic catalog of video games with detailed descriptions, category, store, console, and pricing information.
 
-1. Identify Entities: Identify the main entities that need to be stored in the database. These could include customers, products, categories, orders, etc.
-2. Define Attributes: For each entity, list and define the attributes or properties associated with it. For example, for a "customer" entity, attributes might include "id," "firstName," "lastName," "email" and so on.
-3. Establish Relationships: Determine the relationships between entities. Relationships can be one-to-one, one-to-many, or many-to-many. For instance, in an E-commerce system, a "customer" may have multiple "orders".
-4. Key: When establishing relationships, remember to create a key in your ERD to explain the notation used for relationships.
-5. According to the ERD above, create the entities, and build the database with Entity Framework Core. Add ERD in screenshots folders
-6. Create basic CRUD operations for each endpoint.
-7. Use authentication and role-based authorization
+#### Review and Rating :
+- Allow users to leave reviews and ratings for games they have purchased.
 
-## Level 2: Additional Requirements
+#### Search and Filtering:
+- Enable users to search for games based on name, category, or other criteria.
 
-In addition to the basic requirements, the application enhances its functionality with the following features:
 
-1. Include pagination functionality to the method getting all products.
-2. Implement search functionality to allow users to search for specific products based on keywords or specific fields (e.g., by title).
-3. Add validation checks to ensure the data meets certain criteria before executing the actions.
+### For Employees (Administrators):
+ 
+#### User Management:
+- User Registration and Login: Allow users to create accounts and log in using email and password.
+- User Roles: Support different user roles (e.g., Admin, Customer) with varying permissions.
+- Profile Management: Enable users to update their profile information, including order history and preferences.
+  
+#### Product Management:
+- Video Game Listings: Manage video game data, including name, developer, publisher, release date, price, and description.
+- Inventory Management: Keep track of stock levels for each game, ensuring that users can only purchase available items.
+- Categories : Organize games into categories (e.g., Action, RPG, Sports) .
 
-## Level 3: Advanced Requirements
+#### Order Management:
+- Order Processing: Handle order creation, status updates, and history tracking.
+- Payment Integration: Integrate with payment gateways (e.g., Stripe, PayPal) for processing payments securely.
 
-If you have a higher skill level and finish the previous requirements before the deadline, you can tackle the following bonus tasks:
+#### Admin Dashboard:
+- Product Management: Allow admins to add, update, or delete video game listings.
+- User Management: Admins can manage user accounts.
+- Order Management: View and manage all orders.
 
-1. Refactor method getting all products to also handle query parameters for filtering and sorting products based on specific criteria (e.g., price range, by title, by date, etc). Pagination still need to be integrated.
-2. Use claim-based or resource-based where applicable.
-3. Peer Review:
-   - Review 2 assignments from other teams.
-   - Provide constructive feedback and suggestions for improvement.
+## Technology Stack:
 
-`Please note that the bonus requirements and reviews are optional and can be completed if you have additional time and advanced skills.`
+- Framework: ASP.NET Core 
+- Database: PostgreSQL 
+- ORM: Entity Framework Core 
+- Authentication: JWT (JSON Web Tokens) for secure user authentication
+- Hosting:[]
+- Version Control: Git (for source code management)
 
-Happy coding!
+
+## Prerequisites :
+- Vscode
+- .Net 8 SDK
+- SQL Server
+
+
+  ## Getting Started :
+
+### Step 1: Clone the Repository
+Open your terminal or command prompt and clone the repository to your local machine:
+```bash
+git clone https://github.com/your-username//sda-3-online-Backend_Teamwork.git
+```
+Replace your-username with your actual GitHub username.
+
+
+ ### Step 2: Navigate to the Project Directory
+Change your directory to the cloned repository:
+```bash
+cd sda-3-online-Backend_Teamwork
+```
+ ### Step 3: Set Up the Database
+Create the Database:
+Create a new database in your SQL Server or PostgreSQL instance. You can use SSMS or pgAdmin for this.
+Note the database name, as you will need it in the next step.
+
+Update Connection String:
+
+Open the appsettings.json file located in the project root directory.
+Update the connection string to point to your newly created database. For example:
+```json
+"ConnectionStrings": {
+    "DefaultConnection": "Server=your_server;Database=your_database;User Id=your_username;Password=your_password;"
+}
+```
+Replace your_server, your_database, your_username, and your_password with your actual database connection details.
+
+ ### Step 4: Apply Migrations
+To set up the database schema, you'll need to apply the migrations. In the terminal, run the following command:
+
+```bash
+dotnet ef database update
+```
+This command will create the necessary tables in your database based on the entity definitions in the project.
+
+
+ ### Step 5: Run the Application
+You can now run the application. Use the following command in the terminal:
+
+```bash
+dotnet run
+```
+The application should start, and you will see output indicating that the server is running, typically on http://localhost:5005 or https://localhost:5125.
+
+ ### Step 6: Testing the API
+You can test the API using tools like Postman or cURL.
+
+
+## Project structure
+- Controllers: API controllers with request and response
+- Database : DbContext and Database Configurations
+- DTOs : Data Transfer Objects
+- Entities : Database Entities (User, Product, Category, Order)
+- Middleware : Logging, request, response and Error Handler 
+- Repositories # Repository Layer for database operations
+- Services : Business Logic Layer 
+- Utils : Common logics
+- Migrations : Entity Framework Migrations
+- Program : a Application Entry Point
+
+
+## Deployment :
+The apllication is deployed and can be accessed at : [https:/]
+
+
+
+## Team Member :
+- Lead : Mohammed Alhussain (https://github.com/K-MH21 )
+- Taghreed Alotaibi (https://github.com/aghreedmn)
+- Razan Almohammadi (https://github.com/RazanAlmohammadi)
+- Lujain Alshehri (https://github.com/Lujain41)
+- Samar Almutairi (https://github.com/SamarSaad056)
+
+
+
+
+
+
+
+
+
+
+
+

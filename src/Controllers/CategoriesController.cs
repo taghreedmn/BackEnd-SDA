@@ -2,6 +2,7 @@ using FusionTech.src.Services.category;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.CategoryDTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FusionTech.src.Controllers
 {
@@ -17,6 +18,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<CategoryReadDto>> CreateOne(
             [FromBody] CategoryCreateDto createDto
         )
@@ -48,6 +50,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpDelete("{Id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid Id)
         {
             var category = await _categoryService.GetByIdAsync(Id);
@@ -60,6 +63,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPut("{Id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> UpdateCategory(Guid id, CategoryUpdateDto updateDto)
         {
             var isUpdated = await _categoryService.UpdateOneAsync(id, updateDto);
