@@ -28,19 +28,21 @@ namespace FusionTech.src.Services.VideoGamesInfo
             _systemAdminRepository = systemAdminRepository;
         }
 
-        public async Task<VideoGameInfoReadDto> CreateOneAsync(
-            VideoGameInfoCreateDto createGameInfo,
-            string email
-        )
+
+        public async Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto createGameInfo, string email)
         {
+
             var originalPerson = await _personRepo.FindPersonByEmail(email);
-            var originalSystemAdmin = await _systemAdminRepository.GetByIdAsync(
-                originalPerson!.PersonId
-            );
+            var originalSystemAdmin = await _systemAdminRepository.GetByIdAsync(originalPerson!.PersonId);
+            if (originalPerson == null)
+            {
+                throw CustomExeption.NotFound("Person not found.");
+            }
+
 
             if (originalSystemAdmin!.ManageGames)
             {
-                throw new UnauthorizedAccessException("Unauthorized");
+                throw CustomExeption.UnAthorized("Unauthorized access to manage games.");
             }
 
             var videoGame = _mapper.Map<VideoGameInfoCreateDto, VideoGameInfo>(createGameInfo);
@@ -48,8 +50,9 @@ namespace FusionTech.src.Services.VideoGamesInfo
 
             if (createdGameInfo == null)
             {
-                throw new InvalidOperationException("Failed to create the video game.");
+                throw CustomExeption.InternalError("Failed to create the video game.");
             }
+
 
             return _mapper.Map<VideoGameInfo, VideoGameInfoReadDto>(createdGameInfo);
         }
@@ -59,15 +62,25 @@ namespace FusionTech.src.Services.VideoGamesInfo
             var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
             if (foundGameInfo == null)
             {
-                return false;
+                throw CustomExeption.NotFound($"Video game with ID {id} not found.");
             }
-
+            bool isDeleted = await _videoGameInfoRepo.DeleteOnAsync(foundGameInfo);
+            if (!isDeleted)
+            {
+                throw CustomExeption.InternalError("Failed to delete the video game.");
+            }
             return await _videoGameInfoRepo.DeleteOnAsync(foundGameInfo);
         }
 
         public async Task<List<VideoGameInfoReadDto>> GetAllAsync(SearchParameters searchParameters)
         {
             var videoGameList = await _videoGameInfoRepo.GetAllAsync();
+
+            if (videoGameList == null || videoGameList.Count == 0)
+            {
+                throw CustomExeption.NotFound("No video games found.");
+            }
+
             searchParameters.IsValid(); // Throws an error incase of a wrong parameters
             videoGameList = videoGameList
                 .Where(a =>
@@ -102,35 +115,37 @@ namespace FusionTech.src.Services.VideoGamesInfo
         public async Task<VideoGameInfoReadDto> GetByIdAsync(Guid id)
         {
             var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
+            if (foundGameInfo == null)
+            {
+                throw CustomExeption.NotFound($"Video game with ID {id} not found.");
+            }
             return _mapper.Map<VideoGameInfo, VideoGameInfoReadDto>(foundGameInfo);
         }
         public async Task<List<VideoGameInfoReadDto>> GetVideoGameVersionByIdAsync(Guid id)
         {
             var foundGameInfo = await _videoGameInfoRepo.GetVideoGameVersionByIdAsync(id);
+            if (foundGameInfo == null || foundGameInfo.Count == 0)
+            {
+                throw CustomExeption.NotFound($"No video game versions found for ID {id}.");
+            }
             return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(foundGameInfo);
         }
 
-        /* public async Task<bool> UpdateOnAsync(Guid id, VideoGameInfoUpdateDto updateGameInfo)
-        {
-            var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
-            if (foundGameInfo == null)
-            {
-                return false;
-            }
 
-            _mapper.Map(updateGameInfo, foundGameInfo);
-            return await _videoGameInfoRepo.UpdateOnAsync(foundGameInfo);
-        } */
 
         public async Task<bool> UpdateGameNameAsync(Guid id, string newGameName)
         {
             var videoGame = await _videoGameInfoRepo.GetByIdAsync(id);
             if (videoGame == null)
             {
-                return false;
+                throw CustomExeption.NotFound($"Video game with ID {id} not found.");
             }
-
             videoGame.GameName = newGameName;
+            bool isUpdated = await _videoGameInfoRepo.UpdateOnAsync(videoGame);
+            if (!isUpdated)
+            {
+                throw CustomExeption.InternalError("Failed to update the game name.");
+            }
 
             return await _videoGameInfoRepo.UpdateOnAsync(videoGame);
         }
@@ -140,10 +155,15 @@ namespace FusionTech.src.Services.VideoGamesInfo
             var videoGame = await _videoGameInfoRepo.GetByIdAsync(id);
             if (videoGame == null)
             {
-                return false;
+                throw CustomExeption.NotFound($"Video game with ID {id} not found.");
             }
 
             videoGame.YearOfRelease = newYearOfRelease;
+            bool isUpdated = await _videoGameInfoRepo.UpdateOnAsync(videoGame);
+            if (!isUpdated)
+            {
+                throw CustomExeption.InternalError("Failed to update the year of release.");
+            }
 
             return await _videoGameInfoRepo.UpdateOnAsync(videoGame);
         }
