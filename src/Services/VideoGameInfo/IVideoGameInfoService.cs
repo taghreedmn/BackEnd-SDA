@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FusionTech.src.Entity;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.VideoGameInfoDTO;
 
 namespace FusionTech.src.Services.VideoGamesInfo
 {
     public interface IVideoGameInfoService
     {
-
-        Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto newGameInfo,string email);
-        Task<List<VideoGameInfoReadDto>> GetAllAsync();
+        Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto newGameInfo, string email);
+        Task<List<VideoGameInfoReadDto>> GetAllAsync(SearchParameters searchParameters);
         Task<VideoGameInfoReadDto> GetByIdAsync(Guid id);
         Task<bool> DeleteAsync(Guid id);
         Task<bool> UpdateGameNameAsync(Guid id, string newGameName);
