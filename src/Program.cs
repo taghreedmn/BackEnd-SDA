@@ -1,5 +1,4 @@
 using System.Text;
-using FusionTech.Middlewares;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
@@ -26,6 +25,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
+using FusionTech.src.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -106,19 +106,19 @@ builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
 
-    
+
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<ISupplierService, SupplierService>()
     .AddScoped<SupplierRepository, SupplierRepository>();
-    
-    builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<ISupplyService, SupplyService>()
     .AddScoped<SupplyRepository, SupplyRepository>();
 
-   
-    builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<IPublisherService, PublisherService>()
     .AddScoped<PublisherRepository, PublisherRepository>();
@@ -166,13 +166,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-
+app.UseMiddleware<LoggingMiddleware>();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseRouting();
 app.MapGet("/", ()=> "server is running");
-
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
+
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
     try
