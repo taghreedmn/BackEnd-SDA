@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.OrderDTO;
 
+
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -58,25 +59,11 @@ namespace FusionTech.src.Controllers
         // Get all orders
         [HttpGet("Customer/{CustomerId}")]
         [Authorize]
-        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync([FromRoute]int CustomerId)
+        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync([FromRoute] int CustomerId)
         {
             var orders = await _orderService.GetOrderByIdAsync(CustomerId);
             return Ok(orders);
         }
-        // public async Task<ActionResult<List<OrderReadDto>>> GetAllOrdersAsync()
-        // {
-        //     var storeList = await _orderService.GetAllOrdersAsync();
-        //     return Ok(storeList);
-        // }
 
-        // // Get a specific order by ID
-        // [HttpGet("{id}")]
-
-        // // Update an existing order
-        // [HttpPut("{id}")]
-        // public ActionResult UpdateOrder(int id, [FromBody] Order updatedOrder)
-        // {
-
-        // }
     }
 }

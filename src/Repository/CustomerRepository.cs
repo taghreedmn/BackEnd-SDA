@@ -23,23 +23,28 @@ namespace FusionTech.src.Repository
             return customer;
         }
 
+        // Here the person is already there (admin or employee)
+        public async Task<Customer> CreateCustomerRawSqlAsync(int personId, int age)
+        {
+            var sql = "INSERT INTO \"Customers\" (\"PersonId\", \"Age\") VALUES (@personId, @age)";
+
+            await _databaseContext.Database.ExecuteSqlRawAsync(
+                sql,
+                new Npgsql.NpgsqlParameter("@personId", personId),
+                new Npgsql.NpgsqlParameter("@age", age)
+            );
+            return (await GetByIdAsync(personId))!;
+        }
+
         public async Task<Customer?> GetByIdAsync(int id)
         {
             return await _Customer.FindAsync(id);
         }
 
-        public async Task<int> GetNextIdCustomerAsync()
+        public async Task<bool> UpdateAsync(Customer customer)
         {
-            var counter = await _databaseContext.PersonIdCounters.SingleOrDefaultAsync(c =>
-                c.PersonIdCounterId == Customer.PersonType
-            );
-
-            // Increment the counter
-            counter.CurrentId++;
-            await _databaseContext.SaveChangesAsync();
-
-            // Return the calculated ID
-            return PersonIdConfig.CustomerStartIndex + counter.CurrentId;
+            _Customer.Update(customer);
+            return await _databaseContext.SaveChangesAsync() > 0;
         }
     }
 }

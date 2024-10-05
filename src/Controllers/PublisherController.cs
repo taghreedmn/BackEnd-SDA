@@ -41,7 +41,7 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult<PublisherReadDto>> CreatePublisher(PublisherCreateDto createDto)
         {
             var publisherCreated = await _publisherService.CreateOneAsync(createDto);
-            return Created($"api/v1/Publisher/{publisherCreated.PublisherName}", publisherCreated);
+            return Created($"api/v1/publisher/{publisherCreated.PublisherName}", publisherCreated);
         }
 
 

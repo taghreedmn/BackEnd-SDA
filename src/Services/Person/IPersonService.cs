@@ -6,8 +6,11 @@ namespace FusionTech.src.Services.Person
     {
         Task<PersonSignInDTO> GetByIdAsync(int id);
         Task<string> SignInAsync(PersonSignInDTO personSignInDTO);
-        Task<bool> EditProfilePicture(int personId, string picturePath);
-        Task<bool> EditPassword(int personId, string oldPassword, string newPassword);
-        Task<bool> EditPhone(int personId, string newPhone);
+        Task<bool> UpdateNameAsync(string email, string name);
+
+        Task<bool> EditProfilePicture(string email, string picturePath);
+        Task<bool> EditPassword(string email, string oldPassword, string newPassword);
+        Task<bool> EditPhone(string email, string newPhone);
+        Task<int> GetIdByEmailAsync(string email);
     }
 }

@@ -15,32 +15,55 @@ namespace FusionTech.src.Repository
             _Person = _databaseContext.Set<Person>();
         }
 
-        public async Task<Person> FindPersonById(int id)
+        public async Task<Person?> GetByIdAsync(int id)
         {
             return await _Person.FindAsync(id);
         }
 
-        public async Task<Person> FindPersonByEmail(string email)
+        public async Task<Person?> FindPersonByEmail(string email)
         {
             return await _Person.FirstOrDefaultAsync(e => e.PersonEmail == email);
         }
 
         public async Task<bool> DeletePersonById(int id)
         {
-            var result = await DeletePerson(GetByIdAsync(id).Result);
+            var person = await GetByIdAsync(id);
+            if (person == null)
+                return true;
+
+            var result = await DeletePerson(person);
             return result;
         }
 
         public async Task<bool> DeletePerson(Person person)
         {
+            if (person == null)
+                return false;
+
             _Person.Remove(person);
             await _databaseContext.SaveChangesAsync();
             return true;
         }
 
-        public async Task<Person?> GetByIdAsync(int id)
+        public async Task<bool> UpdateAsync(Person person)
         {
-            return await _Person.FindAsync(id);
+            _Person.Update(person);
+            return await _databaseContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<PersonIdCounter> GetIdCounterAsync(PersonType personType)
+        {
+            var counter = await _databaseContext.PersonIdCounters.SingleOrDefaultAsync(c =>
+                c.PersonIdCounterId == personType
+            );
+
+            return counter!;
+        }
+
+        public async Task<bool> UpdatePersonIdCounter(PersonIdCounter idCounter)
+        {
+            idCounter!.CurrentId++;
+            return await _databaseContext.SaveChangesAsync() > 0;
         }
     }
 }

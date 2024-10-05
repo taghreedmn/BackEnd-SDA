@@ -24,7 +24,7 @@ namespace FusionTech.src.Controllers
         )
         {
             var paymentCreated = await _paymentService.CreateOneAsync(createDto);
-            return Created($"api/v1/payment/{paymentCreated.Id}", paymentCreated);
+            return Created($"api/v1/payment/{paymentCreated.PaymentId}", paymentCreated);
             // return Ok(paymentCreated);
         }
 
@@ -52,7 +52,7 @@ namespace FusionTech.src.Controllers
             {
                 return NotFound();
             }
-            await _paymentService.DeleteOneAsync(payment.Id);
+            await _paymentService.DeleteOneAsync(payment.PaymentId);
             return Ok(payment);
         }
     }
