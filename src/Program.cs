@@ -1,13 +1,15 @@
 using System.Text;
+using FusionTech.Middlewares;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
 using FusionTech.src.Service.publisher;
 using FusionTech.src.Service.Store;
-using FusionTech.src.Services.Category;
+using FusionTech.src.Services.category;
 using FusionTech.src.Services.Console;
 using FusionTech.src.Services.Customer;
 using FusionTech.src.Services.Inventory;
+using FusionTech.src.Services.order;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Services.Person;
 using FusionTech.src.Services.StoreEmployee;
@@ -17,7 +19,9 @@ using FusionTech.src.Services.supplier;
 using FusionTech.src.Services.supply;
 using FusionTech.src.Services.SystemAdmin;
 using FusionTech.src.Services.VideoGamesInfo;
+using FusionTech.src.Services.videoGameVersion;
 using FusionTech.src.Utils;
+using FusionTech.videoGameVersion;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -72,6 +76,10 @@ builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
 builder
+  .Services.AddScoped<IOrderService, OrderService>()
+  .AddScoped<OrderRepository, OrderRepository>();
+
+builder
     .Services.AddScoped<IInventoryService, InventoryService>()
     .AddScoped<InventoryRepository, InventoryRepository>();
 
@@ -83,6 +91,10 @@ builder
     .AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
 
 
+//Video Game Version mapper 
+builder
+.Services.AddScoped<IVideoGameVersionService, VideoGameVersionService>()
+.AddScoped<VideoGameVersionRepository, VideoGameVersionRepository>();
 //add auto mapper
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
@@ -154,6 +166,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
 {
@@ -174,6 +187,7 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine($"Databse connection failed:{ex.Message}");
     }
 }
+app.UseMiddleware<LoggingMiddleware>();
 
 // Enable Swagger for API documentation
 if (app.Environment.IsDevelopment())

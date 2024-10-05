@@ -1,5 +1,5 @@
 using FusionTech.src.Entity;
-using FusionTech.src.Services.Category;
+using FusionTech.src.Services.category;
 using FusionTech.src.Services.Payment;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;

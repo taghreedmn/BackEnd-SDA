@@ -6,8 +6,10 @@ namespace FusionTech.src.Entity
     {
         public Guid RatedId { get; set; }
         public float Rating { get; set; }
-        public string? Comment { get; set; }
-        public Guid GameId  { get; set; }
+
+        [StringLength(500, ErrorMessage = "Comment cannot exceed 500 characters.")]
+        public string Comment { get; set; }
+        public Guid VideoGameVersionId  { get; set; }
         public Guid PersonId { get; set; }
     }
 }

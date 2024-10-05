@@ -13,8 +13,7 @@ namespace FusionTech.src.DTO
             public float SupplierQuantity { get; set; }
             public DateTime SupplierDate { get; set; }
             public Guid InventoryId { get; set; }
-
-            //public Guid ViduoGameVersionId { get; set; }
+            public Guid ViduoGameVersionId { get; set; }
         }
 
         public class SupplyReadDto

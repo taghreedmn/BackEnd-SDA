@@ -59,7 +59,7 @@ namespace FusionTech.src.Repository
 
        internal async Task<Supply> GetByIdAsync(Guid id)
        {
-            return await _supply.Include(p => p.Supplier).Include(p => p.Inventory).FirstOrDefaultAsync(p => p.SupplyId == id);
+            return await _supply.Include(p => p.Supplier).Include(p => p.Inventory).Include(p => p.VideoGameVersion).FirstOrDefaultAsync(p => p.SupplyId == id);
        }
       
 
