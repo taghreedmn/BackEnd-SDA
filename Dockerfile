@@ -1,21 +1,28 @@
-# Use the official .NET SDK image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 5125
+ENV ASPNETCORE_URLS=http://0.0.0.0:5125
+
+ARG configuration=Release
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+COPY ["Backend.csproj", "./"]
+RUN dotnet restore "Backend.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "Backend.csproj" -c $configuration -o /app/build
 
-# Copy csproj and restore as distinct layers
-COPY Backend.csproj ./
-RUN dotnet restore
+FROM build AS publish
+ARG configuration=Release
+RUN dotnet publish "Backend.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+FROM base AS final
 
-# Use the official ASP.NET runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /src/out .
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Backend.dll"]
 
-# Set the entry point for the application
-ENTRYPOINT ["dotnet", "YourApp.dll"]
+
 
 
