@@ -131,12 +131,12 @@ namespace FusionTech.src.Utils
             // CreateMap<CustomerUpdateDto, Customer>();
 
             // StoreEmployee mappings
-            CreateMap<StoreEmployeeCreateDto, StoreEmployee>();
-            CreateMap<StoreEmployee, StoreEmployeeReadDto>();
+            CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
+            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
             // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
 
             // SystemAdmin mappings
-            CreateMap<SystemAdminCreateDto, SystemAdmin>();
+            CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
             CreateMap<SystemAdmin, SystemAdminReadDto>();
             // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
 
@@ -168,7 +168,7 @@ namespace FusionTech.src.Utils
             // Studio mappings
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
-            CreateMap<CreatStudioDTO, GameStudio>()
+            CreateMap<CreateStudioDTO, GameStudio>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );

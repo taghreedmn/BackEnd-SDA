@@ -1,7 +1,5 @@
 using static FusionTech.src.DTO.SupplyDTO;
 using FusionTech.src.Utils;
-using FusionTech.src.DTO;
-using static FusionTech.src.DTO.SupplyReadDto;
 
 namespace FusionTech.src.Services.supply
 {
