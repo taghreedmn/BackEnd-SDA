@@ -1,5 +1,6 @@
 using AutoMapper;
 using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.StoreDTO;
 
 namespace FusionTech.src.Service.Store
@@ -31,6 +32,10 @@ namespace FusionTech.src.Service.Store
         public async Task<StoreReadDto> GetByIdAsync(Guid id)
         {
             var foundStore = await _storeRepo.GetByIdAsync(id);
+            if (foundStore == null)
+            {
+                throw CustomException.NotFound("Store not found");
+            }
             return _mapper.Map<StoreReadDto>(foundStore);
         }
 
@@ -38,7 +43,7 @@ namespace FusionTech.src.Service.Store
         {
             var foundStore = await _storeRepo.GetByIdAsync(storeUpdateDto.StoreId);
             if (foundStore == null)
-                return false;
+                throw CustomException.NotFound("Store not found");
 
             _mapper.Map(storeUpdateDto, foundStore);
             return await _storeRepo.UpdateOneAsync(foundStore);
@@ -47,7 +52,8 @@ namespace FusionTech.src.Service.Store
         public async Task<bool> DeleteOneAsync(Guid id)
         {
             var foundStore = await _storeRepo.GetByIdAsync(id);
-            if (foundStore == null) return false;
+            if (foundStore == null)
+                return false;
 
             return await _storeRepo.DeleteOneAsync(foundStore);
         }

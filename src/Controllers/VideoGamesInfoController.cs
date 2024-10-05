@@ -31,14 +31,8 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult> GetVideoGameById(Guid id)
         {
             var videoGame = await _videoGameInfoService.GetVideoGameVersionByIdAsync(id);
-
-            if (videoGame == null)
-            {
-                return NotFound();
-            }
             return Ok(videoGame);
         }
-
 
         [Authorize(Policy = "admin")]
         // Add a new video game
@@ -48,17 +42,13 @@ namespace FusionTech.src.Controllers
             string? userEmail = User.FindFirstValue(ClaimTypes.Email);
             if (string.IsNullOrEmpty(userEmail))
             {
-                return Unauthorized("User email not found");
+                throw CustomException.Forbidden("Admin not authorized");
             }
 
             var createdVideoGame = await _videoGameInfoService.CreateOneAsync(
                 newVideoGameDto,
                 userEmail
             );
-            if (createdVideoGame == null)
-            {
-                return BadRequest("Failed to create video game");
-            }
 
             return CreatedAtAction(
                 nameof(GetVideoGameById),
@@ -72,11 +62,7 @@ namespace FusionTech.src.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteVideoGame(Guid id)
         {
-            var isDeleted = await _videoGameInfoService.DeleteAsync(id);
-            if (!isDeleted)
-            {
-                return NotFound();
-            }
+            await _videoGameInfoService.DeleteAsync(id);
             return NoContent();
         }
 
@@ -84,30 +70,18 @@ namespace FusionTech.src.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateGameName(Guid id, string newGameName)
         {
-            var isUpdated = await _videoGameInfoService.UpdateGameNameAsync(id, newGameName);
-
-            if (!isUpdated)
-            {
-                return NotFound("Video game not found or update failed.");
-            }
-
+            await _videoGameInfoService.UpdateGameNameAsync(id, newGameName);
             return NoContent();
         }
 
         [Authorize(Policy = "admin")]
         [HttpPut("{id}/year")]
-        public async Task<ActionResult> UpdateYearOfRelease(Guid id, string newYearOfRelease)
+        public async Task<ActionResult> UpdateYearOfRelease(Guid id, string newYearOfRelease) //Check string formatting using regex
         {
             var isUpdated = await _videoGameInfoService.UpdateYearOfReleaseAsync(
                 id,
                 newYearOfRelease
             );
-
-            if (!isUpdated)
-            {
-                return NotFound("Video game not found or update failed.");
-            }
-
             return NoContent();
         }
     }

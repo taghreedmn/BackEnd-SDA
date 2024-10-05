@@ -41,7 +41,7 @@ namespace FusionTech.src.Services.category
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
-                throw CustomExeption.NotFound($"Category with ID {id} not found");
+                throw CustomException.NotFound($"Category with ID {id} not found");
             }
             return _mapper.Map<Category, CategoryReadDto>(foundCategory);
         }
@@ -50,7 +50,7 @@ namespace FusionTech.src.Services.category
             var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
             if (foundCategory == null || foundCategory.Count == 0)
             {
-                throw CustomExeption.NotFound($"No categories found with the name {CategoryName}");
+                throw CustomException.NotFound($"No categories found with the name {CategoryName}");
             }
             var categoryLists = _mapper.Map<List<Category>, List<CategoryReadDto>>(foundCategory);
             return categoryLists;
@@ -61,12 +61,12 @@ namespace FusionTech.src.Services.category
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
-                throw CustomExeption.NotFound($"Category with ID {id} not found");
+                throw CustomException.NotFound($"Category with ID {id} not found");
             }
             bool isDelete = await _categoryRepository.DeleteOneAsync(foundCategory);
             if (!isDelete)
             {
-                throw CustomExeption.InternalError("Failed to delete the category");
+                throw CustomException.InternalError("Failed to delete the category");
             }
             return true;
         }
@@ -76,13 +76,13 @@ namespace FusionTech.src.Services.category
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
-                throw CustomExeption.NotFound($"Category with ID {id} not found");
+                throw CustomException.NotFound($"Category with ID {id} not found");
             }
             _mapper.Map(updateDto, foundCategory);
             bool isUpdated = await _categoryRepository.UpdateOneAsync(foundCategory);
             if (!isUpdated)
             {
-                throw CustomExeption.InternalError("Failed to update the category");
+                throw CustomException.InternalError("Failed to update the category");
             }
             return true;
         }

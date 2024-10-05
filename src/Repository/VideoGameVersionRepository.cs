@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
-using FusionTech.src.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace FusionTech.src.Repository
@@ -55,6 +50,5 @@ namespace FusionTech.src.Repository
             await _databaseContext.SaveChangesAsync();
             return true;
         }
-
     }
 }

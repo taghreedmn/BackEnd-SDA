@@ -41,9 +41,6 @@ namespace FusionTech.src.Controllers
             try
             {
                 var result = await _customerService.UpdateAgeAsync(userEmail, age);
-                if (!result)
-                    return NotFound(new { message = "Customer not found." });
-
                 return Ok(new { message = "Customer's age updated successfully." });
             }
             catch (ArgumentOutOfRangeException e)

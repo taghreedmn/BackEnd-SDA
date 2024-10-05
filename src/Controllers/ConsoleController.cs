@@ -37,11 +37,7 @@ namespace FusionTech.src.Controllers
         [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateConsoleDTO consoleName)
         {
-            var updated = await _consoleService.UpdateAsync(id, consoleName);
-            if (!updated)
-            {
-                return NotFound();
-            }
+            await _consoleService.UpdateAsync(id, consoleName);
             return NoContent();
         }
 
@@ -68,12 +64,6 @@ namespace FusionTech.src.Controllers
         {
             var foundConsole = await _consoleService.GetIdAsync(id);
 
-            // if not fount
-            if (foundConsole == null)
-            {
-                return NotFound();
-            }
-            //if found
             await _consoleService.DeleteIdAsync(foundConsole.GameConsoleId);
             return NoContent();
         }

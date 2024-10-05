@@ -22,15 +22,8 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult<SystemAdminReadDto>> SignUp(SystemAdminSignUpDTO createDto)
         {
             var userEmail = User.FindFirst(ClaimTypes.Email)!.Value;
-            try
-            {
-                var AdminCreated = await _systemAdminService.CreateOneAsync(createDto, userEmail);
-                return Ok(AdminCreated);
-            }
-            catch (UnauthorizedAccessException e)
-            {
-                return Unauthorized(e.Message);
-            }
+            var AdminCreated = await _systemAdminService.CreateOneAsync(createDto, userEmail);
+            return Ok(AdminCreated);
         }
 
         [HttpDelete]
@@ -38,14 +31,9 @@ namespace FusionTech.src.Controllers
         {
             var adminEmail = User.FindFirst(ClaimTypes.Email)!.Value;
             bool isDeleted;
-            try
-            {
-                isDeleted = await _systemAdminService.DeletePersonAsync(personId, adminEmail);
-            }
-            catch (Exception e)
-            {
-                return Unauthorized(e.Message);
-            }
+
+            isDeleted = await _systemAdminService.DeletePersonAsync(personId, adminEmail);
+
             return Ok(isDeleted);
         }
     }

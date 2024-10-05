@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace FusionTech.src.DTO
 {
     public class VideoGameVersionDTO
@@ -10,12 +5,14 @@ namespace FusionTech.src.DTO
         public class VideoGameVersionCreateDto
         {
             public Guid VideoGameInfoId { get; set; }
+            public Guid GameConsoleId { get; set; }
             public double Price { get; set; }
         }
 
         public class VideoGameVersionUpdateDto
         {
             public Guid VideoGameVersionId { get; set; }
+            public Guid GameConsoleId { get; set; }
             public float? Price { get; set; }
         }
 
@@ -24,8 +21,7 @@ namespace FusionTech.src.DTO
             public Guid VideoGameVersionId { get; set; }
             public Guid VideoGameInfoId { get; set; }
             public double Price { get; set; }
-
-
+            public Guid GameConsoleId { get; set; }
         }
     }
 }

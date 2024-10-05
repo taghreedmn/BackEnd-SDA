@@ -1,4 +1,3 @@
-
 using FusionTech.src.Service.Store;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,28 +38,23 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult<StoreReadDto>> GetStoreById([FromRoute] Guid id)
         {
             var store = await _storeService.GetByIdAsync(id);
-            if (store == null)
-            {
-                return NotFound();
-            }
             return Ok(store);
         }
 
         // Updates a store by ID
         [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult> UpdateStore([FromRoute] Guid id, [FromBody] StoreUpdateDto updateDto)
+        public async Task<ActionResult> UpdateStore(
+            [FromRoute] Guid id,
+            [FromBody] StoreUpdateDto updateDto
+        )
         {
-            if (id != updateDto.StoreId)
+            if (id != updateDto.StoreId) // StoreUpdateDto shouldn't have ID
             {
                 return BadRequest("ID mismatch.");
             }
 
             var isUpdated = await _storeService.UpdateOneAsync(updateDto);
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
             return NoContent();
         }
 

@@ -88,7 +88,7 @@ namespace FusionTech.src.Services.Customer
         public async Task<bool> UpdateAgeAsync(string email, int age)
         {
             if (age < 1 || age > 120)
-                throw new ArgumentOutOfRangeException("Age must be between 1 and 120.");
+                throw CustomException.InternalError("Age must be between 1 and 120.");
             var person = await _personRepo.FindPersonByEmail(email);
             var customer = await _customerRepo.GetByIdAsync(person!.PersonId);
             customer!.Age = age;

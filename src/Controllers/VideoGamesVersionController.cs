@@ -1,5 +1,3 @@
-using FusionTech.src.DTO;
-using FusionTech.src.Utils;
 using FusionTech.videoGameVersion;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,21 +23,24 @@ namespace FusionTech.src.Controllers
         )
         {
             var videoGameVersionCreated = await _versionService.CreateOneAsync(createDto);
-            return Created($"api/v1/categories/{videoGameVersionCreated.VideoGameVersionId}", videoGameVersionCreated);
+            return Created(
+                $"api/v1/categories/{videoGameVersionCreated.VideoGameVersionId}",
+                videoGameVersionCreated
+            );
             // return Ok(categoryCreated);
         }
 
         [HttpGet]
-        public async Task<ActionResult<VideoGameVersionReadDto>> GetVersion(
-
-        )
+        public async Task<ActionResult<VideoGameVersionReadDto>> GetVersion()
         {
             var versionList = await _versionService.GetAllAsync();
             return Ok(versionList);
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<VideoGameVersionReadDto>> GetVersionByIdAsync([FromRoute] Guid Id)
+        public async Task<ActionResult<VideoGameVersionReadDto>> GetVersionByIdAsync(
+            [FromRoute] Guid Id
+        )
         {
             var version = await _versionService.GetVersionByIdAsync(Id);
             return Ok(version);
@@ -50,24 +51,18 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult<VideoGameVersionReadDto>> DeleteOneAsync([FromRoute] Guid Id)
         {
             var version = await _versionService.GetVersionByIdAsync(Id);
-            if (version == null)
-            {
-                return NotFound();
-            }
             await _versionService.DeleteOneAsync(version.VideoGameVersionId);
             return Ok(version);
         }
 
         [Authorize(Policy = "admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOneAsync(Guid id, VideoGameVersionUpdateDto updateGameVersion)
+        public async Task<IActionResult> UpdateOneAsync(
+            Guid id,
+            VideoGameVersionUpdateDto updateGameVersion
+        )
         {
             var isUpdated = await _versionService.UpdateOneAsync(id, updateGameVersion);
-
-            if (!isUpdated)
-            {
-                return NotFound("Video game not found or update failed.");
-            }
 
             return NoContent();
         }

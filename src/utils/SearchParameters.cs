@@ -14,21 +14,22 @@ namespace FusionTech.src.Utils
 
         public void IsValid()
         {
+            // Check less than zero (negative price)
             // Validate MinPrice is not greater than MaxPrice
             if (MinPrice.HasValue && MaxPrice.HasValue && MinPrice.Value > MaxPrice.Value)
             {
-                throw new ArgumentException("MinPrice cannot be greater than MaxPrice.");
+                throw CustomException.InternalError("MinPrice cannot be greater than MaxPrice.");
             }
 
             // Ensure PaginationOptions are valid
             if (PaginationOptions.Limit <= 0)
             {
-                throw new ArgumentException("Limit must be greater than zero.");
+                throw CustomException.InternalError("Limit must be greater than zero.");
             }
 
             if (PaginationOptions.Offset < 0)
             {
-                throw new ArgumentException("Offset cannot be negative.");
+                throw CustomException.InternalError("Offset cannot be negative.");
             }
         }
     }
