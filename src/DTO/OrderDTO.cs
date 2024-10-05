@@ -11,7 +11,7 @@ namespace FusionTech.src.DTO
 
             public DateTime OrderDate { get; set; }
             public double TotalPrice { get; set; }
-            public int PaymentId { get; set; }
+            public Guid PaymentId { get; set; }
             public Guid StoreId { get; set; }
             public int EmployeeId { get; set; }
             public List<OrderedGamesReadDto> OrderedGames { get; set; }

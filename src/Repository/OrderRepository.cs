@@ -42,7 +42,7 @@ namespace FusionTech.src.Repository
                 .ThenInclude(ord => ord.VideoGameVersion)
                 .Where(ord => ord.CustomerId == CustomerId)
                 .ToListAsync();
-                
+
         }
 
     }

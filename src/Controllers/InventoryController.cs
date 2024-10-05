@@ -36,16 +36,16 @@ namespace FusionTech.src.Controllers
         }
 
         // Updates an inventory item by ID
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateItemAsync([FromRoute] Guid id, [FromBody] InventoryModifyGameQuantityDTO updateDto)
-        {
-            var isUpdated = await _inventoryService.UpdateGameQuantityAsync(id, updateDto); // Assuming a method exists for this
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
-            return NoContent();
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult> UpdateItemAsync([FromRoute] Guid id, [FromBody] InventoryModifyGameQuantityDTO updateDto)
+        // {
+        //     var isUpdated = await _inventoryService.UpdateGameQuantityAsync(id, updateDto); // Assuming a method exists for this
+        //     if (!isUpdated)
+        //     {
+        //         return NotFound();
+        //     }
+        //     return NoContent();
+        // }
 
         // Adds a game to the inventory 
         [HttpPost]

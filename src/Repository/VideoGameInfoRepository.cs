@@ -21,6 +21,11 @@ namespace FusionTech.src.Repository
         {
             return await _videoGameInfos.FindAsync(id);
         }
+        public async Task<List<VideoGameInfo>> GetVideoGameVersionByIdAsync(Guid id)
+        {
+            return await _videoGameInfos
+            .Include(vi => vi.VideoGameVersions).Where(vi => vi.VideoGameInfoId == id).ToListAsync();
+        }
 
 
         // Create a new video game

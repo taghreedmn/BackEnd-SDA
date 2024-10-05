@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using static FusionTech.src.DTO.VideoGameInfoDTO;
 
 namespace FusionTech.src.DTO
 {
@@ -16,6 +17,9 @@ namespace FusionTech.src.DTO
             public Guid CategoryId { get; set; }
 
             public string? CategoryName { get; set; }
+            public List<VideoGameInfoReadDto> Categories { get; set; }
+            // public VideoGameInfoReadDto VideoGameInfo { get; set; }
+
         }
 
         public class CategoryUpdateDto

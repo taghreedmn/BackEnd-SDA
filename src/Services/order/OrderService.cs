@@ -1,8 +1,6 @@
 using AutoMapper;
-using FusionTech.src.DTO;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
-using FusionTech.src.Utils;
 using static FusionTech.src.DTO.OrderDTO;
 
 namespace FusionTech.src.Services.order
@@ -57,7 +55,7 @@ namespace FusionTech.src.Services.order
                 OrderId = orderId,
                 OrderDate = DateTime.Now,
                 TotalPrice = totalPrice,
-                PaymentId = createDto.PaymentId, // For Future improvment, make it an enum (Now it is Guid)
+                PaymentId = createDto.PaymentId,
                 StoreId = createDto.StoreId,
                 EmployeeId = createDto.EmployeeId,
                 CustomerId = userId,

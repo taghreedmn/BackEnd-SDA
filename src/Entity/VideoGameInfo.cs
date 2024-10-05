@@ -14,7 +14,8 @@ namespace FusionTech.src.Entity
     public Guid PublisherId { get; set; }
    public string? GamePicturePath { get; set; }
     public ICollection<GameStudio> GameStudios { get; set; }
-    public ICollection<Category> Categoreis { get; set; }
+    public ICollection<Category> Categories { get; set; }
+    public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
 
   }
 }
