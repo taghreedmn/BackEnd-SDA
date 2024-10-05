@@ -20,7 +20,7 @@ namespace FusionTech.src.DTO
         {
             public Guid SupplyId { get; set; }
             public Guid SupplierId { get; set; }
-            public Guid GamesId { get; set; }
+            public Guid VideoGameVersionId { get; set; }
             public float SupplierQuantity { get; set; }
             public DateTime SupplierDate { get; set; }
             public Guid InventoryId { get; set; }

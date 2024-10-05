@@ -44,7 +44,7 @@ namespace FusionTech.src.Services.Customer
                 out byte[] salt
             );
             var idCounter = await _personRepo.GetIdCounterAsync(Entity.Customer.PersonType);
-            customer.PersonId = PersonIdConfig.CustomerStartIndex + idCounter.CurrentId;
+            customer.PersonId = PersonIdConfig.CustomerStartIndex + idCounter.CurrentId + 1;
             customer.PersonPassword = hashedPassword;
             customer.salt = salt;
             Entity.Customer categoryCreated = await _customerRepo.CreateOneAsync(customer);

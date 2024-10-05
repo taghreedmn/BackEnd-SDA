@@ -65,7 +65,7 @@ namespace FusionTech.src.Services.SystemAdmin
                 out byte[] salt
             );
             var idCounter = await _personRepo.GetIdCounterAsync(Entity.SystemAdmin.PersonType);
-            systemAdmin.PersonId = PersonIdConfig.SystemAdminStartIndex + idCounter.CurrentId;
+            systemAdmin.PersonId = PersonIdConfig.SystemAdminStartIndex + idCounter.CurrentId + 1;
             systemAdmin.PersonPassword = hashedPassword;
             systemAdmin.salt = salt;
             Entity.SystemAdmin createdSystemAdmin = await _systemAdminRepository.CreateOneAsync(
