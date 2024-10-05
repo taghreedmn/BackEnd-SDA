@@ -14,5 +14,6 @@ namespace FusionTech.src.Entity
         public Supplier? Supplier { get; set; }
         public Inventory? Inventory { get; set; }
         public VideoGameVersion? VideoGameVersion { get; set; }
+        public Guid GamesId { get; internal set; }
     }
 }
