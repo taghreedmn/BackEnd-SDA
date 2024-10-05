@@ -1,3 +1,5 @@
+using FusionTech.src.Utils;
+
 namespace FusionTech.src.Entity
 {
     public abstract class Person
@@ -7,7 +9,7 @@ namespace FusionTech.src.Entity
         public required string PersonName { get; set; }
 
         public required string PersonEmail { get; set; }
-
+        [PasswordComplexity]
         public required string PersonPassword { get; set; }
 
         public string? PersonPhoneNumber { get; set; }
@@ -16,6 +18,6 @@ namespace FusionTech.src.Entity
         public static readonly PersonType PersonType = PersonType.Person;
 
         public required byte[] salt { get; set; }
-        
+
     }
 }
