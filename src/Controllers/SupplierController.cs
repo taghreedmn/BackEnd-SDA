@@ -1,5 +1,6 @@
 
 using FusionTech.src.Services.supplier;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.SupplierDTO;
 
@@ -42,6 +43,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<IActionResult> UpdateSupplier(Guid id, SupplierUpdateDto updateDto)
         {
             var foundSupplier = await _supplierService.GetByIdAsync(id);
@@ -55,6 +57,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<IActionResult> DeleteSupplier(Guid id)
         {
             var foundSupplier = await _supplierService.GetByIdAsync(id);

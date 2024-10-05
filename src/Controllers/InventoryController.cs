@@ -1,4 +1,5 @@
 using FusionTech.src.Services.Inventory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.InventoryDTO;
 
@@ -49,6 +50,7 @@ namespace FusionTech.src.Controllers
 
         // Adds a game to the inventory 
         [HttpPost]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
         {
             var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
@@ -61,6 +63,7 @@ namespace FusionTech.src.Controllers
 
         // Removes a game from the inventory 
         [HttpDelete]
+        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult> RemoveGameFromInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
         {
             var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);
