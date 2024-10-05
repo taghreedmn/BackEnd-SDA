@@ -14,7 +14,6 @@ using static FusionTech.src.DTO.StoreEmployeeDTO;
 using static FusionTech.src.DTO.StudioDTO;
 using static FusionTech.src.DTO.SupplierDTO;
 using static FusionTech.src.DTO.SupplyDTO;
-using static FusionTech.src.DTO.SupplyReadDto;
 using static FusionTech.src.DTO.SystemAdminDTO;
 using static FusionTech.src.DTO.InventoryDTO;
 using static FusionTech.src.DTO.StoreDTO;
@@ -158,7 +157,7 @@ namespace FusionTech.src.Utils
             // Studio mappings
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
-            CreateMap<CreatStudioDTO, GameStudio>()
+            CreateMap<CreateStudioDTO, GameStudio>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
