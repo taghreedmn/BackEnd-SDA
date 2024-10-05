@@ -18,5 +18,6 @@ namespace FusionTech.src.Entity
         public string PublisherEmail { get; set; }
         public string? PublisherPicturePath { get; set; }
 
+        public ICollection<VideoGameInfo> VideoGameInfos { get; set; }
     }
 }

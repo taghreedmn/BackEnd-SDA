@@ -1,8 +1,6 @@
 using AutoMapper;
-using FusionTech.src.DTO;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
-using FusionTech.src.Utils;
 using static FusionTech.src.DTO.OrderDTO;
 
 namespace FusionTech.src.Services.order
@@ -29,7 +27,7 @@ namespace FusionTech.src.Services.order
             // var order = _mapper.Map<OrderCreateDto, Order>(createDto);
             Guid orderId = Guid.NewGuid();
             List<OrderedGames> orderedGames = new List<OrderedGames>(createDto.OrderedGames.Count);
-            double totalPrice = 0;
+            float totalPrice = 0;
             foreach (var orderedGameDTO in createDto.OrderedGames)
             {
                 var videoGameVersion = await _videoGameVersionRepository.GetVersionByIdAsync(
@@ -47,7 +45,7 @@ namespace FusionTech.src.Services.order
                     new OrderedGames
                     {
                         OrderId = orderId,
-                        VideoGameVersionId = videoGameVersion.Id,
+                        VideoGameVersionId = videoGameVersion.VideoGameVersionId,
                         Quantity = orderedGameDTO.Quantity,
                     }
                 );
@@ -57,7 +55,7 @@ namespace FusionTech.src.Services.order
                 OrderId = orderId,
                 OrderDate = DateTime.Now,
                 TotalPrice = totalPrice,
-                PaymentId = createDto.PaymentId, // For Future improvment, make it an enum (Now it is Guid)
+                PaymentId = createDto.PaymentId,
                 StoreId = createDto.StoreId,
                 EmployeeId = createDto.EmployeeId,
                 CustomerId = userId,

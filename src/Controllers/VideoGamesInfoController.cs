@@ -55,7 +55,7 @@ namespace FusionTech.src.Controllers
                 return BadRequest("Failed to create video game");
             }
 
-            return CreatedAtAction(nameof(GetVideoGameById), new { id = createdVideoGame.GameId }, createdVideoGame);
+            return CreatedAtAction(nameof(GetVideoGameById), new { id = createdVideoGame.VideoGameInfoId }, createdVideoGame);
         }
 
         [Authorize(Policy = "admin")]

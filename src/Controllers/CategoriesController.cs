@@ -1,9 +1,7 @@
-using System.Data;
-using FusionTech.src.DTO;
-using FusionTech.src.Entity;
-using FusionTech.src.Services.Category; // Correct casing
+using FusionTech.src.Services.category;
 using FusionTech.src.Utils;
 using Microsoft.AspNetCore.Mvc;
+using static FusionTech.src.DTO.CategoryDTO;
 
 namespace FusionTech.src.Controllers
 {
