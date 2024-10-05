@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using FusionTech.src.Utils;
 
 namespace FusionTech.src.DTO
 {
@@ -15,7 +16,8 @@ namespace FusionTech.src.DTO
             public required string PersonEmail { get; set; }
 
             [Required(ErrorMessage = "Person password is required.")]
-            [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters long and cannot exceed 100 characters.")]
+             //[StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters long and cannot exceed 100 characters.")]
+             [PasswordComplexity]
             public required string PersonPassword { get; set; }
 
             [Phone(ErrorMessage = "Invalid phone number format.")]
