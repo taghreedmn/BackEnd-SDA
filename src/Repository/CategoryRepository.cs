@@ -27,7 +27,7 @@ namespace FusionTech.src.Repository
         {
             var result = _category.Where(c =>
                 c.CategoryName.ToLower().Contains(paginationOptions.Search.ToLower())
-            );
+            ); // Logic should be in Services (I think)
             return await result
                 .Skip(paginationOptions.Offset)
                 .Take(paginationOptions.Limit)

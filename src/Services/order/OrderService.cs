@@ -36,11 +36,11 @@ namespace FusionTech.src.Services.order
                 );
                 if (videoGameVersion == null)
                 {
-                    throw CustomExeption.NotFound($"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found.");
+                    throw CustomException.NotFound($"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found.");
                 }
                 if (orderedGameDTO.Quantity <= 0)
                 {
-                    throw CustomExeption.BadRequest("Quantity must be greater than zero.");
+                    throw CustomException.BadRequest("Quantity must be greater than zero.");
                 }
                 // Check for Quantity, it could be zero or negative
                 totalPrice += videoGameVersion.Price * orderedGameDTO.Quantity;
@@ -76,7 +76,7 @@ namespace FusionTech.src.Services.order
             var orders = await _orderRepository.GetOrderByIdAsync(CustomerId);
             if (orders == null || orders.Count == 0)
             {
-                throw CustomExeption.NotFound($"No orders found for customer ID {CustomerId}.");
+                throw CustomException.NotFound($"No orders found for customer ID {CustomerId}.");
             }
             var orderLists = _mapper.Map<List<Order>, List<OrderReadDto>>(orders);
             return orderLists;

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FusionTech.src.Utils;
 
 namespace FusionTech.src.Middlewares
@@ -14,6 +10,7 @@ namespace FusionTech.src.Middlewares
         {
             _next = next;
         }
+
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -22,7 +19,6 @@ namespace FusionTech.src.Middlewares
             }
             catch (CustomException ex)
             {
-
                 context.Response.StatusCode = ex.StatusCode;
                 context.Response.ContentType = "application/json";
 
@@ -34,10 +30,7 @@ namespace FusionTech.src.Middlewares
                     // fields
                 };
                 await context.Response.WriteAsJsonAsync(response);
-
             }
         }
-
     }
 }
-

@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace FusionTech.src.Utils
 {
@@ -13,9 +9,11 @@ namespace FusionTech.src.Utils
         {
             var password = value as string;
 
-            if (password == null) return false;
+            if (password == null)
+                return false;
 
-            if (password.Length < 8) return false;
+            if (password.Length < 8)
+                return false;
 
             bool hasUpperCase = password.Any(char.IsUpper);
 
@@ -24,7 +22,7 @@ namespace FusionTech.src.Utils
             bool hasDigit = password.Any(char.IsDigit);
 
             bool hasSpecialChar = Regex.IsMatch(password, @"[!@#$%^&*(),.?""\:{}|<>]");
-        
+
             return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
         }
 

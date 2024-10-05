@@ -53,7 +53,7 @@ namespace FusionTech.src.Services.SystemAdmin
 
             if (!originalSystemAdmin!.ManageSystemAdmins)
             {
-                throw new UnauthorizedAccessException("Unauthorized");
+                throw CustomException.Forbidden("Admin not authorized");
             }
 
             Entity.SystemAdmin systemAdmin = _mapper.Map<SystemAdminSignUpDTO, Entity.SystemAdmin>(
@@ -80,7 +80,7 @@ namespace FusionTech.src.Services.SystemAdmin
             var toBeDeletedPerson = await _personRepo.GetByIdAsync(id);
             if (toBeDeletedPerson == null)
             {
-                throw new ArgumentNullException("Person doesn't exist");
+                throw CustomException.NotFound("Person not found");
             }
             var adminPerson = await _personRepo.FindPersonByEmail(adminEmail);
             var admin = await _systemAdminRepository.GetByIdAsync(adminPerson!.PersonId);
@@ -89,15 +89,15 @@ namespace FusionTech.src.Services.SystemAdmin
                 case Entity.PersonType.SystemAdmin:
                     if (admin!.ManageSystemAdmins)
                         return await _personRepo.DeletePerson(toBeDeletedPerson);
-                    throw new UnauthorizedAccessException("Unauthorized");
+                    throw CustomException.Forbidden("Admin not authorized");
                 case Entity.PersonType.StoreEmployee:
                     if (admin!.ManageEmployees)
                         return await _personRepo.DeletePerson(toBeDeletedPerson);
-                    throw new UnauthorizedAccessException("Unauthorized");
+                    throw CustomException.Forbidden("Admin not authorized");
                 case Entity.PersonType.Customer:
                     if (admin!.ManageCustomers)
                         return await _personRepo.DeletePerson(toBeDeletedPerson);
-                    throw new UnauthorizedAccessException("Unauthorized");
+                    throw CustomException.Forbidden("Admin not authorized");
                 default:
                     throw new ArgumentNullException(
                         "Something is wrong, the type of the person is undefined"

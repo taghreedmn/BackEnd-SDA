@@ -1,4 +1,3 @@
-using FusionTech.src.Entity;
 using static FusionTech.src.DTO.OrderedGamesDto;
 
 namespace FusionTech.src.DTO
@@ -8,9 +7,8 @@ namespace FusionTech.src.DTO
         public class OrderReadDto()
         {
             public Guid OrderId { get; set; }
-
             public DateTime OrderDate { get; set; }
-            public double TotalPrice { get; set; }
+            public float TotalPrice { get; set; }
             public Guid PaymentId { get; set; }
             public Guid StoreId { get; set; }
             public int EmployeeId { get; set; }
@@ -23,10 +21,6 @@ namespace FusionTech.src.DTO
             public Guid StoreId { get; set; }
             public Guid PaymentId { get; set; }
             public List<OrderedGamesCreateDto> OrderedGames { get; set; } // Removed the DTO to make things easier
-            // public List<OrderedGamesCreateDto> OrderedGames { get; set; }
-            // public double Price { get; set; }
-            // public Guid videoGameVerionID { get; set; }
-            // public Guid ConsoleId { get; set; }
         }
 
         public class OrderUpdateDto()

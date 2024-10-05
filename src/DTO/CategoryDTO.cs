@@ -18,8 +18,6 @@ namespace FusionTech.src.DTO
 
             public string? CategoryName { get; set; }
             public List<VideoGameInfoReadDto> Categories { get; set; }
-            // public VideoGameInfoReadDto VideoGameInfo { get; set; }
-
         }
 
         public class CategoryUpdateDto

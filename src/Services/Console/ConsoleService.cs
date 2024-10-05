@@ -1,6 +1,7 @@
 using AutoMapper;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.ConsoleDTO;
 
 namespace FusionTech.src.Services.Console
@@ -34,6 +35,10 @@ namespace FusionTech.src.Services.Console
         public async Task<ReadConsoleDTO> GetIdAsync(Guid id)
         {
             var foundconsole = await _consoleRepository.GetIdAsync(id);
+            if (foundconsole == null)
+            {
+                throw CustomException.NotFound("Console not found.");
+            }
             return _maper.Map<GameConsole, ReadConsoleDTO>(foundconsole);
         }
 
@@ -51,7 +56,7 @@ namespace FusionTech.src.Services.Console
 
             if (foundconsole == null)
             {
-                return false;
+                throw CustomException.NotFound("Console not found.");
             }
             _maper.Map(ConsoleName, foundconsole);
             return await _consoleRepository.UpdateOneAsync(foundconsole);

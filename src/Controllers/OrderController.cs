@@ -1,10 +1,8 @@
 using System.Security.Claims;
-using FusionTech.src.Entity;
 using FusionTech.src.Services.order;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FusionTech.src.DTO.OrderDTO;
-
 
 namespace FusionTech.src.Controllers
 {
@@ -36,15 +34,12 @@ namespace FusionTech.src.Controllers
                 return BadRequest("User ID not found in claims or is not a valid integer.");
             }
 
-            // var userGuid = ConvertIntToGuid(userId); //  using int to Guid conversion
-
-            // return await _orderService.CreateOneAsync(userGuid, orderCreateDto);
             return await _orderService.CreateOneAsync(userId, orderCreateDto);
         }
 
         // Get all orders
         [HttpGet]
-        [Authorize]
+        [Authorize(Policy = "Customer")]
         public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync()
         {
             var authenticateClaims = HttpContext.User;
@@ -59,6 +54,5 @@ namespace FusionTech.src.Controllers
             var orders = await _orderService.GetOrderByIdAsync(userId);
             return Ok(orders);
         }
-
     }
 }

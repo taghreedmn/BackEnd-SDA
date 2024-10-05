@@ -44,9 +44,9 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
-builder.Services
-    .AddScoped<ISupplyService, SupplyService>()
-    .AddScoped<SupplyRepository, SupplyRepository>();
+// builder.Services
+//     .AddScoped<ISupplyService, SupplyService>()
+//     .AddScoped<SupplyRepository, SupplyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
@@ -96,29 +96,29 @@ builder
 .Services.AddScoped<IVideoGameVersionService, VideoGameVersionService>()
 .AddScoped<VideoGameVersionRepository, VideoGameVersionRepository>();
 //add auto mapper
-builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+// builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<IConsoleService, ConsoleService>()
     .AddScoped<ConsoleRepository, ConsoleRepository>();
 
-builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+// builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
 
 
-builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+// builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<ISupplierService, SupplierService>()
     .AddScoped<SupplierRepository, SupplierRepository>();
 
-builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+// builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<ISupplyService, SupplyService>()
     .AddScoped<SupplyRepository, SupplyRepository>();
 
 
-builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+// builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<IPublisherService, PublisherService>()
     .AddScoped<PublisherRepository, PublisherRepository>();
@@ -192,7 +192,6 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine($"Databse connection failed:{ex.Message}");
     }
 }
-app.UseMiddleware<LoggingMiddleware>();
 
 // Enable Swagger for API documentation
 if (app.Environment.IsDevelopment())
