@@ -1,6 +1,7 @@
 using AutoMapper;
 using FusionTech.src.Entity;
 using FusionTech.src.Repository;
+using FusionTech.src.Utils;
 using static FusionTech.src.DTO.OrderDTO;
 
 namespace FusionTech.src.Services.order
@@ -35,9 +36,11 @@ namespace FusionTech.src.Services.order
                 );
                 if (videoGameVersion == null)
                 {
-                    throw new ArgumentNullException(
-                        $"An invalid video game reference {orderedGameDTO.VideoGameVersionID}"
-                    );
+                    throw CustomExeption.NotFound($"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found.");
+                }
+                if (orderedGameDTO.Quantity <= 0)
+                {
+                    throw CustomExeption.BadRequest("Quantity must be greater than zero.");
                 }
                 // Check for Quantity, it could be zero or negative
                 totalPrice += videoGameVersion.Price * orderedGameDTO.Quantity;
@@ -71,6 +74,10 @@ namespace FusionTech.src.Services.order
         public async Task<List<OrderReadDto>> GetOrderByIdAsync(int CustomerId)
         {
             var orders = await _orderRepository.GetOrderByIdAsync(CustomerId);
+            if (orders == null || orders.Count == 0)
+            {
+                throw CustomExeption.NotFound($"No orders found for customer ID {CustomerId}.");
+            }
             var orderLists = _mapper.Map<List<Order>, List<OrderReadDto>>(orders);
             return orderLists;
         }

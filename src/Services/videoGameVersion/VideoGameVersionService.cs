@@ -22,29 +22,42 @@ namespace FusionTech.src.Services.videoGameVersion
         {
             var videoGame = _mapper.Map<VideoGameVersionCreateDto, VideoGameVersion>(createGameVersion);
             var createdGameVersion = await _videoGameVersionRepo.CreateOneAsync(videoGame);
+            if (createdGameVersion == null)
+            {
+                throw CustomExeption.InternalError("Failed to create the video game version.");
+            }
             return _mapper.Map<VideoGameVersion, VideoGameVersionReadDto>(createdGameVersion);
         }
 
         public async Task<bool> DeleteOneAsync(Guid id)
         {
-            var foundGameInfo = await _videoGameVersionRepo.GetVersionByIdAsync(id);
-            if (foundGameInfo == null)
+            var foundGameVersion = await _videoGameVersionRepo.GetVersionByIdAsync(id);
+            if (foundGameVersion == null)
             {
-                return false;
+                throw CustomExeption.NotFound($"Video game version with ID {id} not found.");
             }
 
-            return await _videoGameVersionRepo.DeleteOneAsync(foundGameInfo);
+            return await _videoGameVersionRepo.DeleteOneAsync(foundGameVersion);
         }
 
-        public async Task<List<VideoGameVersionReadDto>> GetAllAsync( )
+        public async Task<List<VideoGameVersionReadDto>> GetAllAsync()
         {
             var videoGameList = await _videoGameVersionRepo.GetAllAsync();
+            if (videoGameList == null || videoGameList.Count == 0)
+            {
+                throw CustomExeption.NotFound("No video game versions found.");
+            }
+
             return _mapper.Map<List<VideoGameVersion>, List<VideoGameVersionReadDto>>(videoGameList);
         }
 
         public async Task<VideoGameVersionReadDto> GetVersionByIdAsync(Guid id)
         {
             var foundGameVersion = await _videoGameVersionRepo.GetVersionByIdAsync(id);
+            if (foundGameVersion == null)
+            {
+                throw CustomExeption.NotFound($"Video game version with ID {id} not found.");
+            }
             return _mapper.Map<VideoGameVersion, VideoGameVersionReadDto>(foundGameVersion);
         }
 
@@ -53,10 +66,14 @@ namespace FusionTech.src.Services.videoGameVersion
             var foundGameVersion = await _videoGameVersionRepo.GetVersionByIdAsync(id);
             if (foundGameVersion == null)
             {
-                return false;
+                throw CustomExeption.NotFound($"Video game version with ID {id} not found.");
             }
-
             _mapper.Map(updateGameVersion, foundGameVersion);
+            bool isUpdated = await _videoGameVersionRepo.UpdateOneAsync(foundGameVersion);
+            if (!isUpdated)
+            {
+                throw CustomExeption.InternalError("Failed to update the video game version.");
+            }
             return await _videoGameVersionRepo.UpdateOneAsync(foundGameVersion);
         }
     }
