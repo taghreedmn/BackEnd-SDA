@@ -56,8 +56,8 @@ namespace FusionTech.src.Database
         
 
               // Seed Inventory data
-            var Inventory1 = new Inventory { InventoryId = Guid.NewGuid(),GameId = Guid.NewGuid(), StoreId = Guid.NewGuid(), GameQuantity = 250 };
-            var Inventory2 = new Inventory { InventoryId = Guid.NewGuid(),GameId = Guid.NewGuid(), StoreId = Guid.NewGuid(), GameQuantity = 400 };
+            var Inventory1 = new Inventory { InventoryId = Guid.NewGuid(),VideoGameVersionId = Guid.NewGuid(), StoreId = Guid.NewGuid(), GameQuantity = 250 };
+            var Inventory2 = new Inventory { InventoryId = Guid.NewGuid(),VideoGameVersionId = Guid.NewGuid(), StoreId = Guid.NewGuid(), GameQuantity = 400 };
 
             
        
@@ -68,8 +68,8 @@ namespace FusionTech.src.Database
                 
 
               // Seed Supply data
-            var Supply1 = new Supply { SupplyId = Guid.NewGuid(), SupplierId = Supplier1.SupplierId, GamesId = Guid.NewGuid(), SupplierQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Inventory1.InventoryId };
-            var Supply2 = new Supply { SupplyId = Guid.NewGuid(), SupplierId = Supplier2.SupplierId, GamesId = Guid.NewGuid(), SupplierQuantity = 50, SupplierDate = DateTime.UtcNow.AddDays(-1), InventoryId = Inventory2.InventoryId };
+            var Supply1 = new Supply { SupplyId = Guid.NewGuid(), SupplierId = Supplier1.SupplierId, GamesId = Guid.NewGuid(), SupplyQuantity = 100, SupplierDate = DateTime.UtcNow, InventoryId = Inventory1.InventoryId };
+            var Supply2 = new Supply { SupplyId = Guid.NewGuid(), SupplierId = Supplier2.SupplierId, GamesId = Guid.NewGuid(), SupplyQuantity = 50, SupplierDate = DateTime.UtcNow.AddDays(-1), InventoryId = Inventory2.InventoryId };
 
                 
 
@@ -87,16 +87,16 @@ namespace FusionTech.src.Database
           
 
                // Seed GameStudio data
-          var Studio1 = new GameStudio { StudioId = Guid.NewGuid(), StudioName = "FromSoftware", StudioPicturePath = "pic1/png" };
-          var Studio2 = new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Treyarch", StudioPicturePath = "pic2/png" };          
-          var Studio3 = new GameStudio { StudioId = Guid.NewGuid(), StudioName = "Valve", StudioPicturePath = "pic3/png" };
+          var Studio1 = new GameStudio { GameStudioId = Guid.NewGuid(), StudioName = "FromSoftware", StudioPicturePath = "pic1/png" };
+          var Studio2 = new GameStudio { GameStudioId = Guid.NewGuid(), StudioName = "Treyarch", StudioPicturePath = "pic2/png" };          
+          var Studio3 = new GameStudio { GameStudioId = Guid.NewGuid(), StudioName = "Valve", StudioPicturePath = "pic3/png" };
 
          
 
             // Seed Publisher data
          
-            var Publisher1 =  new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Activision", Email = "publisher1@example.com", PublisherPicturePath = "" };
-            var Publisher2 = new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Microsoft", Email = "publisher2@example.com", PublisherPicturePath = "" };
+            var Publisher1 =  new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Activision", PublisherEmail = "publisher1@example.com", PublisherPicturePath = "" };
+            var Publisher2 = new Publisher { PublisherId = Guid.NewGuid(), PublisherName = "Microsoft", PublisherEmail = "publisher2@example.com", PublisherPicturePath = "" };
           
 
             // Seed Store data
