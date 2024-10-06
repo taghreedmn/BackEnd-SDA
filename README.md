@@ -52,7 +52,7 @@ The primary goal of this project is to create a scalable and efficient platform 
 - Database: PostgreSQL 
 - ORM: Entity Framework Core 
 - Authentication: JWT (JSON Web Tokens) for secure user authentication
-- Hosting:[]
+- Hosting: Render and supabase 
 - Version Control: Git (for source code management)
 
 
@@ -120,24 +120,34 @@ You can test the API using tools like Postman or cURL.
 - DTOs : Data Transfer Objects
 - Entities : Database Entities (User, Product, Category, Order)
 - Middleware : Logging, request, response and Error Handler 
-- Repositories # Repository Layer for database operations
+- Repositories : Repository Layer for database operations
 - Services : Business Logic Layer 
-- Utils : Common logics
+- Utils : Common logics in the system 
 - Migrations : Entity Framework Migrations
 - Program : a Application Entry Point
 
 
+## Some API Endpoints :
+- https://fusiontech1.onrender.com/api/v1/Categories
+- https://fusiontech1.onrender.com/api/v1/Console
+- https://fusiontech1.onrender.com/api/v1/Customer
+- https://fusiontech1.onrender.com/api/v1/GameStudio
+- https://fusiontech1.onrender.com/api/v1/Payment
+- https://fusiontech1.onrender.com/api/v1/Order
+
+
+
 ## Deployment :
-The apllication is deployed and can be accessed at : [https:/]
+The apllication is deployed and can be accessed at :  [https://fusiontech1.onrender.com]
 
 
 
 ## Team Member :
-- Lead : Mohammed Alhussain (https://github.com/K-MH21 )
-- Taghreed Alotaibi (https://github.com/aghreedmn)
-- Razan Almohammadi (https://github.com/RazanAlmohammadi)
-- Lujain Alshehri (https://github.com/Lujain41)
-- Samar Almutairi (https://github.com/SamarSaad056)
+- Lead : Mohammed Alhussain [https://github.com/K-MH21]
+- Taghreed Alotaibi [https://github.com/aghreedmn]
+- Razan Almohammadi [https://github.com/RazanAlmohammadi]
+- Lujain Alshehri [https://github.com/Lujain41]
+- Samar Almutairi [https://github.com/SamarSaad056]
 
 
 
