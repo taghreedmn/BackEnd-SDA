@@ -16,6 +16,7 @@ namespace FusionTech.src.DTO
 
             [Range(0, int.MaxValue, ErrorMessage = "Years of service cannot be negative.")]
             public int YearsOfService { get; set; } = 0;
+            public Guid StoreId { get; set; }
         }
 
         public class StoreEmployeeSignInDto : PersonSignInDTO

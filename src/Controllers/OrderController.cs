@@ -18,8 +18,8 @@ namespace FusionTech.src.Controllers
         }
 
         // Create a new order
-        [HttpPost]
         [Authorize(Policy = "Customer")]
+        [HttpPost]
         public async Task<ActionResult<OrderReadDto>> CreateOneAsync(
             [FromBody] OrderCreateDto orderCreateDto
         )
@@ -38,8 +38,8 @@ namespace FusionTech.src.Controllers
         }
 
         // Get all orders
-        [HttpGet]
         [Authorize(Policy = "Customer")]
+        [HttpGet]
         public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync()
         {
             var authenticateClaims = HttpContext.User;

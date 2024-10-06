@@ -18,8 +18,8 @@ namespace FusionTech.src.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize(Policy = "admin")]
         [HttpPost]
-        [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<CategoryReadDto>> CreateOne(
             [FromBody] CategoryCreateDto createDto
         )
@@ -52,8 +52,8 @@ namespace FusionTech.src.Controllers
             return Ok(category);
         }
 
+        [Authorize(Policy = "admin")]
         [HttpDelete("{Id}")]
-        [Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid Id)
         {
             var category = await _categoryService.GetByIdAsync(Id);
@@ -61,8 +61,8 @@ namespace FusionTech.src.Controllers
             return Ok(category);
         }
 
+        [Authorize(Policy = "admin")]
         [HttpPut("{Id}")]
-        [Authorize(Roles = "admin")]
         public async Task<ActionResult> UpdateCategory(Guid id, CategoryUpdateDto updateDto)
         {
             await _categoryService.UpdateOneAsync(id, updateDto);
