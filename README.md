@@ -138,7 +138,7 @@ You can test the API using tools like Postman or cURL.
 
 
 ## Deployment :
-The apllication is deployed and can be accessed at :  [https://fusiontech1.onrender.com]
+The application is deployed and can be accessed at :  [https://fusiontech1.onrender.com]
 
 
 
