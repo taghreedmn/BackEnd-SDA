@@ -168,6 +168,26 @@ namespace FusionTech.src.Database
                 Location = "Jeddah",
             };
 
+            PasswordUtils.HashPassword(
+                "StoreEmployee",
+                out string hashedPassword2,
+                out byte[] salt2
+            );
+
+            var storeEmployee1 = new StoreEmployee
+            {
+                PersonId = 1000,
+                PersonEmail = "employee@mail.com",
+                PersonName = "Store Employee",
+                PersonPassword = hashedPassword2,
+                PersonPhoneNumber = "+966500000005",
+                salt = salt2,
+                Role = "StoreEmployee",
+                Salary = 4827f,
+                YearsOfService = 5,
+                StoreId = Store1.StoreId,
+            };
+
             var Inventory1 = new Inventory
             {
                 InventoryId = Guid.NewGuid(),
@@ -277,6 +297,7 @@ namespace FusionTech.src.Database
             modelBuilder.Entity<VideoGameVersion>().HasData(VideoGameVersion1, VideoGameVersion2);
 
             modelBuilder.Entity<Store>().HasData(Store1, Store2);
+            modelBuilder.Entity<StoreEmployee>().HasData(storeEmployee1);
 
             modelBuilder.Entity<Inventory>().HasData(Inventory1, Inventory2);
 
