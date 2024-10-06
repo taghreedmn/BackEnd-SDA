@@ -17,8 +17,8 @@ namespace FusionTech.src.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpPost]
         public async Task<ActionResult<PaymentReadDto>> CreateOne(
             [FromBody] PaymentCreateDto createDto
         )
@@ -44,8 +44,8 @@ namespace FusionTech.src.Controllers
             return Ok(payment);
         }
 
-        [HttpDelete("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<PaymentReadDto>> DeleteOne([FromRoute] Guid id)
         {
             var payment = await _paymentService.GetByIdAsync(id);
