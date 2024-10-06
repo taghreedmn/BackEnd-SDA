@@ -310,6 +310,30 @@ namespace FusionTech.src.Database
             modelBuilder.Entity<Supplier>().HasData(Supplier1, Supplier2);
 
             modelBuilder.Entity<Supply>().HasData(Supply1, Supply2);
+
+            modelBuilder
+                .Entity<Category>()
+                .HasMany(c => c.VideoGameInfos)
+                .WithMany(v => v.Categories)
+                .UsingEntity(j =>
+                    j.HasData(
+                        new
+                        {
+                            CategoriesCategoryId = Category1.CategoryId,
+                            VideoGameInfosVideoGameInfoId = VideoGameInfo1.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            CategoriesCategoryId = Category2.CategoryId,
+                            VideoGameInfosVideoGameInfoId = VideoGameInfo1.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            CategoriesCategoryId = Category1.CategoryId,
+                            VideoGameInfosVideoGameInfoId = VideoGameInfo2.VideoGameInfoId,
+                        }
+                    )
+                );
         }
     }
 }
