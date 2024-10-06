@@ -1,4 +1,3 @@
-
 using FusionTech.src.Database;
 using FusionTech.src.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +20,14 @@ namespace FusionTech.src.Repository
         {
             return await _videoGameInfos.FindAsync(id);
         }
+
         public async Task<List<VideoGameInfo>> GetVideoGameVersionByIdAsync(Guid id)
         {
             return await _videoGameInfos
-            .Include(vi => vi.VideoGameVersions).Where(vi => vi.VideoGameInfoId == id).ToListAsync();
+                .Include(vi => vi.VideoGameVersions)
+                .Where(vi => vi.VideoGameInfoId == id)
+                .ToListAsync();
         }
-
 
         // Create a new video game
         public async Task<VideoGameInfo> CreateOneAsync(VideoGameInfo newGameInfo)
@@ -53,8 +54,15 @@ namespace FusionTech.src.Repository
         // Delete a video game
         public async Task<bool> DeleteOnAsync(VideoGameInfo gameInfo)
         {
-            _videoGameInfos.Remove(gameInfo);
-            await _databaseContext.SaveChangesAsync();
+            try
+            {
+                _videoGameInfos.Remove(gameInfo);
+                await _databaseContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return true;
         }
     }

@@ -22,9 +22,7 @@ namespace FusionTech.src.Repository
 
         public async Task<Person?> FindPersonByEmail(string email)
         {
-            return await _Person.FirstOrDefaultAsync(e =>
-                string.Equals(e.PersonEmail, email, StringComparison.OrdinalIgnoreCase)
-            );
+            return await _Person.FirstOrDefaultAsync(e => e.PersonEmail.ToLower() == email.ToLower());
         }
 
         public async Task<bool> DeletePersonById(int id)

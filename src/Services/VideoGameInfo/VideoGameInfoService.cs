@@ -42,7 +42,7 @@ namespace FusionTech.src.Services.VideoGamesInfo
                 throw CustomException.NotFound("Person not found.");
             }
 
-            if (originalSystemAdmin!.ManageGames)
+            if (!(originalSystemAdmin!.ManageGames))
             {
                 throw CustomException.UnAuthorized("Unauthorized access to manage games.");
             }

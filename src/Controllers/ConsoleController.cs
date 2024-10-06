@@ -24,8 +24,8 @@ namespace FusionTech.src.Controllers
         }
 
         //1-Create Console:
-        [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpPost]
         public async Task<ActionResult<ReadConsoleDTO>> CreateOneAsync(CreateConsoleDTO createDTO)
         {
             var consoleCreated = await _consoleService.CreateOneAsync(createDTO);
@@ -33,8 +33,8 @@ namespace FusionTech.src.Controllers
         }
 
         //2-update Console
-        [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateConsoleDTO consoleName)
         {
             await _consoleService.UpdateAsync(id, consoleName);
@@ -58,8 +58,8 @@ namespace FusionTech.src.Controllers
         }
 
         //5-delete Console by id
-        [HttpDelete("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteId(Guid id)
         {
             var foundConsole = await _consoleService.GetIdAsync(id);

@@ -42,8 +42,8 @@ namespace FusionTech.src.Controllers
         }
 
         // Updates a store by ID
-        [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateStore(
             [FromRoute] Guid id,
             [FromBody] StoreUpdateDto updateDto
@@ -59,8 +59,8 @@ namespace FusionTech.src.Controllers
         }
 
         // Deletes a store by ID
-        [HttpDelete("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteStore([FromRoute] Guid id)
         {
             var isDeleted = await _storeService.DeleteOneAsync(id);
