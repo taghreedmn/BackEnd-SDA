@@ -42,19 +42,19 @@ namespace FusionTech.src.Controllers
            return Ok(supplyItem);
        }
 
-
-
-
         // Create a new supply
-
         [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
         public async Task<ActionResult<SupplyReadDto>> CreateOne(SupplyCreateDto createDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var supplyCreated = await _supplyService.CreateOneAsync(createDto);
-            return Created($"api/v1/supplies/{supplyCreated.SupplyId}", supplyCreated);
+            return CreatedAtAction(nameof(GetSupplyById), new { id = supplyCreated.SupplyId }, supplyCreated);
         }
 
+    
         // Update supply
         [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
