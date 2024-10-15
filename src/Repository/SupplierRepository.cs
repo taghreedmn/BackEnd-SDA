@@ -32,18 +32,21 @@ namespace FusionTech.src.Repository
             return await _supplier.FindAsync(id);
         }
 
-        public async Task<bool> DeleteOneAsync(Supplier supplier)
+       public async Task<bool> DeleteOneAsync(Supplier supplier)
         {
+            if (supplier == null) throw new ArgumentNullException(nameof(supplier));
+            
             _supplier.Remove(supplier);
-            await _databaseContext.SaveChangesAsync();
-            return true;
+            return await _databaseContext.SaveChangesAsync() > 0;
         }
+
 
         public async Task<bool> UpdateOneAsync(Supplier updateSupplier)
         {
+            if (updateSupplier == null) throw new ArgumentNullException(nameof(updateSupplier));
+
             _supplier.Update(updateSupplier);
-            await _databaseContext.SaveChangesAsync();
-            return true;
+            return await _databaseContext.SaveChangesAsync() > 0;
         }
     }
 }
