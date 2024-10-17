@@ -1,9 +1,3 @@
-using AutoMapper;
-using FusionTech.src.DTO;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.PaymentDTO;
-
 namespace FusionTech.src.Services.Payment
 {
     public class PaymentService : IPaymentService

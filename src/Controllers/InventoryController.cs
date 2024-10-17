@@ -1,8 +1,3 @@
-using FusionTech.src.Services.Inventory;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.InventoryDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -48,10 +43,12 @@ namespace FusionTech.src.Controllers
         //     return NoContent();
         // }
 
-        // Adds a game to the inventory 
+        // Adds a game to the inventory
         [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult> AddGameToInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
+        public async Task<ActionResult> AddGameToInventory(
+            [FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto
+        )
         {
             var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
             if (!gameAdded)
@@ -61,10 +58,12 @@ namespace FusionTech.src.Controllers
             return NoContent(); // No content returned on successful addition
         }
 
-        // Removes a game from the inventory 
+        // Removes a game from the inventory
         [HttpDelete]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult> RemoveGameFromInventory([FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto)
+        public async Task<ActionResult> RemoveGameFromInventory(
+            [FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto
+        )
         {
             var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);
             if (!gameRemoved)
@@ -75,4 +74,3 @@ namespace FusionTech.src.Controllers
         }
     }
 }
-

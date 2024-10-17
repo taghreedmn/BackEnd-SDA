@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.ConsoleDTO;
-
 namespace FusionTech.src.Services.Console
 {
     public interface IConsoleService

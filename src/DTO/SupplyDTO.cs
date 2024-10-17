@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using FusionTech.src.Entity;
-
 namespace FusionTech.src.DTO
 {
     public class SupplyDTO

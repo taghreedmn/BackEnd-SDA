@@ -1,9 +1,3 @@
-using System.Security.Claims;
-using FusionTech.src.Services.SystemAdmin;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.SystemAdminDTO;
-
 namespace FusionTech.src.Controllers
 {
     [Authorize(Policy = "admin")]

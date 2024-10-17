@@ -1,10 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Config;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.CustomerDTO;
-using static FusionTech.src.DTO.SystemAdminDTO;
-
 namespace FusionTech.src.Services.SystemAdmin
 {
     public class SystemAdminService : ISystemAdminService

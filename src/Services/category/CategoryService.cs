@@ -1,11 +1,3 @@
-using AutoMapper;
-using FusionTech.src.DTO;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using Microsoft.EntityFrameworkCore.Metadata;
-using static FusionTech.src.DTO.CategoryDTO;
-
 namespace FusionTech.src.Services.category
 {
     public class CategoryService : ICategoryService

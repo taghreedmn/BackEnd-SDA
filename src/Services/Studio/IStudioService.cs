@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.StudioDTO;
-
 namespace FusionTech.src.Services.Studio
 {
     public interface IStudioService

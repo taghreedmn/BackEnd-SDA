@@ -1,13 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using FusionTech.src.Services.Publisher;
-using static FusionTech.src.DTO.PublisherDTO;
-using Microsoft.AspNetCore.Authorization;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    
     public class PublisherController : ControllerBase
     {
         private readonly IPublisherService _publisherService;
@@ -17,7 +11,6 @@ namespace FusionTech.src.Controllers
             _publisherService = publisherService;
         }
 
-        
         [HttpGet]
         public async Task<ActionResult<List<PublisherReadDto>>> GetAllPublishers()
         {
@@ -25,7 +18,6 @@ namespace FusionTech.src.Controllers
             return Ok(publishers);
         }
 
-    
         [HttpGet("{id}")]
         public async Task<ActionResult<PublisherReadDto>> GetPublisherById(Guid id)
         {
@@ -37,15 +29,15 @@ namespace FusionTech.src.Controllers
             return Ok(publisher);
         }
 
-
         [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult<PublisherReadDto>> CreatePublisher(PublisherCreateDto createDto)
+        public async Task<ActionResult<PublisherReadDto>> CreatePublisher(
+            PublisherCreateDto createDto
+        )
         {
             var publisherCreated = await _publisherService.CreateOneAsync(createDto);
             return Created($"api/v1/publisher/{publisherCreated.PublisherName}", publisherCreated);
         }
-
 
         [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
@@ -60,7 +52,6 @@ namespace FusionTech.src.Controllers
             await _publisherService.UpdateOneAsync(id, updateDto);
             return NoContent();
         }
-
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]

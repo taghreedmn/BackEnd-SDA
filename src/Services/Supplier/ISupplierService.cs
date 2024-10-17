@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.SupplierDTO;
-
 namespace FusionTech.src.Services.supplier
 {
     public interface ISupplierService

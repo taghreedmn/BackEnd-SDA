@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations; // Added
-using FusionTech.src.Entity;
-using static FusionTech.src.DTO.CategoryDTO;
-using static FusionTech.src.DTO.VideoGameVersionDTO;
-
 namespace FusionTech.src.DTO
 {
     public class VideoGameInfoDTO

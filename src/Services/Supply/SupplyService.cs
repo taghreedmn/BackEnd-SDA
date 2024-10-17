@@ -1,12 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Repository;
-using FusionTech.src.Entity;
-using static FusionTech.src.DTO.SupplyDTO;
-using FusionTech.src.Utils;
-
-
-
-
 namespace FusionTech.src.Services.supply
 {
    

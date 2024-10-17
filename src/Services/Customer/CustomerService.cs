@@ -1,9 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Config;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.CustomerDTO;
-
 namespace FusionTech.src.Services.Customer
 {
     public class CustomerService : ICustomerService

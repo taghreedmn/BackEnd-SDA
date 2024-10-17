@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.CustomerDTO;
-
 namespace FusionTech.src.Services.Customer
 {
     public interface ICustomerService

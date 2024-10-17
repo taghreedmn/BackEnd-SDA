@@ -1,6 +1,3 @@
-
-using static FusionTech.src.DTO.StoreDTO;
-
 namespace FusionTech.src.Service.Store
 {
     public interface IStoreService

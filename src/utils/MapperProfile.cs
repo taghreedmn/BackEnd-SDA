@@ -1,25 +1,3 @@
-using AutoMapper;
-using FusionTech.src.DTO;
-using FusionTech.src.Entity;
-using static FusionTech.src.DTO.CategoryDTO;
-using static FusionTech.src.DTO.ConsoleDTO;
-using static FusionTech.src.DTO.CustomerDTO;
-using static FusionTech.src.DTO.InventoryDTO;
-using static FusionTech.src.DTO.PaymentDTO;
-using static FusionTech.src.DTO.PersonDTO;
-using static FusionTech.src.DTO.PublisherDTO;
-using static FusionTech.src.DTO.StoreDTO;
-using static FusionTech.src.DTO.StoreEmployeeDTO;
-using static FusionTech.src.DTO.StudioDTO;
-using static FusionTech.src.DTO.SupplierDTO;
-using static FusionTech.src.DTO.SupplyDTO;
-using static FusionTech.src.DTO.SystemAdminDTO;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-using static FusionTech.src.DTO.OrderedGamesDto;
-using static FusionTech.src.DTO.OrderDTO;
-using static FusionTech.src.DTO.VideoGameVersionDTO;
-
-
 namespace FusionTech.src.Utils
 {
     public class MapperProfile : Profile
