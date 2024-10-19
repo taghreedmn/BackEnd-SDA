@@ -36,7 +36,7 @@ namespace FusionTech.src.Repository
         // Get all video games
         public async Task<List<VideoGameInfo>> GetAllAsync()
         {
-            return await _videoGameInfos.ToListAsync();
+            return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
         }
 
         // Update an existing video game

@@ -1,7 +1,8 @@
 namespace FusionTech.src.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
+    
     public class PublisherController : ControllerBase
     {
         private readonly IPublisherService _publisherService;

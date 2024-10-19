@@ -37,7 +37,7 @@ namespace FusionTech.src.Controllers
         //     return Ok(category);
         // }
         [HttpGet("{CategoryName}")]
-        public async Task<ActionResult<CategoryReadDto>> GetCategoryDetailsByNameAsync(
+        public async Task<ActionResult<List<CategoryReadDto>>> GetCategoryDetailsByNameAsync(
             [FromRoute] string CategoryName
         )
         {

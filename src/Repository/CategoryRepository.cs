@@ -20,7 +20,7 @@ namespace FusionTech.src.Repository
 
         public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
         {
-            var result = _category.Where(c =>
+            var result = _category.Include(v => v.VideoGameInfos).ThenInclude(vi => vi.VideoGameVersions).Where(c =>
                 c.CategoryName.ToLower().Contains(paginationOptions.Search.ToLower())
             ); // Logic should be in Services (I think)
             return await result
@@ -36,7 +36,7 @@ namespace FusionTech.src.Repository
         public async Task<List<Category>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
             return await _category
-            .Include(c => c.VideoGameInfos).Where(c => c.CategoryName.ToLower() == CategoryName.ToLower()).ToListAsync();
+            .Include(c => c.VideoGameInfos).ThenInclude(vi => vi.VideoGameVersions).Where(c => c.CategoryName.ToLower() == CategoryName.ToLower()).ToListAsync();
         }
 
         public async Task<bool> DeleteOneAsync(Category category)

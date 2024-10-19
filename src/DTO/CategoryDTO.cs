@@ -14,7 +14,7 @@ namespace FusionTech.src.DTO
             public Guid CategoryId { get; set; }
 
             public string? CategoryName { get; set; }
-            public List<VideoGameInfoReadDto> VideoGameInfos { get; set; }
+            public ICollection<VideoGameInfoReadDto> VideoGameInfos { get; set; }
         }
 
         public class CategoryUpdateDto
