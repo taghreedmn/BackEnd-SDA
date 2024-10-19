@@ -1,9 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.ConsoleDTO;
-
 namespace FusionTech.src.Services.Console
 {
     public class ConsoleService : IConsoleService

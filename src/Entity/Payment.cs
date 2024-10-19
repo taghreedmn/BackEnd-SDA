@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace FusionTech.src.Entity
 {
     public class Payment

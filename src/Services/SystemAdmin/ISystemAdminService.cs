@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.SystemAdminDTO;
-
 namespace FusionTech.src.Services.SystemAdmin
 {
     public interface ISystemAdminService

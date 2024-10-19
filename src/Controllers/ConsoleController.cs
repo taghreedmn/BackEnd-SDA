@@ -5,11 +5,6 @@
 //4-get all Consoles
 //5-delete Console by id
 
-using FusionTech.src.Services.Console;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.ConsoleDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

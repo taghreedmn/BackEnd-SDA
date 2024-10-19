@@ -1,10 +1,3 @@
-using System.Security.Claims;
-using FusionTech.src.Services.order;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.OrderDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

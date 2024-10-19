@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.VideoGameVersionDTO;
-
 namespace FusionTech.src.DTO
 {
     public class OrderedGamesDto

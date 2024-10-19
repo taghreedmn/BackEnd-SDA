@@ -1,10 +1,3 @@
-using System.Security.Authentication;
-using AutoMapper;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-
 namespace FusionTech.src.Services.VideoGamesInfo
 {
     public class VideoGameInfoService : IVideoGameInfoService

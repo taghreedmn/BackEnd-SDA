@@ -1,12 +1,3 @@
-
-using FusionTech.src.DTO;
-using FusionTech.src.Services.supply;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.SupplyDTO;
-
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -33,14 +24,14 @@ namespace FusionTech.src.Controllers
         // Get supply by ID
         [HttpGet("{id}")]
         public async Task<ActionResult> GetSupplyById(Guid id)
-       {
+        {
             var supplyItem = await _supplyService.GetByIdAsync(id);
             if (supplyItem == null)
             {
                 return NotFound();
             }
-           return Ok(supplyItem);
-       }
+            return Ok(supplyItem);
+        }
 
         // Create a new supply
         [HttpPost]
@@ -51,10 +42,13 @@ namespace FusionTech.src.Controllers
                 return BadRequest(ModelState);
 
             var supplyCreated = await _supplyService.CreateOneAsync(createDto);
-            return CreatedAtAction(nameof(GetSupplyById), new { id = supplyCreated.SupplyId }, supplyCreated);
+            return CreatedAtAction(
+                nameof(GetSupplyById),
+                new { id = supplyCreated.SupplyId },
+                supplyCreated
+            );
         }
 
-    
         // Update supply
         [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]

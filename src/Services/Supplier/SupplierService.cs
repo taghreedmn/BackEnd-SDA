@@ -1,11 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Repository;
-using FusionTech.src.Entity;
-using static FusionTech.src.DTO.SupplierDTO;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace FusionTech.src.Services.supplier
 {
     public class SupplierService : ISupplierService

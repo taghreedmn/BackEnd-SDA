@@ -1,7 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Repository;
-using static FusionTech.src.DTO.InventoryDTO;
-
 namespace FusionTech.src.Services.Inventory
 
 {

@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-
 namespace FusionTech.src.DTO
 {
     public class CategoryDTO

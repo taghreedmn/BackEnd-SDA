@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace FusionTech.src.DTO
 {
     public class InventoryDTO

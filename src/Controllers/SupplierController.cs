@@ -1,9 +1,3 @@
-
-using FusionTech.src.Services.supplier;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.SupplierDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
