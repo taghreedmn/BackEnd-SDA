@@ -1,5 +1,3 @@
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.CategoryDTO;
 namespace FusionTech.src.Services.category
 {
     public interface ICategoryService

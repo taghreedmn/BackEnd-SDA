@@ -1,6 +1,3 @@
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-
 namespace FusionTech.src.Services.VideoGamesInfo
 {
     public interface IVideoGameInfoService

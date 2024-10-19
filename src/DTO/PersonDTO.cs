@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using FusionTech.src.Utils;
-
 namespace FusionTech.src.DTO
 {
     public class PersonDTO

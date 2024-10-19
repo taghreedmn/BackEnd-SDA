@@ -1,7 +1,3 @@
-using FusionTech.src.Entity;
-using FusionTech.src.Utils;
-using Microsoft.EntityFrameworkCore;
-
 namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext

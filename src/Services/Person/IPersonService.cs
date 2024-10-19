@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.PersonDTO;
-
 namespace FusionTech.src.Services.Person
 {
     public interface IPersonService

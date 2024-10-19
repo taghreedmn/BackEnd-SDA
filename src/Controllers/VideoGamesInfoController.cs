@@ -1,10 +1,3 @@
-using System.Security.Claims;
-using FusionTech.src.Services.VideoGamesInfo;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

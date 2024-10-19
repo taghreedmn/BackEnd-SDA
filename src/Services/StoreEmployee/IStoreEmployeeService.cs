@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.StoreEmployeeDTO;
-
 namespace FusionTech.src.Services.StoreEmployee
 {
     public interface IStoreEmployeeService

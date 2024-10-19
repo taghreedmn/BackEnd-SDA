@@ -1,9 +1,3 @@
-using System.Security.Claims;
-using FusionTech.src.Services.order;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.OrderDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -52,6 +46,11 @@ namespace FusionTech.src.Controllers
                 return BadRequest("User ID not found in claims or is not a valid integer.");
             }
             var orders = await _orderService.GetOrderByIdAsync(userId);
+            if (orders == null || !orders.Any())
+            {
+                throw CustomException.Forbidden("Forbidden. You do not have access rights to view this content.");
+            }
+
             return Ok(orders);
         } 
     }

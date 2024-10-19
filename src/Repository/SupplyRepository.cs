@@ -1,8 +1,3 @@
-using FusionTech.src.Database;
-using FusionTech.src.Entity;
-using Microsoft.EntityFrameworkCore;
-
-
 namespace FusionTech.src.Repository
 {
     public class SupplyRepository

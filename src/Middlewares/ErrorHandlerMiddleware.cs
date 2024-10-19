@@ -1,5 +1,3 @@
-using FusionTech.src.Utils;
-
 namespace FusionTech.src.Middlewares
 {
     public class ErrorHandlerMiddleware

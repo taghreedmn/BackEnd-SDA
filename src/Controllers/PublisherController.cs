@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using FusionTech.src.Services.Publisher;
-using static FusionTech.src.DTO.PublisherDTO;
-using Microsoft.AspNetCore.Authorization;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -37,12 +32,13 @@ namespace FusionTech.src.Controllers
 
         [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult<PublisherReadDto>> CreatePublisher(PublisherCreateDto createDto)
+        public async Task<ActionResult<PublisherReadDto>> CreatePublisher(
+            PublisherCreateDto createDto
+        )
         {
             var publisherCreated = await _publisherService.CreateOneAsync(createDto);
             return Created($"api/v1/publisher/{publisherCreated.PublisherName}", publisherCreated);
         }
-
 
         [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
@@ -57,7 +53,6 @@ namespace FusionTech.src.Controllers
             await _publisherService.UpdateOneAsync(id, updateDto);
             return NoContent();
         }
-
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]

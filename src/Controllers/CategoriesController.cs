@@ -1,10 +1,3 @@
-using FusionTech.src.Services.category;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.CategoryDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

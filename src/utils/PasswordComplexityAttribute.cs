@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
-
 namespace FusionTech.src.Utils
 {
     public class PasswordComplexityAttribute : ValidationAttribute

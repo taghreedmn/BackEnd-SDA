@@ -1,5 +1,3 @@
-using static FusionTech.src.DTO.OrderedGamesDto;
-
 namespace FusionTech.src.DTO
 {
     public class OrderDTO
