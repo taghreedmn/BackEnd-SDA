@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace FusionTech.src.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     
     public class PublisherController : ControllerBase
     {
@@ -17,7 +17,6 @@ namespace FusionTech.src.Controllers
             _publisherService = publisherService;
         }
 
-        
         [HttpGet]
         public async Task<ActionResult<List<PublisherReadDto>>> GetAllPublishers()
         {
@@ -25,7 +24,6 @@ namespace FusionTech.src.Controllers
             return Ok(publishers);
         }
 
-    
         [HttpGet("{id}")]
         public async Task<ActionResult<PublisherReadDto>> GetPublisherById(Guid id)
         {
@@ -36,7 +34,6 @@ namespace FusionTech.src.Controllers
             }
             return Ok(publisher);
         }
-
 
         [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
