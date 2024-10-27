@@ -12,7 +12,7 @@ namespace FusionTech.src.Entity
 
         public string? PersonPhoneNumber { get; set; }
 
-        public string? ProfilePicturePath { get; set; }
+        public string? ProfilePicturePath { get; set; }  // "http://localhost:5125/images/image1.png
         public static readonly PersonType PersonType = PersonType.Person;
 
         public required byte[] salt { get; set; }

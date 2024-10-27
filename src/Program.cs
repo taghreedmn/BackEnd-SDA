@@ -1,4 +1,6 @@
-var builder = WebApplication.CreateBuilder(args);
+var options = new WebApplicationOptions { WebRootPath = "wwwroot" };
+
+var builder = WebApplication.CreateBuilder(options);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 //connect the database
@@ -137,6 +139,7 @@ var app = builder.Build();
 
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseStaticFiles();
 
 app.UseRouting();
 app.MapGet("/", () => "server is running");
