@@ -30,5 +30,36 @@ namespace FusionTech.src.Controllers
 
             return Ok(isDeleted);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<SystemAdminReadDto>>> GetAllUsers(
+            [FromQuery] PaginationOptions paginationOptions
+        )
+        {
+            var users = await _systemAdminService.GetAllAsync(paginationOptions);
+            var totalCount = await _systemAdminService.CountSystemAdminsAsync();
+            var CustomerListDto = new SystemAdminListDto
+            {
+                SystemAdmins = users,
+                TotalCount = totalCount,
+            };
+            return Ok(CustomerListDto);
+        }
+
+        [HttpGet("Profile")]
+        public async Task<ActionResult<SystemAdminReadDto>> GetSystemAdminProfile()
+        {
+            var authenticateClaims = HttpContext.User;
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return BadRequest("User ID not found in claims");
+            }
+
+            return Ok(await _systemAdminService.GetOneById(userId));
+        }
     }
 }

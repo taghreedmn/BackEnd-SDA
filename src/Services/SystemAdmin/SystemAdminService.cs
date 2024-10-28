@@ -24,16 +24,6 @@ namespace FusionTech.src.Services.SystemAdmin
             _mapper = mapper;
         }
 
-        public Task<bool> AddGame()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteGame()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<SystemAdminReadDto> CreateOneAsync(
             SystemAdminSignUpDTO createDto,
             string email
@@ -96,6 +86,49 @@ namespace FusionTech.src.Services.SystemAdmin
                         "Something is wrong, the type of the person is undefined"
                     );
             }
+        }
+
+        public async Task<List<SystemAdminReadDto>> GetAllAsync(PaginationOptions paginationOptions)
+        {
+            var systemAdmins = await _systemAdminRepository.GetAllAsync();
+            var filteredSystemAdmins = systemAdmins
+                .Where(c =>
+                    c.PersonName.Contains(
+                        paginationOptions.Search,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || c.PersonEmail.Contains(
+                        paginationOptions.Search,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || (
+                        c.PersonPhoneNumber != null
+                        && c.PersonPhoneNumber.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                .ToList();
+
+            var paginatedSystemAdmins = filteredSystemAdmins
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToList();
+            return _mapper.Map<List<Entity.SystemAdmin>, List<SystemAdminReadDto>>(
+                paginatedSystemAdmins
+            );
+        }
+
+        public async Task<int> CountSystemAdminsAsync()
+        {
+            return await _systemAdminRepository.CountAsync();
+        }
+
+        public async Task<SystemAdminReadDto> GetOneById(int id)
+        {
+            var admin = await _systemAdminRepository.GetByIdAsync(id);
+            return _mapper.Map<Entity.SystemAdmin, SystemAdminReadDto>(admin!);
         }
     }
 }

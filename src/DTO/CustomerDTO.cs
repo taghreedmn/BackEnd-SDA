@@ -12,5 +12,10 @@ namespace FusionTech.src.DTO
         {
             public int Age { get; set; }
         }
+
+        public class CustomerListDto : PersonListDto
+        {
+            public List<CustomerReadDto> Customers { get; set; }
+        }
     }
 }

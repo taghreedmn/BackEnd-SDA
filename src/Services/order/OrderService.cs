@@ -30,7 +30,9 @@ namespace FusionTech.src.Services.order
                 );
                 if (videoGameVersion == null)
                 {
-                    throw CustomException.NotFound($"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found.");
+                    throw CustomException.NotFound(
+                        $"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found."
+                    );
                 }
                 if (orderedGameDTO.Quantity <= 0)
                 {
@@ -76,5 +78,16 @@ namespace FusionTech.src.Services.order
             return orderLists;
         }
 
+        public async Task<List<OrderReadDto>> GetAllAsync()
+        {
+            var orders = await _orderRepository.GetAllAsync();
+
+            return _mapper.Map<List<Order>, List<OrderReadDto>>(orders);
+        }
+
+        public async Task<int> CountOrdersAsync()
+        {
+            return await _orderRepository.CountAsync();
+        }
     }
 }

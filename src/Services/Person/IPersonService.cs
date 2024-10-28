@@ -2,7 +2,7 @@ namespace FusionTech.src.Services.Person
 {
     public interface IPersonService
     {
-        Task<PersonSignInDTO> GetByIdAsync(int id);
+        Task<PersonReadDto> GetByIdAsync(int id);
         Task<string> SignInAsync(PersonSignInDTO personSignInDTO);
         Task<bool> UpdateNameAsync(string email, string name);
 

@@ -22,5 +22,15 @@ namespace FusionTech.src.Repository
         {
             return await _storeEmployee.FindAsync(id);
         }
+
+        public async Task<List<StoreEmployee>> GetAllAsync()
+        {
+            return await _storeEmployee.ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _storeEmployee.CountAsync();
+        }
     }
 }

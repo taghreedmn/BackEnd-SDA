@@ -1,6 +1,6 @@
 namespace FusionTech.src.Utils
 {
-    public class SearchParameters
+    public class SearchParameters : PaginationOptions
     {
         public string? Title { get; set; } = "";
         public float? MinPrice { get; set; } = 0.0f;
@@ -10,7 +10,6 @@ namespace FusionTech.src.Utils
         // public DateTime EndDate { get; set; } = DateTime.MaxValue;
         public SortingTypes SortBy { get; set; } = SortingTypes.None;
         public bool Descending { get; set; } = false;
-        public PaginationOptions PaginationOptions { get; set; } = new PaginationOptions();
 
         public void IsValid()
         {
@@ -22,12 +21,12 @@ namespace FusionTech.src.Utils
             }
 
             // Ensure PaginationOptions are valid
-            if (PaginationOptions.Limit <= 0)
+            if (Limit <= 0)
             {
                 throw CustomException.InternalError("Limit must be greater than zero.");
             }
 
-            if (PaginationOptions.Offset < 0)
+            if (Offset < 0)
             {
                 throw CustomException.InternalError("Offset cannot be negative.");
             }

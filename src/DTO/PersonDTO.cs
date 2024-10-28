@@ -18,7 +18,7 @@ namespace FusionTech.src.DTO
             public required string PersonPassword { get; set; }
 
             [Phone(ErrorMessage = "Invalid phone number format.")]
-            public string? PersonPhone { get; set; }
+            public string? PersonPhoneNumber { get; set; }
         }
 
         public class PersonSignInDTO
@@ -33,8 +33,20 @@ namespace FusionTech.src.DTO
 
         public class PersonReadDto
         {
-            public required string PersonId { get; set; }
+            public int PersonId { get; set; }
+
             public required string PersonName { get; set; }
+
+            public required string PersonEmail { get; set; }
+
+            public string? PersonPhoneNumber { get; set; }
+
+            public string? ProfilePicturePath { get; set; }
+        }
+
+        public class PersonListDto
+        {
+            public int TotalCount { get; set; }
         }
     }
 }

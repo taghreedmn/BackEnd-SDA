@@ -99,8 +99,8 @@ namespace FusionTech.src.Services.VideoGamesInfo
             };
 
             videoGameList = videoGameList
-                .Skip(searchParameters.PaginationOptions.Offset)
-                .Take(searchParameters.PaginationOptions.Limit)
+                .Skip(searchParameters.Offset)
+                .Take(searchParameters.Limit)
                 .ToList();
 
             return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(videoGameList);
