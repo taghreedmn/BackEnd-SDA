@@ -56,7 +56,7 @@ namespace FusionTech.src.DTO
             public string? GamePicturePath { get; set; }
         }
 
-        public class VideoGameInfoReadDtoWithVersions
+        public class VideoGameDetailedDto
         {
             public Guid VideoGameInfoId { get; set; }
 

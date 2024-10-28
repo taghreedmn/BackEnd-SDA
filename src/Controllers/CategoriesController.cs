@@ -13,7 +13,7 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPost]
-        public async Task<ActionResult<CategoryReadDtoWithoutGames>> CreateOne(
+        public async Task<ActionResult<CategoryBasicDto>> CreateOne(
             [FromBody] CategoryCreateDto createDto
         )
         {
@@ -22,7 +22,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CategoryReadDtoWithoutGames>> GetCategory(
+        public async Task<ActionResult<CategoryBasicDto>> GetCategory(
             [FromQuery] PaginationOptions paginationOptions
         )
         {
@@ -38,7 +38,7 @@ namespace FusionTech.src.Controllers
         // }
         [HttpGet("{CategoryName}")]
         public async Task<
-            ActionResult<List<CategoryReadDtoWithGames>>
+            ActionResult<List<CategoryDetailedDto>>
         > GetCategoryDetailsByNameAsync([FromRoute] string CategoryName)
         {
             var category = await _categoryService.GetCategoryDetailsByNameAsync(CategoryName);
@@ -47,7 +47,7 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpDelete("{Id}")]
-        public async Task<ActionResult<CategoryReadDtoWithoutGames>> DeleteOne([FromRoute] Guid Id)
+        public async Task<ActionResult<CategoryBasicDto>> DeleteOne([FromRoute] Guid Id)
         {
             var category = await _categoryService.GetByIdAsync(Id);
             await _categoryService.DeleteOneAsync(category.CategoryId);

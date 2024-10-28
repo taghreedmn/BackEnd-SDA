@@ -11,40 +11,40 @@ namespace FusionTech.src.Services.category
             _mapper = mapper;
         }
 
-        public async Task<CategoryDTO.CategoryReadDtoWithoutGames> CreateOneAsync(
+        public async Task<CategoryDTO.CategoryBasicDto> CreateOneAsync(
           CategoryCreateDto createDto
         )
         {
             var category = _mapper.Map<CategoryCreateDto, Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Category, CategoryReadDtoWithoutGames>(categoryCreated);
+            return _mapper.Map<Category, CategoryBasicDto>(categoryCreated);
         }
 
-        public async Task<List<CategoryReadDtoWithoutGames>> GetAllAsync(
+        public async Task<List<CategoryBasicDto>> GetAllAsync(
             PaginationOptions paginationOptions
         )
         {
             var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Category>, List<CategoryReadDtoWithoutGames>>(categoryList);
+            return _mapper.Map<List<Category>, List<CategoryBasicDto>>(categoryList);
         }
 
-        public async Task<CategoryReadDtoWithGames> GetByIdAsync(Guid id)
+        public async Task<CategoryDetailedDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
                 throw CustomException.NotFound($"Category with ID {id} not found");
             }
-            return _mapper.Map<Category, CategoryReadDtoWithGames>(foundCategory);
+            return _mapper.Map<Category, CategoryDetailedDto>(foundCategory);
         }
-        public async Task<List<CategoryReadDtoWithGames>> GetCategoryDetailsByNameAsync(string CategoryName)
+        public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
             var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
             if (foundCategory == null || foundCategory.Count == 0)
             {
                 throw CustomException.NotFound($"No categories found with the name {CategoryName}");
             }
-            var categoryLists = _mapper.Map<List<Category>, List<CategoryReadDtoWithGames>>(foundCategory);
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(foundCategory);
             return categoryLists;
         }
 

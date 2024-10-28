@@ -11,25 +11,25 @@ namespace FusionTech.src.Services.Studio
             _maper = maper;
         }
 
-        public async Task<ReadStudioDTO> CreateOneAsync(CreateStudioDTO createDTO)
+        public async Task<StudioReadDTO> CreateOneAsync(StudioCreateDTO createDTO)
         {
-            var studio = _maper.Map<CreateStudioDTO, GameStudio>(createDTO);
+            var studio = _maper.Map<StudioCreateDTO, GameStudio>(createDTO);
 
             var studioCreated = await _studioRepository.CreateOneAsync(studio);
 
-            return _maper.Map<GameStudio, ReadStudioDTO>(studioCreated);
+            return _maper.Map<GameStudio, StudioReadDTO>(studioCreated);
         }
 
-        public async Task<List<ReadStudioDTO>> GetAllAsync()
+        public async Task<List<StudioReadDTO>> GetAllAsync()
         {
             var Liststudio = await _studioRepository.GetAllAsync();
-            return _maper.Map<List<GameStudio>, List<ReadStudioDTO>>(Liststudio);
+            return _maper.Map<List<GameStudio>, List<StudioReadDTO>>(Liststudio);
         }
 
-        public async Task<ReadStudioDTO> GetIdAsync(Guid id)
+        public async Task<StudioReadDTO> GetIdAsync(Guid id)
         {
             var foundstudio = await _studioRepository.GetIdAsync(id);
-            return _maper.Map<GameStudio, ReadStudioDTO>(foundstudio);
+            return _maper.Map<GameStudio, StudioReadDTO>(foundstudio);
         }
 
         public async Task<bool> DeleteIdAsync(Guid id)
@@ -40,7 +40,7 @@ namespace FusionTech.src.Services.Studio
             return isDelete;
         }
 
-        public async Task<bool> UpdateAsync(Guid id, UpdateStudioDTO studioName)
+        public async Task<bool> UpdateAsync(Guid id, StudioUpdateDTO studioName)
         {
             var foundstudio = await _studioRepository.GetIdAsync(id);
 
