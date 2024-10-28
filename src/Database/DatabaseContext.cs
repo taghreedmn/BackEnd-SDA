@@ -51,36 +51,36 @@ namespace FusionTech.src.Database
             };
 
             // Seed Category data
-            var Category1 = new Category 
-            { 
-                CategoryId = Guid.NewGuid(), 
-                CategoryName = "Action" 
+            var Category1 = new Category
+            {
+                CategoryId = Guid.Parse("2e32f726-203b-4fa3-a960-3a2c1a275864"),
+                CategoryName = "Action",
             };
             var Category2 = new Category
             {
-                CategoryId = Guid.NewGuid(),
+                CategoryId = Guid.Parse("4867a76e-ccc5-4470-a25a-dd1e91cbc87d"),
                 CategoryName = "Adventure",
             };
             var Category3 = new Category
             {
-                CategoryId = Guid.NewGuid(),
-                CategoryName = "Racing ",
+                CategoryId = Guid.Parse("0b387646-e3f1-4892-857c-b260a7113ca4"),
+                CategoryName = "Racing",
             };
 
             // Seed GameConsole data
             var Console1 = new GameConsole
             {
-                GameConsoleId = Guid.NewGuid(),
+                GameConsoleId = Guid.Parse("0268a1b4-571e-4962-90be-471f315c0497"),
                 ConsoleName = "GamerBox",
             };
             var Console2 = new GameConsole
             {
-                GameConsoleId = Guid.NewGuid(),
+                GameConsoleId = Guid.Parse("36be9397-03a5-4dff-a2f2-1f7061faff98"),
                 ConsoleName = "FusionPlay",
             };
             var Console3 = new GameConsole
             {
-                GameConsoleId = Guid.NewGuid(),
+                GameConsoleId = Guid.Parse("41c5f56f-7ebe-4f73-8298-04b3171e56a0"),
                 ConsoleName = "RetroCube",
             };
             var Console4 = new GameConsole
@@ -116,14 +116,14 @@ namespace FusionTech.src.Database
 
             var Publisher1 = new Publisher
             {
-                PublisherId = Guid.NewGuid(),
+                PublisherId = Guid.Parse("12ba59b8-6c30-4864-9d48-0f95bd278b40"),
                 PublisherName = "Square Enix",
                 PublisherEmail = "creators@us.square-enix.com",
                 PublisherPicturePath = "https://www.square-enix-games.com/home/public/selogo_onwhite.jpg",
             };
             var Publisher2 = new Publisher
             {
-                PublisherId = Guid.NewGuid(),
+                PublisherId = Guid.Parse("f5ea9a66-8a49-4f1f-ae5d-09ce38a7c80d"),
                 PublisherName = "Telltale Games",
                 PublisherEmail = " support@telltalegames.com",
                 PublisherPicturePath = "https://logowik.com/content/uploads/images/telltale-games5562.jpg",
@@ -138,7 +138,7 @@ namespace FusionTech.src.Database
 
             var VideoGameInfo1 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.NewGuid(),
+                VideoGameInfoId = Guid.Parse("7248c5a6-49e0-4f88-be50-8d87a54c938f"),
                 GameName = "Life is Strange: Double Exposure",
                 Description = "Max Caulfield, photographer-in-residence at the prestigious Caledon University, discovers her closest new friend, Safi, dead in the snow. Murdered. To save her, Max tries to Rewind time - a power she’s not used in years... instead, Max opens the way to a parallel timeline where Safi is still alive, and still in danger! Max realizes the killer will soon strike again - in both versions of reality. With her new power to Shift between two timelines - can Max solve and prevent the same murder?",
                 YearOfRelease = "Oct 29, 2024",
@@ -148,7 +148,7 @@ namespace FusionTech.src.Database
             };
             var VideoGameInfo2 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.NewGuid(),
+                VideoGameInfoId = Guid.Parse("ee4836d4-d131-47fe-b741-3c104f14df71"),
                 GameName = "The Wolf Among Us ",
                 Description = "The Wolf Among Us is a five-part episodic game relying heavily on dialogues and choices of the player. The game is considered a prequel to Bill Willingham's 'Fables' comic book and features usual TellTale stylistics: cartoon-like graphics, comparing your choices to the decisions of the other players and QTEs. 'The Wolf' is the first part of the series with a promised expansion to the second season coming out in 2019.You play as Bigby Wolf; he is a Sheriff of a Fabletown: as a typical Sheriff, you need to fulfill the requests of the Fabletown's residents and uncover mysteries lying behind the crimes there. The gameplay consists of choosing the dialogue options, reacting to QTE button-mash and watching cutscenes.",
                 YearOfRelease = "Oct 10, 2013",
@@ -166,16 +166,6 @@ namespace FusionTech.src.Database
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath = "https://media.rawg.io/media/resize/640/-/games/845/84539f8f33fea2c753cca0ce3a6d168f.jpg",
             };
-            /*var VideoGameInfo = new VideoGameInfo
-            {
-                VideoGameInfoId = Guid.NewGuid(),
-                GameName = "GRID (2008)",
-                Description = "",
-                YearOfRelease = "Nov 10, 2015",
-                TotalRating = 5,
-                PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "https://media.rawg.io/media/resize/640/-/games/845/84539f8f33fea2c753cca0ce3a6d168f.jpg",
-            };*/
             var VideoGameInfo4 = new VideoGameInfo
             {
                 VideoGameInfoId = Guid.NewGuid(),
