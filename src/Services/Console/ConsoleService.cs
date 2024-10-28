@@ -11,29 +11,29 @@ namespace FusionTech.src.Services.Console
             _maper = maper;
         }
 
-        public async Task<ReadConsoleDTO> CreateOneAsync(CreateConsoleDTO createDTO)
+        public async Task<ConsoleReadDTO> CreateOneAsync(ConsoleCreateDto createDTO)
         {
-            var console = _maper.Map<CreateConsoleDTO, GameConsole>(createDTO);
+            var console = _maper.Map<ConsoleCreateDto, GameConsole>(createDTO);
 
             var consoleCreated = await _consoleRepository.CreateOneAsync(console);
 
-            return _maper.Map<GameConsole, ReadConsoleDTO>(consoleCreated);
+            return _maper.Map<GameConsole, ConsoleReadDTO>(consoleCreated);
         }
 
-        public async Task<List<ReadConsoleDTO>> GetAllAsync()
+        public async Task<List<ConsoleReadDTO>> GetAllAsync()
         {
             var Listconsole = await _consoleRepository.GetAllAsync();
-            return _maper.Map<List<GameConsole>, List<ReadConsoleDTO>>(Listconsole);
+            return _maper.Map<List<GameConsole>, List<ConsoleReadDTO>>(Listconsole);
         }
 
-        public async Task<ReadConsoleDTO> GetIdAsync(Guid id)
+        public async Task<ConsoleReadDTO> GetIdAsync(Guid id)
         {
             var foundconsole = await _consoleRepository.GetIdAsync(id);
             if (foundconsole == null)
             {
                 throw CustomException.NotFound("Console not found.");
             }
-            return _maper.Map<GameConsole, ReadConsoleDTO>(foundconsole);
+            return _maper.Map<GameConsole, ConsoleReadDTO>(foundconsole);
         }
 
         public async Task<bool> DeleteIdAsync(Guid id)
@@ -44,7 +44,7 @@ namespace FusionTech.src.Services.Console
             return isDelete;
         }
 
-        public async Task<bool> UpdateAsync(Guid id, UpdateConsoleDTO ConsoleName)
+        public async Task<bool> UpdateAsync(Guid id, ConsoleUpdateDTO ConsoleName)
         {
             var foundconsole = await _consoleRepository.GetIdAsync(id);
 

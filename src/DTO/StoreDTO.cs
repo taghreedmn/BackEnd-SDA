@@ -4,7 +4,7 @@ namespace FusionTech.src.DTO
     {
         public class StoreCreateDto
         {
-            public Guid InventoryId { get; set; }
+          
 
             [Range(1, int.MaxValue, ErrorMessage = "Work hours must be at least 1.")]
             public int WorkHours { get; set; }
@@ -17,7 +17,6 @@ namespace FusionTech.src.DTO
         {
             public Guid StoreId { get; set; }
             public Guid InventoryId { get; set; }
-            public Guid EmployeeId { get; set; }
             public int WorkHours { get; set; }
             public string? Location { get; set; }
         }
@@ -25,7 +24,6 @@ namespace FusionTech.src.DTO
         public class StoreUpdateDto
         {
             public Guid StoreId { get; set; }
-            public Guid InventoryId { get; set; }
 
             [Range(1, int.MaxValue, ErrorMessage = "Work hours must be at least 1.")]
             public int WorkHours { get; set; }

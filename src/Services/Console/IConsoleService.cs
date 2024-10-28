@@ -2,10 +2,10 @@ namespace FusionTech.src.Services.Console
 {
     public interface IConsoleService
     {
-        Task<ReadConsoleDTO> CreateOneAsync(CreateConsoleDTO createDTO);
-        Task<List<ReadConsoleDTO>> GetAllAsync();
-        Task<ReadConsoleDTO> GetIdAsync(Guid id);
+        Task<ConsoleReadDTO> CreateOneAsync(ConsoleCreateDto createDTO);
+        Task<List<ConsoleReadDTO>> GetAllAsync();
+        Task<ConsoleReadDTO> GetIdAsync(Guid id);
         Task<bool> DeleteIdAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id, UpdateConsoleDTO ConsoleName);
+        Task<bool> UpdateAsync(Guid id, ConsoleUpdateDTO ConsoleName);
     }
 }
