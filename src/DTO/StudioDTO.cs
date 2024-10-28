@@ -2,7 +2,7 @@ namespace FusionTech.src.DTO
 {
     public class StudioDTO
     {
-        public class CreateStudioDTO
+        public class StudioCreateDTO
         {
             [Required(ErrorMessage = "Studio name is required.")]
             [StringLength(100, ErrorMessage = "Studio name cannot exceed 100 characters.")]
@@ -10,14 +10,14 @@ namespace FusionTech.src.DTO
             public string? StudioPicturePath { get; set; }
         }
 
-        public class ReadStudioDTO
+        public class StudioReadDTO
         {
             public Guid GameStudioId { get; set; }
             public string? StudioName { get; set; }
             public string? StudioPicturePath { get; set; }
         }
 
-        public class UpdateStudioDTO
+        public class StudioUpdateDTO
         {
             public Guid GameStudioId { get; set; }
 

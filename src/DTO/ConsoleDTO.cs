@@ -2,20 +2,20 @@ namespace FusionTech.src.DTO
 {
     public class ConsoleDTO
     {
-        public class CreateConsoleDTO
+        public class ConsoleCreateDto
         {
             [Required(ErrorMessage = "Console name is required.")]
             [StringLength(100, ErrorMessage = "Console name cannot exceed 100 characters.")]
             public required string ConsoleName { get; set; }
         }
 
-        public class ReadConsoleDTO
+        public class ConsoleReadDTO
         {
             public Guid GameConsoleId { get; set; }
             public string? ConsoleName { get; set; }
         }
 
-        public class UpdateConsoleDTO
+        public class ConsoleUpdateDTO
         {
             public Guid GameConsoleId { get; set; }
 

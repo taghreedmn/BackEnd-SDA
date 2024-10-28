@@ -48,8 +48,8 @@ namespace FusionTech.src.Utils
 
 
             // Category mappings
-            CreateMap<Category, CategoryReadDtoWithoutGames>();
-            CreateMap<Category, CategoryReadDtoWithGames>();
+            CreateMap<Category, CategoryBasicDto>();
+            CreateMap<Category, CategoryDetailedDto>();
             CreateMap<CategoryCreateDto, Category>();
             CreateMap<CategoryUpdateDto, Category>()
                 .ForAllMembers(opts =>
@@ -80,9 +80,9 @@ namespace FusionTech.src.Utils
                 );
 
             // Console mappings
-            CreateMap<GameConsole, ReadConsoleDTO>();
-            CreateMap<UpdateConsoleDTO, GameConsole>();
-            CreateMap<CreateConsoleDTO, GameConsole>()
+            CreateMap<GameConsole, ConsoleReadDTO>();
+            CreateMap<ConsoleUpdateDTO, GameConsole>();
+            CreateMap<ConsoleCreateDto, GameConsole>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
@@ -138,17 +138,17 @@ namespace FusionTech.src.Utils
                 );
 
             // Console mappings
-            CreateMap<GameConsole, ReadConsoleDTO>();
-            CreateMap<UpdateConsoleDTO, GameConsole>();
-            CreateMap<CreateConsoleDTO, GameConsole>()
+            CreateMap<GameConsole, ConsoleReadDTO>();
+            CreateMap<ConsoleUpdateDTO, GameConsole>();
+            CreateMap<ConsoleCreateDto, GameConsole>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
             // Studio mappings
-            CreateMap<GameStudio, ReadStudioDTO>();
-            CreateMap<UpdateStudioDTO, GameStudio>();
-            CreateMap<CreateStudioDTO, GameStudio>()
+            CreateMap<GameStudio, StudioReadDTO>();
+            CreateMap<StudioUpdateDTO, GameStudio>();
+            CreateMap<StudioCreateDTO, GameStudio>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
@@ -199,9 +199,9 @@ namespace FusionTech.src.Utils
                 );
 
             // Studio mappings
-            CreateMap<GameStudio, ReadStudioDTO>();
-            CreateMap<UpdateStudioDTO, GameStudio>();
-            CreateMap<CreateStudioDTO, GameStudio>()
+            CreateMap<GameStudio, StudioReadDTO>();
+            CreateMap<StudioUpdateDTO, GameStudio>();
+            CreateMap<StudioCreateDTO, GameStudio>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
@@ -215,9 +215,9 @@ namespace FusionTech.src.Utils
                 );
 
             // Console mappings
-            CreateMap<GameConsole, ReadConsoleDTO>();
-            CreateMap<UpdateConsoleDTO, GameConsole>();
-            CreateMap<CreateConsoleDTO, GameConsole>()
+            CreateMap<GameConsole, ConsoleReadDTO>();
+            CreateMap<ConsoleUpdateDTO, GameConsole>();
+            CreateMap<ConsoleCreateDto, GameConsole>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
@@ -257,7 +257,7 @@ namespace FusionTech.src.Utils
 
             // VideoGameInfo mappings
             CreateMap<VideoGameInfo, VideoGameInfoReadDto>();
-            CreateMap<VideoGameInfo, VideoGameInfoReadDtoWithVersions>();
+            CreateMap<VideoGameInfo, VideoGameDetailedDto>();
             CreateMap<VideoGameInfoCreateDto, VideoGameInfo>();
             CreateMap<VideoGameInfoUpdateDto, VideoGameInfo>()
                 .ForAllMembers(opts =>

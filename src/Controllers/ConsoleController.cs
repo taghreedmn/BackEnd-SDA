@@ -21,7 +21,7 @@ namespace FusionTech.src.Controllers
         //1-Create Console:
         [Authorize(Roles = "EmployeeOrAdmin")]
         [HttpPost]
-        public async Task<ActionResult<ReadConsoleDTO>> CreateOneAsync(CreateConsoleDTO createDTO)
+        public async Task<ActionResult<ConsoleReadDTO>> CreateOneAsync(ConsoleCreateDto createDTO)
         {
             var consoleCreated = await _consoleService.CreateOneAsync(createDTO);
             return Created($"api/v1/Console/{consoleCreated.ConsoleName}", consoleCreated);
@@ -30,7 +30,7 @@ namespace FusionTech.src.Controllers
         //2-update Console
         [Authorize(Roles = "EmployeeOrAdmin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateConsoleDTO consoleName)
+        public async Task<ActionResult<bool>> UpdateAsync(Guid id, ConsoleUpdateDTO consoleName)
         {
             await _consoleService.UpdateAsync(id, consoleName);
             return NoContent();
@@ -38,7 +38,7 @@ namespace FusionTech.src.Controllers
 
         //3-get Console by id
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReadConsoleDTO>> GetIdAsync(Guid id)
+        public async Task<ActionResult<ConsoleReadDTO>> GetIdAsync(Guid id)
         {
             var foundcosole = await _consoleService.GetIdAsync(id);
             return Ok(foundcosole);
@@ -46,7 +46,7 @@ namespace FusionTech.src.Controllers
 
         //4-get all Consoles
         [HttpGet]
-        public async Task<ActionResult<ReadConsoleDTO>> GetAllAsync()
+        public async Task<ActionResult<ConsoleReadDTO>> GetAllAsync()
         {
             var Listconsole = await _consoleService.GetAllAsync();
             return Ok(Listconsole);

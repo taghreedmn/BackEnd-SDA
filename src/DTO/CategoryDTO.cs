@@ -9,7 +9,7 @@ namespace FusionTech.src.DTO
             public string? CategoryName { get; set; }
         }
 
-        public class CategoryReadDtoWithoutGames // Fix the naming
+        public class CategoryBasicDto // Fix the naming
         {
             public Guid CategoryId { get; set; }
 
@@ -17,7 +17,7 @@ namespace FusionTech.src.DTO
             
         }
 
-        public class CategoryReadDtoWithGames // Fix the naming
+        public class CategoryDetailedDto // Fix the naming
         {
             public Guid CategoryId { get; set; }
 
