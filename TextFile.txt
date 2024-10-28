@@ -1,0 +1,2381 @@
+---------------------------------Person----------------------
+----------------------------------------------------------------
+1-
+Title: Sign in for a registered account
+
+API Endpoint:
+
+/api/v1/Person/signIn
+
+Request Type:
+POST
+
+Request Body:
+{
+"personEmail": "admin@mail.com",
+"personPassword": "SuperAdmin"
+}
+
+Expected Response:
+Status code: 200
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwibmFtZWlkIjoiLTEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE3MzAwMTc3MDUsImV4cCI6MTczMDAxODMwNSwiaWF0IjoxNzMwMDE3NzA1LCJpc3MiOiJmdXNpb25UZWNoIiwiYXVkIjoiZnVzaW9uVGVjaCJ9.KU09i8IW5Cyqv2_OtRACXVjGDh2KaSchquG_Tzlt3Zg
+
+Auth Token (if applicable):
+None
+Comments:
+Passed
+
+---------------------------------CATEGORY----------------------
+----------------------------------------------------------------
+2-
+Title: retrieve all categories
+
+API Endpoint:
+/api/v1/categories
+
+
+Request Type:
+GET
+
+Request Body:
+NONE
+
+Expected Response:
+Status code: 200
+
+Response body: 
+NONE
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+    {
+        "categoryId": "2e32f726-203b-4fa3-a960-3a2c1a275864",
+        "categoryName": "Sports",
+        "videoGameInfos": [
+            {
+                "videoGameInfoId": "063ffa91-cac3-4873-a340-b4b91497ff5f",
+                "gameName": "Fifa",
+                "description": "Description for Game 2",
+                "yearOfRelease": "2023-07-04",
+                "totalRating": 5,
+                "publisherId": "e355932c-f0fd-4d4b-874e-9ee23ed40d9d",
+                "gamePicturePath": "",
+                "videoGameVersions": [
+                    {
+                        "videoGameVersionId": "c48c7b35-c1d7-4ee0-a6c0-c085f5759d8c",
+                        "price": 85,
+                        "videoGameInfoId": "063ffa91-cac3-4873-a340-b4b91497ff5f",
+                        "gameConsoleId": "36be9397-03a5-4dff-a2f2-1f7061faff98",
+                        "ratedBies": null
+                    }
+                ]
+            },
+            {
+                "videoGameInfoId": "e279ecd8-3777-4795-891c-275b0ef50137",
+                "gameName": "Dark souls",
+                "description": "Description for Game 1",
+                "yearOfRelease": "2019-09-08",
+                "totalRating": 3,
+                "publisherId": "32e9bf86-42d4-49c9-8307-2d26e82d4afd",
+                "gamePicturePath": "",
+                "videoGameVersions": [
+                    {
+                        "videoGameVersionId": "7e24452e-3463-45ef-8f7a-499b3334ecce",
+                        "price": 80,
+                        "videoGameInfoId": "e279ecd8-3777-4795-891c-275b0ef50137",
+                        "gameConsoleId": "0268a1b4-571e-4962-90be-471f315c0497",
+                        "ratedBies": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "categoryId": "4867a76e-ccc5-4470-a25a-dd1e91cbc87d",
+        "categoryName": "Adventure",
+        "videoGameInfos": [
+            {
+                "videoGameInfoId": "e279ecd8-3777-4795-891c-275b0ef50137",
+                "gameName": "Dark souls",
+                "description": "Description for Game 1",
+                "yearOfRelease": "2019-09-08",
+                "totalRating": 3,
+                "publisherId": "32e9bf86-42d4-49c9-8307-2d26e82d4afd",
+                "gamePicturePath": "",
+                "videoGameVersions": [
+                    {
+                        "videoGameVersionId": "7e24452e-3463-45ef-8f7a-499b3334ecce",
+                        "price": 80,
+                        "videoGameInfoId": "e279ecd8-3777-4795-891c-275b0ef50137",
+                        "gameConsoleId": "0268a1b4-571e-4962-90be-471f315c0497",
+                        "ratedBies": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "categoryId": "dcb85699-92f7-4e58-9f24-ceb256beb1d3",
+        "categoryName": "Simulation",
+        "videoGameInfos": []
+    }
+]
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+
+----------------------------------------------------------------
+3-
+Title: retrieve Category by name
+
+API Endpoint:
+/api/v1/categories/Sports
+
+Request Type:
+GET
+
+Request Body:
+none
+
+Expected Response:
+Status code: 200
+
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+    {
+        "categoryId": "2e32f726-203b-4fa3-a960-3a2c1a275864",
+        "categoryName": "Sports",
+        "videoGameInfos": [
+            {
+                "videoGameInfoId": "063ffa91-cac3-4873-a340-b4b91497ff5f",
+                "gameName": "Fifa",
+                "description": "Description for Game 2",
+                "yearOfRelease": "2023-07-04",
+                "totalRating": 5,
+                "publisherId": "e355932c-f0fd-4d4b-874e-9ee23ed40d9d",
+                "gamePicturePath": "",
+                "videoGameVersions": [
+                    {
+                        "videoGameVersionId": "c48c7b35-c1d7-4ee0-a6c0-c085f5759d8c",
+                        "price": 85,
+                        "videoGameInfoId": "063ffa91-cac3-4873-a340-b4b91497ff5f",
+                        "gameConsoleId": "36be9397-03a5-4dff-a2f2-1f7061faff98",
+                        "ratedBies": null
+                    }
+                ]
+            },
+            {
+                "videoGameInfoId": "e279ecd8-3777-4795-891c-275b0ef50137",
+                "gameName": "Dark souls",
+                "description": "Description for Game 1",
+                "yearOfRelease": "2019-09-08",
+                "totalRating": 3,
+                "publisherId": "32e9bf86-42d4-49c9-8307-2d26e82d4afd",
+                "gamePicturePath": "",
+                "videoGameVersions": [
+                    {
+                        "videoGameVersionId": "7e24452e-3463-45ef-8f7a-499b3334ecce",
+                        "price": 80,
+                        "videoGameInfoId": "e279ecd8-3777-4795-891c-275b0ef50137",
+                        "gameConsoleId": "0268a1b4-571e-4962-90be-471f315c0497",
+                        "ratedBies": null
+                    }
+                ]
+            }
+        ]
+    }
+]
+  
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+4-
+Title: Craete a new Category
+
+API Endpoint:
+/api/v1/categories
+
+Request Type:
+POST
+
+Request Body:
+{
+  "categoryName": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "categoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "categoryName": "string",
+  "videoGameInfos": [
+    {
+      "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "gameName": "string",
+      "description": "string",
+      "yearOfRelease": "string",
+      "totalRating": 0,
+      "publisherId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "gamePicturePath": "string",
+      "videoGameVersions": [
+        {
+          "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "price": 0,
+          "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "ratedBies": [
+            {
+              "ratedById": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "rating": 0,
+              "comment": "string",
+              "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "personId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+  
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+5-
+Title: Delete Category by id
+
+API Endpoint:
+/api/v1/categories/{id}
+
+Request Type:
+DELET
+
+Request Body:
+none 
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "categoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "categoryName": "string",
+  "videoGameInfos": [
+    {
+      "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "gameName": "string",
+      "description": "string",
+      "yearOfRelease": "string",
+      "totalRating": 0,
+      "publisherId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "gamePicturePath": "string",
+      "videoGameVersions": [
+        {
+          "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "price": 0,
+          "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "ratedBies": [
+            {
+              "ratedById": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "rating": 0,
+              "comment": "string",
+              "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "personId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+6-
+Title: Update Category by id
+
+API Endpoint:
+/api/v1/categories/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "categoryName": "Sport"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+none 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------CUSTOMER--------------------------
+----------------------------------------------------------------
+7-
+Title: Create Customer account
+
+API Endpoint:
+/api/v1/Customer
+
+Request Type:
+POST
+
+Request Body:
+{
+  "personName": "string",
+  "personEmail": "user@example.com",
+  "personPassword": "string",
+  "personPhone": "string",
+  "profilePicturePath": "",
+  "age": 120
+}
+
+Expected Response:
+Status code: 200
+
+Response body:
+none
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "personId": "string",
+  "personName": "string",
+  "age": 0
+}
+  
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+
+----------------------------------------------------------------
+8-
+Title: search customer by age
+
+API Endpoint:
+/api/v1/Customer/age
+
+Request Type:
+GET
+
+Request Body:
+None 
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+0
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+9-
+Title: update customer Age
+
+API Endpoint:
+/api/v1/Customer/updateAge
+
+Request Type:
+PUT
+
+Request Body:
+{
+"age": 25
+}
+
+Expected Response:
+Status code: 200
+
+Response body: 
+
+Actual Response:
+Status code: 200
+
+Response body:
+None
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+10-
+Title: Switch to customer 
+
+API Endpoint:
+/api/v1/Customer/SwitchToCustomer 
+
+Request Type:
+GET
+
+Request Body:
+{
+"age": 25
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "personId": "string",
+  "personName": "string",
+  "age": 0
+}
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+---------------------------ORDER----------------------------
+----------------------------------------------------------------
+11-
+Title: Create order 
+
+API Endpoint:
+/api/v1/Order
+
+Request Type:
+POST
+
+Request Body:
+{
+  "employeeId": 0,
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "orderedGames": [
+    {
+      "orderId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "videoGameVersionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "quantity": 0
+    }
+  ]
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "orderId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "orderDate": "2024-10-27T13:28:18.577Z",
+  "totalPrice": 0,
+  "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "employeeId": 0,
+  "orderedGames": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "videoGameVersionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "orderId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "quantity": 0,
+      "videoGameRead": {
+        "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "price": 0,
+        "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    }
+  ]
+}
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+
+----------------------------------------------------------------
+12-
+Title: Retrieve Order
+
+API Endpoint:
+/api/v1/Order
+
+Request Type:
+GET
+
+Request Body:
+None 
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+  {
+    "orderId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "orderDate": "2024-10-27T13:29:17.652Z",
+    "totalPrice": 0,
+    "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "employeeId": 0,
+    "orderedGames": [
+      {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "videoGameVersionID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "orderId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "quantity": 0,
+        "videoGameRead": {
+          "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "price": 0,
+          "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        }
+      }
+    ]
+  }
+]
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+-------------------------Inventory-----------------------------
+----------------------------------------------------------------
+13-
+Title: Retrieve Inventory
+
+API Endpoint:
+/api/v1/Inventory
+
+Request Type:
+GET
+
+Request Body:
+None 
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+  {
+    "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "gameId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "gameQuantity": 0
+  }
+]
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed 
+----------------------------------------------------------------
+14-
+Title: Create Inventory
+
+API Endpoint:
+/api/v1/Inventory
+
+Request Type:
+POST
+
+Request Body:
+{
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameQuantity": 2147483647
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+ None
+ 
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+15-
+Title: Delete Inventory
+
+API Endpoint:
+/api/v1/Inventory
+
+Request Type:
+Delete
+
+Request Body:
+{
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameQuantity": 2147483647
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+  
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+16-
+Title: Retrieve Inventory by id
+
+API Endpoint:
+/api/v1/Inventory
+
+Request Type:
+GET
+
+Request Body:
+{
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameQuantity": 0
+}
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+
+-----------------------------SystemAdmin--------------------------
+------------------------------------------------------------------
+17-
+Title: Create SystemAdmin
+
+API Endpoint:
+/api/v1/SystemAdmin
+
+Request Type:
+POST
+
+Request Body:
+{
+  "personName": "string",
+  "personEmail": "user@example.com",
+  "personPassword": "string",
+  "personPhone": "string",
+  "profilePicturePath": "string",
+  "manageStores": true,
+  "manageEmployees": true,
+  "manageGames": true,
+  "manageCustomers": true,
+  "manageSystemAdmins": true
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "personEmail": "user@example.com",
+  "personPassword": "string",
+  "manageStores": true,
+  "manageEmployees": true,
+  "manageGames": true,
+  "manageCustomers": true,
+  "manageSystemAdmins": true
+}
+
+Auth Token (if applicable):
+
+Comments:
+Passed
+----------------------------------------------------------------
+18-
+Title: Delete SystemAdmin
+
+API Endpoint:
+/api/v1/SystemAdmin
+
+Request Type:
+DELETE
+
+Request Body:
+{
+"personId": ""
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+--------------------------VideoGamesInfo--------------------
+----------------------------------------------------------------
+19-
+Title: Retrieve VideoGamesInfo
+
+API Endpoint:
+/api/v1/VideoGamesInfo
+
+Request Type:
+GET
+
+Request Body:
+None 
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+empty 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+20-
+Title: Create VideoGamesInfo
+
+API Endpoint:
+/api/v1/VideoGamesInfo
+
+Request Type:
+POST
+
+Request Body:
+{
+  "gameName": "string",
+  "description": "string",
+  "yearOfRelease": "2024-10-27",
+  "totalRating": 5,
+  "publisherId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gamePicturePath": "string",
+  "categoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+ 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+21-
+Title: Retrieve VideoGamesInfo by id
+
+API Endpoint:
+/api/v1/VideoGamesInfo/{id}
+
+Request Type:
+GET
+
+Request Body:
+{
+"VideoGamesInfoId": ""
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+ 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+22-
+Title: Delete VideoGamesInfo by id
+
+API Endpoint:
+/api/v1/VideoGamesInfo/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+{
+"VideoGamesInfoId": ""
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+ 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+23-
+Title: Update VideoGamesInfo by id
+
+API Endpoint:
+/api/v1/VideoGamesInfo/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+"VideoGamesInfoId": ""
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+24-
+Title: Update VideoGamesInfo by id and year
+
+API Endpoint:
+/api/v1/VideoGamesInfo/{id}/year
+
+Request Type:
+PUT
+
+
+Request Body:
+{
+"VideoGamesInfoId": ""
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+-------------------------VideoGamesVersion----------------------
+----------------------------------------------------------------
+25-
+Title: Create VideoGamesVersion
+
+API Endpoint:
+/api/v1/VideoGamesVersion
+
+Request Type:
+DELETE
+
+Request Body:
+{
+  "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "price": 0
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "price": 0,
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+26-
+Title: Retrieve VideoGamesVersion
+
+API Endpoint:
+/api/v1/VideoGamesVersion
+
+Request Type:
+GET
+
+Request Body:
+None
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "price": 0,
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+27-
+Title: Retrieve VideoGamesVersion by id 
+
+API Endpoint:
+/api/v1/VideoGamesVersion/{id}
+
+Request Type:
+GET
+
+Request Body:
+None
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "videoGameInfoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "price": 0,
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+28-
+Title: Update VideoGamesVersion by id 
+
+API Endpoint:
+/api/v1/VideoGamesVersion/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "price": 0
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+---------------------------StoreEmployee-----------------------
+----------------------------------------------------------------
+29-
+Title: Create StoreEmployee
+
+API Endpoint:
+/api/v1/StoreEmployee
+
+Request Type:
+POST
+
+Request Body:
+{
+  "personName": "string",
+  "personEmail": "user@example.com",
+  "personPassword": "string",
+  "personPhone": "string",
+  "profilePicturePath": "string",
+  "role": "string",
+  "salary": 0.01,
+  "yearsOfService": 2147483647,
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "personEmail": "user@example.com",
+  "personPassword": "string",
+  "role": "string",
+  "salary": 0,
+  "yearsOfService": 0
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+--------------------Console--------------------------------
+----------------------------------------------------------------
+30-
+Title: Create Console
+
+API Endpoint:
+/api/v1/Console
+
+Request Type:
+POST
+
+Request Body:
+{
+  "consoleName": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 20
+
+Response body:
+{
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "consoleName": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+31-
+Title: Retrieve Console
+
+API Endpoint:
+/api/v1/Console
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "consoleName": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+32-
+Title: Update Console by id 
+
+API Endpoint:
+/api/v1/Console/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "consoleName": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+33-
+Title: Retrieve Console by id 
+
+API Endpoint:
+/api/v1/Console/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "gameConsoleId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "consoleName": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+34-
+Title: Delete Console by id 
+
+API Endpoint:
+/api/v1/Console/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+----------------------------------------------------------------
+35-
+Title: Update GameStudio
+
+API Endpoint:
+/api/v1/GameStudio
+
+Request Type:
+POST
+
+Request Body:
+{
+  "studioName": "string",
+  "studioPicturePath": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "gameStudioId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "studioName": "string",
+  "studioPicturePath": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+36-
+Title: Retrieve GameStudio
+
+API Endpoint:
+/api/v1/GameStudio
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "gameStudioId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "studioName": "string",
+  "studioPicturePath": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+37-
+Title: Update GameStudio by id 
+
+API Endpoint:
+/api/v1/GameStudio/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "gameStudioId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "studioName": "string",
+  "studioPicturePath": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+38-
+Title: Retrieve GameStudio by id 
+
+API Endpoint:
+/api/v1/GameStudio/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "gameStudioId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "studioName": "string",
+  "studioPicturePath": "string"
+}
+ 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+39-
+Title: Delete GameStudio by id 
+API Endpoint:
+/api/v1/GameStudio/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+------------------------------Store----------------------------
+----------------------------------------------------------------
+40-
+Title: Create Store
+
+API Endpoint:
+/api/v1/Store
+
+Request Type:
+POST
+
+Request Body:
+{
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "workHours": 2147483647,
+  "location": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "employeeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "workHours": 0,
+  "location": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+41-
+Title: Retrieve Store
+
+API Endpoint:
+/api/v1/Store/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+  {
+    "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "employeeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "workHours": 0,
+    "location": "string"
+  }
+] 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+42- 
+Title: Retrieve Store By id
+
+API Endpoint:
+/api/v1/Store/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "employeeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "workHours": 0,
+  "location": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+43-
+Title: Update Store by id
+
+API Endpoint:
+/api/v1/Store/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "workHours": 2147483647,
+  "location": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+44-
+Title: Delete Store by id 
+
+API Endpoint:
+/api/v1/Store/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+---------------------------Supplier-----------------------
+----------------------------------------------------------------
+45-
+Title: Retrieve Supplier 
+
+API Endpoint:
+/api/v1/Supplier
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+  {
+    "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "supplierName": "string",
+    "supplierContact": "string",
+    "supplierBankInfo": "string"
+  }
+] 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+46-
+Title: Update Supplier
+
+API Endpoint:
+/api/v1/Supplier
+
+Request Type:
+POST
+
+Request Body:
+{
+  "supplierName": "string",
+  "supplierContact": "string",
+  "supplierBankInfo": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierName": "string",
+  "supplierContact": "string",
+  "supplierBankInfo": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+47-
+Title:  Retieve Supplier by id 
+
+API Endpoint:
+/api/v1/Supplier/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierName": "string",
+  "supplierContact": "string",
+  "supplierBankInfo": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+48-
+Title: Update Supplier by id 
+
+API Endpoint:
+/api/v1/Supplier/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "supplierName": "string",
+  "supplierContact": "string",
+  "supplierBankInfo": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+49-
+Title:  Delete Supplier by id 
+
+API Endpoint:
+/api/v1/Supplier/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+
+---------------------------Supply-----------------------
+----------------------------------------------------------------
+45-
+Title: Retrieve Supply 
+
+API Endpoint:
+/api/v1/Supply
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "supplyId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierQuantity": 0,
+  "supplierDate": "2024-10-27T15:10:39.001Z",
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplier": {
+    "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "supplierName": "string",
+    "supplierBankInfo": "string",
+    "supplierContactInfo": "string"
+  },
+  "inventory": {
+    "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "gameQuantity": 0
+  }
+}
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+46-
+Title: Update Supply
+
+API Endpoint:
+/api/v1/Supply
+
+Request Type:
+POST
+
+Request Body:
+{
+  "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierQuantity": 0.01,
+  "supplierDate": "2024-10-27T15:12:04.431Z",
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "viduoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "supplyId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplierQuantity": 0,
+  "supplierDate": "2024-10-27T15:12:04.432Z",
+  "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "supplier": {
+    "supplierId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "supplierName": "string",
+    "supplierBankInfo": "string",
+    "supplierContactInfo": "string"
+  },
+  "inventory": {
+    "inventoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "videoGameVersionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "storeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "gameQuantity": 0
+  }
+}
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+47-
+Title: Retieve Supply by id 
+
+API Endpoint:
+/api/v1/Supply/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+none
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+48-
+Title: Update Supply by id 
+
+API Endpoint:
+/api/v1/Supply/{id}
+
+Request Type:
+PUT
+
+Request Body:
+{
+  "supplierQuantity": 0.01,
+  "supplierDate": "2024-10-27T15:13:20.765Z"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+49-
+Title:  Delete Supply by id 
+
+API Endpoint:
+/api/v1/Supply/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+--------------------------Payment--------------------------
+----------------------------------------------------------------
+50-
+Title: Create Payment
+
+API Endpoint:
+/api/v1/Payment/{id}
+
+Request Type:
+POST
+
+Request Body:
+{
+  "paymentMethod": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "paymentMethod": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+51-
+Title:  Retieve Payment
+
+API Endpoint:
+/api/v1/Payment
+
+Request Type:
+DELETE
+
+Request Body:
+{
+  "limit": 0,
+  "offset": 0,
+  "search": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "paymentMethod": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+52-
+Title:  Retieve Payment by id 
+
+API Endpoint:
+/api/v1/Payment/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "paymentMethod": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+53-
+Title:  Retieve Payment by id 
+
+API Endpoint:
+/api/v1/Payment/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "paymentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "paymentMethod": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+---------------------------Publisher----------------------------
+----------------------------------------------------------------
+54-
+Title:  Retieve Publisher
+
+API Endpoint:
+/api/v1/Publisher
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+[
+  {
+    "publisherId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "publisherName": "string",
+    "email": "string",
+    "publisherPicturePath": "string"
+  }
+] 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+55-
+Title:  Create Publisher
+
+API Endpoint:
+/api/v1/Publisher
+
+Request Type:
+POST
+
+Request Body:
+{
+  "publisherName": "string",
+  "email": "user@example.com",
+  "publisherPicturePath": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "publisherId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "publisherName": "string",
+  "email": "string",
+  "publisherPicturePath": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+56-
+Title:  Retieve Publisher by id 
+
+API Endpoint:
+/api/v1/Publisher/{id}
+
+Request Type:
+GET
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+{
+  "publisherId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "publisherName": "string",
+  "email": "string",
+  "publisherPicturePath": "string"
+} 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+57-
+Title:  Update Publisher by id 
+
+API Endpoint:
+/api/v1/Publisher/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+{
+  "publisherName": "string",
+  "email": "user@example.com",
+  "publisherPicturePath": "string"
+}
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
+----------------------------------------------------------------
+58-
+Title:  Delete Publisher by id 
+
+API Endpoint:
+/api/v1/Publisher/{id}
+
+Request Type:
+DELETE
+
+Request Body:
+
+
+Expected Response:
+Status code: 200
+
+Response body: Authentication token
+
+Actual Response:
+Status code: 200
+
+Response body:
+true 
+
+Auth Token (if applicable):
+None
+
+Comments:
+Passed
