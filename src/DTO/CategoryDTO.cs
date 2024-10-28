@@ -9,7 +9,15 @@ namespace FusionTech.src.DTO
             public string? CategoryName { get; set; }
         }
 
-        public class CategoryReadDto
+        public class CategoryReadDtoWithoutGames // Fix the naming
+        {
+            public Guid CategoryId { get; set; }
+
+            public string? CategoryName { get; set; }
+            
+        }
+
+        public class CategoryReadDtoWithGames // Fix the naming
         {
             public Guid CategoryId { get; set; }
 

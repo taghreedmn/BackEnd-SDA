@@ -25,6 +25,14 @@ namespace FusionTech.src.Repository
                 .ToListAsync();
         }
 
+        public async Task<List<VideoGameInfo>> GetVideoGameRatingsByIdAsync(Guid id)
+        {
+            return await _videoGameInfos
+                .Include(vi => vi.RatedBies)
+                .Where(vi => vi.VideoGameInfoId == id)
+                .ToListAsync();
+        }
+
         // Create a new video game
         public async Task<VideoGameInfo> CreateOneAsync(VideoGameInfo newGameInfo)
         {
