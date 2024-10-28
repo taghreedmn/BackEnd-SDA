@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace FusionTech.src.Middlewares
 {
     public class LoggingMiddleware

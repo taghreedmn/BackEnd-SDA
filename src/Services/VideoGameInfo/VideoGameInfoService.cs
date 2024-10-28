@@ -1,10 +1,3 @@
-using System.Security.Authentication;
-using AutoMapper;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-
 namespace FusionTech.src.Services.VideoGamesInfo
 {
     public class VideoGameInfoService : IVideoGameInfoService
@@ -113,24 +106,38 @@ namespace FusionTech.src.Services.VideoGamesInfo
             return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(videoGameList);
         }
 
-        public async Task<VideoGameInfoReadDto> GetByIdAsync(Guid id)
+        public async Task<VideoGameInfoReadDtoWithVersions> GetByIdAsync(Guid id)
         {
             var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
             if (foundGameInfo == null)
             {
                 throw CustomException.NotFound($"Video game with ID {id} not found.");
             }
-            return _mapper.Map<VideoGameInfo, VideoGameInfoReadDto>(foundGameInfo);
+            return _mapper.Map<VideoGameInfo, VideoGameInfoReadDtoWithVersions>(foundGameInfo);
         }
 
-        public async Task<List<VideoGameInfoReadDto>> GetVideoGameVersionByIdAsync(Guid id)
+        public async Task<List<VideoGameInfoReadDtoWithVersions>> GetVideoGameVersionByIdAsync(
+            Guid id
+        )
         {
             var foundGameInfo = await _videoGameInfoRepo.GetVideoGameVersionByIdAsync(id);
             if (foundGameInfo == null || foundGameInfo.Count == 0)
             {
                 throw CustomException.NotFound($"No video game versions found for ID {id}.");
             }
-            return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(foundGameInfo);
+            return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDtoWithVersions>>(
+                foundGameInfo
+            );
+        }
+
+        public async Task<List<VideoGameInfo>> GetVideoGameRatingsByIdAsync(Guid id)
+        {
+            var foundGameInfoRatings = await _videoGameInfoRepo.GetVideoGameRatingsByIdAsync(id);
+            if (foundGameInfoRatings == null || foundGameInfoRatings.Count == 0)
+            {
+                throw CustomException.NotFound($"No video game ratings found for ID {id}.");
+            }
+            return foundGameInfoRatings;
         }
 
         public async Task<bool> UpdateGameNameAsync(Guid id, string newGameName)

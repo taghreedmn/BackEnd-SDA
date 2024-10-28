@@ -1,13 +1,7 @@
-
-using FusionTech.src.Services.supplier;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.SupplierDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class SupplierController : ControllerBase
     {
         private readonly ISupplierService _supplierService;
@@ -39,7 +33,7 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult<SupplierReadDto>> CreateSupplier(SupplierCreateDto createDto)
         {
             var supplierCreated = await _supplierService.CreateOneAsync(createDto);
-            return Created($"api/supplier/{supplierCreated.SupplierId}", supplierCreated);
+            return Created($"api/v1/supplier/{supplierCreated.SupplierId}", supplierCreated);
         }
 
         [HttpPut("{id}")]

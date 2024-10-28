@@ -1,7 +1,3 @@
-using FusionTech.src.Services.Person;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.PersonDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

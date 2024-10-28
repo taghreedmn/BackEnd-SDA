@@ -1,10 +1,3 @@
-using System.Security.Claims;
-using FusionTech.src.Services.VideoGamesInfo;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.VideoGameInfoDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -31,6 +24,13 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult> GetVideoGameById(Guid id)
         {
             var videoGame = await _videoGameInfoService.GetVideoGameVersionByIdAsync(id);
+            return Ok(videoGame);
+        }
+
+        [HttpGet("{id}/ratings")]
+        public async Task<ActionResult> GetVideoGameRatingsById(Guid id) // TODO
+        {
+            var videoGame = await _videoGameInfoService.GetVideoGameRatingsByIdAsync(id);
             return Ok(videoGame);
         }
 

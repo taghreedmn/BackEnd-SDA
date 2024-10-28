@@ -1,9 +1,3 @@
-using System.Security.Claims;
-using FusionTech.src.Services.StoreEmployee;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.StoreEmployeeDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

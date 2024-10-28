@@ -1,9 +1,3 @@
-using FusionTech.src.Services.Payment;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.PaymentDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace FusionTech.src.Entity
 {
     public class RatedBy
@@ -9,7 +7,7 @@ namespace FusionTech.src.Entity
 
         [StringLength(500, ErrorMessage = "Comment cannot exceed 500 characters.")]
         public string Comment { get; set; }
-        public Guid VideoGameVersionId  { get; set; }
+        public Guid VideoGameInfoId { get; set; }
         public Guid PersonId { get; set; }
     }
 }

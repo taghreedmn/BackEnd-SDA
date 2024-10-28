@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations; // Added
-using FusionTech.src.Entity;
-using static FusionTech.src.DTO.CategoryDTO;
-using static FusionTech.src.DTO.VideoGameVersionDTO;
-
 namespace FusionTech.src.DTO
 {
     public class VideoGameInfoDTO
@@ -63,9 +54,25 @@ namespace FusionTech.src.DTO
             public Guid PublisherId { get; set; }
 
             public string? GamePicturePath { get; set; }
+        }
+
+        public class VideoGameInfoReadDtoWithVersions
+        {
+            public Guid VideoGameInfoId { get; set; }
+
+            public string? GameName { get; set; }
+
+            public string? Description { get; set; }
+
+            public string? YearOfRelease { get; set; }
+
+            public int TotalRating { get; set; }
+
+            public Guid PublisherId { get; set; }
+
+            public string? GamePicturePath { get; set; }
 
             public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
-
         }
     }
 }

@@ -1,7 +1,3 @@
-using FusionTech.src.Entity;
-using FusionTech.src.Utils;
-using Microsoft.EntityFrameworkCore;
-
 namespace FusionTech.src.Database
 {
     public class DatabaseContext : DbContext
@@ -55,32 +51,36 @@ namespace FusionTech.src.Database
             };
 
             // Seed Category data
-            var Category1 = new Category { CategoryId = Guid.NewGuid(), CategoryName = "Sports" };
+            var Category1 = new Category
+            {
+                CategoryId = Guid.Parse("2e32f726-203b-4fa3-a960-3a2c1a275864"),
+                CategoryName = "Sports",
+            };
             var Category2 = new Category
             {
-                CategoryId = Guid.NewGuid(),
+                CategoryId = Guid.Parse("4867a76e-ccc5-4470-a25a-dd1e91cbc87d"),
                 CategoryName = "Adventure",
             };
             var Category3 = new Category
             {
-                CategoryId = Guid.NewGuid(),
+                CategoryId = Guid.Parse("dcb85699-92f7-4e58-9f24-ceb256beb1d3"),
                 CategoryName = "Simulation",
             };
 
             // Seed GameConsole data
             var Console1 = new GameConsole
             {
-                GameConsoleId = Guid.NewGuid(),
+                GameConsoleId = Guid.Parse("0268a1b4-571e-4962-90be-471f315c0497"),
                 ConsoleName = "GamerBox",
             };
             var Console2 = new GameConsole
             {
-                GameConsoleId = Guid.NewGuid(),
+                GameConsoleId = Guid.Parse("36be9397-03a5-4dff-a2f2-1f7061faff98"),
                 ConsoleName = "FusionPlay",
             };
             var Console3 = new GameConsole
             {
-                GameConsoleId = Guid.NewGuid(),
+                GameConsoleId = Guid.Parse("41c5f56f-7ebe-4f73-8298-04b3171e56a0"),
                 ConsoleName = "RetroCube",
             };
 

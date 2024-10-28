@@ -1,10 +1,3 @@
-using FusionTech.src.Services.category;
-using FusionTech.src.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.CategoryDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -20,7 +13,7 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPost]
-        public async Task<ActionResult<CategoryReadDto>> CreateOne(
+        public async Task<ActionResult<CategoryReadDtoWithoutGames>> CreateOne(
             [FromBody] CategoryCreateDto createDto
         )
         {
@@ -29,7 +22,7 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CategoryReadDto>> GetCategory(
+        public async Task<ActionResult<CategoryReadDtoWithoutGames>> GetCategory(
             [FromQuery] PaginationOptions paginationOptions
         )
         {
@@ -44,9 +37,9 @@ namespace FusionTech.src.Controllers
         //     return Ok(category);
         // }
         [HttpGet("{CategoryName}")]
-        public async Task<ActionResult<CategoryReadDto>> GetCategoryDetailsByNameAsync(
-            [FromRoute] string CategoryName
-        )
+        public async Task<
+            ActionResult<List<CategoryReadDtoWithGames>>
+        > GetCategoryDetailsByNameAsync([FromRoute] string CategoryName)
         {
             var category = await _categoryService.GetCategoryDetailsByNameAsync(CategoryName);
             return Ok(category);
@@ -54,7 +47,7 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpDelete("{Id}")]
-        public async Task<ActionResult<CategoryReadDto>> DeleteOne([FromRoute] Guid Id)
+        public async Task<ActionResult<CategoryReadDtoWithoutGames>> DeleteOne([FromRoute] Guid Id)
         {
             var category = await _categoryService.GetByIdAsync(Id);
             await _categoryService.DeleteOneAsync(category.CategoryId);

@@ -1,7 +1,3 @@
-using FusionTech.src.Database;
-using FusionTech.src.Entity;
-using Microsoft.EntityFrameworkCore;
-
 namespace FusionTech.src.Repository
 {
     public class VideoGameInfoRepository
@@ -29,6 +25,14 @@ namespace FusionTech.src.Repository
                 .ToListAsync();
         }
 
+        public async Task<List<VideoGameInfo>> GetVideoGameRatingsByIdAsync(Guid id)
+        {
+            return await _videoGameInfos
+                .Include(vi => vi.RatedBies)
+                .Where(vi => vi.VideoGameInfoId == id)
+                .ToListAsync();
+        }
+
         // Create a new video game
         public async Task<VideoGameInfo> CreateOneAsync(VideoGameInfo newGameInfo)
         {
@@ -40,7 +44,7 @@ namespace FusionTech.src.Repository
         // Get all video games
         public async Task<List<VideoGameInfo>> GetAllAsync()
         {
-            return await _videoGameInfos.ToListAsync();
+            return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
         }
 
         // Update an existing video game

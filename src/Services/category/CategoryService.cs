@@ -1,11 +1,3 @@
-using AutoMapper;
-using FusionTech.src.DTO;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using Microsoft.EntityFrameworkCore.Metadata;
-using static FusionTech.src.DTO.CategoryDTO;
-
 namespace FusionTech.src.Services.category
 {
     public class CategoryService : ICategoryService
@@ -19,40 +11,40 @@ namespace FusionTech.src.Services.category
             _mapper = mapper;
         }
 
-        public async Task<CategoryDTO.CategoryReadDto> CreateOneAsync(
+        public async Task<CategoryDTO.CategoryReadDtoWithoutGames> CreateOneAsync(
           CategoryCreateDto createDto
         )
         {
             var category = _mapper.Map<CategoryCreateDto, Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Category, CategoryReadDto>(categoryCreated);
+            return _mapper.Map<Category, CategoryReadDtoWithoutGames>(categoryCreated);
         }
 
-        public async Task<List<CategoryReadDto>> GetAllAsync(
+        public async Task<List<CategoryReadDtoWithoutGames>> GetAllAsync(
             PaginationOptions paginationOptions
         )
         {
             var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Category>, List<CategoryReadDto>>(categoryList);
+            return _mapper.Map<List<Category>, List<CategoryReadDtoWithoutGames>>(categoryList);
         }
 
-        public async Task<CategoryReadDto> GetByIdAsync(Guid id)
+        public async Task<CategoryReadDtoWithGames> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
                 throw CustomException.NotFound($"Category with ID {id} not found");
             }
-            return _mapper.Map<Category, CategoryReadDto>(foundCategory);
+            return _mapper.Map<Category, CategoryReadDtoWithGames>(foundCategory);
         }
-        public async Task<List<CategoryReadDto>> GetCategoryDetailsByNameAsync(string CategoryName)
+        public async Task<List<CategoryReadDtoWithGames>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
             var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
             if (foundCategory == null || foundCategory.Count == 0)
             {
                 throw CustomException.NotFound($"No categories found with the name {CategoryName}");
             }
-            var categoryLists = _mapper.Map<List<Category>, List<CategoryReadDto>>(foundCategory);
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryReadDtoWithGames>>(foundCategory);
             return categoryLists;
         }
 

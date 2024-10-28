@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace FusionTech.src.Entity
 {
     public class GameConsole

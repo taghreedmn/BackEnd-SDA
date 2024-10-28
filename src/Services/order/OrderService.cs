@@ -1,9 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.OrderDTO;
-
 namespace FusionTech.src.Services.order
 {
     public class OrderService : IOrderService

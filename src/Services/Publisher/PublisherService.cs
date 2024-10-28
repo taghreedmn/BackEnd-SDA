@@ -1,9 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Services.Publisher;
-using static FusionTech.src.DTO.PublisherDTO;
-
 namespace FusionTech.src.Service.publisher
 {
     public class PublisherService : IPublisherService

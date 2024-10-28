@@ -1,33 +1,6 @@
-using System.Text;
-using FusionTech.src.Database;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using FusionTech.src.Service.publisher;
-using FusionTech.src.Service.Store;
-using FusionTech.src.Services.category;
-using FusionTech.src.Services.Console;
-using FusionTech.src.Services.Customer;
-using FusionTech.src.Services.Inventory;
-using FusionTech.src.Services.order;
-using FusionTech.src.Services.Payment;
-using FusionTech.src.Services.Person;
-using FusionTech.src.Services.StoreEmployee;
-using FusionTech.src.Services.Publisher;
-using FusionTech.src.Services.Studio;
-using FusionTech.src.Services.supplier;
-using FusionTech.src.Services.supply;
-using FusionTech.src.Services.SystemAdmin;
-using FusionTech.src.Services.VideoGamesInfo;
-using FusionTech.src.Services.videoGameVersion;
-using FusionTech.src.Utils;
-using FusionTech.videoGameVersion;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Npgsql;
-using FusionTech.src.Middlewares;
+var options = new WebApplicationOptions { WebRootPath = "wwwroot" };
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(options);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 //connect the database
@@ -44,12 +17,12 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 // builder.Services
 //     .AddScoped<ISupplyService, SupplyService>()
 //     .AddScoped<SupplyRepository, SupplyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
-
 
 // add DI services
 builder
@@ -76,8 +49,8 @@ builder
     .Services.AddScoped<IPaymentService, PaymentService>()
     .AddScoped<PaymentRepository, PaymentRepository>();
 builder
-  .Services.AddScoped<IOrderService, OrderService>()
-  .AddScoped<OrderRepository, OrderRepository>();
+    .Services.AddScoped<IOrderService, OrderService>()
+    .AddScoped<OrderRepository, OrderRepository>();
 
 builder
     .Services.AddScoped<IInventoryService, InventoryService>()
@@ -90,11 +63,11 @@ builder
     .Services.AddScoped<IVideoGameInfoService, VideoGameInfoService>()
     .AddScoped<VideoGameInfoRepository, VideoGameInfoRepository>();
 
-
-//Video Game Version mapper 
+//Video Game Version mapper
 builder
-.Services.AddScoped<IVideoGameVersionService, VideoGameVersionService>()
-.AddScoped<VideoGameVersionRepository, VideoGameVersionRepository>();
+    .Services.AddScoped<IVideoGameVersionService, VideoGameVersionService>()
+    .AddScoped<VideoGameVersionRepository, VideoGameVersionRepository>();
+
 //add auto mapper
 // builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
@@ -106,7 +79,6 @@ builder
     .Services.AddScoped<IStudioService, StudioService>()
     .AddScoped<StudioRepository, StudioRepository>();
 
-
 // builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
     .Services.AddScoped<ISupplierService, SupplierService>()
@@ -116,7 +88,6 @@ builder
 builder
     .Services.AddScoped<ISupplyService, SupplyService>()
     .AddScoped<SupplyRepository, SupplyRepository>();
-
 
 // builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder
@@ -168,12 +139,13 @@ var app = builder.Build();
 
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseStaticFiles();
 
 app.UseRouting();
-app.MapGet("/", ()=> "server is running");
+app.MapGet("/", () => "server is running");
+
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
-
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
     try

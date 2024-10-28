@@ -1,7 +1,3 @@
-
-using static FusionTech.src.DTO.PublisherDTO;
-
-
 namespace FusionTech.src.Services.Publisher
 {
     public interface IPublisherService

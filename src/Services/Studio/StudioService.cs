@@ -1,8 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Entity;
-using FusionTech.src.Repository;
-using static FusionTech.src.DTO.StudioDTO;
-
 namespace FusionTech.src.Services.Studio
 {
     public class StudioService : IStudioService

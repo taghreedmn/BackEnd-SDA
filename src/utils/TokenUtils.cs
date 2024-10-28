@@ -1,9 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using FusionTech.src.Entity;
-using Microsoft.IdentityModel.Tokens;
-
 namespace FusionTech.src.Utils
 {
     public class TokenUtils

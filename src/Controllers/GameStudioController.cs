@@ -5,11 +5,6 @@
 //4-get all Studios
 //5-delete Studio by id
 
-using FusionTech.src.Services.Studio;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using static FusionTech.src.DTO.StudioDTO;
-
 namespace FusionTech.src.Controllers
 {
     [ApiController]

@@ -1,7 +1,3 @@
-
-
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace FusionTech.src.Entity
 {
     public class Inventory

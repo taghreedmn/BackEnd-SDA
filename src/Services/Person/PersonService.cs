@@ -1,8 +1,3 @@
-using AutoMapper;
-using FusionTech.src.Repository;
-using FusionTech.src.Utils;
-using static FusionTech.src.DTO.PersonDTO;
-
 namespace FusionTech.src.Services.Person
 {
     public class PersonService : IPersonService
