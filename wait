@@ -1,0 +1,5 @@
+Implement APIs for GetAll, profiles, and orders management
+
+- Implement APIs to get all customers, employees, and admins
+- Implement APIs for profile pages and dashboard for Customer and Admin
+- Implement API call to get all orders made in the system
