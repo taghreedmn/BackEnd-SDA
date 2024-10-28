@@ -22,7 +22,7 @@ namespace FusionTech.src.Controllers
 
         [HttpPost]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult<ReadStudioDTO>> CreateOneAsync(CreateStudioDTO createDTO)
+        public async Task<ActionResult<StudioReadDTO>> CreateOneAsync(StudioCreateDTO createDTO)
         {
             var studioCreated = await _studioService.CreateOneAsync(createDTO);
             return Created($"api/v1/GameStudio/{studioCreated.StudioName}", studioCreated);
@@ -31,7 +31,7 @@ namespace FusionTech.src.Controllers
         //2-update Studio:
         [HttpPut("{id}")]
         [Authorize(Roles = "EmployeeOrAdmin")]
-        public async Task<ActionResult<bool>> UpdateAsync(Guid id, UpdateStudioDTO studioName)
+        public async Task<ActionResult<bool>> UpdateAsync(Guid id, StudioUpdateDTO studioName)
         {
             var updated = await _studioService.UpdateAsync(id, studioName);
             if (!updated)
@@ -43,7 +43,7 @@ namespace FusionTech.src.Controllers
 
         //3-get Studio by id
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReadStudioDTO>> GetIdAsync(Guid id)
+        public async Task<ActionResult<StudioReadDTO>> GetIdAsync(Guid id)
         {
             var foundstudio = await _studioService.GetIdAsync(id);
             return Ok(foundstudio);
@@ -51,7 +51,7 @@ namespace FusionTech.src.Controllers
 
         //4-get all Studios
         [HttpGet]
-        public async Task<ActionResult<ReadStudioDTO>> GetAllAsync()
+        public async Task<ActionResult<StudioReadDTO>> GetAllAsync()
         {
             var Liststudio = await _studioService.GetAllAsync();
             return Ok(Liststudio);
