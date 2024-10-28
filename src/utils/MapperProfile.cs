@@ -7,7 +7,10 @@ namespace FusionTech.src.Utils
             // Supply mappings
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
-            CreateMap<SupplyUpdateDto, Supply>().ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+            CreateMap<SupplyUpdateDto, Supply>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
 
             // Person mappings
             CreateMap<PersonSignUpDTO, Person>();
@@ -19,80 +22,8 @@ namespace FusionTech.src.Utils
             CreateMap<SupplyCreateDto, Supply>();
             CreateMap<SupplyUpdateDto, Supply>()
                 .ForAllMembers(opts =>
-                    opts.Condition((src, dest, strProperty) => strProperty != null));
-            
-                // Person mappings
-                CreateMap<PersonSignUpDTO, Person>();
-                CreateMap<Person, PersonSignInDTO>();
-                // CreateMap<PersonUpdateDto, Person>();
-
-
-                // Customer mappings
-                CreateMap<CustomerSignUpDTO, Customer>();
-                CreateMap<Customer, CustomerReadDto>();
-                // CreateMap<CustomerUpdateDto, Customer>();
-
-                // StoreEmployee mappings
-                CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
-                CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
-                // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
-
-                // SystemAdmin mappings
-                CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
-                CreateMap<SystemAdmin, SystemAdminReadDto>();
-                // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
-
-
-            // Category mappings
-            CreateMap<Category, CategoryReadDto>();
-            CreateMap<CategoryCreateDto, Category>();
-            CreateMap<CategoryUpdateDto, Category>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
-
-            // Payment mappings
-            CreateMap<Payment, PaymentReadDto>();
-            CreateMap<PaymentCreateDto, Payment>();
-            CreateMap<PaymentUpdateDto, Payment>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
-
-            // Ordergames mappings
-            CreateMap<OrderedGames, OrderedGamesReadDto>();
-            CreateMap<OrderedGamesCreateDto, OrderedGames>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
-
-            // order mappings
-            CreateMap<Order, OrderReadDto>();
-            CreateMap<OrderCreateDto, Order>()
-                 .ForMember(dest => dest.CustomerId, opt => opt.Condition((src, dest, srcProperty) => srcProperty != null));
-
-            // Console mappings
-            CreateMap<GameConsole, ReadConsoleDTO>();
-            CreateMap<UpdateConsoleDTO, GameConsole>();
-            CreateMap<CreateConsoleDTO, GameConsole>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
-
-            //inventory
-            CreateMap<Inventory, InventoryReadDto>();
-            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
-            CreateMap<InventoryCreateDto, Inventory>()
-                .ForAllMembers(opts =>
-                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                );
-
-
-            // Person mappings
-            CreateMap<PersonSignInDTO, Person>();
-            CreateMap<Person, PersonReadDto>();
-            // CreateMap<PersonUpdateDto, Person>();
-
-            //Supply
-            CreateMap<Supply, SupplyReadDto>();
-            CreateMap<SupplyCreateDto, Supply>();
-            CreateMap<SupplyUpdateDto, Supply>()
-                .ForAllMembers(opts =>
                     opts.Condition((src, dest, strProperty) => strProperty != null)
                 );
-
 
             // Person mappings
             CreateMap<PersonSignUpDTO, Person>();
@@ -117,12 +48,86 @@ namespace FusionTech.src.Utils
 
 
             // Category mappings
-            CreateMap<Category, CategoryReadDto>();
+            CreateMap<Category, CategoryReadDtoWithoutGames>();
+            CreateMap<Category, CategoryReadDtoWithGames>();
             CreateMap<CategoryCreateDto, Category>();
             CreateMap<CategoryUpdateDto, Category>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
+
+            // Payment mappings
+            CreateMap<Payment, PaymentReadDto>();
+            CreateMap<PaymentCreateDto, Payment>();
+            CreateMap<PaymentUpdateDto, Payment>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            // Ordergames mappings
+            CreateMap<OrderedGames, OrderedGamesReadDto>();
+            CreateMap<OrderedGamesCreateDto, OrderedGames>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            // order mappings
+            CreateMap<Order, OrderReadDto>();
+            CreateMap<OrderCreateDto, Order>()
+                .ForMember(
+                    dest => dest.CustomerId,
+                    opt => opt.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            // Console mappings
+            CreateMap<GameConsole, ReadConsoleDTO>();
+            CreateMap<UpdateConsoleDTO, GameConsole>();
+            CreateMap<CreateConsoleDTO, GameConsole>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            //inventory
+            CreateMap<Inventory, InventoryReadDto>();
+            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
+            CreateMap<InventoryCreateDto, Inventory>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
+
+            // Person mappings
+            CreateMap<PersonSignInDTO, Person>();
+            CreateMap<Person, PersonReadDto>();
+            // CreateMap<PersonUpdateDto, Person>();
+
+            //Supply
+            CreateMap<Supply, SupplyReadDto>();
+            CreateMap<SupplyCreateDto, Supply>();
+            CreateMap<SupplyUpdateDto, Supply>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, strProperty) => strProperty != null)
+                );
+
+            // Person mappings
+            CreateMap<PersonSignUpDTO, Person>();
+            CreateMap<Person, PersonSignInDTO>();
+            // CreateMap<PersonUpdateDto, Person>();
+
+
+            // Customer mappings
+            CreateMap<CustomerSignUpDTO, Customer>();
+            CreateMap<Customer, CustomerReadDto>();
+            // CreateMap<CustomerUpdateDto, Customer>();
+
+            // StoreEmployee mappings
+            CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
+            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
+            // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
+
+            // SystemAdmin mappings
+            CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
+            CreateMap<SystemAdmin, SystemAdminReadDto>();
+            // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
 
             // Payment mappings
             CreateMap<Payment, PaymentReadDto>();
@@ -177,26 +182,13 @@ namespace FusionTech.src.Utils
             CreateMap<SupplierCreateDto, Supplier>();
             CreateMap<SupplierUpdateDto, Supplier>();
 
-
             // StoreEmployee mappings
             CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
             CreateMap<StoreEmployee, StoreEmployeeSignUpDTO>();
 
-
-
             // SystemAdmin mappings
             CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
             CreateMap<SystemAdmin, SystemAdminReadDto>();
-
-
-
-            // Category mappings
-            CreateMap<Category, CategoryReadDto>();
-            CreateMap<CategoryCreateDto, Category>();
-            CreateMap<CategoryUpdateDto, Category>()
-                .ForAllMembers(opts =>
-                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                );
 
             // Payment mappings
             CreateMap<Payment, PaymentReadDto>();
@@ -206,7 +198,6 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-
             // Studio mappings
             CreateMap<GameStudio, ReadStudioDTO>();
             CreateMap<UpdateStudioDTO, GameStudio>();
@@ -215,14 +206,13 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-                    //inventory
-                    CreateMap<Inventory, InventoryReadDto>();
-                    CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
-                    CreateMap<InventoryCreateDto, Inventory>()
-                        .ForAllMembers(opts =>
-                            opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                        );
-
+            //inventory
+            CreateMap<Inventory, InventoryReadDto>();
+            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
+            CreateMap<InventoryCreateDto, Inventory>()
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
 
             // Console mappings
             CreateMap<GameConsole, ReadConsoleDTO>();
@@ -231,7 +221,6 @@ namespace FusionTech.src.Utils
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
-
 
             // Publisher mappings
             CreateMap<Publisher, PublisherReadDto>();
@@ -249,14 +238,13 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-
-          /*   //PlayedIn Mappings
-            CreateMap<Played, ReadPlayedInDTO>();
-            CreateMap<CreatePlayedInDTO, Store>();
-            CreateMap<UpdatePlayedInDTO, Store>()
-                .ForAllMembers(opts =>
-                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                ); */
+            /*   //PlayedIn Mappings
+              CreateMap<Played, ReadPlayedInDTO>();
+              CreateMap<CreatePlayedInDTO, Store>();
+              CreateMap<UpdatePlayedInDTO, Store>()
+                  .ForAllMembers(opts =>
+                      opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                  ); */
 
             /* //DevelopedBy Mappings
             CreateMap<Developed, ReadDevelopedByDTO>();
@@ -269,9 +257,12 @@ namespace FusionTech.src.Utils
 
             // VideoGameInfo mappings
             CreateMap<VideoGameInfo, VideoGameInfoReadDto>();
+            CreateMap<VideoGameInfo, VideoGameInfoReadDtoWithVersions>();
             CreateMap<VideoGameInfoCreateDto, VideoGameInfo>();
             CreateMap<VideoGameInfoUpdateDto, VideoGameInfo>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcProperty) => srcProperty != null));
+                .ForAllMembers(opts =>
+                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
+                );
 
             // VideoGameVersion mappings
             CreateMap<VideoGameVersion, VideoGameVersionReadDto>();
@@ -283,5 +274,3 @@ namespace FusionTech.src.Utils
         }
     }
 }
-   
-

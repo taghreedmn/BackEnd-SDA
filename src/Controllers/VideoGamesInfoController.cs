@@ -27,6 +27,13 @@ namespace FusionTech.src.Controllers
             return Ok(videoGame);
         }
 
+        [HttpGet("{id}/ratings")]
+        public async Task<ActionResult> GetVideoGameRatingsById(Guid id) // TODO
+        {
+            var videoGame = await _videoGameInfoService.GetVideoGameRatingsByIdAsync(id);
+            return Ok(videoGame);
+        }
+
         [Authorize(Policy = "admin")]
         // Add a new video game
         [HttpPost]
