@@ -17,14 +17,14 @@ namespace FusionTech.src.Services.Person
             _config = config;
         }
 
-        public async Task<PersonSignInDTO> GetByIdAsync(int id)
+        public async Task<PersonReadDto> GetByIdAsync(int id)
         {
             var foundPerson = await _personRepository.GetByIdAsync(id);
             if (foundPerson == null)
             {
                 throw CustomException.NotFound($"Person with ID {id} not found.");
             }
-            return _mapper.Map<Entity.Person, PersonSignInDTO>(foundPerson);
+            return _mapper.Map<Entity.Person, PersonReadDto>(foundPerson);
         }
 
         public async Task<int> GetIdByEmailAsync(string email)

@@ -37,8 +37,16 @@ namespace FusionTech.src.Repository
                 .ThenInclude(ord => ord.VideoGameVersion)
                 .Where(ord => ord.CustomerId == CustomerId)
                 .ToListAsync();
-
         }
 
+        public async Task<List<Order>> GetAllAsync()
+        {
+            return await _order.ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _order.CountAsync();
+        }
     }
 }

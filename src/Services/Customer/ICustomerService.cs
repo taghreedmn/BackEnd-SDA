@@ -2,13 +2,13 @@ namespace FusionTech.src.Services.Customer
 {
     public interface ICustomerService
     {
+        Task<List<CustomerReadDto>> GetAllAsync(PaginationOptions paginationOptions);
+        Task<CustomerReadDto> GetOneById(int customerId);
         Task<CustomerReadDto> CreateOneAsync(CustomerSignUpDTO createDto);
         Task<int> getAgeByEmailAsync(string userEmail);
-
-        // We need to change the object into the appropriate type
-        Task<object> OrderGameAsync(int customerId, int gameId);
         Task<string> SignInAsCustomer(string email);
         Task<string> SignInAsCustomer(string email, int age);
         Task<bool> UpdateAgeAsync(string email, int age);
+        Task<int> CountCustomersAsync();
     }
 }

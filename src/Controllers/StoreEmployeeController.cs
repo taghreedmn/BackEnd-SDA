@@ -13,7 +13,7 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPost]
-        public async Task<ActionResult<StoreEmployeeSignInDto>> SignUpEmployee(
+        public async Task<ActionResult<StoreEmployeeSignUpDTO>> SignUpEmployee(
             StoreEmployeeSignUpDTO createDto
         )
         {
@@ -30,6 +30,22 @@ namespace FusionTech.src.Controllers
             {
                 return Unauthorized(e.Message);
             }
+        }
+
+        [HttpGet]
+        [Authorize(Policy = "admin")]
+        public async Task<ActionResult<List<StoreEmployeeReadDto>>> GetAllUsers(
+            [FromQuery] PaginationOptions paginationOptions
+        )
+        {
+            var users = await _storeEmployeeService.GetAllAsync(paginationOptions);
+            var totalCount = await _storeEmployeeService.CountStoreEmployeesAsync();
+            var CustomerListDto = new StoreEmployeeListDto
+            {
+                StoreEmployees = users,
+                TotalCount = totalCount,
+            };
+            return Ok(CustomerListDto);
         }
     }
 }

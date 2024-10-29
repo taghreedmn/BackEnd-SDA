@@ -31,10 +31,10 @@ namespace FusionTech.src.Controllers
             return await _orderService.CreateOneAsync(userId, orderCreateDto);
         }
 
-        // Get all orders
+        // Get all orders for a customer
         [Authorize(Policy = "Customer")]
         [HttpGet]
-        public async Task<ActionResult<List<OrderReadDto>>> GetOrderByIdAsync()
+        public async Task<ActionResult<List<OrderReadDto>>> GetCustomerAllOrders()
         {
             var authenticateClaims = HttpContext.User;
             var userIdClaim = authenticateClaims.FindFirst(c =>
@@ -46,12 +46,40 @@ namespace FusionTech.src.Controllers
                 return BadRequest("User ID not found in claims or is not a valid integer.");
             }
             var orders = await _orderService.GetOrderByIdAsync(userId);
-            if (orders == null || !orders.Any())
+            if (orders == null || orders.Count == 0)
             {
-                throw CustomException.Forbidden("Forbidden. You do not have access rights to view this content.");
+                throw CustomException.Forbidden(
+                    "Forbidden. You do not have access rights to view this content."
+                );
             }
 
             return Ok(orders);
-        } 
+        }
+
+        // Get all orders
+        [Authorize(Policy = "admin")]
+        [HttpGet("all")]
+        public async Task<ActionResult<List<OrderListDto>>> GetAllOrders()
+        {
+            var authenticateClaims = HttpContext.User;
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return BadRequest("User ID not found in claims or is not a valid integer.");
+            }
+            var orders = await _orderService.GetAllAsync();
+            if (orders == null || orders.Count == 0)
+            {
+                throw CustomException.Forbidden("No Orders has been placed in the system");
+            }
+
+            var orderCount = await _orderService.CountOrdersAsync();
+            var orderListDto = new OrderListDto { Orders = orders, TotalCount = orderCount };
+
+            return Ok(orders);
+        }
     }
 }

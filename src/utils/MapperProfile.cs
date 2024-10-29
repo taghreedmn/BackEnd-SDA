@@ -14,6 +14,7 @@ namespace FusionTech.src.Utils
 
             // Person mappings
             CreateMap<PersonSignUpDTO, Person>();
+            CreateMap<PersonSignInDTO, Person>();
             CreateMap<Person, PersonReadDto>();
             // CreateMap<PersonUpdateDto, Person>();
 
@@ -25,12 +26,6 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, strProperty) => strProperty != null)
                 );
 
-            // Person mappings
-            CreateMap<PersonSignUpDTO, Person>();
-            CreateMap<Person, PersonSignInDTO>();
-            // CreateMap<PersonUpdateDto, Person>();
-
-
             // Customer mappings
             CreateMap<CustomerSignUpDTO, Customer>();
             CreateMap<Customer, CustomerReadDto>();
@@ -38,7 +33,7 @@ namespace FusionTech.src.Utils
 
             // StoreEmployee mappings
             CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
-            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
+            CreateMap<StoreEmployee, StoreEmployeeReadDto>();
             // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
 
             // SystemAdmin mappings
@@ -95,11 +90,6 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-            // Person mappings
-            CreateMap<PersonSignInDTO, Person>();
-            CreateMap<Person, PersonReadDto>();
-            // CreateMap<PersonUpdateDto, Person>();
-
             //Supply
             CreateMap<Supply, SupplyReadDto>();
             CreateMap<SupplyCreateDto, Supply>();
@@ -107,27 +97,6 @@ namespace FusionTech.src.Utils
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, strProperty) => strProperty != null)
                 );
-
-            // Person mappings
-            CreateMap<PersonSignUpDTO, Person>();
-            CreateMap<Person, PersonSignInDTO>();
-            // CreateMap<PersonUpdateDto, Person>();
-
-
-            // Customer mappings
-            CreateMap<CustomerSignUpDTO, Customer>();
-            CreateMap<Customer, CustomerReadDto>();
-            // CreateMap<CustomerUpdateDto, Customer>();
-
-            // StoreEmployee mappings
-            CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
-            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
-            // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
-
-            // SystemAdmin mappings
-            CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
-            CreateMap<SystemAdmin, SystemAdminReadDto>();
-            // CreateMap<SystemAdminUpdateDto, SystemAdmin>();
 
             // Payment mappings
             CreateMap<Payment, PaymentReadDto>();
@@ -161,34 +130,10 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-            // Person mappings
-            CreateMap<PersonSignUpDTO, Person>();
-            CreateMap<Person, PersonReadDto>();
-            // CreateMap<PersonUpdateDto, Person>();
-
-
-            // Customer mappings
-            CreateMap<CustomerSignUpDTO, Customer>();
-            CreateMap<Customer, CustomerReadDto>();
-            // CreateMap<CustomerUpdateDto, Customer>();
-
-            // StoreEmployee mappings
-            CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
-            CreateMap<StoreEmployee, StoreEmployeeSignInDto>();
-            // CreateMap<StoreEmployeeUpdateDto, StoreEmployee>();
-
             // Supplier mappings
             CreateMap<Supplier, SupplierReadDto>();
             CreateMap<SupplierCreateDto, Supplier>();
             CreateMap<SupplierUpdateDto, Supplier>();
-
-            // StoreEmployee mappings
-            CreateMap<StoreEmployeeSignUpDTO, StoreEmployee>();
-            CreateMap<StoreEmployee, StoreEmployeeSignUpDTO>();
-
-            // SystemAdmin mappings
-            CreateMap<SystemAdminSignUpDTO, SystemAdmin>();
-            CreateMap<SystemAdmin, SystemAdminReadDto>();
 
             // Payment mappings
             CreateMap<Payment, PaymentReadDto>();
