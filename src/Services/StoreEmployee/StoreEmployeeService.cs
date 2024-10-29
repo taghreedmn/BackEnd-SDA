@@ -21,7 +21,7 @@ namespace FusionTech.src.Services.StoreEmployee
             _mapper = mapper;
         }
 
-        public async Task<StoreEmployeeSignInDto> CreateOneAsync(
+        public async Task<StoreEmployeeSignUpDTO> CreateOneAsync(
             StoreEmployeeSignUpDTO createDto,
             string adminEmail
         )
@@ -46,14 +46,15 @@ namespace FusionTech.src.Services.StoreEmployee
                 out byte[] salt
             );
             var idCounter = await _personRepo.GetIdCounterAsync(Entity.StoreEmployee.PersonType);
-            storeEmployee.PersonId = PersonIdConfig.StoreEmployeeStartIndex + idCounter.CurrentId + 1;
+            storeEmployee.PersonId =
+                PersonIdConfig.StoreEmployeeStartIndex + idCounter.CurrentId + 1;
             storeEmployee.PersonPassword = hashedPassword;
             storeEmployee.salt = salt;
             Entity.StoreEmployee createdStoreEmployee = await _storeEmployeeRepo.CreateOneAsync(
                 storeEmployee
             );
             await _personRepo.UpdatePersonIdCounter(idCounter);
-            return _mapper.Map<Entity.StoreEmployee, StoreEmployeeSignInDto>(createdStoreEmployee);
+            return _mapper.Map<Entity.StoreEmployee, StoreEmployeeSignUpDTO>(createdStoreEmployee);
         }
 
         public async Task<float> ViewSalary(string email)
@@ -61,6 +62,45 @@ namespace FusionTech.src.Services.StoreEmployee
             var originalPerson = await _personRepo.FindPersonByEmail(email);
             var employee = await _storeEmployeeRepo.GetByIdAsync(originalPerson!.PersonId);
             return employee!.Salary;
+        }
+
+        public async Task<List<StoreEmployeeReadDto>> GetAllAsync(
+            PaginationOptions paginationOptions
+        )
+        {
+            var storeEmployees = await _storeEmployeeRepo.GetAllAsync();
+            var filteredStoreEmployees = storeEmployees
+                .Where(c =>
+                    c.PersonName.Contains(
+                        paginationOptions.Search,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || c.PersonEmail.Contains(
+                        paginationOptions.Search,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || (
+                        c.PersonPhoneNumber != null
+                        && c.PersonPhoneNumber.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                .ToList();
+
+            var paginatedStoreEmployees = filteredStoreEmployees
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToList();
+            return _mapper.Map<List<Entity.StoreEmployee>, List<StoreEmployeeReadDto>>(
+                paginatedStoreEmployees
+            );
+        }
+
+        public async Task<int> CountStoreEmployeesAsync()
+        {
+            return await _storeEmployeeRepo.CountAsync();
         }
     }
 }

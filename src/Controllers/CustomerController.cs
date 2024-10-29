@@ -72,5 +72,39 @@ namespace FusionTech.src.Controllers
                 return Ok(token);
             }
         }
+
+        [HttpGet]
+        [Authorize(Policy = "admin")]
+        public async Task<ActionResult<List<CustomerListDto>>> GetAllUsers(
+            [FromQuery] PaginationOptions paginationOptions
+        )
+        {
+            var users = await _customerService.GetAllAsync(paginationOptions);
+            // Each time we call this API we calculate the number of persons. Isn't this kind of costly?
+            var totalCount = await _customerService.CountCustomersAsync();
+            var CustomerListDto = new CustomerListDto
+            {
+                Customers = users,
+                TotalCount = totalCount,
+            };
+            return Ok(CustomerListDto);
+        }
+
+        [Authorize(Policy = "Customer")]
+        [HttpGet("Profile")]
+        public async Task<ActionResult<CustomerReadDto>> GetCustomerProfile()
+        {
+            var authenticateClaims = HttpContext.User;
+            var userIdClaim = authenticateClaims.FindFirst(c =>
+                c.Type == ClaimTypes.NameIdentifier
+            );
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return BadRequest("User ID not found in claims");
+            }
+
+            return Ok(await _customerService.GetOneById(userId));
+        }
     }
 }

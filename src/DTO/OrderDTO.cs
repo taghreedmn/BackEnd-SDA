@@ -25,5 +25,11 @@ namespace FusionTech.src.DTO
         {
             public float TotalPrice { get; set; }
         }
+
+        public class OrderListDto
+        {
+            public List<OrderReadDto> Orders { get; set; }
+            public int TotalCount { get; set; }
+        }
     }
 }

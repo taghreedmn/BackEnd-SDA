@@ -89,9 +89,46 @@ namespace FusionTech.src.Services.Customer
             return await _customerRepo.UpdateAsync(customer);
         }
 
-        public Task<object> OrderGameAsync(int customerId, int gameId)
+        public async Task<List<CustomerReadDto>> GetAllAsync(PaginationOptions paginationOptions)
         {
-            throw new NotImplementedException();
+            var customers = await _customerRepo.GetAllAsync();
+            var filteredCustomers = customers
+                .Where(c =>
+                    c.PersonName.Contains(
+                        paginationOptions.Search,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || c.PersonEmail.Contains(
+                        paginationOptions.Search,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || (
+                        c.PersonPhoneNumber != null
+                        && c.PersonPhoneNumber.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                .ToList();
+
+            var paginatedCustomers = filteredCustomers
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToList();
+
+            return _mapper.Map<List<Entity.Customer>, List<CustomerReadDto>>(paginatedCustomers);
+        }
+
+        public async Task<int> CountCustomersAsync()
+        {
+            return await _customerRepo.CountAsync();
+        }
+
+        public async Task<CustomerReadDto> GetOneById(int customerId)
+        {
+            var customer = await _customerRepo.GetByIdAsync(customerId);
+            return _mapper.Map<Entity.Customer, CustomerReadDto>(customer!);
         }
     }
 }

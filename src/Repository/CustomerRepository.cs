@@ -41,5 +41,17 @@ namespace FusionTech.src.Repository
             _Customer.Update(customer);
             return await _databaseContext.SaveChangesAsync() > 0;
         }
+
+        public async Task<List<Customer>> GetAllAsync()
+        {
+            return await _Customer.ToListAsync();
+        }
+
+        
+
+        public async Task<int> CountAsync()
+        {
+            return await _Customer.CountAsync();
+        }
     }
 }

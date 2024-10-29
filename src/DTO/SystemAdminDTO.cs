@@ -10,16 +10,19 @@ namespace FusionTech.src.DTO
             public required bool ManageCustomers { get; set; }
             public required bool ManageSystemAdmins { get; set; }
         }
-        
 
-        public class SystemAdminReadDto : PersonSignInDTO
+        public class SystemAdminReadDto : PersonReadDto
         {
             public bool ManageStores { get; private set; }
             public bool ManageEmployees { get; private set; }
             public bool ManageGames { get; private set; }
             public bool ManageCustomers { get; private set; }
             public required bool ManageSystemAdmins { get; set; }
+        }
 
+        public class SystemAdminListDto : PersonListDto
+        {
+            public List<SystemAdminReadDto> SystemAdmins { get; set; }
         }
     }
 }

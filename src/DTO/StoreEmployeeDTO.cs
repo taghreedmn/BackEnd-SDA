@@ -17,13 +17,17 @@ namespace FusionTech.src.DTO
             public Guid StoreId { get; set; }
         }
 
-        public class StoreEmployeeSignInDto : PersonSignInDTO
+        public class StoreEmployeeReadDto : PersonReadDto
         {
-            public string? Role { get; set; }
-
+            public required string Role { get; set; }
             public float Salary { get; set; }
-
             public int YearsOfService { get; set; }
+            public Guid StoreId { get; set; }
+        }
+
+        public class StoreEmployeeListDto : PersonListDto
+        {
+            public List<StoreEmployeeReadDto> StoreEmployees { get; set; }
         }
     }
 }
