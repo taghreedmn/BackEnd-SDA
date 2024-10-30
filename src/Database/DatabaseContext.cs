@@ -195,7 +195,7 @@ namespace FusionTech.src.Database
                 TotalRating = 3,
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "ee4836d4-d131-47fe-b741-3c104f14df71";
@@ -209,7 +209,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "d6cd4ffd-62d1-41e6-b6b4-5a05babb8d45";
@@ -223,7 +223,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "c5618a1b-eef8-43ec-aa1b-25415fb5bc2f";
@@ -237,7 +237,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "02b0bb70-4fc8-4c72-86a7-731f4332b9a5";
@@ -251,7 +251,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "96ae6e7a-5c53-4ded-bf98-6a791f1ebdd3";
@@ -265,7 +265,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "dce59101-3621-461e-bf10-61807163a946";
@@ -279,7 +279,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "007e6acf-7ff4-45d6-aa22-dfbf4c4d3b23";
@@ -293,7 +293,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "0ce33067-7091-4c51-a1c4-3a93751c748c";
@@ -307,7 +307,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "e439131b-d595-48e3-8873-be55a1357748";
@@ -321,7 +321,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "426a499a-41c1-4763-a615-fca426836e3f";
@@ -335,7 +335,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "e5a9c78f-863e-428d-81a5-3b2d4ce62494";
@@ -349,7 +349,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "4cdb49aa-17a7-4029-a50a-e01f5aa5fd3c";
@@ -363,7 +363,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "9215201e-133d-43e1-b9b8-7b73ac3327c5";
@@ -377,7 +377,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "338b764e-b0f1-4969-89c8-164ca308e226";
@@ -391,7 +391,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
             videoGamesInfoGuidHelper = "7fe582b8-0308-48d8-8173-800102aebcfb";
             var VideoGameInfo16 = new VideoGameInfo
@@ -404,7 +404,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "72daabe6-62ec-4657-8e27-3ef881adcdd0";
@@ -418,7 +418,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "e09688b3-257e-413f-9ef4-0f4a9916a2c7";
@@ -432,7 +432,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "339b171d-1256-4569-a330-506e46bb06c6";
@@ -446,7 +446,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
 
             videoGamesInfoGuidHelper = "a0ed6f38-b3e3-4090-86f1-40c09cdaaecd";
@@ -460,7 +460,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"./images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
             //pc 4, playstation 5
 
