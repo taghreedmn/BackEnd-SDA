@@ -43,12 +43,29 @@ namespace FusionTech.src.Controllers
           }
 
 
+        // [HttpGet("{categoryName}")]
+        // public async Task<ActionResult<List<CategoryDetailedDto>>> GetCategoryDetailsByNameAsync([FromRoute] string categoryName)
+        // {
+        //     var category = await _categoryService.GetCategoryDetailsByNameAsync(categoryName);
+        //     return Ok(category);
+        // }
         [HttpGet("{categoryName}")]
-        public async Task<ActionResult<List<CategoryDetailedDto>>> GetCategoryDetailsByNameAsync([FromRoute] string categoryName)
+        public async Task<ActionResult<CategoryListDto>> GetCategoryDetailsByNameAsync(
+          [FromRoute] string categoryName, 
+          [FromQuery] PaginationOptions paginationOptions)
         {
-            var category = await _categoryService.GetCategoryDetailsByNameAsync(categoryName);
-            return Ok(category);
-        }
+           var categoryDetails = await _categoryService.GetCategoryDetailsByNameAsync(categoryName, paginationOptions);
+           var totalCount = await _categoryService.CountCategoryDetailsByNameAsync(categoryName);
+
+           var response = new CategoryListDto
+           {
+                Categories = categoryDetails,
+                TotalCount = totalCount
+           };
+
+    return Ok(response);
+}
+
 
         [Authorize(Policy = "admin")]
         [HttpDelete("{id}")]
@@ -57,7 +74,7 @@ namespace FusionTech.src.Controllers
             var category = await _categoryService.GetByIdAsync(id);
             if (category == null)
             {
-                return NotFound(); // Handle not found scenario
+                return NotFound(); 
             }
 
             await _categoryService.DeleteOneAsync(category.CategoryId);
@@ -69,9 +86,9 @@ namespace FusionTech.src.Controllers
         public async Task<ActionResult> UpdateCategory(Guid id, CategoryUpdateDto updateDto)
         {
             var updatedCategory = await _categoryService.UpdateOneAsync(id, updateDto);
-            if (updatedCategory == null)
+            if (updatedCategory )
             {
-                return NotFound(); // Handle not found scenario
+                return NotFound(); 
             }
 
             return NoContent();
