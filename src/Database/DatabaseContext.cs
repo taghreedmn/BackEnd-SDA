@@ -50,7 +50,7 @@ namespace FusionTech.src.Database
                 ManageEmployees = true,
                 ManageStores = true,
                 ManageSystemAdmins = true,
-                ProfilePicturePath="./wwwroot/Users/609.webp",
+                ProfilePicturePath="",
             };
             PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword10, out byte[] salt10);
 
@@ -67,7 +67,7 @@ namespace FusionTech.src.Database
                 ManageEmployees = false,
                 ManageStores = false,
                 ManageSystemAdmins = false,
-                ProfilePicturePath="./wwwroot/Users/610.webp",
+                ProfilePicturePath="",
             };
               PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword11, out byte[] salt11);
 
@@ -84,7 +84,7 @@ namespace FusionTech.src.Database
                 ManageEmployees = true,
                 ManageStores = true,
                 ManageSystemAdmins = false,
-                ProfilePicturePath="./wwwroot/Users/611.webp",
+                ProfilePicturePath="",
             };
 
             // Seed Category data
@@ -1003,7 +1003,7 @@ namespace FusionTech.src.Database
                 Salary = 4827f,
                 YearsOfService = 5,
                 StoreId = Store1.StoreId,
-                ProfilePicturePath="./wwwroot/Users/704.png",
+                ProfilePicturePath="",
             };
 
             PasswordUtils.HashPassword(
@@ -1024,7 +1024,7 @@ namespace FusionTech.src.Database
                 Salary = 12000f,
                 YearsOfService = 8,
                 StoreId = Store2.StoreId,
-                ProfilePicturePath="./wwwroot/Users/705.png",
+                ProfilePicturePath="",
             };
             PasswordUtils.HashPassword(
                 "StoreEmployee",
@@ -1044,7 +1044,7 @@ namespace FusionTech.src.Database
                 Salary = 10000f,
                 YearsOfService = 6,
                 StoreId = Store1.StoreId,
-                ProfilePicturePath="./wwwroot/Users/706.png",
+                ProfilePicturePath="",
             };
 
             //customer data
@@ -1058,7 +1058,7 @@ namespace FusionTech.src.Database
                 PersonPhoneNumber = "+966504071075",
                 salt = salt8,
                 Age = 35,
-                ProfilePicturePath="./wwwroot/Users/1007.jpg",
+                ProfilePicturePath="",
             };
             PasswordUtils.HashPassword("Customer", out string hashedPassword7, out byte[] salt7);
             var customer2 = new Customer
@@ -1070,7 +1070,7 @@ namespace FusionTech.src.Database
                 PersonPhoneNumber = "+966504060980",
                 salt = salt7,
                 Age = 30,
-                ProfilePicturePath="./wwwroot/Users/1008.jpg",
+                ProfilePicturePath="",
             };
             PasswordUtils.HashPassword("Customer", out string hashedPassword6, out byte[] salt6);
             var customer3 = new Customer
@@ -1082,7 +1082,7 @@ namespace FusionTech.src.Database
                 PersonPhoneNumber = "+966503371005",
                 salt = salt6,
                 Age = 23,
-                ProfilePicturePath="./wwwroot/Users/1009.jpg",
+                ProfilePicturePath="",
             };
             PasswordUtils.HashPassword("Customer", out string hashedPassword4, out byte[] salt4);
             var customer4 = new Customer
@@ -1094,7 +1094,7 @@ namespace FusionTech.src.Database
                 PersonPhoneNumber = "+966504471195",
                 salt = salt4,
                 Age = 25,
-                ProfilePicturePath="./wwwroot/Users/1000.jpg",
+                ProfilePicturePath="",
                 
             };
 
@@ -1174,26 +1174,27 @@ namespace FusionTech.src.Database
                 RatedById = Guid.Parse("e2f0c1a7-8c2c-4f51-9f4e-4a7f3b1c7e4b"),
                 Rating = 5f,
                 Comment = "very nice service ! thank you",
-                VideoGameInfoId = VideoGameInfo1.VideoGameInfoId,
-                PersonId = customer2.PersonId,
+                PersonId=customer1.PersonId,
+       
             };
             var Rate2 = new RatedBy
             {
                 RatedById = Guid.Parse("b9e7f8a1-5e9a-4e79-a0b7-6e5c6d2b5f9c"),
                 Rating = 4.5f,
                 Comment = "very nice game I like itt :)",
-                VideoGameInfoId = VideoGameInfo2.VideoGameInfoId,
-                PersonId = customer2.PersonId,
+                PersonId=customer2.PersonId
+        
+
             };
             var Rate3 = new RatedBy
             {
                 RatedById = Guid.Parse("16ed8a7d-4f1b-4ec7-b4ed-79c6b8ac7e0a"),
                 Rating = 4f,
                 Comment = "good games ! ",
-                VideoGameInfoId = VideoGameInfo2.VideoGameInfoId,
-                PersonId = customer1.PersonId,
-                
+                PersonId=customer1.PersonId
             };
+
+
 
             // modelBuilder
             modelBuilder.Entity<SystemAdmin>().HasData(SystemAdmin1,SystemAdmin2,SystemAdmin3);
@@ -1340,6 +1341,8 @@ namespace FusionTech.src.Database
                     Supply19,
                     Supply20
                 );
+
+                
 
             modelBuilder
                 .Entity<Category>()
