@@ -9,18 +9,23 @@ namespace FusionTech.src.DTO
             public string? CategoryName { get; set; }
         }
 
-        public class CategoryBasicDto // Fix the naming
+        // This DTO represents individual category data
+        public class CategoryBasicDto 
         {
             public Guid CategoryId { get; set; }
-
             public string? CategoryName { get; set; }
-            
         }
 
-        public class CategoryDetailedDto // Fix the naming
+        // This DTO represents the response that contains a list of categories
+        public class CategoryListDto 
+        {
+            public List<CategoryBasicDto> Categories { get; set; } = new List<CategoryBasicDto>();
+            public int TotalCategory { get; set; }
+        }
+
+        public class CategoryDetailedDto
         {
             public Guid CategoryId { get; set; }
-
             public string? CategoryName { get; set; }
             public ICollection<VideoGameInfoReadDto> VideoGameInfos { get; set; }
         }

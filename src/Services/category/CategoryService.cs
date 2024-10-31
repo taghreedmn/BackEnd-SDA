@@ -27,6 +27,13 @@ namespace FusionTech.src.Services.category
             var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
             return _mapper.Map<List<Category>, List<CategoryBasicDto>>(categoryList);
         }
+        public async Task<int> CountCategoryAsync()
+        {
+            // return 100
+            return await _categoryRepository.CountAsync();
+        }
+
+
 
         public async Task<CategoryDetailedDto> GetByIdAsync(Guid id)
         {

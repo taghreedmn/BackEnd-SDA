@@ -8,5 +8,6 @@ namespace FusionTech.src.Services.category
         Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName);
         Task<bool> DeleteOneAsync(Guid Id);
         Task<bool> UpdateOneAsync(Guid Id, CategoryUpdateDto updateDto);
+        Task<int> CountCategoryAsync();
     }
 }

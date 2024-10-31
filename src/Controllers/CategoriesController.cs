@@ -1,3 +1,4 @@
+
 namespace FusionTech.src.Controllers
 {
     [ApiController]
@@ -13,52 +14,66 @@ namespace FusionTech.src.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPost]
-        public async Task<ActionResult<CategoryBasicDto>> CreateOne(
-            [FromBody] CategoryCreateDto createDto
-        )
+        public async Task<ActionResult<CategoryBasicDto>> CreateOne([FromBody] CategoryCreateDto createDto)
         {
             var categoryCreated = await _categoryService.CreateOneAsync(createDto);
             return Created($"api/v1/categories/{categoryCreated.CategoryId}", categoryCreated);
         }
-
+        
         [HttpGet]
-        public async Task<ActionResult<CategoryBasicDto>> GetCategory(
-            [FromQuery] PaginationOptions paginationOptions
-        )
+        public async Task<ActionResult<CategoryListDto>> GetAllAsync(
+           [FromQuery] PaginationOptions paginationOptions)
         {
-            var categoryList = await _categoryService.GetAllAsync(paginationOptions);
-            return Ok(categoryList);
-        }
+           var categoryList = await _categoryService.GetAllAsync(paginationOptions);
+           var totalCategory = await _categoryService.CountCategoryAsync();
 
-        // [HttpGet("{Id}")]
-        // public async Task<ActionResult<CategoryReadDto>> GetCategoryById([FromRoute] Guid Id)
-        // {
-        //     var category = await _categoryService.GetByIdAsync(Id);
-        //     return Ok(category);
-        // }
-        [HttpGet("{CategoryName}")]
-        public async Task<
-            ActionResult<List<CategoryDetailedDto>>
-        > GetCategoryDetailsByNameAsync([FromRoute] string CategoryName)
+           var categoriesDto = categoryList.Select(c => new CategoryDTO.CategoryBasicDto
+           {
+              CategoryId = c.CategoryId,
+              CategoryName = c.CategoryName,
+            }).ToList();
+
+          var response = new CategoryDTO.CategoryListDto
+          {
+                  Categories = categoriesDto,
+                  TotalCategory = totalCategory
+          };
+
+              return Ok(response);
+          }
+
+
+        [HttpGet("{categoryName}")]
+        public async Task<ActionResult<List<CategoryDetailedDto>>> GetCategoryDetailsByNameAsync([FromRoute] string categoryName)
         {
-            var category = await _categoryService.GetCategoryDetailsByNameAsync(CategoryName);
+            var category = await _categoryService.GetCategoryDetailsByNameAsync(categoryName);
             return Ok(category);
         }
 
         [Authorize(Policy = "admin")]
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<CategoryBasicDto>> DeleteOne([FromRoute] Guid Id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<CategoryBasicDto>> DeleteOne([FromRoute] Guid id)
         {
-            var category = await _categoryService.GetByIdAsync(Id);
+            var category = await _categoryService.GetByIdAsync(id);
+            if (category == null)
+            {
+                return NotFound(); // Handle not found scenario
+            }
+
             await _categoryService.DeleteOneAsync(category.CategoryId);
             return Ok(category);
         }
 
         [Authorize(Policy = "admin")]
-        [HttpPut("{Id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateCategory(Guid id, CategoryUpdateDto updateDto)
         {
-            await _categoryService.UpdateOneAsync(id, updateDto);
+            var updatedCategory = await _categoryService.UpdateOneAsync(id, updateDto);
+            if (updatedCategory == null)
+            {
+                return NotFound(); // Handle not found scenario
+            }
+
             return NoContent();
         }
     }
