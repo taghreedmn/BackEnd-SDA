@@ -72,7 +72,6 @@ namespace FusionTech.src.Database
                 CategoryName = "simulation",
             };
 
-
             // Seed GameConsole data
             var Console1 = new GameConsole
             {
@@ -129,7 +128,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse("86b47e62-089e-4f3e-b9c4-f29ea6720fd0"),
                 StudioName = "Crystal Dynamics",
-                StudioPicturePath = "./wwwroot/images/CrystalDynamics-Logo-Embracer-Group-White-1024x383.png",
+                StudioPicturePath =
+                    "./wwwroot/images/CrystalDynamics-Logo-Embracer-Group-White-1024x383.png",
             };
             var Studio6 = new GameStudio
             {
@@ -184,206 +184,284 @@ namespace FusionTech.src.Database
                 PublisherPicturePath = "./wwwroot/images/EieauOC5_400x400.png",
             };
 
+            var videoGamesInfoGuidHelper = "7248c5a6-49e0-4f88-be50-8d87a54c938f";
             var VideoGameInfo1 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("7248c5a6-49e0-4f88-be50-8d87a54c938f"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Life is Strange: Double Exposure",
-                Description = "Max Caulfield, photographer-in-residence at the prestigious Caledon University, discovers her closest new friend, Safi, dead in the snow. Murdered. To save her, Max tries to Rewind time - a power she’s not used in years... instead, Max opens the way to a parallel timeline where Safi is still alive, and still in danger! Max realizes the killer will soon strike again - in both versions of reality. With her new power to Shift between two timelines - can Max solve and prevent the same murder?",
+                Description =
+                    "Max Caulfield, photographer-in-residence at the prestigious Caledon University, discovers her closest new friend, Safi, dead in the snow. Murdered. To save her, Max tries to Rewind time - a power she’s not used in years... instead, Max opens the way to a parallel timeline where Safi is still alive, and still in danger! Max realizes the killer will soon strike again - in both versions of reality. With her new power to Shift between two timelines - can Max solve and prevent the same murder?",
                 YearOfRelease = "Oct 29, 2024",
                 TotalRating = 3,
                 PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Life is Strange.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "ee4836d4-d131-47fe-b741-3c104f14df71";
             var VideoGameInfo2 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("ee4836d4-d131-47fe-b741-3c104f14df71"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "The Wolf Among Us",
-                Description = "The Wolf Among Us is a five-part episodic game relying heavily on dialogues and choices of the player. The game is considered a prequel to Bill Willingham's 'Fables' comic book and features usual TellTale stylistics: cartoon-like graphics, comparing your choices to the decisions of the other players and QTEs. 'The Wolf' is the first part of the series with a promised expansion to the second season coming out in 2019.You play as Bigby Wolf; he is a Sheriff of a Fabletown: as a typical Sheriff, you need to fulfill the requests of the Fabletown's residents and uncover mysteries lying behind the crimes there. The gameplay consists of choosing the dialogue options, reacting to QTE button-mash and watching cutscenes.",
+                Description =
+                    "The Wolf Among Us is a five-part episodic game relying heavily on dialogues and choices of the player. The game is considered a prequel to Bill Willingham's 'Fables' comic book and features usual TellTale stylistics: cartoon-like graphics, comparing your choices to the decisions of the other players and QTEs. 'The Wolf' is the first part of the series with a promised expansion to the second season coming out in 2019.You play as Bigby Wolf; he is a Sheriff of a Fabletown: as a typical Sheriff, you need to fulfill the requests of the Fabletown's residents and uncover mysteries lying behind the crimes there. The gameplay consists of choosing the dialogue options, reacting to QTE button-mash and watching cutscenes.",
                 YearOfRelease = "Oct 10, 2013",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/The Wolf Among Us.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "d6cd4ffd-62d1-41e6-b6b4-5a05babb8d45";
             var VideoGameInfo3 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("d6cd4ffd-62d1-41e6-b6b4-5a05babb8d45"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Rise of the Tomb Raider",
-                Description = "Rise of the Tomb Raider is the eleventh entry in the franchise, being a sequel to its predecessor, Tomb Raider, a reboot of the franchise. This story follows Lara Croft, one year after battling her supernatural experiences in Yamatai. This time she is trying to find the legendary city of Kitezh in Siberia, Russia. The legend behind the city begins in the 12th century and still comes nowadays, that this ancient city grants with a promise of immortality. While Lara tries to solve the mystery of Siberia, she encounters an organisation called Trinity. They want to retrieve this gift to themselves. Following the notes of her father, Lara tries to discover the secrets of the ancient city and stop Trinity in doing so.Exploring the Soviet motive,even more,the game has the DLC's - Baba Yaga, the Temple of the Witch, which follows Lara in the Soviet mine and confronting the legendary witch of Russian folk-tales, Cold Darkness Awakened, the story about a secret biological weapon and Blood Ties and Lara's Nightmare - a fight for ownership of the Croft estate.",
+                Description =
+                    "Rise of the Tomb Raider is the eleventh entry in the franchise, being a sequel to its predecessor, Tomb Raider, a reboot of the franchise. This story follows Lara Croft, one year after battling her supernatural experiences in Yamatai. This time she is trying to find the legendary city of Kitezh in Siberia, Russia. The legend behind the city begins in the 12th century and still comes nowadays, that this ancient city grants with a promise of immortality. While Lara tries to solve the mystery of Siberia, she encounters an organisation called Trinity. They want to retrieve this gift to themselves. Following the notes of her father, Lara tries to discover the secrets of the ancient city and stop Trinity in doing so.Exploring the Soviet motive,even more,the game has the DLC's - Baba Yaga, the Temple of the Witch, which follows Lara in the Soviet mine and confronting the legendary witch of Russian folk-tales, Cold Darkness Awakened, the story about a secret biological weapon and Blood Ties and Lara's Nightmare - a fight for ownership of the Croft estate.",
                 YearOfRelease = "Nov 10, 2015",
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Rise of the Tomb Raider.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "c5618a1b-eef8-43ec-aa1b-25415fb5bc2f";
             var VideoGameInfo4 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("c5618a1b-eef8-43ec-aa1b-25415fb5bc2f"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "GRID (2008)",
-                Description = "GRID is a racing game that lets the player dive into the motorsport, assume the real racer’s role and even control their own racing team. Races and racing championships are held in three main locations – the United States, Europe, and Japan. All racing circuits in the game are the mixture of imaginary and the existing ones. The gameplay is divided into 6 racing classes: GT championships, drifting, touge (climbing the narrow mountain pass like Pikes Peak), open wheel racing, demolition derby, and 24 Hours of Le Mans (additional at the end of the season). Each car of 43 available in the game is tied to one of the event types. Several professional teams compete within these championships. Therefore, to start the career player have to choose one of the disciplines and a professional team to join. While progressing GRID gives an opportunity to create your own racing team, hire sponsors and other drivers, and participate in different events. The gameplay also has a remarkable feature called “flashback” that allows rewinding time to prevent driver’s mistakes.",
+                Description =
+                    "GRID is a racing game that lets the player dive into the motorsport, assume the real racer’s role and even control their own racing team. Races and racing championships are held in three main locations – the United States, Europe, and Japan. All racing circuits in the game are the mixture of imaginary and the existing ones. The gameplay is divided into 6 racing classes: GT championships, drifting, touge (climbing the narrow mountain pass like Pikes Peak), open wheel racing, demolition derby, and 24 Hours of Le Mans (additional at the end of the season). Each car of 43 available in the game is tied to one of the event types. Several professional teams compete within these championships. Therefore, to start the career player have to choose one of the disciplines and a professional team to join. While progressing GRID gives an opportunity to create your own racing team, hire sponsors and other drivers, and participate in different events. The gameplay also has a remarkable feature called “flashback” that allows rewinding time to prevent driver’s mistakes.",
                 YearOfRelease = "Jun 3, 2008",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/GRID (2008).png",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "02b0bb70-4fc8-4c72-86a7-731f4332b9a5";
             var VideoGameInfo5 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("02b0bb70-4fc8-4c72-86a7-731f4332b9a5"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Operation Flashpoint: Red River",
-                Description = "Operation Flashpoint: Red River is a tactical first-person shooter, set in the modern world. The game is a sequel to Operation Flashpoint: Dragon Rising, and overall a third game in the series.The game’s protagonists are a squad of four US Marine Corps soldiers,each with their unique skills and fighting capabilities.The main campaign focuses on a fictional conflict in the Middle East,featuring both single - player mode and cooperative multiplayer.The battles in Operation Flashpoint are unique in a way that the players will feel the battleground,facing a real threat of getting their platoon killed,therefore making them plan their every step and use the surroundings to ensure victory.While,the game lacks competitive multiplayer,due to its focus on realism and refined experience of a fast - paced military simulator,the cooperative experience will allow players to fully immerse themselves in what would seem like a real test of nerves,teamwork,and tactics.",
+                Description =
+                    "Operation Flashpoint: Red River is a tactical first-person shooter, set in the modern world. The game is a sequel to Operation Flashpoint: Dragon Rising, and overall a third game in the series.The game’s protagonists are a squad of four US Marine Corps soldiers,each with their unique skills and fighting capabilities.The main campaign focuses on a fictional conflict in the Middle East,featuring both single - player mode and cooperative multiplayer.The battles in Operation Flashpoint are unique in a way that the players will feel the battleground,facing a real threat of getting their platoon killed,therefore making them plan their every step and use the surroundings to ensure victory.While,the game lacks competitive multiplayer,due to its focus on realism and refined experience of a fast - paced military simulator,the cooperative experience will allow players to fully immerse themselves in what would seem like a real test of nerves,teamwork,and tactics.",
                 YearOfRelease = "Apr 19, 2011",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Operation Flashpoint Red River.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "96ae6e7a-5c53-4ded-bf98-6a791f1ebdd3";
             var VideoGameInfo6 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("96ae6e7a-5c53-4ded-bf98-6a791f1ebdd3"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Just Cause 2",
-                Description = "Just Cause II follows a story of Rico Rodriguez, who arrives yet on another fictional island. Previously being on the Caribbean, now he is coming to Panau - an island in Southeast Asia. This time, Rico has to overthrow the dictatorial regime with its leader, Pandak 'Baby' Panay and confront his former mentor, Tom Sheldon. When Rico arrives at the island, he discovers three criminal gangs: The Roaches, The Reapers and the Ular Boys. In order to prevail, Rico has to fight all of the three fractions as well.One of the key features of the game is speed.This game is filled with adrenaline and ways of doing things very fastly.A wide variety of vehicles such as planes,boats,cars and other.A grappling hook is also available for the player as he can make his character fly around like Spider - Man or tie enemies to each other.There is a big choice of weaponry as well - you can have a pistol, two pistols, auto - rifles or even a grenade launcher! Having an open world map provides a player with experience do whatever they please - flying around, making missions or just discovering new things on the island.",
+                Description =
+                    "Just Cause II follows a story of Rico Rodriguez, who arrives yet on another fictional island. Previously being on the Caribbean, now he is coming to Panau - an island in Southeast Asia. This time, Rico has to overthrow the dictatorial regime with its leader, Pandak 'Baby' Panay and confront his former mentor, Tom Sheldon. When Rico arrives at the island, he discovers three criminal gangs: The Roaches, The Reapers and the Ular Boys. In order to prevail, Rico has to fight all of the three fractions as well.One of the key features of the game is speed.This game is filled with adrenaline and ways of doing things very fastly.A wide variety of vehicles such as planes,boats,cars and other.A grappling hook is also available for the player as he can make his character fly around like Spider - Man or tie enemies to each other.There is a big choice of weaponry as well - you can have a pistol, two pistols, auto - rifles or even a grenade launcher! Having an open world map provides a player with experience do whatever they please - flying around, making missions or just discovering new things on the island.",
                 YearOfRelease = "Mar 23, 2010",
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Just Cause 2.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "dce59101-3621-461e-bf10-61807163a946";
             var VideoGameInfo7 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("dce59101-3621-461e-bf10-61807163a946"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Hitman: Absolution",
-                Description = "The direct sequel to the Hitman: Blood money, Absolution tells the story of Agent 47, the true intentions of his Agency and how top Agent became a renegade on the run. Unlike previous games in the series, players will get more linear and cinematic experience. The game revolves around objective-based missions, providing various methods of completion. Players can avoid direct confrontation by disguising themselves in other people’s uniforms and use environmental interactions to distract or kill unsuspecting targets. And in case of raising the alarm, players can try to rush the mission with the direct attack, using dozens of available weapons.Players can use special vision mechanic,called Instinct.It allows seeing through the solid surfaces in order to observe NPC’s,items that can be interacted with and predict the movement of patrolling guards.Absolution provides players with additional challenges and collectibles in order to invite players to explore the maps.",
+                Description =
+                    "The direct sequel to the Hitman: Blood money, Absolution tells the story of Agent 47, the true intentions of his Agency and how top Agent became a renegade on the run. Unlike previous games in the series, players will get more linear and cinematic experience. The game revolves around objective-based missions, providing various methods of completion. Players can avoid direct confrontation by disguising themselves in other people’s uniforms and use environmental interactions to distract or kill unsuspecting targets. And in case of raising the alarm, players can try to rush the mission with the direct attack, using dozens of available weapons.Players can use special vision mechanic,called Instinct.It allows seeing through the solid surfaces in order to observe NPC’s,items that can be interacted with and predict the movement of patrolling guards.Absolution provides players with additional challenges and collectibles in order to invite players to explore the maps.",
                 YearOfRelease = "Nov 19, 2012",
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Hitman Absolution.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "007e6acf-7ff4-45d6-aa22-dfbf4c4d3b23";
             var VideoGameInfo8 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("007e6acf-7ff4-45d6-aa22-dfbf4c4d3b23"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "The Walking Dead: Michonne",
-                Description = "The Walking Dead: Michonne - A Telltale Miniseries stars the iconic, blade-wielding character from Robert Kirkman's best-selling comic books. Haunted by her past, and coping with unimaginable loss and regret, the story explores Michonne's absence between issues #126 and #139 of the comic book. In this three part miniseries, players will discover what took Michonne away from Rick, Ezekiel, and the rest of her trusted group… and what brought her back.",
+                Description =
+                    "The Walking Dead: Michonne - A Telltale Miniseries stars the iconic, blade-wielding character from Robert Kirkman's best-selling comic books. Haunted by her past, and coping with unimaginable loss and regret, the story explores Michonne's absence between issues #126 and #139 of the comic book. In this three part miniseries, players will discover what took Michonne away from Rick, Ezekiel, and the rest of her trusted group… and what brought her back.",
                 YearOfRelease = "Feb 22, 2016",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/The Walking Dead Michonne.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "0ce33067-7091-4c51-a1c4-3a93751c748c";
             var VideoGameInfo9 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("0ce33067-7091-4c51-a1c4-3a93751c748c"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Poker Night 2",
-                Description = "Playing poker is good in itself and as an occasion for live communication, a disclosure of communicative talents, a great way to spend time with friends. Especially if these friends know how to play and have fun playing.This poker simulator allows you to spend time in a beautiful company.The game lets you play with Sam(Sam & Max franchise),assisted by Max,Brock Samson(The Venture Bros.),Ash Williams(The Evil Dead) and Claptrap(Borderlands).The dealer of the game is GLaDOS(Portal series). Some other popular characters take part as additional characters or cameos.All players start the game with the same amount of in-game money,the goal is to win the money of other players.The game can be played in Texas hold 'em style or in Omaha hold' em.",
+                Description =
+                    "Playing poker is good in itself and as an occasion for live communication, a disclosure of communicative talents, a great way to spend time with friends. Especially if these friends know how to play and have fun playing.This poker simulator allows you to spend time in a beautiful company.The game lets you play with Sam(Sam & Max franchise),assisted by Max,Brock Samson(The Venture Bros.),Ash Williams(The Evil Dead) and Claptrap(Borderlands).The dealer of the game is GLaDOS(Portal series). Some other popular characters take part as additional characters or cameos.All players start the game with the same amount of in-game money,the goal is to win the money of other players.The game can be played in Texas hold 'em style or in Omaha hold' em.",
                 YearOfRelease = "Apr 24, 2013",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Poker Night 2.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "e439131b-d595-48e3-8873-be55a1357748";
             var VideoGameInfo10 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("e439131b-d595-48e3-8873-be55a1357748"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Back to the Future: The Game",
-                Description = "Marty McFly and Doc Brown return in a completely new Back to the Future adventure. Six months after the events of the third film, the DeLorean Time Machine mysteriously returns to Hill Valley - driverless! Marty must go back in time and get aid from a resistant teenage Emmett Brown, or else the space time continuum will forever be unraveled!",
+                Description =
+                    "Marty McFly and Doc Brown return in a completely new Back to the Future adventure. Six months after the events of the third film, the DeLorean Time Machine mysteriously returns to Hill Valley - driverless! Marty must go back in time and get aid from a resistant teenage Emmett Brown, or else the space time continuum will forever be unraveled!",
                 YearOfRelease = "Dec 21, 2010",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Back to the Future The Game.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "426a499a-41c1-4763-a615-fca426836e3f";
             var VideoGameInfo11 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("426a499a-41c1-4763-a615-fca426836e3f"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Jurassic Park: The Game",
-                Description = "Security systems have failed and the creatures of the park roam free. Now, a rogue corporation will stop at nothing to acquire the dinosaur embryos stolen and lost by Dennis Nedry. Experience a brand new adventure set during the events of the first Jurassic Park movie and see new areas and dinosaurs in this landmark adventure 65 million years in the making!",
+                Description =
+                    "Security systems have failed and the creatures of the park roam free. Now, a rogue corporation will stop at nothing to acquire the dinosaur embryos stolen and lost by Dennis Nedry. Experience a brand new adventure set during the events of the first Jurassic Park movie and see new areas and dinosaurs in this landmark adventure 65 million years in the making!",
                 YearOfRelease = "Nov 15, 2011",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Jurassic Park The Game.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "e5a9c78f-863e-428d-81a5-3b2d4ce62494";
             var VideoGameInfo12 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("e5a9c78f-863e-428d-81a5-3b2d4ce62494"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "F1 2015",
-                Description = "F1 2015 is a racing simulator based on the 2015 Formula One season, but with teams from the 2014 season (including the Hockenheimring track, which is missed from the 2015 season calendar). Seventh in the series. It presents the crews and pilots who participated directly in this season. Unlike its predecessors, the game received a new engine, improved physics and graphics.A 'Pro Season' mode was featured.This mode was different from the usual championship in a complete lack of interface and management assistance, as well as the highest level of complexity.The career mode, which was in the previous parts of the series, did not appear in the game.",
+                Description =
+                    "F1 2015 is a racing simulator based on the 2015 Formula One season, but with teams from the 2014 season (including the Hockenheimring track, which is missed from the 2015 season calendar). Seventh in the series. It presents the crews and pilots who participated directly in this season. Unlike its predecessors, the game received a new engine, improved physics and graphics.A 'Pro Season' mode was featured.This mode was different from the usual championship in a complete lack of interface and management assistance, as well as the highest level of complexity.The career mode, which was in the previous parts of the series, did not appear in the game.",
                 YearOfRelease = "Jul 9, 2015",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/F1 2015.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "4cdb49aa-17a7-4029-a50a-e01f5aa5fd3c";
             var VideoGameInfo13 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("4cdb49aa-17a7-4029-a50a-e01f5aa5fd3c"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Overlord: Raising Hell",
-                Description = "How evil can you get? Discover how corruptible you are in Overlord, the twisted fantasy action adventure where you can be evil(or really evil).In the game's seriously warped fantasy world, players will become the Overlord and get first-hand experience of how absolute power corrupts absolutely. You could be a regular run-of-the-mill Overlord. However, with incredible power at your disposal and a team of evil-minded impish critters, the Minions, on hand to do your bidding, how will you resist the temptation to be wonderfully despotic?!Go deeper into the Overlord's twisted world as the single-player expansion content opens a series of hellish new levels, each a supernatural abyss for the game's five kingdoms: Mellow Hills, Evernight, Heaven's Peak, the Golden Halls and the Ruborian Desert. Access to each abyss is via a portal, which opens once a kingdom has been successfully conquered and the previous ruler banished to a personal hell within. However it's not just the fallen heroes that have been dragged into the abyss: the Overlord's newly loyal peasants have also been taken down into hell too.",
+                Description =
+                    "How evil can you get? Discover how corruptible you are in Overlord, the twisted fantasy action adventure where you can be evil(or really evil).In the game's seriously warped fantasy world, players will become the Overlord and get first-hand experience of how absolute power corrupts absolutely. You could be a regular run-of-the-mill Overlord. However, with incredible power at your disposal and a team of evil-minded impish critters, the Minions, on hand to do your bidding, how will you resist the temptation to be wonderfully despotic?!Go deeper into the Overlord's twisted world as the single-player expansion content opens a series of hellish new levels, each a supernatural abyss for the game's five kingdoms: Mellow Hills, Evernight, Heaven's Peak, the Golden Halls and the Ruborian Desert. Access to each abyss is via a portal, which opens once a kingdom has been successfully conquered and the previous ruler banished to a personal hell within. However it's not just the fallen heroes that have been dragged into the abyss: the Overlord's newly loyal peasants have also been taken down into hell too.",
                 YearOfRelease = "Feb 15, 2008",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Overlord Raising Hell.jpg",
-            }; 
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+            };
+
+            videoGamesInfoGuidHelper = "9215201e-133d-43e1-b9b8-7b73ac3327c5";
             var VideoGameInfo14 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("9215201e-133d-43e1-b9b8-7b73ac3327c5"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Law & Order: Legacies",
-                Description = "Law & Order: Legacies is an adventure game developed by Telltale Games. It was originally released in 2012. It was published by Telltale Games. The game is rated as 'Recommended' on RAWG. Law & Order: Legacies is available on PC. Dave Felton and Jason Lars Berquist produced the game. It was scored by Jared Emerson-Johnson and Mike Post.",
+                Description =
+                    "Law & Order: Legacies is an adventure game developed by Telltale Games. It was originally released in 2012. It was published by Telltale Games. The game is rated as 'Recommended' on RAWG. Law & Order: Legacies is available on PC. Dave Felton and Jason Lars Berquist produced the game. It was scored by Jared Emerson-Johnson and Mike Post.",
                 YearOfRelease = "Jan 30, 2012",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Law and Order Legacies.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "338b764e-b0f1-4969-89c8-164ca308e226";
             var VideoGameInfo15 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("338b764e-b0f1-4969-89c8-164ca308e226"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "The Walking Dead: Michonne - Episode 2: Give No Shelter",
-                Description = "The Walking Dead: Michonne - Episode 2: Give No Shelter is an adventure game developed by Skybound. It came out on 29-03-2016. It was published by Telltale Games. Most rawgers rated the game as 'Recommended'. The Walking Dead: Michonne - Episode 2: Give No Shelter is available on PC and PlayStation 3.",
+                Description =
+                    "The Walking Dead: Michonne - Episode 2: Give No Shelter is an adventure game developed by Skybound. It came out on 29-03-2016. It was published by Telltale Games. Most rawgers rated the game as 'Recommended'. The Walking Dead: Michonne - Episode 2: Give No Shelter is available on PC and PlayStation 3.",
                 YearOfRelease = "Mar 29, 2016",
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/The Walking Dead Michonne  Episode 2 Give No Shelter.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+            videoGamesInfoGuidHelper = "7fe582b8-0308-48d8-8173-800102aebcfb";
             var VideoGameInfo16 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("7fe582b8-0308-48d8-8173-800102aebcfb"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Hitman",
-                Description = "Hitman is a six episodes game with different contracts. The action takes place as a prequel to Hitman: Agent 47 (only prologue) and episodes take place six years after Hitman: Absolution. All contracts are being ordered by a 'shadow client' and seem to be unrelated. But as you fulfil those contracts, you start to realise that all of the targets somehow are a part of a secret organisation called the Providence.",
+                Description =
+                    "Hitman is a six episodes game with different contracts. The action takes place as a prequel to Hitman: Agent 47 (only prologue) and episodes take place six years after Hitman: Absolution. All contracts are being ordered by a 'shadow client' and seem to be unrelated. But as you fulfil those contracts, you start to realise that all of the targets somehow are a part of a secret organisation called the Providence.",
                 YearOfRelease = "Mar 11, 2016",
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Hitman.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
-            var VideoGameInfo17= new VideoGameInfo
+
+            videoGamesInfoGuidHelper = "72daabe6-62ec-4657-8e27-3ef881adcdd0";
+            var VideoGameInfo17 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("72daabe6-62ec-4657-8e27-3ef881adcdd0"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Just Cause 3",
-                Description = "Just Cause 3 is an open-world action adventure with the large locus on freedom of exploring. It is the thirds title in the Just Cause series produced by Avalanche Studios, preceded by the first two numerical parts and having the 4th part not yet released as its successor.Rico Rodriguez is the protagonist of the game, who is continually being forced to deal with bandits and dictators somewhere in the Mediterranean.The events of the third game in the series take place 6 years after the second installment.",
+                Description =
+                    "Just Cause 3 is an open-world action adventure with the large locus on freedom of exploring. It is the thirds title in the Just Cause series produced by Avalanche Studios, preceded by the first two numerical parts and having the 4th part not yet released as its successor.Rico Rodriguez is the protagonist of the game, who is continually being forced to deal with bandits and dictators somewhere in the Mediterranean.The events of the third game in the series take place 6 years after the second installment.",
                 YearOfRelease = "Nov 30, 2015",
                 TotalRating = 5,
                 PublisherId = Publisher1.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Just Cause 3.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "e09688b3-257e-413f-9ef4-0f4a9916a2c7";
             var VideoGameInfo18 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("e09688b3-257e-413f-9ef4-0f4a9916a2c7"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Rise of the Argonauts",
-                Description = "The role model: Released in 2008, the game, is similar to another well - known representative of the genre of action - role - playing games God of War series.Developers became studio Liquid Entertainment, and the publisher company Codemasters.The game appeared on the PC and on the most popular consoles of its generation: Playstation 3 and Xbox 360. The story and the setting: The plot of the game tells about Jason, and the action takes place in Ancient Greece. Like God of War, the game uses ancient Greek mythology to build a game universe. The modified myth of Jason and the Argonauts, who went on a journey for the Golden Fleece was used as inspiration.According to the scriptwriters of the game, Jason is a Greek king, whose wife was killed in front of him.The only way for a grieving husband to return the beloved is the Golden Fleece, which can resurrect the dead.Other well-known heroes of myths appear in the game: Hercules, Achilles, Medea, Medusa, Patroclus, and others. Together they travel through a variety of real and imaginary locations: Iolcu, Delphi, Mycenae, Tartar, and Kifr.",
+                Description =
+                    "The role model: Released in 2008, the game, is similar to another well - known representative of the genre of action - role - playing games God of War series.Developers became studio Liquid Entertainment, and the publisher company Codemasters.The game appeared on the PC and on the most popular consoles of its generation: Playstation 3 and Xbox 360. The story and the setting: The plot of the game tells about Jason, and the action takes place in Ancient Greece. Like God of War, the game uses ancient Greek mythology to build a game universe. The modified myth of Jason and the Argonauts, who went on a journey for the Golden Fleece was used as inspiration.According to the scriptwriters of the game, Jason is a Greek king, whose wife was killed in front of him.The only way for a grieving husband to return the beloved is the Golden Fleece, which can resurrect the dead.Other well-known heroes of myths appear in the game: Hercules, Achilles, Medea, Medusa, Patroclus, and others. Together they travel through a variety of real and imaginary locations: Iolcu, Delphi, Mycenae, Tartar, and Kifr.",
                 YearOfRelease = "Dec 12, 2008",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Rise of the Argonauts.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "339b171d-1256-4569-a330-506e46bb06c6";
             var VideoGameInfo19 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("339b171d-1256-4569-a330-506e46bb06c6"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "Damnation",
-                Description = "Evolving the shooter genre with its unique and exhilarating combination of fluid action and combat, Damnation features huge, open environments, frenetic combat, daredevil acrobatics and high-octane vehicle-based stunts. Presenting players with an intense test of reflexes, quick thinking and rapid-fire conflict, Damnation will feature vast, breathtaking landscapes, each covering miles of distance and thousands of vertical feet. Billed as a shooter gone vertical and visually inspired by iconic elements of American history, these massive streaming landscapes will form the battlegrounds for a post-industrial conflict between humanity and an unstoppable arms dealer hell - bent on total world domination.",
+                Description =
+                    "Evolving the shooter genre with its unique and exhilarating combination of fluid action and combat, Damnation features huge, open environments, frenetic combat, daredevil acrobatics and high-octane vehicle-based stunts. Presenting players with an intense test of reflexes, quick thinking and rapid-fire conflict, Damnation will feature vast, breathtaking landscapes, each covering miles of distance and thousands of vertical feet. Billed as a shooter gone vertical and visually inspired by iconic elements of American history, these massive streaming landscapes will form the battlegrounds for a post-industrial conflict between humanity and an unstoppable arms dealer hell - bent on total world domination.",
                 YearOfRelease = "May 22, 2009",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/Damnation.jpg",
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
+
+            videoGamesInfoGuidHelper = "a0ed6f38-b3e3-4090-86f1-40c09cdaaecd";
             var VideoGameInfo20 = new VideoGameInfo
             {
-                VideoGameInfoId = Guid.Parse("a0ed6f38-b3e3-4090-86f1-40c09cdaaecd"),
+                VideoGameInfoId = Guid.Parse(videoGamesInfoGuidHelper),
                 GameName = "ToCA Race Driver",
-                Description = "Pro Race Driver features 42 licensed touring and racecars, including the Holden Commodore, Ford Falcon, Mercedes CLK, Alfa Romeo GTV, and Viper GTS. Thirty-eight international circuits are re-created under license, including Bathurst, Hockenheimring, and Silverstone. The 13 global championships include DTM from Germany, V8 Supercars from Australia, and the British Touring Car Championship. The state-of-the-art car physics engine was tested for realism by professional race drivers. A customizable car setup provides a uniquely true-to-life driving and performance experience. Real, visible damage is created using the crash test industry's FEM system, and it affects the handling and drivability of vehicles.",
+                Description =
+                    "Pro Race Driver features 42 licensed touring and racecars, including the Holden Commodore, Ford Falcon, Mercedes CLK, Alfa Romeo GTV, and Viper GTS. Thirty-eight international circuits are re-created under license, including Bathurst, Hockenheimring, and Silverstone. The 13 global championships include DTM from Germany, V8 Supercars from Australia, and the British Touring Car Championship. The state-of-the-art car physics engine was tested for realism by professional race drivers. A customizable car setup provides a uniquely true-to-life driving and performance experience. Real, visible damage is created using the crash test industry's FEM system, and it affects the handling and drivability of vehicles.",
                 YearOfRelease = "Apr 1, 2003",
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
-                GamePicturePath = "./wwwroot/GameImage/ToCA Race Driver.jpg",
-            }; 
+                GamePicturePath =
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+            };
             //pc 4, playstation 5
 
             var VideoGameVersion1 = new VideoGameVersion
@@ -392,7 +470,6 @@ namespace FusionTech.src.Database
                 Price = 80,
                 VideoGameInfoId = VideoGameInfo1.VideoGameInfoId,
                 GameConsoleId = Console5.GameConsoleId,
-                
             };
             var VideoGameVersion2 = new VideoGameVersion
             {
@@ -401,7 +478,7 @@ namespace FusionTech.src.Database
                 VideoGameInfoId = VideoGameInfo2.VideoGameInfoId,
                 GameConsoleId = Console4.GameConsoleId,
             };
-             var VideoGameVersion3 = new VideoGameVersion
+            var VideoGameVersion3 = new VideoGameVersion
             {
                 VideoGameVersionId = Guid.Parse("8fa26dfb-b2e3-4f5c-bc6a-d01001fac01f"),
                 Price = 90,
@@ -710,17 +787,27 @@ namespace FusionTech.src.Database
                 GameQuantity = 500,
             };
 
-
-
             // Seed Payment data
             var Payment1 = new Payment
             {
                 PaymentId = Guid.Parse("4c02ee7d-5a8b-4dba-9df0-5d84aba66837"),
                 PaymentMethod = "Cash on delivery",
             };
-            var Payment2 = new Payment { PaymentId = Guid.Parse("93d71ec8-adfe-4b40-93ba-bc4a389e6393"), PaymentMethod = "Visa" };
-            var Payment3 = new Payment { PaymentId = Guid.Parse("649bd2f6-fd7b-4af9-aaad-c30aae9d0f53"), PaymentMethod = "Mada" };
-            var Payment4 = new Payment { PaymentId = Guid.Parse("77965d61-af9f-41a5-a9df-fbe8e9386a2a"), PaymentMethod = "Apple Pay" };
+            var Payment2 = new Payment
+            {
+                PaymentId = Guid.Parse("93d71ec8-adfe-4b40-93ba-bc4a389e6393"),
+                PaymentMethod = "Visa",
+            };
+            var Payment3 = new Payment
+            {
+                PaymentId = Guid.Parse("649bd2f6-fd7b-4af9-aaad-c30aae9d0f53"),
+                PaymentMethod = "Mada",
+            };
+            var Payment4 = new Payment
+            {
+                PaymentId = Guid.Parse("77965d61-af9f-41a5-a9df-fbe8e9386a2a"),
+                PaymentMethod = "Apple Pay",
+            };
 
             // Seed PersonIdCounter data
             var PersonIdCounter1 = new PersonIdCounter
@@ -957,25 +1044,104 @@ namespace FusionTech.src.Database
 
             modelBuilder.Entity<Category>().HasData(Category1, Category2, Category3, Category4);
 
-            modelBuilder.Entity<GameConsole>().HasData(Console1, Console2, Console3, Console4, Console5);
+            modelBuilder
+                .Entity<GameConsole>()
+                .HasData(Console1, Console2, Console3, Console4, Console5);
 
-            modelBuilder.Entity<GameStudio>().HasData(Studio1, Studio2, Studio3, Studio4, Studio5, Studio6, Studio7, Studio8, Studio9, Studio10);
+            modelBuilder
+                .Entity<GameStudio>()
+                .HasData(
+                    Studio1,
+                    Studio2,
+                    Studio3,
+                    Studio4,
+                    Studio5,
+                    Studio6,
+                    Studio7,
+                    Studio8,
+                    Studio9,
+                    Studio10
+                );
 
             modelBuilder.Entity<Publisher>().HasData(Publisher1, Publisher2, Publisher3);
 
-            modelBuilder.Entity<VideoGameInfo>().HasData(VideoGameInfo1, VideoGameInfo2, VideoGameInfo3, VideoGameInfo4, VideoGameInfo5, VideoGameInfo6,
-            VideoGameInfo7, VideoGameInfo8, VideoGameInfo9, VideoGameInfo10, VideoGameInfo11, VideoGameInfo12, VideoGameInfo13, VideoGameInfo14, VideoGameInfo15, VideoGameInfo16,
-            VideoGameInfo17, VideoGameInfo18, VideoGameInfo19, VideoGameInfo20);
+            modelBuilder
+                .Entity<VideoGameInfo>()
+                .HasData(
+                    VideoGameInfo1,
+                    VideoGameInfo2,
+                    VideoGameInfo3,
+                    VideoGameInfo4,
+                    VideoGameInfo5,
+                    VideoGameInfo6,
+                    VideoGameInfo7,
+                    VideoGameInfo8,
+                    VideoGameInfo9,
+                    VideoGameInfo10,
+                    VideoGameInfo11,
+                    VideoGameInfo12,
+                    VideoGameInfo13,
+                    VideoGameInfo14,
+                    VideoGameInfo15,
+                    VideoGameInfo16,
+                    VideoGameInfo17,
+                    VideoGameInfo18,
+                    VideoGameInfo19,
+                    VideoGameInfo20
+                );
 
-            modelBuilder.Entity<VideoGameVersion>().HasData(VideoGameVersion1, VideoGameVersion2, VideoGameVersion3, VideoGameVersion4, VideoGameVersion5, VideoGameVersion6, VideoGameVersion7, VideoGameVersion8, VideoGameVersion9, VideoGameVersion10,
-            VideoGameVersion11, VideoGameVersion12, VideoGameVersion13, VideoGameVersion14, VideoGameVersion15, VideoGameVersion16, VideoGameVersion17, VideoGameVersion18,
-            VideoGameVersion19, VideoGameVersion20);
+            modelBuilder
+                .Entity<VideoGameVersion>()
+                .HasData(
+                    VideoGameVersion1,
+                    VideoGameVersion2,
+                    VideoGameVersion3,
+                    VideoGameVersion4,
+                    VideoGameVersion5,
+                    VideoGameVersion6,
+                    VideoGameVersion7,
+                    VideoGameVersion8,
+                    VideoGameVersion9,
+                    VideoGameVersion10,
+                    VideoGameVersion11,
+                    VideoGameVersion12,
+                    VideoGameVersion13,
+                    VideoGameVersion14,
+                    VideoGameVersion15,
+                    VideoGameVersion16,
+                    VideoGameVersion17,
+                    VideoGameVersion18,
+                    VideoGameVersion19,
+                    VideoGameVersion20
+                );
 
             modelBuilder.Entity<Store>().HasData(Store1, Store2);
             modelBuilder.Entity<StoreEmployee>().HasData(storeEmployee1);
 
-            modelBuilder.Entity<Inventory>().HasData(Inventory1, Inventory2, Inventory3, Inventory4, Inventory5, Inventory6, Inventory7, Inventory8,
-            Inventory9, Inventory10, Inventory11, Inventory12, Inventory13, Inventory14, Inventory15, Inventory16, Inventory17, Inventory18, Inventory19, Inventory20);
+            modelBuilder
+                .Entity<Inventory>()
+                .HasData(
+                    Inventory1,
+                    Inventory2,
+                    Inventory3,
+                    Inventory4,
+                    Inventory5,
+                    Inventory6,
+                    Inventory7,
+                    Inventory8,
+                    Inventory9,
+                    Inventory10,
+                    Inventory11,
+                    Inventory12,
+                    Inventory13,
+                    Inventory14,
+                    Inventory15,
+                    Inventory16,
+                    Inventory17,
+                    Inventory18,
+                    Inventory19,
+                    Inventory20
+                );
 
             modelBuilder.Entity<Payment>().HasData(Payment1, Payment2, Payment3, Payment4);
 
@@ -985,8 +1151,30 @@ namespace FusionTech.src.Database
 
             modelBuilder.Entity<Supplier>().HasData(Supplier1, Supplier2);
 
-            modelBuilder.Entity<Supply>().HasData(Supply1, Supply2, Supply3, Supply4, Supply5, Supply6, Supply7, Supply8, Supply9, Supply10, Supply11
-            , Supply12, Supply13, Supply14, Supply15, Supply16, Supply17, Supply18, Supply19, Supply20);
+            modelBuilder
+                .Entity<Supply>()
+                .HasData(
+                    Supply1,
+                    Supply2,
+                    Supply3,
+                    Supply4,
+                    Supply5,
+                    Supply6,
+                    Supply7,
+                    Supply8,
+                    Supply9,
+                    Supply10,
+                    Supply11,
+                    Supply12,
+                    Supply13,
+                    Supply14,
+                    Supply15,
+                    Supply16,
+                    Supply17,
+                    Supply18,
+                    Supply19,
+                    Supply20
+                );
 
             modelBuilder
                 .Entity<Category>()
@@ -1099,123 +1287,121 @@ namespace FusionTech.src.Database
                             CategoriesCategoryId = Category3.CategoryId,
                             VideoGameInfosVideoGameInfoId = VideoGameInfo20.VideoGameInfoId,
                         }
-
                     )
                 );
             modelBuilder
-           .Entity<GameStudio>()
-           .HasMany(G => G.VideoGames)
-           .WithMany(v => v.GameStudios)
-           .UsingEntity(j =>
-               j.HasData(
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio1.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo1.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio2.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo2.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio3.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo3.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio5.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo3.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio4.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo4.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio4.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo5.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio6.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo6.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio7.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo7.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio2.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo8.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio2.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo9.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio2.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo10.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio2.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo11.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio4.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo12.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio4.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo13.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio2.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo14.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio8.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo15.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio7.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo16.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio6.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo17.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio9.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo18.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio10.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo19.VideoGameInfoId,
-                   },
-                   new
-                   {
-                       GameStudiosGameStudioId = Studio4.GameStudioId,
-                       VideoGamesVideoGameInfoId = VideoGameInfo20.VideoGameInfoId,
-                   }
-
-               )
-           );
+                .Entity<GameStudio>()
+                .HasMany(G => G.VideoGames)
+                .WithMany(v => v.GameStudios)
+                .UsingEntity(j =>
+                    j.HasData(
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio1.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo1.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio2.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo2.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio3.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo3.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio5.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo3.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio4.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo4.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio4.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo5.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio6.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo6.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio7.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo7.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio2.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo8.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio2.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo9.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio2.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo10.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio2.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo11.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio4.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo12.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio4.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo13.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio2.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo14.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio8.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo15.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio7.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo16.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio6.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo17.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio9.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo18.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio10.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo19.VideoGameInfoId,
+                        },
+                        new
+                        {
+                            GameStudiosGameStudioId = Studio4.GameStudioId,
+                            VideoGamesVideoGameInfoId = VideoGameInfo20.VideoGameInfoId,
+                        }
+                    )
+                );
         }
     }
 }
