@@ -29,26 +29,26 @@ namespace FusionTech.src.Services.category
             return await _categoryRepository.CountAsync();
         }
 
-        public async Task<CategoryDTO.CategoryDetailedDto> GetByIdAsync(Guid id)
+        public async Task<CategoryDetailedDto> GetByIdAsync(Guid id)
         {
             var foundCategory = await _categoryRepository.GetByIdAsync(id);
             if (foundCategory == null)
             {
                 throw CustomException.NotFound($"Category with ID {id} not found");
             }
-            return _mapper.Map<CategoryDTO.CategoryDetailedDto>(foundCategory);
+            return _mapper.Map<CategoryDetailedDto>(foundCategory);
         }
 
-        public async Task<(List<CategoryDTO.CategoryDetailedDto> categories, int totalCount)> GetCategoryDetailsByNameAsync(string categoryName, PaginationOptions paginationOptions)
+        public async Task<(List<CategoryDetailedDto> categories, int totalCount)> GetCategoryDetailsByNameAsync(string categoryName, PaginationOptions paginationOptions)
         {
-            var (foundCategories, totalCount) = await _categoryRepository.GetCategoryDetailsByNameAsync(categoryName, paginationOptions);
+            var (foundCategory, totalCount) = await _categoryRepository.GetCategoryDetailsByNameAsync(categoryName, paginationOptions);
 
-            if (foundCategories == null || foundCategories.Count == 0)
+            if (foundCategory == null || foundCategory.Count == 0)
             {
                 throw CustomException.NotFound($"No categories found with the name {categoryName}");
             }
 
-            var categoryLists = _mapper.Map<List<Category>, List<CategoryDTO.CategoryDetailedDto>>(foundCategories);
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(foundCategory);
             return (categoryLists, totalCount);
         }
 

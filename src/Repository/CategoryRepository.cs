@@ -57,43 +57,32 @@ namespace FusionTech.src.Repository
 
         public async Task<Category> GetByIdAsync(Guid id)
         {
-            // Corrected access to the Category
             return await _category.Include(c => c.VideoGameInfos)
                                   .ThenInclude(vi => vi.VideoGameVersions)
                                   .FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
-        // public async Task<List<Category>> GetCategoryDetailsByNameAsync(string categoryName)
-        // {
-        //     return await _category
-        //         .Include(c => c.VideoGameInfos)
-        //         .ThenInclude(vi => vi.VideoGameVersions)
-        //         .Where(c => c.CategoryName.ToLower() == categoryName.ToLower())
-        //         .ToListAsync();
-        // }
+
         public async Task<(List<Category>, int)> GetCategoryDetailsByNameAsync(string categoryName, PaginationOptions paginationOptions)
         {
-          IQueryable<Category> query = _category
-            .Include(c => c.VideoGameInfos)
-            .ThenInclude(vi => vi.VideoGameVersions)
-            .Where(c => c.CategoryName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+   
+              var normalizedCategoryName = categoryName.ToLowerInvariant();
 
-    
-            var totalCount = await query.CountAsync();
+             IQueryable<Category> query = _category
+                 .Include(c => c.VideoGameInfos)
+                 .ThenInclude(vi => vi.VideoGameVersions)
+                 .Where(c => c.CategoryName.ToLower() == categoryName.ToLower());
+
+             var totalCount = await query.CountAsync();
 
            // Pagination
-           var categories = await query
-             .Skip(paginationOptions.Offset)
-             .Take(paginationOptions.Limit)
-             .ToListAsync();
+             var categories = await query
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToListAsync();
 
-          return (categories, totalCount);
+             return (categories, totalCount);
         }
-
-
-   
-
-
 
         public async Task<bool> DeleteOneAsync(Category category)
         {
