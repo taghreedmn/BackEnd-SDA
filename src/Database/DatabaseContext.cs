@@ -143,88 +143,110 @@ namespace FusionTech.src.Database
             };
 
             // Seed GameStudio data
+            var studioGuidHelper = "646e4c3c-bfc2-41dc-9f49-14b7905516b8";
             var Studio1 = new GameStudio
             {
-                GameStudioId = Guid.Parse("646e4c3c-bfc2-41dc-9f49-14b7905516b8"),
+                GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Deck Nine Games",
-                StudioPicturePath = "./wwwroot/images/Deck_Nine_logo.svg.png",
-            };
-            var Studio2 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("8720de28-1bf5-49ad-b272-ddfee747f22c"),
-                StudioName = "Telltale Games",
-                StudioPicturePath = "./wwwroot/images/telltale-games5562.jpg",
-            };
-            var Studio3 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("0b4ad2e6-b78c-47a8-bf70-fb667cb7a138"),
-                StudioName = "Feral Interactive",
-                StudioPicturePath = "./wwwroot/images/images.png",
-            };
-            var Studio4 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("bbd8f143-d7e1-41ef-9702-9bfb27567b80"),
-                StudioName = "Codemaster",
-                StudioPicturePath = "./wwwroot/images/EieauOC5_400x400.png",
-            };
-            var Studio5 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("86b47e62-089e-4f3e-b9c4-f29ea6720fd0"),
-                StudioName = "Crystal Dynamics",
-                StudioPicturePath =
-                    "./wwwroot/images/CrystalDynamics-Logo-Embracer-Group-White-1024x383.png",
-            };
-            var Studio6 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("bfe21050-cd59-4feb-ab5e-459031e4b3f3"),
-                StudioName = "Avalanche Studios",
-                StudioPicturePath = "./wwwroot/images/Avalanche_Studios_Group_logo.svg.png",
-            };
-            var Studio7 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("5502bbf3-535e-4042-85b8-052b35594542"),
-                StudioName = "IO Interactive",
-                StudioPicturePath = "./wwwroot/images/ioi_white_on_black.jpg",
-            };
-            var Studio8 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("cf04439e-6b5d-406f-b2e1-a5616a3aee8a"),
-                StudioName = "Skybound Entertainment",
-                StudioPicturePath = "./wwwroot/images/Skybound_Entertainment_Logo.png",
-            };
-            var Studio9 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("727cffb5-6ba3-4a56-a1eb-fe1962c8f044"),
-                StudioName = "Liquid Entertainment",
-                StudioPicturePath = "./wwwroot/images/2258-liquid-entertainment-logo.jpg",
-            };
-            var Studio10 = new GameStudio
-            {
-                GameStudioId = Guid.Parse("9fc928ce-aa2a-4e7b-816d-b3468ea552ed"),
-                StudioName = "Blue Omega Entertainment",
-                StudioPicturePath = "./wwwroot/images/Blue_Omega_Entertainment_Logo.jpg",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
+            studioGuidHelper = "8720de28-1bf5-49ad-b272-ddfee747f22c";
+            var Studio2 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Telltale Games",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+            };
+
+            studioGuidHelper = "0b4ad2e6-b78c-47a8-bf70-fb667cb7a138";
+            var Studio3 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Feral Interactive",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+            };
+
+            studioGuidHelper = "bbd8f143-d7e1-41ef-9702-9bfb27567b80";
+            var Studio4 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Codemaster",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+            };
+
+            studioGuidHelper = "86b47e62-089e-4f3e-b9c4-f29ea6720fd0";
+            var Studio5 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Crystal Dynamics",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+            };
+
+            studioGuidHelper = "bfe21050-cd59-4feb-ab5e-459031e4b3f3";
+            var Studio6 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Avalanche Studios",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+            };
+
+            studioGuidHelper = "5502bbf3-535e-4042-85b8-052b35594542";
+            var Studio7 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "IO Interactive",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+            };
+
+            studioGuidHelper = "cf04439e-6b5d-406f-b2e1-a5616a3aee8a";
+            var Studio8 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Skybound Entertainment",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+            };
+
+            studioGuidHelper = "727cffb5-6ba3-4a56-a1eb-fe1962c8f044";
+            var Studio9 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Liquid Entertainment",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+            };
+
+            studioGuidHelper = "9fc928ce-aa2a-4e7b-816d-b3468ea552ed";
+            var Studio10 = new GameStudio
+            {
+                GameStudioId = Guid.Parse(studioGuidHelper),
+                StudioName = "Blue Omega Entertainment",
+                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+            };
+
+            var publisherGuidHelper = "12ba59b8-6c30-4864-9d48-0f95bd278b40";
             var Publisher1 = new Publisher
             {
-                PublisherId = Guid.Parse("12ba59b8-6c30-4864-9d48-0f95bd278b40"), //action
+                PublisherId = Guid.Parse(publisherGuidHelper), //action
                 PublisherName = "Square Enix",
                 PublisherEmail = "creators@us.square-enix.com",
-                PublisherPicturePath = "./wwwroot/images/selogo_onwhite.jpg",
+                PublisherPicturePath = $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.jpg",
             };
+            publisherGuidHelper = "f5ea9a66-8a49-4f1f-ae5d-09ce38a7c80d";
             var Publisher2 = new Publisher
             {
-                PublisherId = Guid.Parse("f5ea9a66-8a49-4f1f-ae5d-09ce38a7c80d"),
+                PublisherId = Guid.Parse(publisherGuidHelper),
                 PublisherName = "Telltale Games",
                 PublisherEmail = " support@telltalegames.com", // adventure and action
-                PublisherPicturePath = "./wwwroot/images/telltale-games5562.jpg",
+                PublisherPicturePath = $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.jpg",
             };
+            publisherGuidHelper = "df5d8791-98b3-445d-8120-07b33695da10";
             var Publisher3 = new Publisher
             {
-                PublisherId = Guid.Parse("df5d8791-98b3-445d-8120-07b33695da10"),
+                PublisherId = Guid.Parse(publisherGuidHelper),
                 PublisherName = "Codemasters",
                 PublisherEmail = " help@codemasters.com", //race
-                PublisherPicturePath = "./wwwroot/images/EieauOC5_400x400.png",
+                PublisherPicturePath = $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.png",
+
             };
 
             var videoGamesInfoGuidHelper = "7248c5a6-49e0-4f88-be50-8d87a54c938f";
