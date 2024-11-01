@@ -4,23 +4,10 @@ var builder = WebApplication.CreateBuilder(options);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 //connect the database
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(
-    builder.Configuration.GetConnectionString("local")
-);
-
-// I might remove this, as I don't see the need nor if I acutally have PersonType in our Databas
-// future me, if you decide to remove it, don't forgot to remove it in TokenUtils.cs too
-dataSourceBuilder.MapEnum<PersonType>();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseNpgsql(dataSourceBuilder.Build());
+    options.UseNpgsql(builder.Configuration.GetConnectionString("local"));
 });
-
-builder.Services.AddAutoMapper(typeof(MapperProfile));
-
-// builder.Services
-//     .AddScoped<ISupplyService, SupplyService>()
-//     .AddScoped<SupplyRepository, SupplyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
@@ -41,7 +28,6 @@ builder
     .Services.AddScoped<ISystemAdminService, SystemAdminService>()
     .AddScoped<SystemAdminRepository, SystemAdminRepository>();
 
-builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder
     .Services.AddScoped<ICategoryService, CategoryService>()
     .AddScoped<CategoryRepository, CategoryRepository>();

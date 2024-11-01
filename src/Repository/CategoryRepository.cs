@@ -63,14 +63,37 @@ namespace FusionTech.src.Repository
                                   .FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
-        public async Task<List<Category>> GetCategoryDetailsByNameAsync(string categoryName)
+        // public async Task<List<Category>> GetCategoryDetailsByNameAsync(string categoryName)
+        // {
+        //     return await _category
+        //         .Include(c => c.VideoGameInfos)
+        //         .ThenInclude(vi => vi.VideoGameVersions)
+        //         .Where(c => c.CategoryName.ToLower() == categoryName.ToLower())
+        //         .ToListAsync();
+        // }
+        public async Task<(List<Category>, int)> GetCategoryDetailsByNameAsync(string categoryName, PaginationOptions paginationOptions)
         {
-            return await _category
-                .Include(c => c.VideoGameInfos)
-                .ThenInclude(vi => vi.VideoGameVersions)
-                .Where(c => c.CategoryName.ToLower() == categoryName.ToLower())
-                .ToListAsync();
+          IQueryable<Category> query = _category
+            .Include(c => c.VideoGameInfos)
+            .ThenInclude(vi => vi.VideoGameVersions)
+            .Where(c => c.CategoryName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+
+    
+            var totalCount = await query.CountAsync();
+
+           // Pagination
+           var categories = await query
+             .Skip(paginationOptions.Offset)
+             .Take(paginationOptions.Limit)
+             .ToListAsync();
+
+          return (categories, totalCount);
         }
+
+
+   
+
+
 
         public async Task<bool> DeleteOneAsync(Category category)
         {

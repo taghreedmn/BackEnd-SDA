@@ -73,6 +73,7 @@ namespace FusionTech.src.DTO
             public string? GamePicturePath { get; set; }
 
             public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
+            public ICollection<RatedBy> RatedBies { get; set; }
         }
     }
 }

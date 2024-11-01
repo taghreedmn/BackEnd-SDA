@@ -20,6 +20,7 @@ global using static FusionTech.src.DTO.OrderedGamesDto;
 global using static FusionTech.src.DTO.PaymentDTO;
 global using static FusionTech.src.DTO.PersonDTO;
 global using static FusionTech.src.DTO.PublisherDTO;
+global using static FusionTech.src.DTO.RatedByDTO;
 global using static FusionTech.src.DTO.StoreDTO;
 global using static FusionTech.src.DTO.StoreEmployeeDTO;
 global using static FusionTech.src.DTO.StudioDTO;
