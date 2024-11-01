@@ -25,11 +25,19 @@ namespace FusionTech.src.Repository
                 .ToListAsync();
         }
 
-        public async Task<List<VideoGameInfo>> GetVideoGameRatingsByIdAsync(Guid id)
+        public async Task<List<VideoGameRatingReadDto>> GetVideoGameRatingsByIdAsync(Guid id)
         {
             return await _videoGameInfos
-                .Include(vi => vi.RatedBies)
                 .Where(vi => vi.VideoGameInfoId == id)
+                .SelectMany(vi => vi.RatedBies)
+                .Select(rb => new VideoGameRatingReadDto
+                {
+                    Rating = rb.Rating,
+                    Comment = rb.Comment,
+                    PersonId = rb.Customer.PersonId,
+                    PersonName = rb.Customer.PersonName,
+                    ProfilePicturePath = rb.Customer.ProfilePicturePath,
+                })
                 .ToListAsync();
         }
 

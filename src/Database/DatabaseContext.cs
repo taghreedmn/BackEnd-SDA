@@ -24,8 +24,6 @@ namespace FusionTech.src.Database
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
 
-      
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>().UseTptMappingStrategy();
@@ -39,7 +37,7 @@ namespace FusionTech.src.Database
 
             var SystemAdmin1 = new SystemAdmin
             {
-                PersonId = 609,
+                PersonId = 1,
                 PersonEmail = "Zayed1@mail.com",
                 PersonName = "Zayd Al-Nasser",
                 PersonPassword = hashedPassword,
@@ -50,13 +48,17 @@ namespace FusionTech.src.Database
                 ManageEmployees = true,
                 ManageStores = true,
                 ManageSystemAdmins = true,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
-            PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword10, out byte[] salt10);
+            PasswordUtils.HashPassword(
+                "SuperAdmin",
+                out string hashedPassword10,
+                out byte[] salt10
+            );
 
             var SystemAdmin2 = new SystemAdmin
             {
-                PersonId = 610,
+                PersonId = 2,
                 PersonEmail = "Tariq2@mail.com",
                 PersonName = "Tariq Hassan",
                 PersonPassword = hashedPassword10,
@@ -67,13 +69,17 @@ namespace FusionTech.src.Database
                 ManageEmployees = false,
                 ManageStores = false,
                 ManageSystemAdmins = false,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
-              PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword11, out byte[] salt11);
+            PasswordUtils.HashPassword(
+                "SuperAdmin",
+                out string hashedPassword11,
+                out byte[] salt11
+            );
 
             var SystemAdmin3 = new SystemAdmin
             {
-                PersonId = 611,
+                PersonId = 3,
                 PersonEmail = "Sara3@mail.com",
                 PersonName = "Sara Al-Hassan",
                 PersonPassword = hashedPassword11,
@@ -84,7 +90,7 @@ namespace FusionTech.src.Database
                 ManageEmployees = true,
                 ManageStores = true,
                 ManageSystemAdmins = false,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
 
             // Seed Category data
@@ -274,7 +280,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher3.PublisherId,
                 GamePicturePath =
-                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.png",
             };
 
             videoGamesInfoGuidHelper = "02b0bb70-4fc8-4c72-86a7-731f4332b9a5";
@@ -432,7 +438,7 @@ namespace FusionTech.src.Database
                 GamePicturePath =
                     $"http://localhost:5125/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
-            
+
             videoGamesInfoGuidHelper = "7fe582b8-0308-48d8-8173-800102aebcfb";
             var VideoGameInfo16 = new VideoGameInfo
             {
@@ -834,17 +840,17 @@ namespace FusionTech.src.Database
             var PersonIdCounter1 = new PersonIdCounter
             {
                 PersonIdCounterId = PersonType.SystemAdmin,
-                CurrentId = 0,
+                CurrentId = 3,
             };
             var PersonIdCounter2 = new PersonIdCounter
             {
                 PersonIdCounterId = PersonType.StoreEmployee,
-                CurrentId = 0,
+                CurrentId = 3,
             };
             var PersonIdCounter3 = new PersonIdCounter
             {
                 PersonIdCounterId = PersonType.Customer,
-                CurrentId = 0,
+                CurrentId = 4,
             };
 
             // Seed Supplier data
@@ -1054,7 +1060,7 @@ namespace FusionTech.src.Database
 
             var storeEmployee1 = new StoreEmployee
             {
-                PersonId = 704,
+                PersonId = 1001,
                 PersonEmail = "employeeAhmed1@hotmail.com",
                 PersonName = "Ahmed Al-Farsi",
                 PersonPassword = hashedPassword1,
@@ -1064,7 +1070,7 @@ namespace FusionTech.src.Database
                 Salary = 4827f,
                 YearsOfService = 5,
                 StoreId = Store1.StoreId,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
 
             PasswordUtils.HashPassword(
@@ -1075,7 +1081,7 @@ namespace FusionTech.src.Database
 
             var storeEmployee2 = new StoreEmployee
             {
-                PersonId = 705,
+                PersonId = 1002,
                 PersonEmail = "employeeOmer2@gmail.com",
                 PersonName = "Omar El-Mansour",
                 PersonPassword = hashedPassword2,
@@ -1085,7 +1091,7 @@ namespace FusionTech.src.Database
                 Salary = 12000f,
                 YearsOfService = 8,
                 StoreId = Store2.StoreId,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
             PasswordUtils.HashPassword(
                 "StoreEmployee",
@@ -1095,7 +1101,7 @@ namespace FusionTech.src.Database
 
             var storeEmployee3 = new StoreEmployee
             {
-                PersonId = 706,
+                PersonId = 1003,
                 PersonEmail = "employeeFatima3@gmail.com",
                 PersonName = "Fatima El-Amin",
                 PersonPassword = hashedPassword3,
@@ -1105,58 +1111,57 @@ namespace FusionTech.src.Database
                 Salary = 10000f,
                 YearsOfService = 6,
                 StoreId = Store1.StoreId,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
 
             //customer data
             PasswordUtils.HashPassword("Customer", out string hashedPassword8, out byte[] salt8);
             var customer1 = new Customer
             {
-                PersonId = 1007,
+                PersonId = 100001,
                 PersonEmail = "Miraaa1@gmail.com",
                 PersonName = "Mira Al-Sharif",
                 PersonPassword = hashedPassword8,
                 PersonPhoneNumber = "+966504071075",
                 salt = salt8,
                 Age = 35,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
             PasswordUtils.HashPassword("Customer", out string hashedPassword7, out byte[] salt7);
             var customer2 = new Customer
             {
-                PersonId = 1008,
+                PersonId = 100002,
                 PersonEmail = "NoorFarouq2@gmail.com",
                 PersonName = "Noor Al-Farouq",
                 PersonPassword = hashedPassword7,
                 PersonPhoneNumber = "+966504060980",
                 salt = salt7,
                 Age = 30,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
             PasswordUtils.HashPassword("Customer", out string hashedPassword6, out byte[] salt6);
             var customer3 = new Customer
             {
-                PersonId = 1009,
+                PersonId = 100003,
                 PersonEmail = "Khalidd3@gmail.com",
                 PersonName = "Khalid Al-Jabari",
                 PersonPassword = hashedPassword6,
                 PersonPhoneNumber = "+966503371005",
                 salt = salt6,
                 Age = 23,
-                ProfilePicturePath="",
+                ProfilePicturePath = "",
             };
             PasswordUtils.HashPassword("Customer", out string hashedPassword4, out byte[] salt4);
             var customer4 = new Customer
             {
-                PersonId = 1000,
+                PersonId = 100004,
                 PersonEmail = "YasinOm4@gmail.com",
                 PersonName = "Yasin Al-Omari",
                 PersonPassword = hashedPassword4,
                 PersonPhoneNumber = "+966504471195",
                 salt = salt4,
                 Age = 25,
-                ProfilePicturePath="",
-                
+                ProfilePicturePath = "",
             };
 
             //order data
@@ -1226,7 +1231,7 @@ namespace FusionTech.src.Database
             {
                 Id = Guid.Parse("3f9e2a1a-5c2d-4f3e-8b0f-4d5e6c7b8a9c"),
                 OrderId = order4.OrderId,
-                VideoGameVersionId = VideoGameVersion2.VideoGameVersionId,
+                VideoGameVersionId = VideoGameVersion3.VideoGameVersionId,
                 Quantity = 2,
             };
 
@@ -1235,30 +1240,28 @@ namespace FusionTech.src.Database
                 RatedById = Guid.Parse("e2f0c1a7-8c2c-4f51-9f4e-4a7f3b1c7e4b"),
                 Rating = 5f,
                 Comment = "very nice service ! thank you",
-                PersonId=customer1.PersonId,
-       
+                PersonId = customer1.PersonId,
+                VideoGameInfoId = VideoGameVersion2.VideoGameInfoId,
             };
             var Rate2 = new RatedBy
             {
                 RatedById = Guid.Parse("b9e7f8a1-5e9a-4e79-a0b7-6e5c6d2b5f9c"),
                 Rating = 4.5f,
                 Comment = "very nice game I like itt :)",
-                PersonId=customer2.PersonId
-        
-
+                PersonId = customer2.PersonId,
+                VideoGameInfoId = VideoGameVersion2.VideoGameInfoId,
             };
             var Rate3 = new RatedBy
             {
                 RatedById = Guid.Parse("16ed8a7d-4f1b-4ec7-b4ed-79c6b8ac7e0a"),
                 Rating = 4f,
-                Comment = "good games ! ",
-                PersonId=customer1.PersonId
+                Comment = "good game ! ",
+                PersonId = customer3.PersonId,
+                VideoGameInfoId = VideoGameVersion3.VideoGameInfoId,
             };
 
-
-
             // modelBuilder
-            modelBuilder.Entity<SystemAdmin>().HasData(SystemAdmin1,SystemAdmin2,SystemAdmin3);
+            modelBuilder.Entity<SystemAdmin>().HasData(SystemAdmin1, SystemAdmin2, SystemAdmin3);
             modelBuilder
                 .Entity<StoreEmployee>()
                 .HasData(storeEmployee1, storeEmployee2, storeEmployee3);
@@ -1343,7 +1346,6 @@ namespace FusionTech.src.Database
                 );
 
             modelBuilder.Entity<Store>().HasData(Store1, Store2);
-            
 
             modelBuilder
                 .Entity<Inventory>()
@@ -1402,8 +1404,6 @@ namespace FusionTech.src.Database
                     Supply19,
                     Supply20
                 );
-
-                
 
             modelBuilder
                 .Entity<Category>()
