@@ -21,66 +21,50 @@ namespace FusionTech.src.Controllers
             return Created($"api/v1/categories/{categoryCreated.CategoryId}", categoryCreated);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<CategoryDTO.CategoryListDto>> GetAllAsync([FromQuery] PaginationOptions paginationOptions)
+       [HttpGet]
+       public async Task<ActionResult<CategoryListDto>> GetAllAsync([FromQuery] PaginationOptions paginationOptions)
+       {
+            // Get paginated category list
+            var (categories, totalCount) = await _categoryService.GetAllAsync(paginationOptions);
+
+                // Map categories to detailed DTOs
+            var categoriesDto = categories.Select(c => new CategoryDetailedDto
+               {
+                   CategoryId = c.CategoryId,
+                   CategoryName = c.CategoryName,
+                   VideoGameInfos = c.VideoGameInfos.Select(v => new VideoGameInfoReadDto
+                   {
+                       VideoGameInfoId = v.VideoGameInfoId,
+                       GameName = v.GameName,
+                       Description = v.Description,
+                       YearOfRelease = v.YearOfRelease,
+                       TotalRating = v.TotalRating,
+                       GamePicturePath = v.GamePicturePath,
+                       VideoGameVersions = v.VideoGameVersions.Select(ver => new VideoGameVersionReadDto
+                       {
+                           VideoGameVersionId = ver.VideoGameVersionId,
+                           Price = ver.Price,
+                           GameConsoleId = ver.GameConsoleId
+                       }).ToList()
+                   }).ToList()
+               }).ToList();
+
+               // Create response DTO
+               var response = new CategoryListDto
+               {
+                   Categories = categoriesDto, 
+                   TotalCategory = totalCount
+               };
+
+               return Ok(response);
+           }
+
+        [HttpGet("{CategoryName}")]
+        public async Task<ActionResult<List<CategoryDetailedDto>>> GetCategoryDetailsByNameAsync([FromRoute] string CategoryName)
         {
-            var categoryList = await _categoryService.GetAllAsync(paginationOptions);
-            var totalCategory = await _categoryService.CountCategoryAsync();
-
-            var categoriesDto = categoryList.Select(c => new CategoryDTO.CategoryBasicDto
-            {
-                CategoryId = c.CategoryId,
-                CategoryName = c.CategoryName,
-            }).ToList();
-
-            var response = new CategoryDTO.CategoryListDto
-            {
-                Categories = categoriesDto,
-                TotalCategory = totalCategory
-            };
-
-            return Ok(response);
+            var category = await _categoryService.GetCategoryDetailsByNameAsync(CategoryName);
+            return Ok(category);
         }
-        [HttpGet("{categoryName}")]
-public async Task<ActionResult<CategoryListDto>> GetCategoryDetailsByNameAsync(
-    [FromRoute] string categoryName, 
-    [FromQuery] PaginationOptions paginationOptions)
-{
-    var (categoryDetails, totalCount) = await _categoryService.GetCategoryDetailsByNameAsync(categoryName, paginationOptions);
-
-    var response = new CategoryListDto
-    {
-        Categories = categoryDetails.Select(cd => new CategoryDTO.CategoryBasicDto
-        {
-            CategoryId = cd.CategoryId,
-            CategoryName = cd.CategoryName,
-        }).ToList(),
-        TotalCategory = totalCount
-    };
-
-    return Ok(response);
-}
-
-
-    //     [HttpGet("{categoryName}")]
-    //    public async Task<ActionResult<CategoryListDto>> GetCategoryDetailsByNameAsync(
-    //     [FromRoute] string categoryName, 
-    //     [FromQuery] PaginationOptions paginationOptions)
-    //    {
-    //        var (categoryDetails, totalCount) = await _categoryService.GetCategoryDetailsByNameAsync(categoryName, paginationOptions);
-
-    //        var response = new CategoryListDto
-    //       {
-    //          Categories = categoryDetails.Select(cd => new CategoryDTO.CategoryBasicDto
-    //          {
-    //              CategoryId = cd.CategoryId,
-    //              CategoryName = cd.CategoryName,
-    //          }).ToList(),
-    //              TotalCategory = totalCount
-    //      };
-
-    //       return Ok(response);
-    //    }
 
         [Authorize(Policy = "admin")]
         [HttpDelete("{Id}")]

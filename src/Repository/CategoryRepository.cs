@@ -19,37 +19,42 @@ namespace FusionTech.src.Repository
         }
 
         public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
-       {
-           IQueryable<Category> query = _category.Include(c => c.VideoGameInfos)
-                                                 .ThenInclude(vi => vi.VideoGameVersions);
-
-         // Search filtering
-        if (!string.IsNullOrEmpty(paginationOptions.Search))
         {
-            query = query.Where(c => c.CategoryName.Contains(paginationOptions.Search, StringComparison.OrdinalIgnoreCase));
+            IQueryable<Category> query = _category.Include(c => c.VideoGameInfos)
+                                                  .ThenInclude(vi => vi.VideoGameVersions);
+
+            // Search filtering
+            if (!string.IsNullOrEmpty(paginationOptions.Search))
+            {
+                query = query.Where(c => c.CategoryName.Contains(paginationOptions.Search, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Min and Max Price Filtering
+            if (paginationOptions.MinPrice.HasValue)
+            {
+                query = query.Where(c => c.VideoGameInfos
+                    .Any(vi => vi.VideoGameVersions
+                    .Any(v => v.Price >= paginationOptions.MinPrice.Value)));
+            }
+
+            if (paginationOptions.MaxPrice.HasValue)
+            {
+                query = query.Where(c => c.VideoGameInfos
+                    .Any(vi => vi.VideoGameVersions
+                    .Any(v => v.Price <= paginationOptions.MaxPrice.Value)));
+            }
+
+            // Count total categories for pagination
+            int totalCount = await query.CountAsync();
+
+            // Pagination
+            var categories = await query
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToListAsync();
+
+            return categories;
         }
-
-         // Min and Max Price Filtering
-        if (paginationOptions.MinPrice.HasValue)
-       {
-           query = query.Where(c => c.VideoGameInfos.Any(vi => vi.VideoGameVersions.Any(v => v.Price >= paginationOptions.MinPrice.Value)));
-       }
-    
-        if (paginationOptions.MaxPrice.HasValue)
-       {
-          query = query.Where(c => c.VideoGameInfos.Any(vi => vi.VideoGameVersions.Any(v => v.Price <= paginationOptions.MaxPrice.Value)));
-       }
-
-          // Pagination
-         var categories = await query
-            .Skip(paginationOptions.Offset)
-            .Take(paginationOptions.Limit)
-            .ToListAsync();
-
-         return categories;
-        }
-
-
         public async Task<int> CountAsync()
         {
             return await _category.CountAsync();
@@ -62,26 +67,10 @@ namespace FusionTech.src.Repository
                                   .FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
-
-        public async Task<(List<Category>, int)> GetCategoryDetailsByNameAsync(string categoryName, PaginationOptions paginationOptions)
+        public async Task<List<Category>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
-   
-              var normalizedCategoryName = categoryName.ToLowerInvariant();
-
-             IQueryable<Category> query = _category
-                 .Include(c => c.VideoGameInfos)
-                 .ThenInclude(vi => vi.VideoGameVersions)
-                 .Where(c => c.CategoryName.ToLower() == categoryName.ToLower());
-
-             var totalCount = await query.CountAsync();
-
-           // Pagination
-             var categories = await query
-                .Skip(paginationOptions.Offset)
-                .Take(paginationOptions.Limit)
-                .ToListAsync();
-
-             return (categories, totalCount);
+            return await _category
+            .Include(c => c.VideoGameInfos).ThenInclude(vi => vi.VideoGameVersions).Where(c => c.CategoryName.ToLower() == CategoryName.ToLower()).ToListAsync();
         }
 
         public async Task<bool> DeleteOneAsync(Category category)
@@ -104,16 +93,16 @@ namespace FusionTech.src.Repository
 
             if (existingCategory == null)
             {
-                return null; // Category not found
+                return null; 
             }
 
-            // Update only the fields that are not null
+            
             if (!string.IsNullOrEmpty(updatedFields.CategoryName))
             {
                 existingCategory.CategoryName = updatedFields.CategoryName;
             }
 
-            // Save the changes
+    
             await _databaseContext.SaveChangesAsync();
 
             return existingCategory;

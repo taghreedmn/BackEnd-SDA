@@ -11,18 +11,46 @@ namespace FusionTech.src.Services.category
             _mapper = mapper;
         }
 
-        public async Task<CategoryDTO.CategoryBasicDto> CreateOneAsync(CategoryCreateDto createDto)
+        public async Task<CategoryBasicDto> CreateOneAsync(CategoryCreateDto createDto)
         {
             var category = _mapper.Map<Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<CategoryDTO.CategoryBasicDto>(categoryCreated);
+            return _mapper.Map<CategoryBasicDto>(categoryCreated);
         }
+        
+        public async Task<(List<CategoryDTO.CategoryDetailedDto> Categories, int TotalCount)> GetAllAsync(PaginationOptions paginationOptions)
+       {
+           var categories = await _categoryRepository.GetAllAsync( paginationOptions); // Fetch all categories
 
-        public async Task<List<CategoryDTO.CategoryBasicDto>> GetAllAsync(PaginationOptions paginationOptions)
-        {
-            var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Category>, List<CategoryDTO.CategoryBasicDto>>(categoryList);
-        }
+           var totalCount = categories.Count; 
+           var pagedCategories = categories
+               .Skip(paginationOptions.Offset)
+               .Take(paginationOptions.Limit)
+               .ToList();
+
+           var categoryDtos = pagedCategories.Select(c => new CategoryDTO.CategoryDetailedDto
+           {
+               CategoryId = c.CategoryId,
+               CategoryName = c.CategoryName,
+               VideoGameInfos = c.VideoGameInfos.Select(v => new VideoGameInfoDTO.VideoGameInfoReadDto
+               {
+                   VideoGameInfoId = v.VideoGameInfoId,
+                   GameName = v.GameName,
+                   Description = v.Description,
+                   YearOfRelease = v.YearOfRelease,
+                   TotalRating = v.TotalRating,
+                   GamePicturePath = v.GamePicturePath,
+                   VideoGameVersions = v.VideoGameVersions.Select(ver => new VideoGameVersionDTO.VideoGameVersionReadDto
+                   {
+                       VideoGameVersionId = ver.VideoGameVersionId,
+                       Price = ver.Price,
+                       GameConsoleId = ver.GameConsoleId
+                   }).ToList()
+               }).ToList()
+           }).ToList();
+
+           return (categoryDtos, totalCount);
+       }
 
         public async Task<int> CountCategoryAsync()
         {
@@ -36,20 +64,18 @@ namespace FusionTech.src.Services.category
             {
                 throw CustomException.NotFound($"Category with ID {id} not found");
             }
-            return _mapper.Map<CategoryDetailedDto>(foundCategory);
+            return _mapper.Map<Category, CategoryDetailedDto>(foundCategory);
         }
 
-        public async Task<(List<CategoryDetailedDto> categories, int totalCount)> GetCategoryDetailsByNameAsync(string categoryName, PaginationOptions paginationOptions)
+        public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
-            var (foundCategory, totalCount) = await _categoryRepository.GetCategoryDetailsByNameAsync(categoryName, paginationOptions);
-
+            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
             if (foundCategory == null || foundCategory.Count == 0)
             {
-                throw CustomException.NotFound($"No categories found with the name {categoryName}");
+                throw CustomException.NotFound($"No categories found with the name {CategoryName}");
             }
-
             var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(foundCategory);
-            return (categoryLists, totalCount);
+            return categoryLists;
         }
 
         public async Task<bool> DeleteOneAsync(Guid id)

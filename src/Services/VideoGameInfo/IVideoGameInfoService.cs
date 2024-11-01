@@ -10,6 +10,6 @@ namespace FusionTech.src.Services.VideoGamesInfo
         Task<bool> DeleteAsync(Guid id);
         Task<bool> UpdateGameNameAsync(Guid id, string newGameName);
         Task<bool> UpdateYearOfReleaseAsync(Guid id, string newYearOfRelease);
-        //Task<bool> UpdateOnAsync(VideoGameInfoUpdateDto updatedVideoGameDto);
+       
     }
 }

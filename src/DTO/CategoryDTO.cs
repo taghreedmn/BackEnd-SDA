@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace FusionTech.src.DTO
 {
     public class CategoryDTO
@@ -20,7 +17,7 @@ namespace FusionTech.src.DTO
 
         public class CategoryListDto 
         {
-            public List<CategoryBasicDto> Categories { get; set; } = new List<CategoryBasicDto>();
+            public List<CategoryDetailedDto> Categories { get; set; } = new List<CategoryDetailedDto>();
             public int TotalCategory { get; set; }
         }
 
