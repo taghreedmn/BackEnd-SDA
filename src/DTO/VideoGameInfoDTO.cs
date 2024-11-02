@@ -54,6 +54,9 @@ namespace FusionTech.src.DTO
             public Guid PublisherId { get; set; }
 
             public string? GamePicturePath { get; set; }
+            
+            // retrieve a video game's details
+            public List<VideoGameVersionDTO.VideoGameVersionReadDto> VideoGameVersions { get; set; } = new List<VideoGameVersionDTO.VideoGameVersionReadDto>();
         }
 
         public class VideoGameDetailedDto
@@ -75,5 +78,7 @@ namespace FusionTech.src.DTO
             public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
             public ICollection<RatedBy> RatedBies { get; set; }
         }
+       
+
     }
 }

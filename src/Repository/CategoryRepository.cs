@@ -20,19 +20,53 @@ namespace FusionTech.src.Repository
 
         public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
         {
-            var result = _category.Include(v => v.VideoGameInfos).ThenInclude(vi => vi.VideoGameVersions).Where(c =>
-                c.CategoryName.ToLower().Contains(paginationOptions.Search.ToLower())
-            ); // Logic should be in Services (I think)
-            return await result
+            IQueryable<Category> query = _category.Include(c => c.VideoGameInfos)
+                                                  .ThenInclude(vi => vi.VideoGameVersions);
+
+            // Search filtering
+            if (!string.IsNullOrEmpty(paginationOptions.Search))
+            {
+                query = query.Where(c => c.CategoryName.Contains(paginationOptions.Search, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Min and Max Price Filtering
+            if (paginationOptions.MinPrice.HasValue)
+            {
+                query = query.Where(c => c.VideoGameInfos
+                    .Any(vi => vi.VideoGameVersions
+                    .Any(v => v.Price >= paginationOptions.MinPrice.Value)));
+            }
+
+            if (paginationOptions.MaxPrice.HasValue)
+            {
+                query = query.Where(c => c.VideoGameInfos
+                    .Any(vi => vi.VideoGameVersions
+                    .Any(v => v.Price <= paginationOptions.MaxPrice.Value)));
+            }
+
+            // Count total categories for pagination
+            int totalCount = await query.CountAsync();
+
+            // Pagination
+            var categories = await query
                 .Skip(paginationOptions.Offset)
                 .Take(paginationOptions.Limit)
                 .ToListAsync();
+
+            return categories;
+        }
+        public async Task<int> CountAsync()
+        {
+            return await _category.CountAsync();
         }
 
         public async Task<Category> GetByIdAsync(Guid id)
         {
-            return await _category.FindAsync(id);
+            return await _category.Include(c => c.VideoGameInfos)
+                                  .ThenInclude(vi => vi.VideoGameVersions)
+                                  .FirstOrDefaultAsync(c => c.CategoryId == id);
         }
+
         public async Task<List<Category>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
             return await _category
@@ -51,6 +85,27 @@ namespace FusionTech.src.Repository
             _category.Update(updateCategory);
             await _databaseContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<Category?> PatchOneAsync(Guid id, Category updatedFields)
+        {
+            var existingCategory = await GetByIdAsync(id);
+
+            if (existingCategory == null)
+            {
+                return null; 
+            }
+
+            
+            if (!string.IsNullOrEmpty(updatedFields.CategoryName))
+            {
+                existingCategory.CategoryName = updatedFields.CategoryName;
+            }
+
+    
+            await _databaseContext.SaveChangesAsync();
+
+            return existingCategory;
         }
     }
 }

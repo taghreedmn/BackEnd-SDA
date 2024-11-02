@@ -57,3 +57,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.IdentityModel.Tokens;
 global using Npgsql;
+global using System.Threading.Tasks;

@@ -11,21 +11,50 @@ namespace FusionTech.src.Services.category
             _mapper = mapper;
         }
 
-        public async Task<CategoryDTO.CategoryBasicDto> CreateOneAsync(
-          CategoryCreateDto createDto
-        )
+        public async Task<CategoryBasicDto> CreateOneAsync(CategoryCreateDto createDto)
         {
-            var category = _mapper.Map<CategoryCreateDto, Category>(createDto);
+            var category = _mapper.Map<Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Category, CategoryBasicDto>(categoryCreated);
+            return _mapper.Map<CategoryBasicDto>(categoryCreated);
         }
+        
+        public async Task<(List<CategoryDTO.CategoryDetailedDto> Categories, int TotalCount)> GetAllAsync(PaginationOptions paginationOptions)
+       {
+           var categories = await _categoryRepository.GetAllAsync( paginationOptions); // Fetch all categories
 
-        public async Task<List<CategoryBasicDto>> GetAllAsync(
-            PaginationOptions paginationOptions
-        )
+           var totalCount = categories.Count; 
+           var pagedCategories = categories
+               .Skip(paginationOptions.Offset)
+               .Take(paginationOptions.Limit)
+               .ToList();
+
+           var categoryDtos = pagedCategories.Select(c => new CategoryDTO.CategoryDetailedDto
+           {
+               CategoryId = c.CategoryId,
+               CategoryName = c.CategoryName,
+               VideoGameInfos = c.VideoGameInfos.Select(v => new VideoGameInfoDTO.VideoGameInfoReadDto
+               {
+                   VideoGameInfoId = v.VideoGameInfoId,
+                   GameName = v.GameName,
+                   Description = v.Description,
+                   YearOfRelease = v.YearOfRelease,
+                   TotalRating = v.TotalRating,
+                   GamePicturePath = v.GamePicturePath,
+                   VideoGameVersions = v.VideoGameVersions.Select(ver => new VideoGameVersionDTO.VideoGameVersionReadDto
+                   {
+                       VideoGameVersionId = ver.VideoGameVersionId,
+                       Price = ver.Price,
+                       GameConsoleId = ver.GameConsoleId
+                   }).ToList()
+               }).ToList()
+           }).ToList();
+
+           return (categoryDtos, totalCount);
+       }
+
+        public async Task<int> CountCategoryAsync()
         {
-            var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Category>, List<CategoryBasicDto>>(categoryList);
+            return await _categoryRepository.CountAsync();
         }
 
         public async Task<CategoryDetailedDto> GetByIdAsync(Guid id)
@@ -37,6 +66,7 @@ namespace FusionTech.src.Services.category
             }
             return _mapper.Map<Category, CategoryDetailedDto>(foundCategory);
         }
+
         public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName)
         {
             var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
@@ -55,8 +85,8 @@ namespace FusionTech.src.Services.category
             {
                 throw CustomException.NotFound($"Category with ID {id} not found");
             }
-            bool isDelete = await _categoryRepository.DeleteOneAsync(foundCategory);
-            if (!isDelete)
+            bool isDeleted = await _categoryRepository.DeleteOneAsync(foundCategory);
+            if (!isDeleted)
             {
                 throw CustomException.InternalError("Failed to delete the category");
             }
@@ -78,6 +108,5 @@ namespace FusionTech.src.Services.category
             }
             return true;
         }
-
     }
 }
