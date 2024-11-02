@@ -92,27 +92,28 @@ namespace FusionTech.src.Services.Customer
         public async Task<List<CustomerReadDto>> GetAllAsync(PaginationOptions paginationOptions)
         {
             var customers = await _customerRepo.GetAllAsync();
-            var filteredCustomers = customers
-                .Where(c =>
-                    c.PersonName.Contains(
-                        paginationOptions.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || c.PersonEmail.Contains(
-                        paginationOptions.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || (
-                        c.PersonPhoneNumber != null
-                        && c.PersonPhoneNumber.Contains(
+            if (paginationOptions.Search != null)
+                customers = customers
+                    .Where(c =>
+                        c.PersonName.Contains(
                             paginationOptions.Search,
                             StringComparison.OrdinalIgnoreCase
                         )
+                        || c.PersonEmail.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || (
+                            c.PersonPhoneNumber != null
+                            && c.PersonPhoneNumber.Contains(
+                                paginationOptions.Search,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                     )
-                )
-                .ToList();
+                    .ToList();
 
-            var paginatedCustomers = filteredCustomers
+            var paginatedCustomers = customers
                 .Skip(paginationOptions.Offset)
                 .Take(paginationOptions.Limit)
                 .ToList();
