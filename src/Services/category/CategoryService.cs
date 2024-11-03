@@ -110,3 +110,18 @@ namespace FusionTech.src.Services.category
         }
     }
 }
+        
+    //     public async Task<List<CategoryDetailedDto>> GetAllAsync(PaginationOptions paginationOptions)
+    //    {
+    //        var categories = await _categoryRepository.GetAllAsync( paginationOptions); // Fetch all categories
+
+    //        return _mapper.Map<List<Category>, List<CategoryDetailedDto>>(categories);
+
+        
+       
+
+        // public async Task<int> CountCategoryAsync()
+        // {
+        //     return await _categoryRepository.CountAsync();
+        // }
+

@@ -109,3 +109,46 @@ namespace FusionTech.src.Repository
         }
     }
 }
+
+        // public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
+        // {
+        //     var categories =_category.ToList();
+            
+        //     // IQueryable<Category> query = _category.Include(c => c.VideoGameInfos)
+        //     //                                       .ThenInclude(vi => vi.VideoGameVersions);
+
+        //     // Search filtering
+        //     if (!string.IsNullOrEmpty(paginationOptions.Search))
+        //     {
+        //         categories = categories
+        //              .Where(c => c.CategoryName.Contains(paginationOptions.Search, StringComparison.OrdinalIgnoreCase))
+        //              .ToList();
+        //     }
+
+        //    // Min and Max Price Filtering
+        //     if (paginationOptions.MinPrice.HasValue && paginationOptions.MinPrice > 0 )
+        //     {
+        //         categories = categories
+        //             .Where(c => c.VideoGameInfos
+        //             .Any(vi => vi.VideoGameVersions
+        //             .Any(v => v.Price >= paginationOptions.MinPrice)))
+        //             .ToList();
+        //     }
+
+        //    if (paginationOptions.MinPrice.HasValue && paginationOptions.MaxPrice < float.MaxValue)  
+        //     {
+        //         categories = categories
+        //             .Where(c => c.VideoGameInfos
+        //             .Any(vi => vi.VideoGameVersions
+        //             .Any(v => v.Price <= paginationOptions.MaxPrice)))
+        //             .ToList();
+        //     }
+
+        //     // Pagination
+        //       categories = categories
+        //         .Skip(paginationOptions.Offset)
+        //         .Take(paginationOptions.Limit)
+        //         .ToList();
+
+        //     return categories;
+        // }

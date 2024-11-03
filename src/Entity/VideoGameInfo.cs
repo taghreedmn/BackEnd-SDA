@@ -12,7 +12,6 @@ namespace FusionTech.src.Entity
         public ICollection<GameStudio> GameStudios { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
-         public ICollection<RatedBy> RatedBies { get; set; }
-        
+        public ICollection<RatedBy> RatedBies { get; set; }
     }
 }

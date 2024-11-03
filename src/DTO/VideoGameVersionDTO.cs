@@ -6,7 +6,7 @@ namespace FusionTech.src.DTO
         {
             public Guid VideoGameInfoId { get; set; }
             public Guid GameConsoleId { get; set; }
-            public double Price { get; set; }
+            public float Price { get; set; }
         }
 
         public class VideoGameVersionUpdateDto
@@ -20,7 +20,7 @@ namespace FusionTech.src.DTO
         {
             public Guid VideoGameVersionId { get; set; }
             public Guid VideoGameInfoId { get; set; }
-            public double Price { get; set; }
+            public float Price { get; set; }
             public Guid GameConsoleId { get; set; }
             // quantity = 5 -- Rating
         }

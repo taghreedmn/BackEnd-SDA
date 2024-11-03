@@ -79,6 +79,5 @@ namespace FusionTech.src.DTO
             public ICollection<RatedBy> RatedBies { get; set; }
         }
        
-
     }
 }
