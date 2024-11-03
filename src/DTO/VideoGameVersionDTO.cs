@@ -22,7 +22,13 @@ namespace FusionTech.src.DTO
             public Guid VideoGameInfoId { get; set; }
             public double Price { get; set; }
             public Guid GameConsoleId { get; set; }
-            // quantity = 5 -- Rating
+        }
+
+        public class VideoGameVersionSimpleReadDto
+        {
+            public Guid VideoGameVersionId { get; set; }
+            public double Price { get; set; }
+            public Guid GameConsoleId { get; set; }
         }
     }
 }

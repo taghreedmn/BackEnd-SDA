@@ -2,11 +2,17 @@ namespace FusionTech.src.Utils
 {
     public class PaginationOptions
     {
-       public int Limit { get; set; } = 2;
-       public int Offset { get; set; } = 0;
-       public string? Search { get; set; } = null;
-       public float? MinPrice { get; set; } = 0; 
-       public float? MaxPrice { get; set; } = 10000; 
-    }
+        public int Limit { get; set; } = 10;
+        public int Offset { get; set; } = 0;
+        public string? Search { get; set; }
 
+        public void IsValid()
+        {
+            if (Limit <= 0)
+                throw CustomException.InternalError("Limit must be greater than zero.");
+
+            if (Offset < 0)
+                throw CustomException.InternalError("Offset cannot be negative.");
+        }
+    }
 }
