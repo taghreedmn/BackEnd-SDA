@@ -3,7 +3,10 @@ namespace FusionTech.src.Services.category
     public interface ICategoryService
     {
         Task<CategoryBasicDto> CreateOneAsync(CategoryCreateDto createDto);
-        Task<(List<CategoryDTO.CategoryDetailedDto> Categories, int TotalCount)> GetAllAsync(PaginationOptions paginationOptions);
+        Task<List<CategoryBasicDto>> GetAllAsync(PaginationOptions paginationOptions);
+        Task<(List<CategoryFullDetailedDto> Categories, int TotalCount)> GetAllDetailedAsync(
+            SearchParameters searchParameters
+        );
         Task<CategoryDetailedDto> GetByIdAsync(Guid id);
         Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName);
         Task<bool> DeleteOneAsync(Guid id);

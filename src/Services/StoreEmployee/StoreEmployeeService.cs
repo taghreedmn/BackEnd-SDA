@@ -69,27 +69,28 @@ namespace FusionTech.src.Services.StoreEmployee
         )
         {
             var storeEmployees = await _storeEmployeeRepo.GetAllAsync();
-            var filteredStoreEmployees = storeEmployees
-                .Where(c =>
-                    c.PersonName.Contains(
-                        paginationOptions.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || c.PersonEmail.Contains(
-                        paginationOptions.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || (
-                        c.PersonPhoneNumber != null
-                        && c.PersonPhoneNumber.Contains(
+            if (paginationOptions.Search != null)
+                storeEmployees = storeEmployees
+                    .Where(c =>
+                        c.PersonName.Contains(
                             paginationOptions.Search,
                             StringComparison.OrdinalIgnoreCase
                         )
+                        || c.PersonEmail.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || (
+                            c.PersonPhoneNumber != null
+                            && c.PersonPhoneNumber.Contains(
+                                paginationOptions.Search,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                     )
-                )
-                .ToList();
+                    .ToList();
 
-            var paginatedStoreEmployees = filteredStoreEmployees
+            var paginatedStoreEmployees = storeEmployees
                 .Skip(paginationOptions.Offset)
                 .Take(paginationOptions.Limit)
                 .ToList();

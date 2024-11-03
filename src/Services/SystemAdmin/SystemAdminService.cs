@@ -91,27 +91,28 @@ namespace FusionTech.src.Services.SystemAdmin
         public async Task<List<SystemAdminReadDto>> GetAllAsync(PaginationOptions paginationOptions)
         {
             var systemAdmins = await _systemAdminRepository.GetAllAsync();
-            var filteredSystemAdmins = systemAdmins
-                .Where(c =>
-                    c.PersonName.Contains(
-                        paginationOptions.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || c.PersonEmail.Contains(
-                        paginationOptions.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                    || (
-                        c.PersonPhoneNumber != null
-                        && c.PersonPhoneNumber.Contains(
+            if (paginationOptions.Search != null)
+                systemAdmins = systemAdmins
+                    .Where(c =>
+                        c.PersonName.Contains(
                             paginationOptions.Search,
                             StringComparison.OrdinalIgnoreCase
                         )
+                        || c.PersonEmail.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || (
+                            c.PersonPhoneNumber != null
+                            && c.PersonPhoneNumber.Contains(
+                                paginationOptions.Search,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                     )
-                )
-                .ToList();
+                    .ToList();
 
-            var paginatedSystemAdmins = filteredSystemAdmins
+            var paginatedSystemAdmins = systemAdmins
                 .Skip(paginationOptions.Offset)
                 .Take(paginationOptions.Limit)
                 .ToList();

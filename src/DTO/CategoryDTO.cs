@@ -9,23 +9,32 @@ namespace FusionTech.src.DTO
             public string CategoryName { get; set; } = string.Empty;
         }
 
-        public class CategoryBasicDto 
+        public class CategoryBasicDto
         {
             public Guid CategoryId { get; set; }
             public string CategoryName { get; set; } = string.Empty;
         }
 
-        public class CategoryListDto 
+        public class CategoryListDto
         {
-            public List<CategoryDetailedDto> Categories { get; set; } = new List<CategoryDetailedDto>();
+            public List<CategoryFullDetailedDto> Categories { get; set; } =
+                new List<CategoryFullDetailedDto>();
             public int TotalCategory { get; set; }
+        }
+
+        public class CategoryFullDetailedDto
+        {
+            public Guid CategoryId { get; set; }
+            public string CategoryName { get; set; } = string.Empty;
+            public ICollection<VideoGameDetailedDto> VideoGameInfos { get; set; } =
+                new List<VideoGameDetailedDto>();
         }
 
         public class CategoryDetailedDto
         {
             public Guid CategoryId { get; set; }
             public string CategoryName { get; set; } = string.Empty;
-            public ICollection<VideoGameInfoReadDto> VideoGameInfos { get; set; } = new List<VideoGameInfoReadDto>();
+            public ICollection<VideoGameInfoReadDto> VideoGameInfos { get; set; }
         }
 
         public class CategoryUpdateDto
