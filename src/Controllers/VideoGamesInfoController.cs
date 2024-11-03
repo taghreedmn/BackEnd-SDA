@@ -11,7 +11,7 @@ namespace FusionTech.src.Controllers
             _videoGameInfoService = videoGameInfoService;
         }
 
-       // Get all video games
+        // Get all video games
         [HttpGet]
         public async Task<ActionResult> GetVideoGames([FromQuery] SearchParameters searchParameters)
         {
@@ -91,6 +91,5 @@ namespace FusionTech.src.Controllers
             );
             return NoContent();
         }
-
     }
 }

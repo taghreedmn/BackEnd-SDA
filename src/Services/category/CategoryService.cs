@@ -17,40 +17,71 @@ namespace FusionTech.src.Services.category
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
             return _mapper.Map<CategoryBasicDto>(categoryCreated);
         }
-        
-        public async Task<(List<CategoryDTO.CategoryDetailedDto> Categories, int TotalCount)> GetAllAsync(PaginationOptions paginationOptions)
-       {
-           var categories = await _categoryRepository.GetAllAsync( paginationOptions); // Fetch all categories
 
-           var totalCount = categories.Count; 
-           var pagedCategories = categories
-               .Skip(paginationOptions.Offset)
-               .Take(paginationOptions.Limit)
-               .ToList();
+        public async Task<List<CategoryBasicDto>> GetAllAsync(PaginationOptions paginationOptions)
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(paginationOptions.Search))
+                categories = categories
+                    .Where(c =>
+                        c.CategoryName.Contains(
+                            paginationOptions.Search,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    .ToList();
 
-           var categoryDtos = pagedCategories.Select(c => new CategoryDTO.CategoryDetailedDto
-           {
-               CategoryId = c.CategoryId,
-               CategoryName = c.CategoryName,
-               VideoGameInfos = c.VideoGameInfos.Select(v => new VideoGameInfoDTO.VideoGameInfoReadDto
-               {
-                   VideoGameInfoId = v.VideoGameInfoId,
-                   GameName = v.GameName,
-                   Description = v.Description,
-                   YearOfRelease = v.YearOfRelease,
-                   TotalRating = v.TotalRating,
-                   GamePicturePath = v.GamePicturePath,
-                   VideoGameVersions = v.VideoGameVersions.Select(ver => new VideoGameVersionDTO.VideoGameVersionReadDto
-                   {
-                       VideoGameVersionId = ver.VideoGameVersionId,
-                       Price = ver.Price,
-                       GameConsoleId = ver.GameConsoleId
-                   }).ToList()
-               }).ToList()
-           }).ToList();
+            var pagedCategories = categories
+                .Skip(paginationOptions.Offset)
+                .Take(paginationOptions.Limit)
+                .ToList();
 
-           return (categoryDtos, totalCount);
-       }
+            return _mapper.Map<List<Category>, List<CategoryBasicDto>>(pagedCategories);
+        }
+
+        public async Task<(
+            List<CategoryFullDetailedDto> Categories,
+            int TotalCount
+        )> GetAllDetailedAsync(SearchParameters searchParameters)
+        {
+            var categories = await _categoryRepository.GetAllDetailedAsync(searchParameters); // Fetch all categories
+
+            var totalCount = categories.Count;
+            var pagedCategories = categories
+                .Skip(searchParameters.Offset)
+                .Take(searchParameters.Limit)
+                .ToList();
+
+            var categoryDtos = pagedCategories
+                .Select(c => new CategoryFullDetailedDto
+                {
+                    CategoryId = c.CategoryId,
+                    CategoryName = c.CategoryName,
+                    VideoGameInfos = c
+                        .VideoGameInfos.Select(v => new VideoGameDetailedDto
+                        {
+                            VideoGameInfoId = v.VideoGameInfoId,
+                            GameName = v.GameName,
+                            Description = v.Description,
+                            YearOfRelease = v.YearOfRelease,
+                            TotalRating = v.TotalRating,
+                            GamePicturePath = v.GamePicturePath,
+                            PublisherId = v.PublisherId,
+                            VideoGameVersions = v
+                                .VideoGameVersions.Select(ver => new VideoGameVersionSimpleReadDto
+                                {
+                                    VideoGameVersionId = ver.VideoGameVersionId,
+                                    Price = ver.Price,
+                                    GameConsoleId = ver.GameConsoleId,
+                                })
+                                .ToList(),
+                        })
+                        .ToList(),
+                })
+                .ToList();
+
+            return (categoryDtos, totalCount);
+        }
 
         public async Task<int> CountCategoryAsync()
         {
@@ -67,14 +98,20 @@ namespace FusionTech.src.Services.category
             return _mapper.Map<Category, CategoryDetailedDto>(foundCategory);
         }
 
-        public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName)
+        public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(
+            string CategoryName
+        )
         {
-            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
+            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(
+                CategoryName
+            );
             if (foundCategory == null || foundCategory.Count == 0)
             {
                 throw CustomException.NotFound($"No categories found with the name {CategoryName}");
             }
-            var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(foundCategory);
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(
+                foundCategory
+            );
             return categoryLists;
         }
 

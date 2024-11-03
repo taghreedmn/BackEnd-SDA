@@ -79,7 +79,7 @@ namespace FusionTech.src.Services.VideoGamesInfo
             videoGameList = videoGameList
                 .Where(a =>
                     a.GameName!.Contains(
-                        searchParameters.Title!,
+                        searchParameters.Search ?? string.Empty,
                         StringComparison.OrdinalIgnoreCase
                     )
                 )

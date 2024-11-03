@@ -211,6 +211,7 @@ namespace FusionTech.src.Utils
 
             // VideoGameVersion mappings
             CreateMap<VideoGameVersion, VideoGameVersionReadDto>();
+            CreateMap<VideoGameVersion, VideoGameVersionSimpleReadDto>();
             CreateMap<VideoGameVersionCreateDto, VideoGameVersion>();
             CreateMap<VideoGameVersionUpdateDto, VideoGameVersion>()
                 .ForAllMembers(opts =>
