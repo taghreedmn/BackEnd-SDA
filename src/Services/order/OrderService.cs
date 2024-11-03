@@ -4,16 +4,19 @@ namespace FusionTech.src.Services.order
     {
         protected readonly OrderRepository _orderRepository;
         protected readonly VideoGameVersionRepository _videoGameVersionRepository;
+        protected readonly InventoryRepository _inventoryRepository;
         protected readonly IMapper _mapper;
 
         public OrderService(
             OrderRepository orderRepository,
             VideoGameVersionRepository videoGameVersionRepository,
+            InventoryRepository inventoryRepository,
             IMapper mapper
         )
         {
             _orderRepository = orderRepository;
             _videoGameVersionRepository = videoGameVersionRepository;
+            _inventoryRepository = inventoryRepository;
             _mapper = mapper;
         }
 
@@ -25,11 +28,15 @@ namespace FusionTech.src.Services.order
 
             foreach (var orderedGameDTO in createDto.OrderedGames)
             {
-                var videoGameVersion = await _videoGameVersionRepository.GetVersionByIdAsync(orderedGameDTO.VideoGameVersionID);
-                
+                var videoGameVersion = await _videoGameVersionRepository.GetVersionByIdAsync(
+                    orderedGameDTO.VideoGameVersionID
+                );
+
                 if (videoGameVersion == null)
                 {
-                    throw CustomException.NotFound($"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found.");
+                    throw CustomException.NotFound(
+                        $"Video game version with ID {orderedGameDTO.VideoGameVersionID} not found."
+                    );
                 }
 
                 if (orderedGameDTO.Quantity <= 0)
@@ -39,12 +46,32 @@ namespace FusionTech.src.Services.order
 
                 totalPrice += videoGameVersion.Price * orderedGameDTO.Quantity;
 
-                orderedGames.Add(new OrderedGames
+                orderedGames.Add(
+                    new OrderedGames
+                    {
+                        OrderId = orderId,
+                        VideoGameVersionId = videoGameVersion.VideoGameVersionId,
+                        Quantity = orderedGameDTO.Quantity,
+                    }
+                );
+                var inventory =
+                    await _inventoryRepository.GetByIdAsync(
+                        createDto.StoreId,
+                        videoGameVersion.VideoGameVersionId
+                    )
+                    ?? throw CustomException.NotFound(
+                        $"Inventory for store ID {createDto.StoreId} and video game version ID {videoGameVersion.VideoGameVersionId} not found."
+                    );
+
+                if (inventory.GameQuantity < orderedGameDTO.Quantity)
                 {
-                    OrderId = orderId,
-                    VideoGameVersionId = videoGameVersion.VideoGameVersionId,
-                    Quantity = orderedGameDTO.Quantity,
-                });
+                    throw CustomException.BadRequest(
+                        $"Insufficient quantity for video game version with ID {orderedGameDTO.VideoGameVersionID}. Available quantity: {inventory.GameQuantity}"
+                    );
+                }
+
+                inventory.GameQuantity -= orderedGameDTO.Quantity;
+                await _inventoryRepository.UpdateOnAsync(inventory);
             }
 
             var order = new Order

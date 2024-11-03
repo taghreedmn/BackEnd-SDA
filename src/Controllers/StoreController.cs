@@ -13,7 +13,7 @@ namespace FusionTech.src.Controllers
 
         // Creates a new store
         [HttpPost]
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         public async Task<ActionResult<StoreReadDto>> CreateOne([FromBody] StoreCreateDto createDto)
         {
             var storeCreated = await _storeService.CreateOneAsync(createDto);
@@ -30,14 +30,14 @@ namespace FusionTech.src.Controllers
 
         // Retrieves a store by ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<StoreReadDto>> GetStoreById([FromRoute] Guid id)
+        public async Task<ActionResult<StoreDetailedReadDto>> GetStoreById([FromRoute] Guid id)
         {
             var store = await _storeService.GetByIdAsync(id);
             return Ok(store);
         }
 
         // Updates a store by ID
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateStore(
             [FromRoute] Guid id,
@@ -54,7 +54,7 @@ namespace FusionTech.src.Controllers
         }
 
         // Deletes a store by ID
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteStore([FromRoute] Guid id)
         {
