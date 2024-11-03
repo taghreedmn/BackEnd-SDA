@@ -116,15 +116,16 @@ namespace FusionTech.src.Services.VideoGamesInfo
             return _mapper.Map<VideoGameInfo, VideoGameDetailedDto>(foundGameInfo);
         }
 
-        public async Task<List<VideoGameDetailedDto>> GetVideoGameVersionByIdAsync(Guid id)
+        public async Task<VideoGameDetailedDto> GetVideoGameVersionByIdAsync(Guid id)
         {
             var foundGameInfo = await _videoGameInfoRepo.GetVideoGameVersionByIdAsync(id);
-            if (foundGameInfo == null || foundGameInfo.Count == 0)
+            if (foundGameInfo == null || !foundGameInfo.Any())
             {
                 throw CustomException.NotFound($"No video game versions found for ID {id}.");
             }
-            return _mapper.Map<List<VideoGameInfo>, List<VideoGameDetailedDto>>(foundGameInfo);
+            return _mapper.Map<VideoGameInfo, VideoGameDetailedDto>(foundGameInfo.First());
         }
+
 
         public async Task<List<VideoGameRatingReadDto>> GetVideoGameRatingsByIdAsync(Guid id)
         {
