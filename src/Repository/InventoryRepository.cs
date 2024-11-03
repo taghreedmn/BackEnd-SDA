@@ -11,9 +11,21 @@ namespace FusionTech.src.Repository
             _Inventory = databaseContext.Set<Inventory>();
         }
 
-        public async Task<Inventory> GetByIdAsync(Guid id)
+        public async Task<Inventory?> GetByIdAsync(Guid storeId, Guid videoGameVersionId)
         {
-            return await _Inventory.FindAsync(id);
+            return await _Inventory.FirstOrDefaultAsync(i =>
+                i.StoreId == storeId && i.VideoGameVersionId == videoGameVersionId
+            );
+        }
+
+        public async Task<Guid?> GetStoreIdByVideoGameVersionId(Guid videoGameVersionId)
+        {
+            var storeId = await _Inventory
+                .Where(i => i.VideoGameVersionId == videoGameVersionId)
+                .Select(i => i.StoreId)
+                .FirstOrDefaultAsync();
+
+            return storeId;
         }
 
         public async Task<Inventory> CreateOneAsync(Inventory newInventory)
@@ -37,7 +49,6 @@ namespace FusionTech.src.Repository
 
         public async Task<bool> DeleteOnAsync(Inventory inventory)
         {
-
             _Inventory.Remove(inventory);
             await _databaseContext.SaveChangesAsync();
             return true;

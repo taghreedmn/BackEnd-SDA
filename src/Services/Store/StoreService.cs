@@ -24,14 +24,14 @@ namespace FusionTech.src.Service.Store
             return _mapper.Map<List<StoreReadDto>>(storeList);
         }
 
-        public async Task<StoreReadDto> GetByIdAsync(Guid id)
+        public async Task<StoreDetailedReadDto> GetByIdAsync(Guid id)
         {
             var foundStore = await _storeRepo.GetByIdAsync(id);
             if (foundStore == null)
             {
                 throw CustomException.NotFound("Store not found");
             }
-            return _mapper.Map<StoreReadDto>(foundStore);
+            return _mapper.Map<StoreDetailedReadDto>(foundStore);
         }
 
         public async Task<bool> UpdateOneAsync(StoreUpdateDto storeUpdateDto)

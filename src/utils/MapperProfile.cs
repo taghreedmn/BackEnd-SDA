@@ -84,7 +84,7 @@ namespace FusionTech.src.Utils
 
             //inventory
             CreateMap<Inventory, InventoryReadDto>();
-            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
+            CreateMap<InventoryUpdateDTO, Inventory>();
             CreateMap<InventoryCreateDto, Inventory>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
@@ -122,14 +122,6 @@ namespace FusionTech.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
-            //inventory
-            CreateMap<Inventory, InventoryReadDto>();
-            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
-            CreateMap<InventoryCreateDto, Inventory>()
-                .ForAllMembers(opts =>
-                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                );
-
             // Supplier mappings
             CreateMap<Supplier, SupplierReadDto>();
             CreateMap<SupplierCreateDto, Supplier>();
@@ -147,14 +139,6 @@ namespace FusionTech.src.Utils
             CreateMap<GameStudio, StudioReadDTO>();
             CreateMap<StudioUpdateDTO, GameStudio>();
             CreateMap<StudioCreateDTO, GameStudio>()
-                .ForAllMembers(opts =>
-                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                );
-
-            //inventory
-            CreateMap<Inventory, InventoryReadDto>();
-            CreateMap<InventoryModifyGameQuantityDTO, Inventory>();
-            CreateMap<InventoryCreateDto, Inventory>()
                 .ForAllMembers(opts =>
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
@@ -177,6 +161,7 @@ namespace FusionTech.src.Utils
 
             // Store mappings
             CreateMap<Store, StoreReadDto>();
+            CreateMap<Store, StoreDetailedReadDto>();
             CreateMap<StoreCreateDto, Store>();
             CreateMap<StoreUpdateDto, Store>()
                 .ForAllMembers(opts =>

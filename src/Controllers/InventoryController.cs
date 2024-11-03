@@ -11,7 +11,7 @@ namespace FusionTech.src.Controllers
             _inventoryService = inventoryService;
         }
 
-        // Retrieves all inventory Games with pagination
+        // TODO Retrieves all inventory Games with pagination
         [HttpGet]
         public async Task<ActionResult<List<InventoryReadDto>>> GetAllItems()
         {
@@ -21,9 +21,11 @@ namespace FusionTech.src.Controllers
 
         // Retrieves an inventory Game by ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<InventoryReadDto>> GetItemById([FromRoute] Guid id)
+        public async Task<ActionResult<InventoryReadDto>> GetStoreIdByVideoGameVersionId(
+            [FromRoute] Guid id
+        )
         {
-            var inventoryItem = await _inventoryService.GetGameByIdAsync(id);
+            var inventoryItem = await _inventoryService.GetStoreIdByVideoGameVersionId(id);
             if (inventoryItem == null)
             {
                 return NotFound();
@@ -45,12 +47,12 @@ namespace FusionTech.src.Controllers
 
         // Adds a game to the inventory
         [HttpPost]
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         public async Task<ActionResult> AddGameToInventory(
-            [FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto
+            [FromBody] InventoryUpdateDTO inventoryUpdateDTO
         )
         {
-            var gameAdded = await _inventoryService.AddGameAsync(modifyGameQuantityDto);
+            var gameAdded = await _inventoryService.AddGameAsync(inventoryUpdateDTO);
             if (!gameAdded)
             {
                 return NotFound();
@@ -60,12 +62,12 @@ namespace FusionTech.src.Controllers
 
         // Removes a game from the inventory
         [HttpDelete]
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         public async Task<ActionResult> RemoveGameFromInventory(
-            [FromBody] InventoryModifyGameQuantityDTO modifyGameQuantityDto
+            [FromBody] InventoryUpdateDTO inventoryUpdateDTO
         )
         {
-            var gameRemoved = await _inventoryService.RemoveGameAsync(modifyGameQuantityDto);
+            var gameRemoved = await _inventoryService.RemoveGameAsync(inventoryUpdateDTO);
             if (!gameRemoved)
             {
                 return NotFound();

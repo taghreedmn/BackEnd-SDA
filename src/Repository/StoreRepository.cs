@@ -12,9 +12,15 @@ namespace FusionTech.src.Repository
         }
 
         // Get store by ID
-        public async Task<Store> GetByIdAsync(Guid id)
+        public async Task<Store?> GetByIdAsync(Guid id)
         {
-            return await _Store.FindAsync(id);
+            var store = await _Store
+                .Include(s => s.storeEmployees)
+                .Include(s => s.Orders)
+                .Include(s => s.Inventories)
+                .FirstOrDefaultAsync(s => s.StoreId == id);
+
+            return store ?? null;
         }
 
         // Create a new store
@@ -48,4 +54,3 @@ namespace FusionTech.src.Repository
         }
     }
 }
-   

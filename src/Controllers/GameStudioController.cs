@@ -21,7 +21,7 @@ namespace FusionTech.src.Controllers
         //1-Create Studio:
 
         [HttpPost]
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         public async Task<ActionResult<StudioReadDTO>> CreateOneAsync(StudioCreateDTO createDTO)
         {
             var studioCreated = await _studioService.CreateOneAsync(createDTO);
@@ -30,7 +30,7 @@ namespace FusionTech.src.Controllers
 
         //2-update Studio:
         [HttpPut("{id}")]
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> UpdateAsync(Guid id, StudioUpdateDTO studioName)
         {
             var updated = await _studioService.UpdateAsync(id, studioName);
@@ -59,7 +59,7 @@ namespace FusionTech.src.Controllers
 
         //5-delete Studio by id
         [HttpDelete("{id}")]
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         public async Task<ActionResult<bool>> DeleteId(Guid id)
         {
             var foundSudio = await _studioService.GetIdAsync(id);

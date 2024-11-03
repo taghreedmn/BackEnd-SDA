@@ -31,6 +31,8 @@ namespace FusionTech.src.Database
 
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Inventory>().HasKey(i => new { i.StoreId, i.VideoGameVersionId });
+
             // Seed Super Admin
             // this is an extremly sensitive information, it should be removed in a real world scenario.
             PasswordUtils.HashPassword("SuperAdmin", out string hashedPassword, out byte[] salt);
@@ -148,7 +150,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Deck Nine Games",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
             studioGuidHelper = "8720de28-1bf5-49ad-b272-ddfee747f22c";
@@ -156,7 +159,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Telltale Games",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
             };
 
             studioGuidHelper = "0b4ad2e6-b78c-47a8-bf70-fb667cb7a138";
@@ -164,7 +168,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Feral Interactive",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
             studioGuidHelper = "bbd8f143-d7e1-41ef-9702-9bfb27567b80";
@@ -172,7 +177,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Codemaster",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
             studioGuidHelper = "86b47e62-089e-4f3e-b9c4-f29ea6720fd0";
@@ -180,7 +186,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Crystal Dynamics",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
             studioGuidHelper = "bfe21050-cd59-4feb-ab5e-459031e4b3f3";
@@ -188,7 +195,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Avalanche Studios",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
             studioGuidHelper = "5502bbf3-535e-4042-85b8-052b35594542";
@@ -196,7 +204,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "IO Interactive",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
             };
 
             studioGuidHelper = "cf04439e-6b5d-406f-b2e1-a5616a3aee8a";
@@ -204,7 +213,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Skybound Entertainment",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.png",
             };
 
             studioGuidHelper = "727cffb5-6ba3-4a56-a1eb-fe1962c8f044";
@@ -212,7 +222,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Liquid Entertainment",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
             };
 
             studioGuidHelper = "9fc928ce-aa2a-4e7b-816d-b3468ea552ed";
@@ -220,7 +231,8 @@ namespace FusionTech.src.Database
             {
                 GameStudioId = Guid.Parse(studioGuidHelper),
                 StudioName = "Blue Omega Entertainment",
-                StudioPicturePath = $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
+                StudioPicturePath =
+                    $"http://localhost:5125/images/Studios/{studioGuidHelper}/{studioGuidHelper}.jpg",
             };
 
             var publisherGuidHelper = "12ba59b8-6c30-4864-9d48-0f95bd278b40";
@@ -229,7 +241,8 @@ namespace FusionTech.src.Database
                 PublisherId = Guid.Parse(publisherGuidHelper), //action
                 PublisherName = "Square Enix",
                 PublisherEmail = "creators@us.square-enix.com",
-                PublisherPicturePath = $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.jpg",
+                PublisherPicturePath =
+                    $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.jpg",
             };
             publisherGuidHelper = "f5ea9a66-8a49-4f1f-ae5d-09ce38a7c80d";
             var Publisher2 = new Publisher
@@ -237,7 +250,8 @@ namespace FusionTech.src.Database
                 PublisherId = Guid.Parse(publisherGuidHelper),
                 PublisherName = "Telltale Games",
                 PublisherEmail = " support@telltalegames.com", // adventure and action
-                PublisherPicturePath = $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.jpg",
+                PublisherPicturePath =
+                    $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.jpg",
             };
             publisherGuidHelper = "df5d8791-98b3-445d-8120-07b33695da10";
             var Publisher3 = new Publisher
@@ -245,8 +259,8 @@ namespace FusionTech.src.Database
                 PublisherId = Guid.Parse(publisherGuidHelper),
                 PublisherName = "Codemasters",
                 PublisherEmail = " help@codemasters.com", //race
-                PublisherPicturePath = $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.png",
-
+                PublisherPicturePath =
+                    $"http://localhost:5125/images/Publishers/{publisherGuidHelper}/{publisherGuidHelper}.png",
             };
 
             var videoGamesInfoGuidHelper = "7248c5a6-49e0-4f88-be50-8d87a54c938f";
@@ -689,84 +703,84 @@ namespace FusionTech.src.Database
 
             var Inventory1 = new Inventory
             {
-                InventoryId = Guid.Parse("fd76ef5f-4ff4-4c64-9766-693e38b9e517"),
+                // InventoryId = Guid.Parse("fd76ef5f-4ff4-4c64-9766-693e38b9e517"),
                 VideoGameVersionId = VideoGameVersion1.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 250,
             };
             var Inventory2 = new Inventory
             {
-                InventoryId = Guid.Parse("1c8072f0-54d8-4a45-a5ef-b6e593bbf52f"),
+                // InventoryId = Guid.Parse("1c8072f0-54d8-4a45-a5ef-b6e593bbf52f"),
                 VideoGameVersionId = VideoGameVersion2.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 150,
             };
             var Inventory3 = new Inventory
             {
-                InventoryId = Guid.Parse("7d3f8f53-4c21-4e9f-a1b7-4a25e9f479a5"),
+                // InventoryId = Guid.Parse("7d3f8f53-4c21-4e9f-a1b7-4a25e9f479a5"),
                 VideoGameVersionId = VideoGameVersion3.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 50,
             };
             var Inventory4 = new Inventory
             {
-                InventoryId = Guid.Parse("42e1e9c0-ea4b-49af-9a92-e6c32b708a75"),
+                // InventoryId = Guid.Parse("42e1e9c0-ea4b-49af-9a92-e6c32b708a75"),
                 VideoGameVersionId = VideoGameVersion4.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 350,
             };
             var Inventory5 = new Inventory
             {
-                InventoryId = Guid.Parse("c3c22e9c-1f78-4e26-9c80-31f4e7a2380e"),
+                // InventoryId = Guid.Parse("c3c22e9c-1f78-4e26-9c80-31f4e7a2380e"),
                 VideoGameVersionId = VideoGameVersion5.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 300,
             };
             var Inventory6 = new Inventory
             {
-                InventoryId = Guid.Parse("95a8c007-e80d-489e-85a2-5c6e9d947c57"),
+                // InventoryId = Guid.Parse("95a8c007-e80d-489e-85a2-5c6e9d947c57"),
                 VideoGameVersionId = VideoGameVersion6.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 200,
             };
             var Inventory7 = new Inventory
             {
-                InventoryId = Guid.Parse("18a27249-9b5d-4d88-9679-63969b57b037"),
+                // InventoryId = Guid.Parse("18a27249-9b5d-4d88-9679-63969b57b037"),
                 VideoGameVersionId = VideoGameVersion7.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 90,
             };
             var Inventory8 = new Inventory
             {
-                InventoryId = Guid.Parse("d7b415f2-bbbf-45ea-926c-0b2c40b9fcba"),
+                // InventoryId = Guid.Parse("d7b415f2-bbbf-45ea-926c-0b2c40b9fcba"),
                 VideoGameVersionId = VideoGameVersion8.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 210,
             };
             var Inventory9 = new Inventory
             {
-                InventoryId = Guid.Parse("5b3f8d90-5a3f-4855-9bc0-dc44768e8d8b"),
+                // InventoryId = Guid.Parse("5b3f8d90-5a3f-4855-9bc0-dc44768e8d8b"),
                 VideoGameVersionId = VideoGameVersion9.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 30,
             };
             var Inventory10 = new Inventory
             {
-                InventoryId = Guid.Parse("2e8bcd53-b1ff-4b1d-a68c-4d8e95ef68b6"),
+                // InventoryId = Guid.Parse("2e8bcd53-b1ff-4b1d-a68c-4d8e95ef68b6"),
                 VideoGameVersionId = VideoGameVersion10.VideoGameVersionId,
                 StoreId = Store1.StoreId,
                 GameQuantity = 400,
             };
             var Inventory11 = new Inventory
             {
-                InventoryId = Guid.Parse("107fe30c-6d74-4bab-8a1f-26ee0e3cce43"),
+                // InventoryId = Guid.Parse("107fe30c-6d74-4bab-8a1f-26ee0e3cce43"),
                 VideoGameVersionId = VideoGameVersion11.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 400,
             };
             var Inventory12 = new Inventory
             {
-                InventoryId = Guid.Parse("7b15e5ab-e9f0-4e49-bc7b-6d3785f6521c"),
+                // InventoryId = Guid.Parse("7b15e5ab-e9f0-4e49-bc7b-6d3785f6521c"),
                 VideoGameVersionId = VideoGameVersion12.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 350,
@@ -774,7 +788,7 @@ namespace FusionTech.src.Database
 
             var Inventory13 = new Inventory
             {
-                InventoryId = Guid.Parse("34d82c84-2bb8-4b42-bc62-9ff4bcb7cb88"),
+                // InventoryId = Guid.Parse("34d82c84-2bb8-4b42-bc62-9ff4bcb7cb88"),
                 VideoGameVersionId = VideoGameVersion13.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 250,
@@ -782,7 +796,7 @@ namespace FusionTech.src.Database
 
             var Inventory14 = new Inventory
             {
-                InventoryId = Guid.Parse("8f204b73-46b8-49c0-9b26-81c3d6d631f3"),
+                // InventoryId = Guid.Parse("8f204b73-46b8-49c0-9b26-81c3d6d631f3"),
                 VideoGameVersionId = VideoGameVersion14.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 600,
@@ -790,7 +804,7 @@ namespace FusionTech.src.Database
 
             var Inventory15 = new Inventory
             {
-                InventoryId = Guid.Parse("0e2a798e-c4f2-4d2c-a12b-6f5e0f155c7b"),
+                // InventoryId = Guid.Parse("0e2a798e-c4f2-4d2c-a12b-6f5e0f155c7b"),
                 VideoGameVersionId = VideoGameVersion15.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 200,
@@ -798,7 +812,7 @@ namespace FusionTech.src.Database
 
             var Inventory16 = new Inventory
             {
-                InventoryId = Guid.Parse("3b9e4c4e-4b3f-4e7b-9756-d07c1bafe7da"),
+                // InventoryId = Guid.Parse("3b9e4c4e-4b3f-4e7b-9756-d07c1bafe7da"),
                 VideoGameVersionId = VideoGameVersion16.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 450,
@@ -806,7 +820,7 @@ namespace FusionTech.src.Database
 
             var Inventory17 = new Inventory
             {
-                InventoryId = Guid.Parse("f3b1f621-5d81-42f0-b877-78b0a635e32d"),
+                // InventoryId = Guid.Parse("f3b1f621-5d81-42f0-b877-78b0a635e32d"),
                 VideoGameVersionId = VideoGameVersion17.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 300,
@@ -814,7 +828,7 @@ namespace FusionTech.src.Database
 
             var Inventory18 = new Inventory
             {
-                InventoryId = Guid.Parse("99c8c29f-7cc0-44ec-bb11-479b27b0b46c"),
+                // InventoryId = Guid.Parse("99c8c29f-7cc0-44ec-bb11-479b27b0b46c"),
                 VideoGameVersionId = VideoGameVersion18.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 700,
@@ -822,7 +836,7 @@ namespace FusionTech.src.Database
 
             var Inventory19 = new Inventory
             {
-                InventoryId = Guid.Parse("5e07b60f-0984-4a83-803c-bda1b735e1c0"),
+                // InventoryId = Guid.Parse("5e07b60f-0984-4a83-803c-bda1b735e1c0"),
                 VideoGameVersionId = VideoGameVersion19.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 400,
@@ -830,7 +844,7 @@ namespace FusionTech.src.Database
 
             var Inventory20 = new Inventory
             {
-                InventoryId = Guid.Parse("7f9d9a79-2e29-4c7c-b3f4-87c85fbd7461"),
+                // InventoryId = Guid.Parse("7f9d9a79-2e29-4c7c-b3f4-87c85fbd7461"),
                 VideoGameVersionId = VideoGameVersion20.VideoGameVersionId,
                 StoreId = Store2.StoreId,
                 GameQuantity = 500,
@@ -898,7 +912,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion1.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory1.InventoryId,
+                // InventoryId = Inventory1.InventoryId,
             };
             var Supply2 = new Supply
             {
@@ -907,7 +921,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion2.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory1.InventoryId,
+                // InventoryId = Inventory1.InventoryId,
             };
             var Supply3 = new Supply
             {
@@ -916,7 +930,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion3.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory3.InventoryId,
+                // InventoryId = Inventory3.InventoryId,
             };
             var Supply4 = new Supply
             {
@@ -925,7 +939,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion4.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory4.InventoryId,
+                // InventoryId = Inventory4.InventoryId,
             };
             var Supply5 = new Supply
             {
@@ -934,7 +948,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion5.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory5.InventoryId,
+                // InventoryId = Inventory5.InventoryId,
             };
             var Supply6 = new Supply
             {
@@ -943,7 +957,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion6.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory6.InventoryId,
+                // InventoryId = Inventory6.InventoryId,
             };
             var Supply7 = new Supply
             {
@@ -952,7 +966,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion7.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory7.InventoryId,
+                // InventoryId = Inventory7.InventoryId,
             };
             var Supply8 = new Supply
             {
@@ -961,7 +975,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion8.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory8.InventoryId,
+                // InventoryId = Inventory8.InventoryId,
             };
             var Supply9 = new Supply
             {
@@ -970,7 +984,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion9.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory9.InventoryId,
+                // InventoryId = Inventory9.InventoryId,
             };
             var Supply10 = new Supply
             {
@@ -979,7 +993,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion10.VideoGameVersionId,
                 SupplyQuantity = 100,
                 SupplierDate = DateTime.UtcNow,
-                InventoryId = Inventory10.InventoryId,
+                // InventoryId = Inventory10.InventoryId,
             };
             var Supply11 = new Supply
             {
@@ -988,7 +1002,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion11.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory11.InventoryId,
+                // InventoryId = Inventory11.InventoryId,
             };
             var Supply12 = new Supply
             {
@@ -997,7 +1011,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion12.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory12.InventoryId,
+                // InventoryId = Inventory12.InventoryId,
             };
             var Supply13 = new Supply
             {
@@ -1006,7 +1020,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion13.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory13.InventoryId,
+                // InventoryId = Inventory13.InventoryId,
             };
             var Supply14 = new Supply
             {
@@ -1015,7 +1029,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion14.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory14.InventoryId,
+                // InventoryId = Inventory14.InventoryId,
             };
             var Supply15 = new Supply
             {
@@ -1024,7 +1038,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion15.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory15.InventoryId,
+                // InventoryId = Inventory15.InventoryId,
             };
             var Supply16 = new Supply
             {
@@ -1033,7 +1047,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion16.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory16.InventoryId,
+                // InventoryId = Inventory16.InventoryId,
             };
             var Supply17 = new Supply
             {
@@ -1042,7 +1056,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion17.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory17.InventoryId,
+                // InventoryId = Inventory17.InventoryId,
             };
             var Supply18 = new Supply
             {
@@ -1051,7 +1065,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion18.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory18.InventoryId,
+                // InventoryId = Inventory18.InventoryId,
             };
             var Supply19 = new Supply
             {
@@ -1060,7 +1074,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion19.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory19.InventoryId,
+                // InventoryId = Inventory19.InventoryId,
             };
             var Supply20 = new Supply
             {
@@ -1069,7 +1083,7 @@ namespace FusionTech.src.Database
                 VideoGameVersionId = VideoGameVersion20.VideoGameVersionId,
                 SupplyQuantity = 50,
                 SupplierDate = DateTime.UtcNow.AddDays(-1),
-                InventoryId = Inventory20.InventoryId,
+                // InventoryId = Inventory20.InventoryId,
             };
 
             //StoreEmployee data
