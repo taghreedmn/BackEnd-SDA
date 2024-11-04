@@ -12,9 +12,13 @@ namespace FusionTech.src.Repository
         }
 
         // Get a video game by ID
-        public async Task<VideoGameInfo> GetByIdAsync(Guid id)
+        public async Task<VideoGameInfo?> GetByIdAsync(Guid id)
         {
-            return await _videoGameInfos.FindAsync(id);
+            return await _videoGameInfos
+                .Include(v => v.VideoGameVersions)
+                .Include(v => v.Categories)
+                .Include(v => v.GameStudios)
+                .FirstOrDefaultAsync(v => v.VideoGameInfoId == id);
         }
 
         public async Task<List<VideoGameInfo>> GetVideoGameVersionByIdAsync(Guid id)
@@ -52,7 +56,7 @@ namespace FusionTech.src.Repository
         //Get all video games
         public async Task<List<VideoGameInfo>> GetAllAsync()
         {
-            return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
+            return await _videoGameInfos.ToListAsync();
         }
 
         // Update an existing video game
@@ -78,5 +82,9 @@ namespace FusionTech.src.Repository
             return true;
         }
 
+        public async Task<List<VideoGameInfo>> GetAllWithVersionAsync()
+        {
+            return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
+        }
     }
 }

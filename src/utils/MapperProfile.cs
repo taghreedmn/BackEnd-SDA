@@ -187,6 +187,7 @@ namespace FusionTech.src.Utils
 
             // VideoGameInfo mappings
             CreateMap<VideoGameInfo, VideoGameInfoReadDto>();
+            CreateMap<VideoGameInfo, VideoGameWithVersionDto>();
             CreateMap<VideoGameInfo, VideoGameDetailedDto>();
             CreateMap<VideoGameInfoCreateDto, VideoGameInfo>();
             CreateMap<VideoGameInfoUpdateDto, VideoGameInfo>()

@@ -19,19 +19,28 @@ namespace FusionTech.src.Controllers
             return Ok(videoGames);
         }
 
+        // Get all video games
+        [HttpGet("Detailed")]
+        public async Task<ActionResult<VideoGameDetailedDto>> GetVideoGamesWithVersion(
+            [FromQuery] SearchParameters searchParameters
+        )
+        {
+            var videoGames = await _videoGameInfoService.GetAllWithVersionAsync(searchParameters);
+            return Ok(videoGames);
+        }
 
         // Get by ID
         [HttpGet("{id}")]
         public async Task<ActionResult<VideoGameDetailedDto>> GetVideoGameById(Guid id)
         {
-            var videoGame = await _videoGameInfoService.GetVideoGameVersionByIdAsync(id);
+            var videoGame = await _videoGameInfoService.GetByIdAsync(id);
 
             if (videoGame == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-            return Ok(videoGame); 
+            return Ok(videoGame);
         }
 
         [HttpGet("{id}/ratings")]

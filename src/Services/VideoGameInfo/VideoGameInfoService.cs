@@ -106,6 +106,65 @@ namespace FusionTech.src.Services.VideoGamesInfo
             return _mapper.Map<List<VideoGameInfo>, List<VideoGameInfoReadDto>>(videoGameList);
         }
 
+        public async Task<List<VideoGameWithVersionDto>> GetAllWithVersionAsync(
+            SearchParameters searchParameters
+        )
+        {
+            var videoGameList = await _videoGameInfoRepo.GetAllWithVersionAsync();
+
+            if (videoGameList == null || videoGameList.Count == 0)
+            {
+                throw CustomException.NotFound("No video games found.");
+            }
+
+            searchParameters.IsValid(); // Throws an error incase of a wrong parameters
+            videoGameList = videoGameList
+                .Where(a =>
+                    a.GameName!.Contains(
+                        searchParameters.Search ?? string.Empty,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                .ToList();
+
+            videoGameList = videoGameList
+                .Where(vg =>
+                    vg.VideoGameVersions.Any(version =>
+                        version.Price >= searchParameters.MinPrice
+                        && version.Price <= searchParameters.MaxPrice
+                    )
+                )
+                .ToList();
+
+            videoGameList = searchParameters.SortBy switch
+            {
+                SortingTypes.ByRating => searchParameters.Descending
+                    ? videoGameList.OrderByDescending(vg => vg.TotalRating).ToList()
+                    : videoGameList.OrderBy(vg => vg.TotalRating).ToList(),
+
+                SortingTypes.ByTitle => searchParameters.Descending
+                    ? videoGameList.OrderByDescending(vg => vg.GameName).ToList()
+                    : videoGameList.OrderBy(vg => vg.GameName).ToList(),
+
+                SortingTypes.ByPrice => searchParameters.Descending
+                    ? videoGameList
+                        .OrderByDescending(vg => vg.VideoGameVersions.Max(version => version.Price))
+                        .ToList()
+                    : videoGameList
+                        .OrderBy(vg => vg.VideoGameVersions.Min(version => version.Price))
+                        .ToList(),
+
+                _ => videoGameList,
+            };
+
+            videoGameList = videoGameList
+                .Skip(searchParameters.Offset)
+                .Take(searchParameters.Limit)
+                .ToList();
+
+            return _mapper.Map<List<VideoGameInfo>, List<VideoGameWithVersionDto>>(videoGameList);
+        }
+
         public async Task<VideoGameDetailedDto> GetByIdAsync(Guid id)
         {
             var foundGameInfo = await _videoGameInfoRepo.GetByIdAsync(id);
@@ -125,7 +184,6 @@ namespace FusionTech.src.Services.VideoGamesInfo
             }
             return _mapper.Map<VideoGameInfo, VideoGameDetailedDto>(foundGameInfo.First());
         }
-
 
         public async Task<List<VideoGameRatingReadDto>> GetVideoGameRatingsByIdAsync(Guid id)
         {
