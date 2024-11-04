@@ -77,6 +77,27 @@ namespace FusionTech.src.DTO
             public string? GamePicturePath { get; set; }
 
             public ICollection<VideoGameVersionSimpleReadDto> VideoGameVersions { get; set; }
+            public ICollection<StudioReadDTO> GameStudios { get; set; }
+            public ICollection<CategoryBasicDto> Categories { get; set; }
+        }
+
+        public class VideoGameWithVersionDto
+        {
+            public Guid VideoGameInfoId { get; set; }
+
+            public string? GameName { get; set; }
+
+            public string? Description { get; set; }
+
+            public string? YearOfRelease { get; set; }
+
+            public int TotalRating { get; set; }
+
+            public Guid PublisherId { get; set; }
+
+            public string? GamePicturePath { get; set; }
+
+            public ICollection<VideoGameVersionSimpleReadDto> VideoGameVersions { get; set; }
         }
     }
 }
