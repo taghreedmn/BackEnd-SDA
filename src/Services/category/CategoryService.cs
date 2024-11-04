@@ -46,13 +46,9 @@ namespace FusionTech.src.Services.category
         {
             var categories = await _categoryRepository.GetAllDetailedAsync(searchParameters); // Fetch all categories
 
-            var totalCount = categories.Count;
-            var pagedCategories = categories
-                .Skip(searchParameters.Offset)
-                .Take(searchParameters.Limit)
-                .ToList();
+            var totalCount = await _categoryRepository.CountAsync();
 
-            var categoryDtos = pagedCategories
+            var categoryDtos = categories
                 .Select(c => new CategoryFullDetailedDto
                 {
                     CategoryId = c.CategoryId,
@@ -60,7 +56,7 @@ namespace FusionTech.src.Services.category
                     VideoGameInfos = c
                         .VideoGameInfos.Select(v => new VideoGameDetailedDto
                         {
-                            VideoGameInfoId = v.VideoGameInfoId,
+                            VideoGameInfoId = v.VideoGameInfoId, 
                             GameName = v.GameName,
                             Description = v.Description,
                             YearOfRelease = v.YearOfRelease,

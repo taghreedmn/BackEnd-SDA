@@ -39,8 +39,9 @@ namespace FusionTech.src.Repository
                     )
                 );
             }
-
+            
             searchParameters.IsValid();
+
             if (searchParameters.MinPrice != 0)
             {
                 query = query.Where(c =>
@@ -60,16 +61,18 @@ namespace FusionTech.src.Repository
             }
 
             // Count total categories for pagination
-            int totalCount = await query.CountAsync();
+            //int totalCount = await query.CountAsync();
 
             // Pagination
             var categories = await query
+                //  .OrderBy(C => C.CategoryName)
                 .Skip(searchParameters.Offset)
                 .Take(searchParameters.Limit)
                 .ToListAsync();
 
             return categories;
         }
+
 
         public async Task<int> CountAsync()
         {
