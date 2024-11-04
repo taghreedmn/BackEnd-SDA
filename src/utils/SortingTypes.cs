@@ -4,7 +4,7 @@ namespace FusionTech.src.Utils
     public enum SortingTypes
     {
         ByTitle,
-        // ByPrice,
+        ByPrice,
         // ByDate,
         ByRating,
         None,
