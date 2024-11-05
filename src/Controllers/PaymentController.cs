@@ -23,11 +23,9 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PaymentReadDto>> GetPayment(
-            PaginationOptions paginationOptions
-        )
+        public async Task<ActionResult<PaymentReadDto>> GetPayment()
         {
-            var paymentList = await _paymentService.GetAllAsync(paginationOptions);
+            var paymentList = await _paymentService.GetAllAsync();
             return Ok(paymentList);
         }
 
