@@ -18,15 +18,9 @@ namespace FusionTech.src.Repository
             return newPayment;
         }
 
-        public async Task<List<Payment>> GetAllAsync(PaginationOptions paginationOptions)
+        public async Task<List<Payment>> GetAllAsync()
         {
-            var result = _payment.Where(c =>
-                c.PaymentMethod.ToLower().Contains(paginationOptions.Search.ToLower())
-            );
-            return await result
-                .Skip(paginationOptions.Offset)
-                .Take(paginationOptions.Limit)
-                .ToListAsync();
+            return await _payment.ToListAsync();
         }
 
         public async Task<Payment> GetByIdAsync(Guid id)

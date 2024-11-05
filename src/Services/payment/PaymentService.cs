@@ -20,15 +20,13 @@ namespace FusionTech.src.Services.Payment
             return _mapper.Map<Entity.Payment, PaymentReadDto>(paymentCreated);
         }
 
-        public async Task<List<PaymentDTO.PaymentReadDto>> GetAllAsync(
-            PaginationOptions paginationOptions
-        )
+        public async Task<List<PaymentReadDto>> GetAllAsync()
         {
-            var paymentList = await _paymentRepository.GetAllAsync(paginationOptions);
+            var paymentList = await _paymentRepository.GetAllAsync();
             return _mapper.Map<List<Entity.Payment>, List<PaymentReadDto>>(paymentList);
         }
 
-        public async Task<PaymentDTO.PaymentReadDto> GetByIdAsync(Guid id)
+        public async Task<PaymentReadDto> GetByIdAsync(Guid id)
         {
             var foundPayment = await _paymentRepository.GetByIdAsync(id);
             return _mapper.Map<Entity.Payment, PaymentReadDto>(foundPayment);
