@@ -24,55 +24,80 @@ namespace FusionTech.src.Repository
         }
 
         public async Task<List<Category>> GetAllDetailedAsync(SearchParameters searchParameters)
-        {
-            IQueryable<Category> query = _category
-                .Include(c => c.VideoGameInfos)
-                .ThenInclude(vi => vi.VideoGameVersions);
+       {
+           IQueryable<Category> query = _category
+               .Include(c => c.VideoGameInfos)
+               .ThenInclude(vi => vi.VideoGameVersions);
 
-            // Search filtering
-            if (!string.IsNullOrEmpty(searchParameters.Search))
-            {
-                query = query.Where(c =>
-                    c.CategoryName.Contains(
-                        searchParameters.Search,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                );
-            }
+           if (!string.IsNullOrEmpty(searchParameters.Search))
+           {
+               var searchTerm = searchParameters.Search.ToLower(); 
+
+               query = query.Where(c =>
+                   c.VideoGameInfos.Any(vi =>
+                             vi.GameName.ToLower().Contains(searchTerm) // Convert GameName to lower case for case-insensitive search
+                   )
+               );
+           }
+
+           // Apply price range filtering
+           if (searchParameters.MinPrice > 0)
+           {
+               query = query.Where(c =>
+                   c.VideoGameInfos.Any(vi =>
+                       vi.VideoGameVersions.Any(v => v.Price >= searchParameters.MinPrice)
+                   )
+               );
+           }
+
+           if (searchParameters.MaxPrice < 10000) // Assuming 10000 is the default maximum price in your parameter class
+           {
+               query = query.Where(c =>
+                   c.VideoGameInfos.Any(vi =>
+                       vi.VideoGameVersions.Any(v => v.Price <= searchParameters.MaxPrice)
+                   )
+               );
+           }       
+
+
+
+           // Apply sorting based on SortBy and Descending parameters
+           switch (searchParameters.SortBy)
+           {
+               case SortingTypes.ByTitle:
+                   query = searchParameters.Descending
+                       ? query.OrderByDescending(c => c.VideoGameInfos.FirstOrDefault().GameName)
+                       : query.OrderBy(c => c.VideoGameInfos.FirstOrDefault().GameName);
+                   break;
+
+               case SortingTypes.ByPrice:
+                   query = searchParameters.Descending
+                       ? query.OrderByDescending(c => c.VideoGameInfos.FirstOrDefault().VideoGameVersions.Min(v => v.Price))
+                       : query.OrderBy(c => c.VideoGameInfos.FirstOrDefault().VideoGameVersions.Min(v => v.Price));
+                   break;
+
+               case SortingTypes.ByRating:
+                   query = searchParameters.Descending
+                       ? query.OrderByDescending(c => c.VideoGameInfos.FirstOrDefault().TotalRating)
+                       : query.OrderBy(c => c.VideoGameInfos.FirstOrDefault().TotalRating);
+                   break;
+
+               case SortingTypes.None:
+               default:
             
-            searchParameters.IsValid();
+                   query = query.OrderBy(c => c.CategoryId); 
+                   break;
+           }
 
-            if (searchParameters.MinPrice != 0)
-            {
-                query = query.Where(c =>
-                    c.VideoGameInfos.Any(vi =>
-                        vi.VideoGameVersions.Any(v => v.Price >= searchParameters.MinPrice)
-                    )
-                );
-            }
+           // Apply pagination (
+           var categories = await query
+               .Skip(searchParameters.Offset)
+               .Take(searchParameters.Limit)
+               .ToListAsync();
 
-            if (searchParameters.MaxPrice != 10000) // Same as the maximum number written inside SearchParamter class
-            {
-                query = query.Where(c =>
-                    c.VideoGameInfos.Any(vi =>
-                        vi.VideoGameVersions.Any(v => v.Price <= searchParameters.MaxPrice)
-                    )
-                );
-            }
 
-            // Count total categories for pagination
-            //int totalCount = await query.CountAsync();
-
-            // Pagination
-            var categories = await query
-                //  .OrderBy(C => C.CategoryName)
-                .Skip(searchParameters.Offset)
-                .Take(searchParameters.Limit)
-                .ToListAsync();
-
-            return categories;
-        }
-
+           return categories;
+       }
 
         public async Task<int> CountAsync()
         {
@@ -131,45 +156,4 @@ namespace FusionTech.src.Repository
     }
 }
 
-        // public async Task<List<Category>> GetAllAsync(PaginationOptions paginationOptions)
-        // {
-        //     var categories =_category.ToList();
-            
-        //     // IQueryable<Category> query = _category.Include(c => c.VideoGameInfos)
-        //     //                                       .ThenInclude(vi => vi.VideoGameVersions);
-
-        //     // Search filtering
-        //     if (!string.IsNullOrEmpty(paginationOptions.Search))
-        //     {
-        //         categories = categories
-        //              .Where(c => c.CategoryName.Contains(paginationOptions.Search, StringComparison.OrdinalIgnoreCase))
-        //              .ToList();
-        //     }
-
-        //    // Min and Max Price Filtering
-        //     if (paginationOptions.MinPrice.HasValue && paginationOptions.MinPrice > 0 )
-        //     {
-        //         categories = categories
-        //             .Where(c => c.VideoGameInfos
-        //             .Any(vi => vi.VideoGameVersions
-        //             .Any(v => v.Price >= paginationOptions.MinPrice)))
-        //             .ToList();
-        //     }
-
-        //    if (paginationOptions.MinPrice.HasValue && paginationOptions.MaxPrice < float.MaxValue)  
-        //     {
-        //         categories = categories
-        //             .Where(c => c.VideoGameInfos
-        //             .Any(vi => vi.VideoGameVersions
-        //             .Any(v => v.Price <= paginationOptions.MaxPrice)))
-        //             .ToList();
-        //     }
-
-        //     // Pagination
-        //       categories = categories
-        //         .Skip(paginationOptions.Offset)
-        //         .Take(paginationOptions.Limit)
-        //         .ToList();
-
-        //     return categories;
-        // }
+      

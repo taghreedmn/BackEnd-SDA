@@ -17,34 +17,20 @@ namespace FusionTech.src.Services.category
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
             return _mapper.Map<CategoryBasicDto>(categoryCreated);
         }
-
         public async Task<List<CategoryBasicDto>> GetAllAsync(PaginationOptions paginationOptions)
-        {
-            var categories = await _categoryRepository.GetAllAsync();
-            if (!string.IsNullOrEmpty(paginationOptions.Search))
-                categories = categories
-                    .Where(c =>
-                        c.CategoryName.Contains(
-                            paginationOptions.Search,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    )
-                    .ToList();
+{
+        var categories = await _categoryRepository.GetAllAsync();
 
-            var pagedCategories = categories
-                .Skip(paginationOptions.Offset)
-                .Take(paginationOptions.Limit)
-                .ToList();
 
-            return _mapper.Map<List<Category>, List<CategoryBasicDto>>(pagedCategories);
-        }
-
+        return _mapper.Map<List<Category>, List<CategoryBasicDto>>(categories);
+    }
+    
         public async Task<(
             List<CategoryFullDetailedDto> Categories,
             int TotalCount
         )> GetAllDetailedAsync(SearchParameters searchParameters)
         {
-            var categories = await _categoryRepository.GetAllDetailedAsync(searchParameters); // Fetch all categories
+            var categories = await _categoryRepository.GetAllDetailedAsync(searchParameters); 
 
             var totalCount = await _categoryRepository.CountAsync();
 
@@ -144,17 +130,3 @@ namespace FusionTech.src.Services.category
     }
 }
         
-    //     public async Task<List<CategoryDetailedDto>> GetAllAsync(PaginationOptions paginationOptions)
-    //    {
-    //        var categories = await _categoryRepository.GetAllAsync( paginationOptions); // Fetch all categories
-
-    //        return _mapper.Map<List<Category>, List<CategoryDetailedDto>>(categories);
-
-        
-       
-
-        // public async Task<int> CountCategoryAsync()
-        // {
-        //     return await _categoryRepository.CountAsync();
-        // }
-
