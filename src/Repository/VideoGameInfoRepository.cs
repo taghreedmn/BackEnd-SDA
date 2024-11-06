@@ -53,7 +53,7 @@ namespace FusionTech.src.Repository
             return newGameInfo;
         }
 
-        // Get all video games
+        //Get all video games
         public async Task<List<VideoGameInfo>> GetAllAsync()
         {
             return await _videoGameInfos.ToListAsync();
