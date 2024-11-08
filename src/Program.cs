@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore.Diagnostics;
+
+
 var options = new WebApplicationOptions { WebRootPath = "wwwroot" };
 
 var builder = WebApplication.CreateBuilder(options);
@@ -134,6 +137,16 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// builder.Services.AddDbContext<DatabaseContext>(options =>
+// {
+//     options
+//         .UseNpgsql(dataSourceBuilder.Build())
+//         .EnableSensitiveDataLogging()
+//         .ConfigureWarnings(Warnings => 
+//             Warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)
+//         );
+// });
 
 // cors
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";

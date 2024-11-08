@@ -54,6 +54,7 @@ namespace FusionTech.src.DTO
             public Guid PublisherId { get; set; }
 
             public string? GamePicturePath { get; set; }
+            public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
         }
 
         public class VideoGameDetailedDto
