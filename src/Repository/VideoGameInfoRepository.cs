@@ -86,5 +86,10 @@ namespace FusionTech.src.Repository
         {
             return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
         }
+
+        public async Task<int> CountAsync()
+        {
+            return await _videoGameInfos.CountAsync();
+        }
     }
 }
