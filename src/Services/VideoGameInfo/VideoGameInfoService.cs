@@ -229,5 +229,9 @@ namespace FusionTech.src.Services.VideoGamesInfo
 
             return await _videoGameInfoRepo.UpdateOnAsync(videoGame);
         }
+
+        public async Task<int> CountGamesInfosAsync() {
+            return await _videoGameInfoRepo.CountAsync();
+        }
     }
 }
