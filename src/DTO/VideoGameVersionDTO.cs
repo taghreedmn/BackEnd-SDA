@@ -9,6 +9,14 @@ namespace FusionTech.src.DTO
             public float Price { get; set; }
         }
 
+        public class VideoGameVersionCreateWithoutIdDto
+        {
+            public Guid GameConsoleId { get; set; }
+
+            [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
+            public float Price { get; set; }
+        }
+
         public class VideoGameVersionUpdateDto
         {
             public Guid VideoGameVersionId { get; set; }

@@ -48,6 +48,12 @@ namespace FusionTech.src.Repository
         // Create a new video game
         public async Task<VideoGameInfo> CreateOneAsync(VideoGameInfo newGameInfo)
         {
+            foreach (var category in newGameInfo.Categories)
+                _databaseContext.Attach(category);
+
+            foreach (var studio in newGameInfo.GameStudios)
+                _databaseContext.Attach(studio);
+
             await _videoGameInfos.AddAsync(newGameInfo);
             await _databaseContext.SaveChangesAsync();
             return newGameInfo;
