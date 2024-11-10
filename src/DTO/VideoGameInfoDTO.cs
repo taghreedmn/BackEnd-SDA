@@ -19,7 +19,10 @@ namespace FusionTech.src.DTO
             public int TotalRating { get; set; }
             public Guid PublisherId { get; set; }
             public string? GamePicturePath { get; set; }
-            public Guid CategoryId { get; set; }
+            public ICollection<Guid> CategoryIds { get; set; } = [];
+            public ICollection<Guid> GameStudioIds { get; set; } = [];
+            public ICollection<VideoGameVersionCreateWithoutIdDto> VideoGameVersions { get; set; } =
+                [];
         }
 
         public class VideoGameInfoUpdateDto
@@ -94,7 +97,7 @@ namespace FusionTech.src.DTO
 
         public class VideoGamesInfoWithVersionListDto
         {
-            public List<VideoGameWithVersionDto> VideoGamesInfos { get; set; }
+            public List<VideoGameWithVersionDto> VideoGamesInfos { get; set; } = [];
             public int TotalCount { get; set; }
         }
     }
