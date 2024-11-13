@@ -12,9 +12,13 @@ namespace FusionTech.src.Repository
         }
 
         // Get a video game by ID
-        public async Task<VideoGameInfo> GetByIdAsync(Guid id)
+        public async Task<VideoGameInfo?> GetByIdAsync(Guid id)
         {
-            return await _videoGameInfos.FindAsync(id);
+            return await _videoGameInfos
+                .Include(v => v.VideoGameVersions)
+                .Include(v => v.Categories)
+                .Include(v => v.GameStudios)
+                .FirstOrDefaultAsync(v => v.VideoGameInfoId == id);
         }
 
         public async Task<List<VideoGameInfo>> GetVideoGameVersionByIdAsync(Guid id)
@@ -25,11 +29,19 @@ namespace FusionTech.src.Repository
                 .ToListAsync();
         }
 
-        public async Task<List<VideoGameInfo>> GetVideoGameRatingsByIdAsync(Guid id)
+        public async Task<List<VideoGameRatingReadDto>> GetVideoGameRatingsByIdAsync(Guid id)
         {
             return await _videoGameInfos
-                .Include(vi => vi.RatedBies)
                 .Where(vi => vi.VideoGameInfoId == id)
+                .SelectMany(vi => vi.RatedBies)
+                .Select(rb => new VideoGameRatingReadDto
+                {
+                    Rating = rb.Rating,
+                    Comment = rb.Comment,
+                    PersonId = rb.Customer.PersonId,
+                    PersonName = rb.Customer.PersonName,
+                    ProfilePicturePath = rb.Customer.ProfilePicturePath,
+                })
                 .ToListAsync();
         }
 
@@ -41,10 +53,10 @@ namespace FusionTech.src.Repository
             return newGameInfo;
         }
 
-        // Get all video games
+        //Get all video games
         public async Task<List<VideoGameInfo>> GetAllAsync()
         {
-            return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
+            return await _videoGameInfos.ToListAsync();
         }
 
         // Update an existing video game
@@ -68,6 +80,16 @@ namespace FusionTech.src.Repository
                 Console.WriteLine(e.Message);
             }
             return true;
+        }
+
+        public async Task<List<VideoGameInfo>> GetAllWithVersionAsync()
+        {
+            return await _videoGameInfos.Include(v => v.VideoGameVersions).ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _videoGameInfos.CountAsync();
         }
     }
 }

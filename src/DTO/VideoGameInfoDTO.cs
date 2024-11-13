@@ -54,10 +54,20 @@ namespace FusionTech.src.DTO
             public Guid PublisherId { get; set; }
 
             public string? GamePicturePath { get; set; }
-            public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
+
+            // retrieve a video game's details
+            // public List<VideoGameVersionReadDto> VideoGameVersions { get; set; } =
+            //     new List<VideoGameVersionDTO.VideoGameVersionReadDto>();
         }
 
-        public class VideoGameDetailedDto
+        public class VideoGameDetailedDto : VideoGameInfoReadDto
+        {
+            public ICollection<VideoGameVersionSimpleReadDto> VideoGameVersions { get; set; }
+            public ICollection<StudioReadDTO> GameStudios { get; set; }
+            public ICollection<CategoryBasicDto> Categories { get; set; }
+        }
+
+        public class VideoGameWithVersionDto
         {
             public Guid VideoGameInfoId { get; set; }
 
@@ -73,7 +83,19 @@ namespace FusionTech.src.DTO
 
             public string? GamePicturePath { get; set; }
 
-            public ICollection<VideoGameVersion> VideoGameVersions { get; set; }
+            public ICollection<VideoGameVersionSimpleReadDto> VideoGameVersions { get; set; }
+        }
+
+        public class VideoGamesInfoListDto
+        {
+            public List<VideoGameInfoReadDto> VideoGamesInfos { get; set; }
+            public int TotalCount { get; set; }
+        }
+
+        public class VideoGamesInfoWithVersionListDto
+        {
+            public List<VideoGameWithVersionDto> VideoGamesInfos { get; set; }
+            public int TotalCount { get; set; }
         }
     }
 }

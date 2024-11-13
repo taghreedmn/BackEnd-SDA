@@ -4,9 +4,13 @@ namespace FusionTech.src.Services.category
     {
         Task<CategoryBasicDto> CreateOneAsync(CategoryCreateDto createDto);
         Task<List<CategoryBasicDto>> GetAllAsync(PaginationOptions paginationOptions);
-        Task<CategoryDetailedDto> GetByIdAsync(Guid Id);
+        Task<(List<CategoryFullDetailedDto> Categories, int TotalCount)> GetAllDetailedAsync(
+            SearchParameters searchParameters
+        );
+        Task<CategoryDetailedDto> GetByIdAsync(Guid id);
         Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName);
-        Task<bool> DeleteOneAsync(Guid Id);
-        Task<bool> UpdateOneAsync(Guid Id, CategoryUpdateDto updateDto);
+        Task<bool> DeleteOneAsync(Guid id);
+        Task<bool> UpdateOneAsync(Guid id, CategoryUpdateDto updateDto);
+        Task<int> CountCategoryAsync();
     }
 }

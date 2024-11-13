@@ -6,11 +6,11 @@ namespace FusionTech.src.DTO
         {
             public Guid SupplierId { get; set; }
 
-            [Range(0.01, float.MaxValue, ErrorMessage = "Supplier quantity must be greater than zero.")]
+            [Range(0.01, double.MaxValue, ErrorMessage = "Supplier quantity must be greater than zero.")]
             public float SupplierQuantity { get; set; }
             public DateTime SupplierDate { get; set; }
             public Guid InventoryId { get; set; }
-            public Guid ViduoGameVersionId { get; set; }
+            public Guid VideoGameVersionId { get; set; }
         }
 
         public class SupplyReadDto
@@ -27,7 +27,7 @@ namespace FusionTech.src.DTO
 
         public class SupplyUpdateDto
         {
-            [Range(0.01, float.MaxValue, ErrorMessage = "Supplier quantity must be greater than zero.")]
+            [Range(0.01, double.MaxValue, ErrorMessage = "Supplier quantity must be greater than zero.")]
             public float SupplierQuantity { get; set; }
             public DateTime SupplierDate { get; set; }
         }

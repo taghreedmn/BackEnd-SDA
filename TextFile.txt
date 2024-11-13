@@ -1,5 +1,5 @@
 ---------------------------------Person----------------------
-----------------------------------------------------------------
+-------------------------------------------------------------
 1-
 Title: Sign in for a registered account
 
@@ -29,10 +29,10 @@ Response body:
 Auth Token (if applicable):
 None
 Comments:
-Passed
+Success
 
 ---------------------------------CATEGORY----------------------
-----------------------------------------------------------------
+---------------------------------------------------------------
 2-
 Title: retrieve all categories
 
@@ -134,9 +134,9 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 
-----------------------------------------------------------------
+---------------------------------------------------------------
 3-
 Title: retrieve Category by name
 
@@ -206,7 +206,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 4-
 Title: Craete a new Category
@@ -268,7 +268,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 5-
 Title: Delete Category by id
@@ -328,7 +328,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 6-
 Title: Update Category by id
@@ -359,7 +359,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------CUSTOMER--------------------------
 ----------------------------------------------------------------
 7-
@@ -401,7 +401,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 
 ----------------------------------------------------------------
 8-
@@ -431,7 +431,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 9-
 Title: update customer Age
@@ -462,7 +462,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 10-
 Title: Switch to customer 
@@ -497,7 +497,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ---------------------------ORDER----------------------------
 ----------------------------------------------------------------
 11-
@@ -559,7 +559,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 
 ----------------------------------------------------------------
 12-
@@ -612,7 +612,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 -------------------------Inventory-----------------------------
 ----------------------------------------------------------------
 13-
@@ -649,7 +649,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed 
+Success 
 ----------------------------------------------------------------
 14-
 Title: Create Inventory
@@ -682,7 +682,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 15-
 Title: Delete Inventory
@@ -714,7 +714,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 16-
 Title: Retrieve Inventory by id
@@ -749,7 +749,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 
 -----------------------------SystemAdmin--------------------------
 ------------------------------------------------------------------
@@ -798,7 +798,7 @@ Response body:
 Auth Token (if applicable):
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 18-
 Title: Delete SystemAdmin
@@ -829,7 +829,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 --------------------------VideoGamesInfo--------------------
 ----------------------------------------------------------------
 19-
@@ -859,7 +859,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 20-
 Title: Create VideoGamesInfo
@@ -896,7 +896,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 21-
 Title: Retrieve VideoGamesInfo by id
@@ -927,7 +927,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 22-
 Title: Delete VideoGamesInfo by id
@@ -958,7 +958,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 23-
 Title: Update VideoGamesInfo by id
@@ -989,7 +989,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 24-
 Title: Update VideoGamesInfo by id and year
@@ -1021,7 +1021,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 -------------------------VideoGamesVersion----------------------
 ----------------------------------------------------------------
 25-
@@ -1060,7 +1060,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 26-
 Title: Retrieve VideoGamesVersion
@@ -1094,7 +1094,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 27-
 Title: Retrieve VideoGamesVersion by id 
@@ -1128,7 +1128,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 28-
 Title: Update VideoGamesVersion by id 
@@ -1161,7 +1161,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ---------------------------StoreEmployee-----------------------
 ----------------------------------------------------------------
 29-
@@ -1207,7 +1207,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 --------------------Console--------------------------------
 ----------------------------------------------------------------
 30-
@@ -1242,7 +1242,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 31-
 Title: Retrieve Console
@@ -1274,7 +1274,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 32-
 Title: Update Console by id 
@@ -1306,7 +1306,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 33-
 Title: Retrieve Console by id 
@@ -1338,7 +1338,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 34-
 Title: Delete Console by id 
@@ -1367,7 +1367,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 35-
@@ -1404,7 +1404,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 36-
 Title: Retrieve GameStudio
@@ -1437,7 +1437,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 37-
 Title: Update GameStudio by id 
@@ -1470,7 +1470,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 38-
 Title: Retrieve GameStudio by id 
@@ -1504,7 +1504,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 39-
 Title: Delete GameStudio by id 
@@ -1532,7 +1532,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ------------------------------Store----------------------------
 ----------------------------------------------------------------
 40-
@@ -1572,7 +1572,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 41-
 Title: Retrieve Store
@@ -1609,7 +1609,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 42- 
 Title: Retrieve Store By id
@@ -1644,7 +1644,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 43-
 Title: Update Store by id
@@ -1678,7 +1678,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 44-
 Title: Delete Store by id 
@@ -1707,7 +1707,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ---------------------------Supplier-----------------------
 ----------------------------------------------------------------
 45-
@@ -1744,7 +1744,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 46-
 Title: Update Supplier
@@ -1782,7 +1782,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 47-
 Title:  Retieve Supplier by id 
@@ -1816,7 +1816,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 48-
 Title: Update Supplier by id 
@@ -1849,7 +1849,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 49-
 Title:  Delete Supplier by id 
@@ -1878,7 +1878,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 
 ---------------------------Supply-----------------------
 ----------------------------------------------------------------
@@ -1928,7 +1928,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 46-
 Title: Update Supply
@@ -1982,7 +1982,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 47-
 Title: Retieve Supply by id 
@@ -2011,7 +2011,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 48-
 Title: Update Supply by id 
@@ -2043,7 +2043,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 49-
 Title:  Delete Supply by id 
@@ -2072,7 +2072,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 --------------------------Payment--------------------------
 ----------------------------------------------------------------
 50-
@@ -2107,7 +2107,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 51-
 Title:  Retieve Payment
@@ -2143,7 +2143,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 52-
 Title:  Retieve Payment by id 
@@ -2175,7 +2175,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 53-
 Title:  Retieve Payment by id 
@@ -2207,7 +2207,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ---------------------------Publisher----------------------------
 ----------------------------------------------------------------
 54-
@@ -2244,7 +2244,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 55-
 Title:  Create Publisher
@@ -2282,7 +2282,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 56-
 Title:  Retieve Publisher by id 
@@ -2316,7 +2316,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 57-
 Title:  Update Publisher by id 
@@ -2349,7 +2349,7 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success
 ----------------------------------------------------------------
 58-
 Title:  Delete Publisher by id 
@@ -2378,4 +2378,4 @@ Auth Token (if applicable):
 None
 
 Comments:
-Passed
+Success

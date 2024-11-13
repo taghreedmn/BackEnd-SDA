@@ -11,21 +11,63 @@ namespace FusionTech.src.Services.category
             _mapper = mapper;
         }
 
-        public async Task<CategoryDTO.CategoryBasicDto> CreateOneAsync(
-          CategoryCreateDto createDto
-        )
+        public async Task<CategoryBasicDto> CreateOneAsync(CategoryCreateDto createDto)
         {
-            var category = _mapper.Map<CategoryCreateDto, Category>(createDto);
+            var category = _mapper.Map<Category>(createDto);
             var categoryCreated = await _categoryRepository.CreateOneAsync(category);
-            return _mapper.Map<Category, CategoryBasicDto>(categoryCreated);
+            return _mapper.Map<CategoryBasicDto>(categoryCreated);
+        }
+        public async Task<List<CategoryBasicDto>> GetAllAsync(PaginationOptions paginationOptions)
+{
+        var categories = await _categoryRepository.GetAllAsync();
+
+
+        return _mapper.Map<List<Category>, List<CategoryBasicDto>>(categories);
+    }
+    
+        public async Task<(
+            List<CategoryFullDetailedDto> Categories,
+            int TotalCount
+        )> GetAllDetailedAsync(SearchParameters searchParameters)
+        {
+            var categories = await _categoryRepository.GetAllDetailedAsync(searchParameters); 
+
+            var totalCount = await _categoryRepository.CountAsync();
+
+            var categoryDtos = categories
+                .Select(c => new CategoryFullDetailedDto
+                {
+                    CategoryId = c.CategoryId,
+                    CategoryName = c.CategoryName,
+                    VideoGameInfos = c
+                        .VideoGameInfos.Select(v => new VideoGameDetailedDto
+                        {
+                            VideoGameInfoId = v.VideoGameInfoId, 
+                            GameName = v.GameName,
+                            Description = v.Description,
+                            YearOfRelease = v.YearOfRelease,
+                            TotalRating = v.TotalRating,
+                            GamePicturePath = v.GamePicturePath,
+                            PublisherId = v.PublisherId,
+                            VideoGameVersions = v
+                                .VideoGameVersions.Select(ver => new VideoGameVersionSimpleReadDto
+                                {
+                                    VideoGameVersionId = ver.VideoGameVersionId,
+                                    Price = ver.Price,
+                                    GameConsoleId = ver.GameConsoleId,
+                                })
+                                .ToList(),
+                        })
+                        .ToList(),
+                })
+                .ToList();
+
+            return (categoryDtos, totalCount);
         }
 
-        public async Task<List<CategoryBasicDto>> GetAllAsync(
-            PaginationOptions paginationOptions
-        )
+        public async Task<int> CountCategoryAsync()
         {
-            var categoryList = await _categoryRepository.GetAllAsync(paginationOptions);
-            return _mapper.Map<List<Category>, List<CategoryBasicDto>>(categoryList);
+            return await _categoryRepository.CountAsync();
         }
 
         public async Task<CategoryDetailedDto> GetByIdAsync(Guid id)
@@ -37,14 +79,21 @@ namespace FusionTech.src.Services.category
             }
             return _mapper.Map<Category, CategoryDetailedDto>(foundCategory);
         }
-        public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(string CategoryName)
+
+        public async Task<List<CategoryDetailedDto>> GetCategoryDetailsByNameAsync(
+            string CategoryName
+        )
         {
-            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(CategoryName);
+            var foundCategory = await _categoryRepository.GetCategoryDetailsByNameAsync(
+                CategoryName
+            );
             if (foundCategory == null || foundCategory.Count == 0)
             {
                 throw CustomException.NotFound($"No categories found with the name {CategoryName}");
             }
-            var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(foundCategory);
+            var categoryLists = _mapper.Map<List<Category>, List<CategoryDetailedDto>>(
+                foundCategory
+            );
             return categoryLists;
         }
 
@@ -55,8 +104,8 @@ namespace FusionTech.src.Services.category
             {
                 throw CustomException.NotFound($"Category with ID {id} not found");
             }
-            bool isDelete = await _categoryRepository.DeleteOneAsync(foundCategory);
-            if (!isDelete)
+            bool isDeleted = await _categoryRepository.DeleteOneAsync(foundCategory);
+            if (!isDeleted)
             {
                 throw CustomException.InternalError("Failed to delete the category");
             }
@@ -78,6 +127,6 @@ namespace FusionTech.src.Services.category
             }
             return true;
         }
-
     }
 }
+        

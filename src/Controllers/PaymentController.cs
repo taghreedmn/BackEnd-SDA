@@ -11,7 +11,7 @@ namespace FusionTech.src.Controllers
             _paymentService = paymentService;
         }
 
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         [HttpPost]
         public async Task<ActionResult<PaymentReadDto>> CreateOne(
             [FromBody] PaymentCreateDto createDto
@@ -23,11 +23,9 @@ namespace FusionTech.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PaymentReadDto>> GetPayment(
-            PaginationOptions paginationOptions
-        )
+        public async Task<ActionResult<PaymentReadDto>> GetPayment()
         {
-            var paymentList = await _paymentService.GetAllAsync(paginationOptions);
+            var paymentList = await _paymentService.GetAllAsync();
             return Ok(paymentList);
         }
 
@@ -38,7 +36,7 @@ namespace FusionTech.src.Controllers
             return Ok(payment);
         }
 
-        [Authorize(Roles = "EmployeeOrAdmin")]
+        [Authorize(Policy = "EmployeeOrAdmin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<PaymentReadDto>> DeleteOne([FromRoute] Guid id)
         {

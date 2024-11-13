@@ -5,8 +5,8 @@ namespace FusionTech.src.Services.Inventory
     {
         Task<InventoryReadDto> CreateOneAsync(InventoryCreateDto inventoryCreateDto);
         Task<List<InventoryReadDto>> GetAllGamesAsync();
-        Task<InventoryReadDto> GetGameByIdAsync(Guid id);
-        Task<bool> RemoveGameAsync(InventoryModifyGameQuantityDTO inventoryModifyDto);  
-        Task<bool> AddGameAsync(InventoryModifyGameQuantityDTO inventoryModifyDto);
+        Task<Guid> GetStoreIdByVideoGameVersionId(Guid id);
+        Task<bool> RemoveGameAsync(InventoryUpdateDTO inventoryUpdateDTO);  
+        Task<bool> AddGameAsync(InventoryUpdateDTO inventoryUpdateDTO);
     }
 }
