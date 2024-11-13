@@ -4,7 +4,9 @@ namespace FusionTech.src.Services.VideoGamesInfo
     {
         Task<VideoGameInfoReadDto> CreateOneAsync(VideoGameInfoCreateDto newGameInfo, string email);
         Task<List<VideoGameInfoReadDto>> GetAllAsync(SearchParameters searchParameters);
-        Task<List<VideoGameWithVersionDto>> GetAllWithVersionAsync(SearchParameters searchParameters);
+        Task<List<VideoGameWithVersionDto>> GetAllWithVersionAsync(
+            SearchParameters searchParameters
+        );
         Task<VideoGameDetailedDto> GetByIdAsync(Guid id);
         Task<VideoGameDetailedDto> GetVideoGameVersionByIdAsync(Guid id);
         Task<List<VideoGameRatingReadDto>> GetVideoGameRatingsByIdAsync(Guid id);
