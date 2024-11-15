@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.FileProviders;
 
 
 var options = new WebApplicationOptions { WebRootPath = "wwwroot" };
@@ -152,13 +151,6 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseRouting();
 app.MapGet("/", () => "server is running");
-
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
-    RequestPath = "/images" // Exposes files at /images
-});
 
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
