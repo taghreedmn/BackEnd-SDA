@@ -154,12 +154,6 @@ app.UseRouting();
 app.MapGet("/", () => "server is running");
 app.UseStaticFiles();
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
-    RequestPath = "/images" // Exposes files at /images
-});
 
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
