@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.FileProviders;
+
 
 var options = new WebApplicationOptions { WebRootPath = "wwwroot" };
 
@@ -153,16 +153,28 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseRouting();
 app.MapGet("/", () => "server is running");
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
-    RequestPath = "",
-    OnPrepareResponse = ctx =>
-    {
-        Console.WriteLine($"Serving static file: {ctx.File.PhysicalPath}");
-    }
-});
+// app.UseStaticFiles(new StaticFileOptions
+// {
+//     FileProvider = new PhysicalFileProvider(
+//         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+//     RequestPath = "",
+//     OnPrepareResponse = ctx =>
+//     {
+//         Console.WriteLine($"Serving static file: {ctx.File.PhysicalPath}");
+//     }
+// });
+
+var webRootProvider = new PhysicalFileProvider(builder.Environment.WebRootPath);
+var newPathProvider = new PhysicalFileProvider(
+  Path.Combine(builder.Environment.ContentRootPath, "wwwroot"));
+
+var compositeProvider = new CompositeFileProvider(webRootProvider,
+                                                  newPathProvider);
+
+// Update the default provider.
+app.Environment.WebRootFileProvider = compositeProvider;
+
+app.UseStaticFiles();
 
 
 //test if the database is conncted
