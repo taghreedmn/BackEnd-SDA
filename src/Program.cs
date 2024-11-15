@@ -153,11 +153,12 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseRouting();
 app.MapGet("/", () => "server is running");
 app.UseStaticFiles();
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")), // Replace "images" with your folder
-    RequestPath = "/wwwroot" // URL path to access files in this folder
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
+    RequestPath = "/images" // Exposes files at /images
 });
 
 //test if the database is conncted
