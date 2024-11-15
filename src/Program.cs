@@ -151,6 +151,7 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseRouting();
 app.MapGet("/", () => "server is running");
+app.UseStaticFiles(); 
 
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
