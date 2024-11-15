@@ -155,9 +155,10 @@ app.MapGet("/", () => "server is running");
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-           Path.Combine(builder.Environment.ContentRootPath, "images")),
-    RequestPath = "/images"
+        Path.Combine(builder.Environment.ContentRootPath, "wwwroot", "images")), // Correct path
+    RequestPath = "/images" // URL prefix to access images
 });
+
 
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())

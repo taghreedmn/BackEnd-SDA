@@ -376,7 +376,7 @@ namespace FusionTech.src.Database
                 TotalRating = 5,
                 PublisherId = Publisher2.PublisherId,
                 GamePicturePath =
-                    $"https://fusiontech-0dxp.onrender.com/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
+                    $"~/images/Games/{videoGamesInfoGuidHelper}/{videoGamesInfoGuidHelper}.jpg",
             };
             
             videoGamesInfoGuidHelper = "0ce33067-7091-4c51-a1c4-3a93751c748c";
