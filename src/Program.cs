@@ -156,8 +156,13 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
-    RequestPath = "" // Leave this empty to expose wwwroot directly
+    RequestPath = "",
+    OnPrepareResponse = ctx =>
+    {
+        Console.WriteLine($"Serving static file: {ctx.File.PhysicalPath}");
+    }
 });
+
 
 //test if the database is conncted
 using (var scope = app.Services.CreateScope())
