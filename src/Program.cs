@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.FileProviders;
-
+using Microsoft.Extensions.FileProviders;
 
 var options = new WebApplicationOptions { WebRootPath = "wwwroot" };
 
@@ -152,6 +152,7 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseRouting();
 app.MapGet("/", () => "server is running");
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
